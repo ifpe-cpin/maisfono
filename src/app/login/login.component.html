@@ -15,7 +15,11 @@
                 <label class="checkbox">
                   <input type="checkbox" value="remember-me" id="remember-me" name="remember-me"> Lembrar Senha
                 </label>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>   
+                <br> 
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                <br>
+                <button  class="btn btn-lg" (click)="signOut()">Sign out</button>
+               
               </form>
              </div>
          </div>
