@@ -13,6 +13,8 @@ import { PacienteComponent } from './paciente/paciente.component';
 import { PacienteFormComponent  } from './paciente/paciente-form/paciente-form.component';
 import { PacienteDetalheComponent } from './paciente/paciente-detalhe/paciente-detalhe.component';
 
+import { DashComponent } from './dash/dash.component';
+
 
 const homeRoutes = [
 		{path: 'home', component: HomeComponent, children:[
@@ -25,7 +27,8 @@ const homeRoutes = [
 					{path: 'novo', component: PacienteFormComponent},
 					{path: 'ver', component: PacienteDetalheComponent},
 					// {path: ':id/editar', component: FonoFormComponent}
-			]}
+			]},
+			{path: 'dash', component: DashComponent}
 		]}
 
 ];
