@@ -23,4 +23,4 @@ const pacienteRoutes = [
   ],
   exports:[RouterModule]
 })
-export class PacienteRoutingModule{}
+export class PacienteRoutingModule{} 

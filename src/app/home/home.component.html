@@ -1,115 +1,139 @@
-<!--The content below is only a placeholder and can be replaced.-->
- <!-- <router-outlet></router-outlet> -->
-
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><span>+</span>Fono</a>
-                <ul class="user-menu">
-                    <li class="dropdown pull-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Usuario <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Perfil</a></li>
-                            <li><a><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <a routerLink="/home/dash" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>+F</b></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>+Fono</b></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="https://irp-cdn.multiscreensite.com/f57590fa/dms3rep/multi/thumbnail/boy-4-200x200.png" class="user-image" alt="User Image">
+                            <span class="hidden-xs">Nome</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="https://irp-cdn.multiscreensite.com/f57590fa/dms3rep/multi/thumbnail/boy-4-200x200.png" class="img-circle" alt="User Image">
+                                <p>
+                                    Nome
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                        <a class="" href="#">
+                                            Perfil
+                                        </a>
+                                </div>
+                                <div class="pull-right">
+                                        <a>
+                                            Sair
+                                        </a>
+                                </div>
+                            </li>
                         </ul>
                     </li>
                 </ul>
             </div>
-                            
-        </div><!-- /.container-fluid -->
-    </nav>
-
-    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-        <form role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-            </div>
-        </form>
-        <ul class="nav menu">
-            <li class="active"><a routerLink="/home/dash"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
-           
-            <!-- FONO -->
-            <li class="parent ">
-                <a>
-                    <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked star"><use xlink:href="#stroked-chevron-down"></use></svg></span> Fono
-                </a>
-                <ul class="children collapse" id="sub-item-1">
-                    <li>
-                        <a class="" routerLink="/home/fono/ver">
-                            <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Perfil
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" routerLink="/home/fono/novo">
-                            <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Cadastrar
-                        </a>
-                    </li>
-                 </ul>
-            </li>
-            <!--/ FONO -->
-
-               <!-- PACIENTE -->
-            <li class="parent ">
-                <a>
-                    <span data-toggle="collapse" href="#sub-item-2"><svg class="glyph stroked star"><use xlink:href="#stroked-chevron-down"></use></svg></span> Paciente
-                </a>
-                <ul class="children collapse" id="sub-item-2">
-                    <li>
-                        <a class="" routerLink="/home/paciente/ver">
-                            <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Perfil
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" routerLink="/home/paciente/novo">
-                            <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Cadastrar
-                        </a>
-                    </li>
-                 </ul>
-            </li>
-            <!--/ PACIENTE -->
-
-            <li><a href="tables.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Consulta</a></li>
-            <li class="parent ">
-                <a>
-                    <span data-toggle="collapse" href="#sub-item-3"><svg class="glyph stroked star"><use xlink:href="#stroked-chevron-down"></use></svg></span> Jogos
-                </a>
-                <ul class="children collapse" id="sub-item-3">
-                    <li>
-                        <a class="" href="#">
-                            <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Jogo 1
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="#">
-                            <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Jogo 2
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="#">
-                            <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Jogo 3
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li role="presentation" class="divider"></li>
-           
-        </ul>
-        <div class="attribution"><a >TEMA</a></div>
-    </div><!--/.sidebar-->
+        </nav>
+    </header>
+    
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+              <!-- Sidebar user panel -->
+              <div class="user-panel">
+                <div class="pull-left image">
+                  <img src="https://irp-cdn.multiscreensite.com/f57590fa/dms3rep/multi/thumbnail/boy-4-200x200.png" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                  <p>Nome</p>
+                  <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+              </div>
+              <!-- search form -->
+              <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                  <input type="text" name="q" class="form-control" placeholder="Search...">
+                  <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                  </span>
+                </div>
+              </form>
+              <!-- /.search form -->
+              <ul class="sidebar-menu">
+                <li class="header">NAVEGAÇÃO PRINCIPAL</li>
+                <li class="treeview">
+                  <a>
+                    <i class="fa fa-user"></i>
+                    <span>Paciente</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a routerLink="/home/paciente/consulta"><i class="fa fa-circle-o"></i> Consultar</a></li>
+                    <li><a routerLink="/home/paciente/consultarMeus"><i class="fa fa-circle-o"></i> Meus Pacientes</a></li>
+                  </ul>
+                </li>
+                <li class="treeview">
+                  <a>
+                    <i class="fa fa-calendar"></i> 
+                    <span>Agenda</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a routerLink="/home/agenda/calendarioAgenda"><i class="fa fa-circle-o"></i> Calendário</a></li>
+                    <li><a routerLink="/home/agenda/consultaAgenda"><i class="fa fa-circle-o"></i> Consultar</a></li>
+                  </ul>
+                </li>
+                <li class="treeview">
+                  <a>
+                    <i class="fa fa-gamepad"></i> 
+                    <span>Jogos</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a routerLink="/home/jogos/listaJogos"><i class="fa fa-circle-o"></i> Jogos</a></li>
+                  </ul>
+                </li>
+                <li class="treeview">
+                  <a>
+                    <i class="glyphicon glyphicon-piggy-bank"></i> 
+                    <span>Faturamento</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Por Período</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Anual</a></li>
+                  </ul>
+                </li>
+                <li class="header">SITE</li>
+              </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
         
-    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-               
-           
-                
-
-                 <router-outlet></router-outlet>
-            
-       
-
+        <div class="content-wrapper">
+            <router-outlet></router-outlet>
+        </div>    
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.1.0
+            </div>
+            <strong>Copyright &copy; 2016-2017 <a href="http://require.com.br/">Require</a>.</strong> Todos os direitos reservados.
+        </footer>
 </div>

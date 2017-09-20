@@ -3,29 +3,32 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-// import { HomeComponent } from './home/home.component';
 
 
 import { HomeModule } from './home/home.module';
 import { FonoModule } from './home/fono/fono.module';
+import { AgendaModule } from './home/agenda/agenda.module';
 import { PacienteModule } from './home/paciente/paciente.module';
 import { AppRoutingModule } from './app.routing.module';
+import { JogosModule } from "./home/jogos/jogos.module";
 
 // import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    
+    LoginComponent    
     // HomeComponent
   ],
   imports: [
     BrowserModule,
     HomeModule,
     FonoModule,
-    PacienteModule,     
-    AppRoutingModule
+    PacienteModule,  
+    JogosModule, 
+    AgendaModule,  
+    AppRoutingModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

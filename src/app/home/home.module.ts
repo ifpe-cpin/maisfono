@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home.routing.module';
 import { HomeComponent } from './home.component';
 import { DashComponent } from './dash/dash.component';
 
+
 @NgModule({
   imports: [
     CommonModule,

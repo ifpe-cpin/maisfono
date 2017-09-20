@@ -2,41 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>MaisFono</title>
+  <title>+Fono</title>
   <base href="/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/AdminLTE.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/skins/_all-skins.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+	
+	
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <script src="../assets/js/lumino.glyphs.js"></script>
 </head>
-<body>
-  <app-root></app-root>
+<body class="hold-transition skin-blue sidebar-mini">
+  
+	<app-root></app-root>
 
-  <script src="../assets/js/jquery-1.11.1.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/chart.min.js"></script>
-	<script src="../assets/js/chart-data.js"></script>
-	<script src="../assets/js/easypiechart.js"></script>
-	<script src="../assets/js/easypiechart-data.js"></script>
-	<script src="../assets/js/bootstrap-datepicker.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/js/app.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/js/demo.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+
+	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+
 	<script>
-		$('#calendar').datepicker({
+		$(function () {
+			$("#pacientesMeus").DataTable();
 		});
 
-		!function ($) {
-		    $(document).on("click","ul.nav li.parent > a > span.icon", function(){          
-		        $(this).find('em:first').toggleClass("glyphicon-minus");      
-		    }); 
-		    $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-		}(window.jQuery);
-
-		$(window).on('resize', function () {
-		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-		})
-		$(window).on('resize', function () {
-		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-		})
+		
+		$(function () {
+			$("#pacientes").DataTable();
+		});
 	</script>	
 </body>
 </html>
