@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Install dependencies
 
-Before execute the below commands you must install Angular 2 and Typescript. To do it, just type:
+Before execute the below commands (in the Windows Command prompt as administrator) you must install Angular 2 and Typescript. To do it, just type:
 
 `npm install -g @angular/cli`
 
