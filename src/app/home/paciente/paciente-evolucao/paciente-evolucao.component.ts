@@ -9,7 +9,6 @@ import { Evolucao } from "../../models/paciente/evolucao";
 export class PacienteEvolucaoComponent implements OnInit {
   selectedEvolucao: Evolucao;
   evolucao: Evolucao[] = [];
-  title: String;
 
   constructor() { }
 
