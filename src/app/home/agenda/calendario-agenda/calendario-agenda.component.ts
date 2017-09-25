@@ -19,6 +19,18 @@ export class CalendarioAgendaComponent implements OnInit {
             center: 'title',
             right : 'month,agendaWeek,agendaDay'
         },
+        events: [
+            {
+                title: 'Ana Silva',
+                start: '2017-09-25T10:00:00',
+                end: '2017-9-25T11:00:00'
+            },
+            {
+                title: 'Event2',
+                start: '2017-09-05'
+            }
+          
+        ],
         minTime: "08:00:00",
         maxTime: "18:00:00",
         businessHours: [
