@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+declare var $:any;
+
 @Component({
   selector: 'app-calendario-agenda',
   templateUrl: './calendario-agenda.component.html',
@@ -10,6 +12,31 @@ export class CalendarioAgendaComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+      $('#calendar').fullCalendar({
+        header: {
+            left  : 'prev,next today',
+            center: 'title',
+            right : 'month,agendaWeek,agendaDay'
+        },
+        minTime: "08:00:00",
+        maxTime: "18:00:00",
+        businessHours: [
+          {
+            // days of week. an array of zero-based day of week integers (0=Sunday)
+            dow: [ 1, 2, 3 ], // Monday - Wednesday
+            start: '10:00', // a start time (10am in this example)
+            end: '18:00', // an end time (6pm in this example)
+          },
+          {
+              // days of week. an array of zero-based day of week integers (0=Sunday)
+              dow: [ 4, 5 ], // Thursday - Friday
+              start: '13:00', // a start time (10am in this example)
+              end: '18:00', // an end time (6pm in this example)
+          },
+
+        ]
+      });
   }
 
 }

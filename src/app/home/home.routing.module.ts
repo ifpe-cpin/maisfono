@@ -11,6 +11,7 @@ import { FonoDetalheComponent } from './fono/fono-detalhe/fono-detalhe.component
 import { PacienteComponent } from './paciente/paciente.component';
 import { ConsultaComponent  } from './paciente/consulta/consulta.component';
 import { ConsultarMeusComponent  } from './paciente/consultar-meus/consultar-meus.component';
+import { PacienteEvolucaoComponent  } from './paciente/paciente-evolucao/paciente-evolucao.component';
 import { PacienteFormComponent  } from './paciente/paciente-form/paciente-form.component';
 import { PacienteDetalheComponent } from './paciente/paciente-detalhe/paciente-detalhe.component';
 
@@ -34,6 +35,7 @@ const homeRoutes = [
 			{path: 'paciente', component: PacienteComponent, children: [
 				{path: 'consulta', component: ConsultaComponent},
 				{path: 'consultarMeus', component: ConsultarMeusComponent},
+				{path: 'evolucao', component: PacienteEvolucaoComponent},
 				{path: 'novo', component: PacienteFormComponent},
 				{path: 'ver', component: PacienteDetalheComponent},
 				// {path: ':id/editar', component: FonoFormComponent}
