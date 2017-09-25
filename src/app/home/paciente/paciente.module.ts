@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { PacienteRoutingModule } from './paciente.routing.module';
@@ -12,6 +13,7 @@ import { PacienteEvolucaoComponent } from './paciente-evolucao/paciente-evolucao
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     PacienteRoutingModule
   ],
   declarations: [PacienteDetalheComponent, PacienteFormComponent, PacienteComponent, ConsultaComponent, ConsultarMeusComponent, PacienteEvolucaoComponent]

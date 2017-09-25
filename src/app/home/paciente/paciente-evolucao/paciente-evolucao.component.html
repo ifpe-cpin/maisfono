@@ -53,7 +53,7 @@
                           {{evolucaoLine.descricao}}
                       </div>
                       <div class="timeline-footer">
-                        <a class="btn btn-primary btn-xs">Editar</a>
+                        <a class="btn btn-primary btn-xs" (click)="selecionaEvolucao(evolucaoLine)"  data-toggle="modal" data-target="#modal-editar" >Editar</a>
                         <a class="btn btn-danger btn-xs" (click)="deletarEvolucao(evolucao.length - i - 1)">Excluir</a>
                       </div>
                   </div>
@@ -87,6 +87,31 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
             <button type="button" class="btn btn-primary" (click)="adicionaEvolucao(titulo.value, descricao.value,'12:00','01 Nov. 2017',1)" data-dismiss="modal" >Salvar</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+
+
+    <!--Modal Editar -->
+    <div class="modal fade" id="modal-editar" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span></button>
+            <h4 class="modal-title">Editar Evolução</h4>
+          </div>
+          <div class="modal-body">
+                  <input [(ngModel)]="selectedEvolucao.titulo" type="text" class="form-control" name="titulo" #titulo >  
+                  <br>
+                  <textarea [(ngModel)]="selectedEvolucao.descricao" class="form-control" rows="3" name="descricao" #descricao></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Fechar</button>
           </div>
         </div>
         <!-- /.modal-content -->
