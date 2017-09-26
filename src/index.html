@@ -46,19 +46,19 @@
 	<script>
 		
 		function onSignIn(googleUser) {
-			if(googleUser!=null){
-				var profile = googleUser.getBasicProfile();
-				
-				localStorage.setItem('id', profile.getId());
-				localStorage.setItem('image', profile.getImageUrl());
-				localStorage.setItem('name', profile.getName());
-				localStorage.setItem('email', profile.getEmail());
 
-				window.location.replace("http://localhost:4200/home/dash");
-			}
-		}
-			
-			onSignIn(googleUser);
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+				console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+				
+				if (typeof(Storage) !== "undefined") {
+						localStorage.setItem("img", profile.getImageUrl());
+						localStorage.setItem("name", profile.getName());
+				}
+				this.router.navigate(['/home/dash']);
+      }
 	</script>
 </body>
 </html>

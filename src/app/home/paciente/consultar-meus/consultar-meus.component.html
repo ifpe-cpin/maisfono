@@ -32,12 +32,21 @@
             </thead>
             <tbody>
               <tr>
-                <td>Ana Hillary dos Santos Silva</td>
+              <tr *ngFor="let lista of listaPaciente">
+              <td>{{lista.nome}}</td>
+                <td>{{lista.telefone}}</td>
+                <td>{{lista.email}}</td>
+                <td>Laudo</td>
+                <td align="center"><a routerLink="/home/paciente/evolucao"><i class="fa fa-line-chart"></i></a></td>
+                <td>Horario</td>
+
+                
+                <!-- <td>Ana Hillary dos Santos Silva</td>
                 <td>(82) 99999-9999</td>
                 <td>pamela@gmail.com</td>
                 <td>Laudo</td>
                 <td align="center"><a routerLink="/home/paciente/evolucao"><i class="fa fa-line-chart"></i></a></td>
-                <td>Horarios</td>
+                <td>Horarios</td> -->
               </tr>
              
             </tbody>
