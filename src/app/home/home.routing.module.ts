@@ -23,6 +23,7 @@ import { DashComponent } from './dash/dash.component';
 
 import { JogosComponent } from "./jogos/jogos.component";
 import { ListaJogosComponent } from "./jogos/lista-jogos/lista-jogos.component";
+import { VideoComponent } from './video/video.component';
 
 
 const homeRoutes = [
@@ -47,7 +48,8 @@ const homeRoutes = [
 				{path: 'consultaAgenda', component: ConsultaAgendaComponent},
 				{path: 'calendarioAgenda', component: CalendarioAgendaComponent},
 			]},
-			{path: 'dash', component: DashComponent}
+			{path: 'dash', component: DashComponent},
+			{path: 'video', component: VideoComponent}
 		]}
 
 ];
