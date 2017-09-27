@@ -11,6 +11,8 @@ declare const gapi: any;
   providers: [AuthService]
 })
 export class LoginComponent implements OnInit,AfterViewInit {
+  public img: String;
+  public name: String;
   
   public auth2: any;
   
@@ -19,6 +21,8 @@ export class LoginComponent implements OnInit,AfterViewInit {
 
   ngOnInit() {
     AppGlobals.GOOGLE_CLIENT_ID = '1062172680352-69ua0kcurpstpb26d0inl1ag6kv1lpir.apps.googleusercontent.com';
+
+    
   }
 
  
@@ -44,6 +48,9 @@ export class LoginComponent implements OnInit,AfterViewInit {
         localStorage.setItem('name', profile.getName());
         localStorage.setItem('email', profile.getEmail());
        
+    this.img = localStorage.getItem("img");
+    this.name = localStorage.getItem("name");
+
         this.router.navigate(['/home/dash']);
 
       }, (error) => {

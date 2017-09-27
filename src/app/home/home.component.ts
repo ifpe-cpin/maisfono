@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   public attachSignout() {
         this._googleAuth.userLogout(()=>{
           console.log("logout");
+          localStorage.clear();
         });
   }
 }
