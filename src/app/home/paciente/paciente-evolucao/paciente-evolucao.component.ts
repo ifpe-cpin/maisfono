@@ -9,6 +9,7 @@ import { Evolucao } from "../../models/paciente/evolucao";
 export class PacienteEvolucaoComponent implements OnInit {
   selectedEvolucao: Evolucao;
   evolucao: Evolucao[] = [];
+  title: String;
 
   constructor() { }
 
@@ -19,7 +20,7 @@ export class PacienteEvolucaoComponent implements OnInit {
       new Evolucao('Título','descricao 3', '12:10', '08 Set. 2017', 2),
       new Evolucao('Título','descricao 4', '12:01', '01 Set. 2017', 1)
     );    
-
+    
     this.selectedEvolucao = {titulo: '', descricao: '', hora: '', data: '', tipoEvolucao: 1};
   }
 
