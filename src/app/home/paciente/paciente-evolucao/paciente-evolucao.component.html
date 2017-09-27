@@ -80,13 +80,13 @@
             <h4 class="modal-title">Incluir Evolução</h4>
           </div>
           <div class="modal-body">
-                  <input type="text" class="form-control" placeholder="Título" name="titulo1" #titulo1 >  
+                  <input type="text" class="form-control" placeholder="Título" name="titulo" #titulo >  
                   <br>
-                  <textarea class="form-control" rows="3" placeholder="Descrição" name="descricao1" #descricao1></textarea>
+                  <textarea class="form-control" rows="3" placeholder="Descrição" name="descricao" #descricao></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-primary" (click)="adicionaEvolucao(titulo1.value, descricao1.value,'12:00','01 Nov. 2017',1)" data-dismiss="modal" >Salvar</button>
+            <button type="button" class="btn btn-primary" (click)="adicionaEvolucao(titulo.value, descricao.value,'12:00','01 Nov. 2017',1)" data-dismiss="modal" >Salvar</button>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -106,9 +106,9 @@
             <h4 class="modal-title">Editar Evolução</h4>
           </div>
           <div class="modal-body">
-                  <input [(ngModel)]="selectedEvolucao.titulo" type="text" class="form-control" name="titulo" #titulo >  
+                  <input [(ngModel)]="selectedEvolucao.titulo" type="text" class="form-control" name="titulo"  >  
                   <br>
-                  <textarea [(ngModel)]="selectedEvolucao.descricao" class="form-control" rows="3" name="descricao" #descricao></textarea>
+                  <textarea [(ngModel)]="selectedEvolucao.descricao" class="form-control" rows="3" name="descricao" ></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Fechar</button>

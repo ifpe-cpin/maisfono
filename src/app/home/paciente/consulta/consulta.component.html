@@ -31,7 +31,14 @@
               </tr>
             </thead>
             <tbody>
-              
+               <tr *ngFor="let lista of paciente">
+                <td>{{lista.nome}}</td>
+                <td>{{lista.telefone}}</td>
+                <td>{{lista.email}}</td>
+                <td>{{lista.Laudo}}</td>
+                <td align="center"><a routerLink="/home/paciente/evolucao"><i class="fa fa-line-chart"></i></a></td>
+                <td>Horario</td>
+              </tr>
              
             </tbody>
             <tfoot>

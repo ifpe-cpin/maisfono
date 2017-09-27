@@ -16,7 +16,14 @@ import { PacienteEvolucaoComponent } from './paciente-evolucao/paciente-evolucao
     FormsModule,
     PacienteRoutingModule
   ],
-  declarations: [PacienteDetalheComponent, PacienteFormComponent, PacienteComponent, ConsultaComponent, ConsultarMeusComponent, PacienteEvolucaoComponent]
+  declarations: [
+  	PacienteDetalheComponent, 
+  	PacienteFormComponent,
+  	PacienteComponent, 
+  	ConsultaComponent, 
+  	ConsultarMeusComponent, 
+  	PacienteEvolucaoComponent
+  	]
 })
 export class PacienteModule { }
  
