@@ -6,6 +6,7 @@
   <title>+Fono</title>
   <base href="/">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google-signin-client_id" content="449875052890-cdb1o95m4lo9ivtev74fio3p4trfvc0c.apps.googleusercontent.com">
 	
 
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -17,10 +18,13 @@
 	<link rel="stylesheet" href="../assets/css/fullcalendar.min.css" />
   <link media="print" rel="stylesheet" href="../assets/css/fullcalendar.print.css" />
 	
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+	
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+	
 	<app-root></app-root>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -36,42 +40,6 @@
 	<script src="https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"></script>
 	<script src="../assets/js/fullcalendar.min.js"></script>
 	<script src="../assets/lang/pt-br.js"></script>
-	<!-- Login e hangout -->
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	
-
-	<script>
-		
-		function onSignIn(googleUser) {
-			var profile = googleUser.getBasicProfile();
-			console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-			console.log('Name: ' + profile.getName());
-			console.log('Image URL: ' + profile.getImageUrl());
-			console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-			
-			if (typeof(Storage) !== "undefined") {
-					localStorage.setItem("img", profile.getImageUrl());
-					localStorage.setItem("name", profile.getName());
-			}
-			
-			//window.location.replace("http://localhost:4200/home/dash");
-		}	
-		
-		function signOut() {
-				var auth2 = gapi.auth2.getAuthInstance();
-				auth2.signOut().then(function() {
-						console.log('User signed out.');
-				});
-
-				Storage.clear();
-				console.log("treyvudwbcid"+Storage);
-		}
-
-		function onLoad() {
-      gapi.load('client:auth2', function() {
-        gapi.auth2.init();
-      });
-    }
-	</script>
 </body>
 </html>

@@ -21,13 +21,13 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{img}}" class="user-image" alt="User Image">
+                            <img [src]="img" class="user-image" alt="User Image">
                             <span class="hidden-xs">{{name}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{img}}" class="img-circle" alt="User Image">
+                                <img [src]="img" class="img-circle" alt="User Image">
                                 <p>
                                    {{name}}
                                 </p>
@@ -40,7 +40,7 @@
                                         </a>
                                 </div>
                                 <div class="pull-right">
-                                        <a onClick="signOut();">
+                                        <a (click)="attachSignout()">
                                             Sair
                                         </a>
                                 </div>
@@ -59,7 +59,7 @@
               <!-- Sidebar user panel -->
               <div class="user-panel">
                 <div class="pull-left image">
-                  <img src="{{img}}" class="img-circle" alt="User Image">
+                  <img [src]="img" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                   <p>{{name}}</p>
@@ -78,6 +78,7 @@
               <!-- /.search form -->
               <ul class="sidebar-menu">
                 <li class="header">NAVEGAÇÃO PRINCIPAL</li>
+                <li><a routerLink="/home/video"><i class="fa fa-gamepad"></i>Vídeo</a></li>
                 <li class="treeview">
                   <a>
                     <i class="fa fa-user"></i>
