@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit} from '@angular/core';
 import { AuthService, AppGlobals } from 'angular2-google-login';
 import {Router} from "@angular/router";
 
@@ -10,7 +10,7 @@ declare const gapi: any;
   styleUrls: ['./login.component.css'],
   providers: [AuthService]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit,AfterViewInit {
   
   public auth2: any;
 
