@@ -45,7 +45,8 @@ export class LoginComponent implements OnInit,AfterViewInit {
         localStorage.setItem('name', profile.getName());
         localStorage.setItem('email', profile.getEmail());
        
-        this.router.navigate(['/home/dash']);
+        //this.router.navigate(['/home/dash']);
+        window.location.replace("http://localhost:4200/home/dash");
         
 
 
