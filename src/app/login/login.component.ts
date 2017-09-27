@@ -47,9 +47,6 @@ export class LoginComponent implements OnInit,AfterViewInit {
         localStorage.setItem('img', profile.getImageUrl());
         localStorage.setItem('name', profile.getName());
         localStorage.setItem('email', profile.getEmail());
-       
-    this.img = localStorage.getItem("img");
-    this.name = localStorage.getItem("name");
 
         this.router.navigate(['/home/dash']);
 

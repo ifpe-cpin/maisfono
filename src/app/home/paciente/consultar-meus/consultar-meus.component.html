@@ -31,22 +31,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-              <tr *ngFor="let lista of listaPaciente">
-              <td>{{lista.nome}}</td>
+              <tr *ngFor="let lista of paciente">
+                <td>{{lista.nome}}</td>
                 <td>{{lista.telefone}}</td>
                 <td>{{lista.email}}</td>
-                <td>Laudo</td>
+                <td>{{lista.Laudo}}</td>
                 <td align="center"><a routerLink="/home/paciente/evolucao"><i class="fa fa-line-chart"></i></a></td>
                 <td>Horario</td>
-
-                
-                <!-- <td>Ana Hillary dos Santos Silva</td>
-                <td>(82) 99999-9999</td>
-                <td>pamela@gmail.com</td>
-                <td>Laudo</td>
-                <td align="center"><a routerLink="/home/paciente/evolucao"><i class="fa fa-line-chart"></i></a></td>
-                <td>Horarios</td> -->
               </tr>
              
             </tbody>
@@ -61,8 +52,12 @@
               </tr>
             </tfoot>
           </table>
+           <button class="btn btn-block btn-primary btn-lg" routerLink="/home/paciente/novo">CADASTRAR NOVO</button>
         </div><!-- /.box-body -->
       </div><!-- /.box -->
+
     </div><!-- /.col -->
+
+
   </div><!-- /.row -->
 </section><!-- /.content -->
