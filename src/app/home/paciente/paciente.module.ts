@@ -22,7 +22,7 @@ import { PacienteEvolucaoComponent } from './paciente-evolucao/paciente-evolucao
   	PacienteComponent, 
   	ConsultaComponent, 
   	ConsultarMeusComponent, 
-  	PacienteEvolucaoComponent
+		PacienteEvolucaoComponent,
   	]
 })
 export class PacienteModule { }
