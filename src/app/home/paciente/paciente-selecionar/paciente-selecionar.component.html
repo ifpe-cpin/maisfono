@@ -1,0 +1,19 @@
+<strong>Escolha um paciente para integrar a vídeo chamada</strong>
+<table id="pacientes" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th width="10%">#</th>  
+        <th>Nome</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let paciente of listaPacientes; let idx = index">
+        <td width="10%"><input type="radio" name="paciente" (click)="select(paciente)"></td>  
+        <td>{{paciente.nome}}</td>
+        <td>{{paciente.email}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <app-video [paciente] = "selectedPaciente"></app-video>
