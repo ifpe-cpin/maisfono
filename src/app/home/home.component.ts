@@ -33,5 +33,14 @@ export class HomeComponent implements OnInit {
           localStorage.clear();
         });
   }
+
+
+   openRoom(){
+    var new_window = window.open('https://hangouts.google.com/hangouts/_/jyg7ajkibnf6pkmp7fqernkt7ue',"Hangout",'fullscreen=yes');
+    
+    new_window.onunload = function(){
+      console.log("fechou");
+    }
+   }
 }
 
