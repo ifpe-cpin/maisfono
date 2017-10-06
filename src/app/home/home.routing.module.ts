@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 
 import { FonoComponent } from './fono/fono.component';
+import { ConsultarFonoComponent  } from './fono/consultar-fono/consultar-fono.component';
+import { ConsultarMeusFonosComponent  } from './fono/consultar-meus-fonos/consultar-meus-fonos.component';
 import { FonoFormComponent  } from './fono/fono-form/fono-form.component';
 import { FonoDetalheComponent } from './fono/fono-detalhe/fono-detalhe.component';
 
@@ -33,6 +35,11 @@ const homeRoutes = [
 						{path: 'novo', component: FonoFormComponent},
 						{path: 'ver', component: FonoDetalheComponent},
 						// {path: ':id/editar', component: FonoFormComponent}
+			]},
+			{path: 'fono', component: FonoComponent, children: [
+				{path: 'consulta', component: ConsultarFonoComponent},
+				{path: 'consultarMeusFonos', component: ConsultarMeusFonosComponent},
+				// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'paciente', component: PacienteComponent, children: [
 				{path: 'consulta', component: ConsultaComponent},
