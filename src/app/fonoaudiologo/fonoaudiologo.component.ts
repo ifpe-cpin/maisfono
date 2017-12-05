@@ -6,12 +6,12 @@ declare const gapi: any;
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  templateUrl: './fonoaudiologo.component.html',
+  styleUrls: ['./fonoaudiologo.component.css'],
   providers: [AuthService]
 })
 
-export class HomeComponent implements OnInit {
+export class FonoaudiologoComponent implements OnInit {
   img: String;
   name: String;
 

@@ -6,13 +6,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
-import { HomeComponent } from './home/home.component';
+import { FonoaudiologoComponent } from './fonoaudiologo/fonoaudiologo.component';
+import { NovoUsuarioComponent } from './novo-usuario/novo-usuario.component';
+import { PacienteComponent } from './paciente/paciente.component';
 
 
 
 const appRoutes: Routes = [
 	{ path: '', component: LoginComponent},
-	{ path: 'home', component: HomeComponent}
+	{ path: 'fonoaudiologo', component: FonoaudiologoComponent},
+	{ path: 'newUser', component: NovoUsuarioComponent},
+	{ path: 'paciente', component: PacienteComponent}
 ];
 ;
 

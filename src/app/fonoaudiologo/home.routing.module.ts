@@ -2,7 +2,7 @@ import { NgModule} from '@angular/core';
 
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home.component';
+import { FonoaudiologoComponent } from './fonoaudiologo.component';
 
 import { FonoComponent } from './fono/fono.component';
 import { ConsultarFonoComponent  } from './fono/consultar-fono/consultar-fono.component';
@@ -30,7 +30,7 @@ import { PacienteSelecionarComponent } from './paciente/paciente-selecionar/paci
 
 
 const homeRoutes = [
-		{path: 'home', component: HomeComponent, children:[
+		{path: 'fonoaudiologo', component: FonoaudiologoComponent, children:[
 			{path: 'fono', component: FonoComponent, children: [
 						{path: 'novo', component: FonoFormComponent},
 						{path: 'ver', component: FonoDetalheComponent},

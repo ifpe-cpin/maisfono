@@ -3,29 +3,33 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
-
-import { HomeModule } from './home/home.module';
-import { FonoModule } from './home/fono/fono.module';
-import { AgendaModule } from './home/agenda/agenda.module';
-import { PacienteModule } from './home/paciente/paciente.module';
+import { FonoaudiologoModule } from './fonoaudiologo/fonoaudiologo.module';
+import { FonoModule } from './fonoaudiologo/fono/fono.module';
+import { AgendaModule } from './fonoaudiologo/agenda/agenda.module';
+import { PacienteModule } from './fonoaudiologo/paciente/paciente.module';
 import { AppRoutingModule } from './app.routing.module';
-import { JogosModule } from "./home/jogos/jogos.module";
+import { JogosModule } from "./fonoaudiologo/jogos/jogos.module";
+import { PacienteComponent } from './paciente/paciente.component';
+import { NovoUsuarioComponent } from './novo-usuario/novo-usuario.component';
+import { FonoComponent } from './novo-usuario/fono/fono.component';
 
 // import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent    
+    LoginComponent,
+    PacienteComponent,
+    NovoUsuarioComponent,
+    FonoComponent    
     // HomeComponent
   ],
   imports: [
     BrowserModule,
-    HomeModule,
+    FonoaudiologoModule,
     FonoModule,
     PacienteModule,  
     JogosModule, 

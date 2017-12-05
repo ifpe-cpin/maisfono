@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit,AfterViewInit {
         localStorage.setItem('email', profile.getEmail());
 
         //this.router.navigate(['/home/dash']);
-        window.location.replace("http://localhost:4200/home/dash");
+        window.location.replace("http://localhost:4200/fonoaudiologo/dash");
 
       }, (error) => {
         alert(JSON.stringify(error, undefined, 2));

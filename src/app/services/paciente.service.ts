@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { PACIENTES } from '../mocks/mock-paciente';
-import { Paciente } from '../home/models/paciente/paciente';
+import { Paciente } from '../fonoaudiologo/models/paciente/paciente';
 
 
 @Injectable()

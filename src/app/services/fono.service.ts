@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { FONO } from '../mocks/mock-fono';
-import { Fono } from '../home/models/fono/fono';
+import { Fono } from '../fonoaudiologo/models/fono/fono';
 
 
 @Injectable()
