@@ -15,6 +15,9 @@ import { JogosModule } from "./fonoaudiologo/jogos/jogos.module";
 import { PacienteComponent } from './paciente/paciente.component';
 import { NovoUsuarioComponent } from './novo-usuario/novo-usuario.component';
 import { FonoComponent } from './novo-usuario/fono/fono.component';
+import { PerfilComponent } from './fonoaudiologo/perfil/perfil.component';
+import { DashboardComponent } from './fonoaudiologo/perfil/dashboard/dashboard.component';
+import { MeusDadosComponent } from './fonoaudiologo/perfil/meus-dados/meus-dados.component';
 
 // import { HomeComponent } from './home/home.component';
 
@@ -24,7 +27,10 @@ import { FonoComponent } from './novo-usuario/fono/fono.component';
     LoginComponent,
     PacienteComponent,
     NovoUsuarioComponent,
-    FonoComponent    
+    FonoComponent,
+    PerfilComponent,
+    DashboardComponent,
+    MeusDadosComponent    
     // HomeComponent
   ],
   imports: [

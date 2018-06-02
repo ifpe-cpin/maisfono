@@ -29,6 +29,11 @@ import { VideoComponent } from './video/video.component';
 import { PacienteSelecionarComponent } from './paciente/paciente-selecionar/paciente-selecionar.component';
 
 
+import { PerfilComponent } from "./perfil/perfil.component";
+import { DashboardComponent } from "./perfil/dashboard/dashboard.component";
+import { MeusDadosComponent } from "./perfil/meus-dados/meus-dados.component";
+
+
 const homeRoutes = [
 		{path: 'fonoaudiologo', component: FonoaudiologoComponent, children:[
 			{path: 'fono', component: FonoComponent, children: [
@@ -55,6 +60,10 @@ const homeRoutes = [
 			{path: 'agenda', component: AgendaComponent, children: [
 				{path: 'consultaAgenda', component: ConsultaAgendaComponent},
 				{path: 'calendarioAgenda', component: CalendarioAgendaComponent},
+			]},
+			{path: 'perfil', component: PerfilComponent, children: [
+				{path: 'dashboard', component: DashboardComponent},
+				{path: 'meusDados', component: MeusDadosComponent},
 			]},
 			{path: 'dash', component: DashComponent},
 			{path: 'video', component: PacienteSelecionarComponent}

@@ -1,0 +1,368 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Fonoaudiólogo
+    <small>Formulário de Edição</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="#">Perfil</a></li>
+    <li class="active">Editar Dados Pessoais</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  
+
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Incluir Professor</h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+      <form id="form1" class="form1" method="post">
+        <div class="col-md-12">
+			<!-- Custom Tabs (Pulled to the right) -->
+			<div class="nav-tabs-custom">
+                <div class="input-group col-xs-12">
+                  <label>Nome  <em>*</em></label>
+                  <input type="text" name="nome" id="nome" class="form-control" placeholder="Nome" min="5" 
+                  title="Este campo deve conter apenas letras e um mínimo de 5 caracteres." required>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>Data de Nascimento  <em>*</em></label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="date" maxlength="8" name="dn" id="dn" class="form-control" placeholder="Data de nascimento" required>
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-4">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>CPF  <em>*</em></label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                      <input type="text" name="cpf" class="form-control" placeholder="CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" 
+                              title="Este campo deve conter apenas números" maxlength="14" minlength="14" 
+                              OnKeyPress="formatar('###.###.###-##', this)" id="cpf" required>
+                      </div>
+                      
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-4">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>CRF  <em>*</em></label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                      <input type="text" name="crf" class="form-control" placeholder="CRF" pattern="\d{11}" 
+                              title="Este campo deve conter apenas números" maxlength="11" minlength="11" 
+                              id="crf" title="Este campo deve conter 11 caracteres e ser composto somente por números." required>
+                      </div>
+                      
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                <br>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Sexo  <em>*</em></label>
+                      <select name="num_sexo" id="num_sexo" class="form-control select2" title="Por favor, selecione uma opção." required >
+                        <option value="">--Selecione--</option>
+                        <option value= '1' >Feminino</option><option value= '2' >Masculino</option>                                  </select>
+
+                    </div><!-- /.form-group -->
+                  </div><!-- /.col (right) -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Tipo Sanguíneo  <em>*</em></label>
+                      <select name="tipo_sanguineo" id="tipo_sanguineo" class="form-control  select2" title="Por favor, selecione uma opção." required>
+                        <option value="">--Selecione--</option>
+                          <option value= '1' >A+</option><option value= '2' >A-</option><option value= '3' >B+</option><option value= '4' >B-</option><option value= '5' >O+</option><option value= '6' >O-</option><option value= '7' >AB+</option><option value= '8' >AB-</option>                                  </select>
+                    </div><!-- /.form-group -->
+                  </div>
+                </div><!-- /.row -->
+                <br>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Estado Civil  <em>*</em></label>
+                      <select name="estado_civil" id="estado_civil" class="form-control select2" title="Por favor, selecione uma opção." required >
+                          <option value="">--Selecione--</option>
+                          <option value= '1' >Solteiro(a)</option><option value= '2' >Casado(a)</option><option value= '3' >Viúvo(a)</option><option value= '4' >Divorciado(a)</option>                                  </select>
+
+                    </div><!-- /.form-group -->
+                  </div><!-- /.col (right) -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Cor/Raça  <em>*</em></label>
+                      <select name="cor" id="cor" class="form-control select2" title="Por favor, selecione uma opção." required >
+                          <option value="">--Selecione--</option>
+                          <option value= '1' >Branca</option><option value= '2' >Preta</option><option value= '3' >Parda</option><option value= '4' >Amarela</option><option value= '5' >Indígena</option><option value= '6' >Não declarada</option>                                  </select>
+
+                    </div><!-- /.form-group -->
+                  </div><!-- /.col (right) -->
+                </div><!-- /.row -->
+                <br>
+
+                <div class="input-group col-xs-12">
+                  <label>Nome do Pai   <em>*</em></label>
+                  <input type="text" name="namePai" class="form-control" placeholder="Nome do Pai" pattern="[Aa-Zz\s]+$" min="5" 
+                  title="Este campo deve conter apenas letras e um mínimo de 5 caracteres." id="namePai" required>
+                </div>
+                <br>
+                <div class="input-group col-xs-12">
+                  <label>Nome da Mãe  <em>*</em></label>
+                  <input type="text" name="nameMae" class="form-control" placeholder="Nome da Mãe" pattern="[Aa-Zz\s]+$" min="5" 
+                  title="Este campo deve conter apenas letras e um mínimo de 5 caracteres." id="nameMae" required>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Nacionalidade  <em>*</em></label>
+                      <select name="nacionalidade" id="nacionalidade" class="form-control select2" title="Por favor, selecione uma opção." required >
+                          <option value="">--Selecione--</option>
+                          <option value= '1' >Brasileira</option><option value= '2' >Brasileira - Nascido no exterior ou naturalizado</option><option value= '3' >Estrangeira</option>                                  </select>
+
+                    </div><!-- /.form-group -->
+                  </div><!-- /.col (right) -->
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="input-group col-xs-12">
+                      <label>Estado de Nascimento  <em>*</em></label>
+                        
+                        <select class="form-control  select2" name="estado_nascimento" id="estado_nascimento" 
+                                onchange="showUserNascimento(this.value);"
+                                onChange="ativaNascimento(this);" required>
+                                
+                            <option value="">--Selecione--</option>
+                            <option value= '1' >Acre</option><option value= '2' >Alagoas</option><option value= '3' >Amazonas</option><option value= '4' >Amapá</option><option value= '5' >Bahia</option><option value= '6' >Ceará</option><option value= '7' >Distrito Federal</option><option value= '8' >Espírito Santo</option><option value= '9' >Goiás</option><option value= '10' >Maranhão</option><option value= '11' >Minas Gerais</option><option value= '12' >Mato Grosso do Sul</option><option value= '13' >Mato Grosso</option><option value= '14' >Pará</option><option value= '15' >Paraíba</option><option value= '16' >Pernambuco</option><option value= '17' >Piauí</option><option value= '18' >Paraná</option><option value= '19' >Rio de Janeiro</option><option value= '20' >Rio Grande do Norte</option><option value= '21' >Rondônia</option><option value= '22' >Roraima</option><option value= '23' >Rio Grande do Sul</option><option value= '24' >Santa Catarina</option><option value= '25' >Sergipe</option><option value= '26' >São Paulo</option><option value= '27' >Tocantins</option>                                    </select>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-6">
+                    <div class="input-group col-xs-12">
+                      <label>Município de Nascimento  <em>*</em></label>
+                      <select class="form-control  select2" name="municipio_nascimento" id="municipio_nascimento" required>
+                        <option value="">Selecione o Estado</option>
+                      </select>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                <br>
+
+                <h3>Contato</h3>
+                <hr>                        
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>Telefone</label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                        <input type="text" name="telefone1" class="form-control" placeholder="xx xxxx-xxxx" title="Telefone" maxlength="12" OnKeyPress="formatar('## ####-####', this);">
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-6">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>Telefone</label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-mobile-phone"></i></span>
+                        <input type="text" name="telefone2" class="form-control" placeholder="xx xxxxx-xxxx" title="Telefone" maxlength="13" OnKeyPress="formatar('## #####-####', this);">
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                <br>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>Email</label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                        <input type="email" name="email" class="form-control" placeholder="Email" >
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div>          
+                <br>
+                <br>
+                <h3>Endereço</h3>
+                <hr>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="col-lg-12 input-group">
+                      <label>Localização/Zona de Residência  <em>*</em></label>
+                      <select name="zona" id="zona" class="form-control select2" title="Por favor, selecione uma opção." required >
+                          <option value="">--Selecione--</option>
+                          <option value= '1' >Urbana</option><option value= '2' >Rural</option>                                  </select>
+                    </div>
+                  </div><!-- /.form-group -->
+                  <div class="col-lg-6">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>CEP</label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                        <input type="int" maxlength="10" class="form-control" name="cep" id="cep" OnKeyPress="formatar('##.###-###', this);">
+                        
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                <br>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="input-group col-xs-12">
+                      <label>Estado  <em>*</em></label>
+                        
+                        <select class="form-control select2" name="estado" id="estado" id="estado" onchange="showUser(this.value)"
+                                onChange="ativa(this);" required>
+                                
+                            <option value="">--Selecione--</option>
+                            <option value= '1' >Acre</option><option value= '2' >Alagoas</option><option value= '3' >Amazonas</option><option value= '4' >Amapá</option><option value= '5' >Bahia</option><option value= '6' >Ceará</option><option value= '7' >Distrito Federal</option><option value= '8' >Espírito Santo</option><option value= '9' >Goiás</option><option value= '10' >Maranhão</option><option value= '11' >Minas Gerais</option><option value= '12' >Mato Grosso do Sul</option><option value= '13' >Mato Grosso</option><option value= '14' >Pará</option><option value= '15' >Paraíba</option><option value= '16' >Pernambuco</option><option value= '17' >Piauí</option><option value= '18' >Paraná</option><option value= '19' >Rio de Janeiro</option><option value= '20' >Rio Grande do Norte</option><option value= '21' >Rondônia</option><option value= '22' >Roraima</option><option value= '23' >Rio Grande do Sul</option><option value= '24' >Santa Catarina</option><option value= '25' >Sergipe</option><option value= '26' >São Paulo</option><option value= '27' >Tocantins</option>                                    </select>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-4">
+                    <div class="input-group col-xs-12">
+                      <label>Município  <em>*</em></label>
+                      <select class="form-control select2" name="municipio" id="municipio" required>
+                        <option value="">Selecione o Estado</option>
+                      </select>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-4">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>Bairro</label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                        <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Bairro" title="Bairro">
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                <br>
+                <div class="row">
+                  <div class="col-lg-9">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>Rua  <em>*</em></label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                        <input type="text" name="rua" id="rua" class="form-control" placeholder="Endereço" min="5" 
+                                title="Este campo deve conter apenas letras e um mínimo de 5 caracteres." required>
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-3">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>Número</label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                        <input type="text" name="num_end" class="form-control" placeholder="Número" title="Número">
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->        
+                <br>
+                <br>
+                <h3>Dados de Formação</h3>
+                <hr>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Escolaridade  <em>*</em></label>
+                      <select name="escolaridade" id="escolaridade" class="form-control select2" title="Por favor, selecione uma opção." onChange="ativaPosGraduacao(this.value)" required >
+                          <option value="">--Selecione--</option>
+                          <option value= '1' >Fundamental incompleto</option><option value= '2' >Fundamental completo</option><option value= '3' >Ensino Médio - Normal/Magistério</option><option value= '4' >Ensino Médio - Normal/Magistério Específico Indígena</option><option value= '5' >Ensino Médio</option><option value= '6' >Superior</option>                                  </select>
+                    </div>
+                  </div><!-- /.form-group -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Pós Graduação </label>
+                      <select name="posGraduacao" id="posGraduacao" class="form-control select2" title="Por favor, selecione uma opção." disabled="disabled">
+                          <option value="">--Selecione--</option>
+                          <option value= '1' >Especialização</option><option value= '2' >Mestrado</option><option value= '3' >Doutorado</option><option value= '4' >Nenhum</option>                                  </select>
+                    </div>
+                  </div><!-- /.form-group -->
+                  <br>
+                </div><!-- /.row -->
+                <br>
+                <div  id="formacao">
+
+                  <div class="row">
+                    <div class="col-md-12"  align="center">
+                      <input type="button" class="btn btn-primary btn-block" id="add" name="add" value="Adicionar Formação" />
+                    </div>
+                  </div>
+
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-6" >
+                    <div class="form-group">
+                      <label>Outro(s) curso(s) específico(s)<em>*</em></label>
+                      <select name="select_outros_cursos" id="select_outros_cursos" class="form-control select2 select2-multiple-cursos" title="Por favor, selecione uma opção." 
+                              multiple="multiple" onChange="array2()" data-placeholder="Selecione o(s) Curso(s)" required >
+                          <option value="">--Selecione--</option>
+                          <option value= '1' >Creche (0 a 3 anos)</option><option value= '2' >Pré-escola (4 e 5 anos)</option><option value= '3' >Anos iniciais do ensino fundamental</option><option value= '4' >Anos finais do ensino fundamental</option><option value= '5' >Ensino médio</option><option value= '6' >Educação de jovens e adultos</option><option value= '7' >Educação especial</option><option value= '8' >Educação indígena</option><option value= '9' >Educação de campo</option><option value= '10' >Educação ambiental</option><option value= '11' >Educação em direitos humanos</option><option value= '12' >Gênero e diversidade sexual</option><option value= '13' >Direitos de criança e adolescente</option><option value= '14' >Educação para as relações etnorraciais e história e cultura afro-brasileira e africana</option><option value= '15' >Outros</option><option value= '16' >Nenhum</option>                                  </select>
+
+                      <input type="hidden" name="outrosCursos" id="outrosCursos" value="">
+
+                    </div><!-- /.form-group -->
+                  </div><!-- /.col (right) -->
+                </div><!-- /.row -->
+                <br>
+                <br>
+                <h3>Áreas que Atende</h3>
+                <hr>
+
+                <div class="row">
+					<div class="col-md-6" >
+						<div class="form-group">
+							<label>Outro(s) curso(s) específico(s)<em>*</em></label>
+							<select name="select_outros_cursos" id="select_outros_cursos" class="form-control select2 select2-multiple-cursos" title="Por favor, selecione uma opção." 
+							  multiple="multiple" onChange="array2()" data-placeholder="Selecione o(s) Curso(s)" required >
+								<option value="">--Selecione--</option>
+								<option value= '1' >Creche (0 a 3 anos)</option><option value= '2' >Pré-escola (4 e 5 anos)</option><option value= '3' >Anos iniciais do ensino fundamental</option><option value= '4' >Anos finais do ensino fundamental</option><option value= '5' >Ensino médio</option><option value= '6' >Educação de jovens e adultos</option><option value= '7' >Educação especial</option><option value= '8' >Educação indígena</option><option value= '9' >Educação de campo</option><option value= '10' >Educação ambiental</option><option value= '11' >Educação em direitos humanos</option><option value= '12' >Gênero e diversidade sexual</option><option value= '13' >Direitos de criança e adolescente</option><option value= '14' >Educação para as relações etnorraciais e história e cultura afro-brasileira e africana</option><option value= '15' >Outros</option><option value= '16' >Nenhum</option>                                  </select>
+
+							<input type="hidden" name="outrosCursos" id="outrosCursos" value="">
+
+                    </div><!-- /.form-group -->
+					</div>
+                </div><!-- /.row -->
+                <br>
+
+                <p align="right">
+                  <button class="btn btn-lg btn-primary fa fa-save" align="right"><b style="margin-left: 10px"> Salvar</b></button>
+                </p>
+          	</div><!-- nav-tabs-custom -->
+        </div><!-- /.col -->
+      </form>
+    </div>
+  </div>
+</section><!-- /.content -->
