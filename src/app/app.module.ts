@@ -19,7 +19,37 @@ import { PerfilComponent } from './fonoaudiologo/perfil/perfil.component';
 import { DashboardComponent } from './fonoaudiologo/perfil/dashboard/dashboard.component';
 import { MeusDadosComponent } from './fonoaudiologo/perfil/meus-dados/meus-dados.component';
 
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  LinkedinLoginProvider
+} from "angular5-social-auth";
+
+// Configs 
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("Your-Facebook-app-id")
+        },
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider("1062172680352-69ua0kcurpstpb26d0inl1ag6kv1lpir.apps.googleusercontent.com")
+        },
+         {
+          id: LinkedinLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider("Your-Linkedin-Client-Id")
+        },
+      ]
+  );
+  return config;
+}
+
 // import { HomeComponent } from './home/home.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +60,7 @@ import { MeusDadosComponent } from './fonoaudiologo/perfil/meus-dados/meus-dados
     FonoComponent,
     PerfilComponent,
     DashboardComponent,
-    MeusDadosComponent    
+    MeusDadosComponent   
     // HomeComponent
   ],
   imports: [
@@ -42,10 +72,17 @@ import { MeusDadosComponent } from './fonoaudiologo/perfil/meus-dados/meus-dados
     FormsModule,
     AgendaModule,  
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    SocialLoginModule
     
   ],
-  providers: [],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

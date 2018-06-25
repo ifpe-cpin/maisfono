@@ -1,66 +1,40 @@
 import { Component, OnInit, Inject, AfterViewInit} from '@angular/core';
-import { AuthService, AppGlobals } from 'angular2-google-login';
 import {Router} from "@angular/router";
 
-declare const gapi: any;
+import {AuthService, GoogleLoginProvider} from 'angular5-social-auth';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [AuthService]
+  providers: []
 })
-export class LoginComponent implements OnInit,AfterViewInit {
-  public img: String;
-  public name: String;
-  
-  public auth2: any;
-  
-  
-  constructor(private router: Router,private _googleAuth: AuthService) { }
+export class LoginComponent implements OnInit {
+ 
+  constructor(private socialAuthService: AuthService, private router: Router){ 
+
+  }
+
+  public socialSignIn(socialPlatform : string) {
+    let socialPlatformProvider;
+    if(socialPlatform == "google"){
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    }
+    
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+        console.log(socialPlatform+" sign in data : " , userData);
+        // Now sign-in with userData
+        this.router.navigate(['/fonoaudiologo/dash']);
+            
+      }
+    );
+  }
 
   ngOnInit() {
-    AppGlobals.GOOGLE_CLIENT_ID = '1062172680352-69ua0kcurpstpb26d0inl1ag6kv1lpir.apps.googleusercontent.com';
-
     
   }
-
- 
-  public googleInit() {
-    gapi.load('auth2', () => {
-      this.auth2 = gapi.auth2.init({
-        client_id: AppGlobals.GOOGLE_CLIENT_ID,
-        cookiepolicy: 'single_host_origin',
-        scope: 'profile email'
-      });
-      this.attachSignin(document.getElementById('googleBtn'));
-    });
-  }
-  
-  public attachSignin(element) {
-    this.auth2.attachClickHandler(element, {},
-      (googleUser) => {
-
-        let profile = googleUser.getBasicProfile();
-
-        localStorage.setItem('token', googleUser.getAuthResponse().id_token);
-        localStorage.setItem('img', profile.getImageUrl());
-        localStorage.setItem('name', profile.getName());
-        localStorage.setItem('email', profile.getEmail());
-
-        //this.router.navigate(['/home/dash']);
-        window.location.replace("http://localhost:4200/fonoaudiologo/dash");
-
-      }, (error) => {
-        alert(JSON.stringify(error, undefined, 2));
-      });
-  }
-
- 
-
-  ngAfterViewInit(){
-    this.googleInit();
-}
 
 
 }

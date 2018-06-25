@@ -11,7 +11,7 @@ export class FonoService {
 		return FONO;
 	}
 
-	setF0no(fono: Fono){
+	setFono(fono: Fono){
 		FONO.push(fono);
 	}
 }

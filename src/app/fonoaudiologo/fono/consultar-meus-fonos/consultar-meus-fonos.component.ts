@@ -14,14 +14,10 @@ declare var $:any;
 })
 export class ConsultarMeusFonosComponent implements OnInit {
 
-   fono: Fono;
-
-
+  fono: Fono;
 
   constructor(private fonoService: FonoService) {
-  
-     
-   } 
+  } 
   
 
   ngOnInit() {
