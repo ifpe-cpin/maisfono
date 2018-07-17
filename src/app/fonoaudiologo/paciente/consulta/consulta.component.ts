@@ -17,7 +17,7 @@ declare var $:any;
 
 export class ConsultaComponent implements OnInit {
  
-  paciente: Paciente;
+  paciente: Paciente[];
 
 
 

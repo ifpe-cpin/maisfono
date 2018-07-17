@@ -14,7 +14,7 @@ declare var $:any;
 })
 export class ConsultarFonoComponent implements OnInit {
 
-  fono: Fono;
+  fono: Fono[];
 
 
 
