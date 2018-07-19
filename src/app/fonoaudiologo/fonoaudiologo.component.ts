@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, AppGlobals } from 'angular2-google-login';
 
 
 declare const gapi: any;
@@ -7,8 +6,7 @@ declare const gapi: any;
 @Component({
   selector: 'app-home',
   templateUrl: './fonoaudiologo.component.html',
-  styleUrls: ['./fonoaudiologo.component.css'],
-  providers: [AuthService]
+  styleUrls: ['./fonoaudiologo.component.css']
 })
 
 export class FonoaudiologoComponent implements OnInit {
@@ -17,7 +15,7 @@ export class FonoaudiologoComponent implements OnInit {
 
   public auth2: any;
 
-  constructor(private _googleAuth: AuthService) { 
+  constructor() { 
 
   }
 
@@ -28,10 +26,7 @@ export class FonoaudiologoComponent implements OnInit {
 
 
   public attachSignout() {
-        this._googleAuth.userLogout(()=>{
-          console.log("logout");
-          localStorage.clear();
-        });
+      
   }
 
 
