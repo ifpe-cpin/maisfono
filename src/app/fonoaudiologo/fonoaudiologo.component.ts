@@ -17,14 +17,13 @@ export class FonoaudiologoComponent implements OnInit {
 
   public auth2: any;
 
-  constructor(private _googleAuth: AuthService) { }
+  constructor(private _googleAuth: AuthService) { 
+
+  }
 
   ngOnInit() {
-    AppGlobals.GOOGLE_CLIENT_ID = '1062172680352-69ua0kcurpstpb26d0inl1ag6kv1lpir.apps.googleusercontent.com';
-    
-    this.img = localStorage.getItem("img");
-    this.name = localStorage.getItem("name");
-
+    this.img = localStorage.getItem('img');
+    this.name = localStorage.getItem('name');
   }
 
 
