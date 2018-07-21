@@ -1,13 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { Fono } from '../../../models/fono';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable'
+import { Router, ActivatedRoute } from '@angular/router';
+import { FonoService } from '../../../services/fono.service';
+import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
 
 @Component({
   selector: 'app-fono-form',
   templateUrl: './fono-form.component.html',
-  styleUrls: ['./fono-form.component.css']
+	styleUrls: ['./fono-form.component.css'],
+	providers:[FonoaudiologoService]
 })
 export class FonoFormComponent implements OnInit {
 
-  constructor() { }
+	fono:Fono;
+	id;
+
+	constructor(
+		public db: AngularFirestore,
+		private route: ActivatedRoute,
+		private router: Router,
+		private fonoService:FonoaudiologoService) { }
+	
+	
+	
 
   ngOnInit() {
     $(document).ready(function(){  
@@ -50,9 +67,57 @@ export class FonoFormComponent implements OnInit {
 			});  
 
 		});  
+
+
+		this.fono = new Fono(this.db);
+
+		this.route
+		.queryParams
+		.subscribe(params => {
+			// Defaults to 0 if no query param provided.
+			let id = params['id'];
+
+			if(id!= undefined){
+					this.fonoService.get(id).subscribe(
+						fono => this.fono = fono
+					);
+			}
+
+			
+		});
+
+
+
+	}
+
+	
+	
+	onSubmit() {
+		if(this.fono.id){
+			this.fono.update().subscribe(
+				result => {
+					console.log(result)
+					this.router.navigate(['/fonoaudiologo/fono/admin']);
+				});
+		}else{
+			
+			this.fono.add().then(
+				result => {
+					console.log(result)
+					this.router.navigate(['/fonoaudiologo/fono/admin']);
+				}
+				
+			);
+
+		}
+
+    }
   }
 
-}
+
+
+
+
 
 
 

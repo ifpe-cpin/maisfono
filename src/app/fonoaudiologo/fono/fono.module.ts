@@ -8,11 +8,15 @@ import { FonoComponent } from './fono.component';
 import { ConsultarFonoComponent } from './consultar-fono/consultar-fono.component';
 import { ConsultarMeusFonosComponent } from './consultar-meus-fonos/consultar-meus-fonos.component';
 
+import { FormsModule } from '@angular/forms';
+import { FonoAdminComponent } from './fono-admin/fono-admin.component';
+
 @NgModule({
   imports: [
     CommonModule,
-    FonoRoutingModule
+    FonoRoutingModule,
+    FormsModule
   ],
-  declarations: [FonoDetalheComponent, FonoFormComponent, FonoComponent, ConsultarFonoComponent, ConsultarMeusFonosComponent]
+  declarations: [FonoDetalheComponent, FonoFormComponent, FonoComponent, ConsultarFonoComponent, ConsultarMeusFonosComponent, FonoAdminComponent]
 })
 export class FonoModule { }
