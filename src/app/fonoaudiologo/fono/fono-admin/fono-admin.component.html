@@ -14,12 +14,13 @@
   
   <!-- Main content -->
   <section class="content">
-      <button class="bt btn-success bt-novo" (click)="createPage()">Novo</button>
+      
     <div class="row">
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
             <h3 class="box-title">fonoaudiólogos</h3>
+            <button class="bt btn-default bt-novo" (click)="createPage()">Novo</button>
           </div><!-- /.box-header -->
           <div class="box-body">
             <table id="fonoaudiologos" class="table table-bordered table-striped">
@@ -35,8 +36,18 @@
                   <td>{{f.nome}}</td>
                   <td>{{f.cpf}}</td>
                   <td align="center">
-                    <a (click)="delete(f)"><i class="fa fa-trash-o" ></i></a>
-                    <a [routerLink]="['/fonoaudiologo/fono/novo']" [queryParams]="{ id: f.id }"><i class="fa fa-pencil-square-o" ></i></a>
+                    <a [routerLink]="['/fonoaudiologo/fono/ver']" 
+                      [queryParams]="{ id: f.id }">
+                      <i class="fa fa-eye" ></i>
+                    </a>
+
+                    <a (click)="delete(f)">
+                      <i class="fa fa-trash-o" ></i>
+                    </a>
+                    <a [routerLink]="['/fonoaudiologo/fono/novo']" 
+                       [queryParams]="{ id: f.id }">
+                       <i class="fa fa-pencil-square-o" ></i>
+                    </a>
                   </td>
                 
                 </tr>

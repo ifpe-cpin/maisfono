@@ -32,6 +32,7 @@ import { PacienteSelecionarComponent } from './paciente/paciente-selecionar/paci
 import { PerfilComponent } from "./perfil/perfil.component";
 import { DashboardComponent } from "./perfil/dashboard/dashboard.component";
 import { MeusDadosComponent } from "./perfil/meus-dados/meus-dados.component";
+import { FonoAdminComponent } from './fono/fono-admin/fono-admin.component';
 
 
 const homeRoutes = [
@@ -39,6 +40,7 @@ const homeRoutes = [
 			{path: 'fono', component: FonoComponent, children: [
 						{path: 'novo', component: FonoFormComponent},
 						{path: 'ver', component: FonoDetalheComponent},
+						{path: 'admin', component: FonoAdminComponent},
 						// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'fono', component: FonoComponent, children: [
