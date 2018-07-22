@@ -97,14 +97,14 @@ export class FonoFormComponent implements OnInit {
 			this.fono.update().subscribe(
 				result => {
 					console.log(result)
-					this.router.navigate(['/fonoaudiologo/fono/admin']);
+					this.router.navigate(['/fonoaudiologo/fono/ver'],{ queryParams: { id: result.id }});
 				});
 		}else{
 			
 			this.fono.add().then(
 				result => {
 					console.log(result)
-					this.router.navigate(['/fonoaudiologo/fono/admin']);
+					this.router.navigate(['/fonoaudiologo/fono/ver'],{ queryParams: { id: result.id }});
 				}
 				
 			);

@@ -25,6 +25,9 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { FormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {MatDialogModule} from '@angular/material';
 
 
 import {
@@ -34,6 +37,7 @@ import {
   FacebookLoginProvider,
   LinkedinLoginProvider
 } from "angular5-social-auth";
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -68,9 +72,11 @@ export function getAuthServiceConfigs() {
     FonoComponent,
     PerfilComponent,
     DashboardComponent,
-    MeusDadosComponent   
+    MeusDadosComponent,
+    ConfirmDialogComponent   
     // HomeComponent
   ],
+  entryComponents:[ConfirmDialogComponent],
   imports: [
     BrowserModule,
     FonoaudiologoModule,
@@ -86,6 +92,8 @@ export function getAuthServiceConfigs() {
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
+    BrowserAnimationsModule,  
+    MatDialogModule,
   ],
   providers: [
     {

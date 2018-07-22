@@ -1,6 +1,41 @@
+<section class="content">
+		<div class="row">
+		  <div class="col-xs-12">
+			<div class="box">
+			  <div class="box-header">
+				
+				<h3 class="box-title">Detalhes</h3>
 
-	<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header"> fono-detalhe works!</h1>
-			</div>
-		</div><!--/.row-->
+				<button type="button" class="btn btn-info btn-detail"
+				 [routerLink]="['/fonoaudiologo/fono/admin']">Admin</button>
+
+				 <button type="button" class="btn btn-info btn-detail" [routerLink]="['/fonoaudiologo/fono/novo']" 
+                       [queryParams]="{ id: fono.id }">Atualizar</button>
+
+
+			  </div><!-- /.box-header -->
+			  <div class="box-body">
+				<table id="fono" class="table table-bordered table-striped">
+					<tr>
+					   <th>Nome</th>
+					   <td>{{fono.nome}}</td>
+					</tr>
+					<tr>
+							<th>Descrição</th>
+							<td>{{fono.descricao}}</td>
+					</tr>
+					<tr>
+							<th>CPF</th>
+							<td>{{fono.cpf}}</td>
+					</tr>			
+					<tr>
+							<th>Data de Nascimento</th>
+							<td>{{fono.data_nascimento}}</td>
+					</tr>			   
+				</table>
+			  </div><!-- /.box-body -->
+			</div><!-- /.box -->
+		  </div><!-- /.col -->
+		</div><!-- /.row -->
+	  </section><!-- /.content -->
+	  

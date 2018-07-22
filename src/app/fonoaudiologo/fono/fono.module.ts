@@ -10,13 +10,23 @@ import { ConsultarMeusFonosComponent } from './consultar-meus-fonos/consultar-me
 
 import { FormsModule } from '@angular/forms';
 import { FonoAdminComponent } from './fono-admin/fono-admin.component';
+import { MatDialog, MatDialogModule } from '@angular/material';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   imports: [
     CommonModule,
     FonoRoutingModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
   ],
-  declarations: [FonoDetalheComponent, FonoFormComponent, FonoComponent, ConsultarFonoComponent, ConsultarMeusFonosComponent, FonoAdminComponent]
+  providers:[MatDialog],
+  declarations: [
+    FonoDetalheComponent,
+     FonoFormComponent,
+     FonoComponent,
+     ConsultarFonoComponent,
+     ConsultarMeusFonosComponent,
+     FonoAdminComponent]
 })
 export class FonoModule { }
