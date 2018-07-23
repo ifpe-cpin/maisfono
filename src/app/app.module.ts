@@ -38,6 +38,7 @@ import {
   LinkedinLoginProvider
 } from "angular5-social-auth";
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { GridViewComponent } from './grid-view/grid-view.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -73,7 +74,8 @@ export function getAuthServiceConfigs() {
     PerfilComponent,
     DashboardComponent,
     MeusDadosComponent,
-    ConfirmDialogComponent   
+    ConfirmDialogComponent,
+    //GridViewComponent   
     // HomeComponent
   ],
   entryComponents:[ConfirmDialogComponent],

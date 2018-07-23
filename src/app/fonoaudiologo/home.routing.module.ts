@@ -33,6 +33,7 @@ import { PerfilComponent } from "./perfil/perfil.component";
 import { DashboardComponent } from "./perfil/dashboard/dashboard.component";
 import { MeusDadosComponent } from "./perfil/meus-dados/meus-dados.component";
 import { FonoAdminComponent } from './fono/fono-admin/fono-admin.component';
+import { PacienteAdminComponent } from './paciente-admin/paciente-admin.component';
 
 
 const homeRoutes = [
@@ -54,6 +55,7 @@ const homeRoutes = [
 				{path: 'evolucao', component: PacienteEvolucaoComponent},
 				{path: 'novo', component: PacienteFormComponent},
 				{path: 'ver', component: PacienteDetalheComponent},
+				{path: 'admin', component: PacienteAdminComponent},
 				// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'jogos', component: JogosComponent, children: [

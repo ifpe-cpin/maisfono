@@ -9,12 +9,15 @@ import { PacienteComponent } from './paciente.component';
 import { ConsultaComponent } from './consulta/consulta.component';
 import { ConsultarMeusComponent } from './consultar-meus/consultar-meus.component';
 import { PacienteEvolucaoComponent } from './paciente-evolucao/paciente-evolucao.component';
+import { PacienteAdminComponent } from '../paciente-admin/paciente-admin.component';
+import { GridViewComponent } from '../../grid-view/grid-view.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    PacienteRoutingModule
+	PacienteRoutingModule,
+	
   ],
   declarations: [
   	PacienteDetalheComponent, 
@@ -22,7 +25,9 @@ import { PacienteEvolucaoComponent } from './paciente-evolucao/paciente-evolucao
   	PacienteComponent, 
   	ConsultaComponent, 
   	ConsultarMeusComponent, 
-		PacienteEvolucaoComponent,
+	PacienteEvolucaoComponent,
+	PacienteAdminComponent,
+	GridViewComponent
   	]
 })
 export class PacienteModule { }
