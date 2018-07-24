@@ -15,11 +15,18 @@ export class PacienteAdminComponent implements OnInit {
 
   ngOnInit() {
 
+    let p1 = new Paciente("Pires","9876541","pires@gmail.com");
+    let p2 = new Paciente("João","9876541","pires@gmail.com");
+
     this.pacientes = [
-      {nome:"pires",telefone:"9999999",email:"j@gmail.com"},
-      {nome:"pires",telefone:"9999999",email:"j@gmail.com"}
+      p1,p2
     ];
 
+  }
+
+  delete(paciente:Paciente){
+    console.log(paciente.nome);
+    
   }
 
 }

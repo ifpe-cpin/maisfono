@@ -1,7 +1,10 @@
-<app-grid-view [title]="paciente" 
+ <app-grid-view [title]="paciente"
                [urlCreate]="['/fonoaudiologo/paciente/ver']"
                [urlView]="['/fonoaudiologo/paciente/ver']"
                [urlUpdate]="['/fonoaudiologo/paciente/ver']"
+               (onDelete)="delete($event)"
                [data]="pacientes"
-               [fields]="['nome','telefone','email']">
+               [fields]="['nome','telefone','email']"
+               [labels]="['Nome','Telefone','E-mail']"
+               >
 </app-grid-view>

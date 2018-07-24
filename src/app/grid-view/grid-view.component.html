@@ -11,32 +11,34 @@
         </div><!-- /.box-header -->
         <div class="box-body">
           <table id="grid" class="table table-bordered table-striped">
+              <thead>
               <tr >
-                <th *ngFor="let f of fields">{{f}}</th>
+                <th *ngFor="let l of labels">{{l}}</th>
                 <th>Ações</th>
               </tr>
-
+              </thead>
+              <tbody>
                <tr *ngFor="let d of data">
                   <td *ngFor="let f of fields">{{d[f]}}</td>
                 
                  
                 <td align="center">
                   <a [routerLink]="urlView" 
+                     [queryParams]="{ id: d.id }"
                     >
                     <i class="fa fa-eye" ></i>
                   </a>
 
-                  <a (click)="delete(f)">
+                  <a (click)="runOnDelete(d)">
                     <i class="fa fa-trash-o" ></i>
                   </a>
                   <a [routerLink]="urlUpdate" 
+                  [queryParams]="{ id: d.id }"
                      >
                      <i class="fa fa-pencil-square-o" ></i>
                   </a>
-                </td>
-              
+                </td>        
               </tr>
-             
             </tbody>
           </table>
         </div><!--/.box-body-->

@@ -1,4 +1,5 @@
-export class Paciente{
+import { Model } from '../../../grid-view/model';
+export class Paciente implements Model{
 	constructor(
 	
 		public nome?: string,
@@ -7,4 +8,12 @@ export class Paciente{
 		){}
 
 	// constructor(){}
+
+	labels(){
+		return [
+			{'nome':'Nome'},
+			{'telefone':'Telefone'},
+			{'email':'E-mail'},
+		];
+	}
 }

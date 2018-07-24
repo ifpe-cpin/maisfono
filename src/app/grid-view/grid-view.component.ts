@@ -1,6 +1,12 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
+import { Paciente } from '../fonoaudiologo/models/paciente/paciente';
+
+
+
+declare var $:any;
+
 
 @Component({
   selector: 'app-grid-view',
@@ -11,12 +17,17 @@ export class GridViewComponent implements OnInit {
 
   private _data: any[];
 
+  
+
   @Input() title: string;
 
   @Input() urlCreate: string;
   @Input() urlView: string;
   @Input() urlUpdate: string;
   @Input() fields: string[];
+  @Input() labels: string[];
+
+  @Output() public onDelete: EventEmitter<any> = new EventEmitter();
 
 
 
@@ -61,7 +72,7 @@ export class GridViewComponent implements OnInit {
                 }
                 else {
                   this.dataTable = $('#grid').DataTable(
-                        //this.dataInfo
+                        this.dataInfo
                      );
                 }
   }
@@ -74,6 +85,7 @@ export class GridViewComponent implements OnInit {
 
   dataTable: any;
 
+  @Input() deleteParam;
   
 
 
@@ -90,6 +102,10 @@ export class GridViewComponent implements OnInit {
 
   createPage(){
     this.router.navigate([this.urlCreate]);
+  }
+
+  runOnDelete(p:any): void {
+    this.onDelete.emit(p);
   }
 
 }

@@ -7,4 +7,6 @@ export class Fono extends Entity{
      cpf: string;
      data_nascimento:string;
 
+     
+
 }

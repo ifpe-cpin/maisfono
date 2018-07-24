@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { FonoAdminComponent } from './fono-admin/fono-admin.component';
 import { MatDialog, MatDialogModule } from '@angular/material';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { GridViewComponent } from '../../grid-view/grid-view.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
      FonoComponent,
      ConsultarFonoComponent,
      ConsultarMeusFonosComponent,
+     //GridViewComponent,
      FonoAdminComponent]
 })
 export class FonoModule { }
