@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Paciente } from '../models/paciente/paciente';
 
 @Component({
   selector: 'app-paciente-admin',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PacienteAdminComponent implements OnInit {
 
+
+  pacientes: Paciente[];
+
   constructor() { }
 
   ngOnInit() {
+
+    this.pacientes = [
+      {nome:"pires",telefone:"9999999",email:"j@gmail.com"},
+      {nome:"pires",telefone:"9999999",email:"j@gmail.com"}
+    ];
+
   }
 
 }

@@ -1,1 +1,7 @@
-<app-grid-view [title]="paciente"></app-grid-view>
+<app-grid-view [title]="paciente" 
+               [urlCreate]="['/fonoaudiologo/paciente/ver']"
+               [urlView]="['/fonoaudiologo/paciente/ver']"
+               [urlUpdate]="['/fonoaudiologo/paciente/ver']"
+               [data]="pacientes"
+               [fields]="['nome','telefone','email']">
+</app-grid-view>

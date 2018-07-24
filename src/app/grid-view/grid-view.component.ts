@@ -14,6 +14,11 @@ export class GridViewComponent implements OnInit {
   @Input() title: string;
 
   @Input() urlCreate: string;
+  @Input() urlView: string;
+  @Input() urlUpdate: string;
+  @Input() fields: string[];
+
+
 
   dataInfo = {
     "language":{
@@ -43,7 +48,7 @@ export class GridViewComponent implements OnInit {
 
 
   @Input()
-  set data( data: any) {
+  set data( data: any[]) {
     
     this._data = data;
 
@@ -59,6 +64,11 @@ export class GridViewComponent implements OnInit {
                         //this.dataInfo
                      );
                 }
+  }
+
+  get data(): any[] {
+    // transform value for display
+    return this._data;
   }
 
 
