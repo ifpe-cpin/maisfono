@@ -5,6 +5,7 @@ import { PacienteService } from '../../../services/paciente.service';
 import { Paciente } from '../../models/paciente/paciente';
 
 import { ConsultarMeusComponent } from '../consultar-meus/consultar-meus.component';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-paciente-form',
@@ -16,14 +17,20 @@ export class PacienteFormComponent implements OnInit {
 
 	paciente: Paciente;
 
-  constructor(private router: Router, private pacienteService: PacienteService) {
-  	this.paciente = new Paciente();
+  constructor(private router: Router,
+     private pacienteService: PacienteService,
+     public db: AngularFirestore) {
+  	this.paciente = new Paciente(this.db);
    }
 
 
    gravar(nome, telefone, email ){
 
-   	let paciente = new Paciente(nome, telefone, email );
+     let paciente = new Paciente(this.db);
+     paciente.nome = nome;
+     paciente.telefone = telefone;
+     paciente.email = email;
+     
    	this.pacienteService.setPaciente(paciente);
 
    	this.router.navigate(['/home/paciente/consultarMeus']);
