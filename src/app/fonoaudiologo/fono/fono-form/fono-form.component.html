@@ -63,7 +63,7 @@
                   <em>*</em>
                 </label>
                 <input type="text" [(ngModel)]="fono.nome" name="Nome" id="nome" class="form-control" placeholder="Nome" required>
-                <input type="hidden" [(ngModel)]="fono.id">
+                <input type="hidden" [(ngModel)]="fono.id" name="id">
               </div>
               <br>
               <div class="input-group col-xs-12">
@@ -380,7 +380,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Curso:</label>
-                    <input type="text" class="form-control pull-right" id="reservationtime">
+                    <input type="text" class="form-control pull-right" name="curso" id="reservationtime">
 
                   </div>
                 </div>
@@ -394,14 +394,14 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Instituição de Ensino:</label>
-                    <input type="text" class="form-control pull-right" id="reservationtime">
+                    <input type="text" class="form-control pull-right" name="instituicao" id="reservationtime">
 
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Data de Conclusão:</label>
-                    <input type="date" class="form-control pull-right" id="reservation">
+                    <input type="date" class="form-control pull-right" name="data_conclusao" id="reservation">
                   </div>
                 </div>
                 <br>
