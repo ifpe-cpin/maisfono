@@ -43,19 +43,11 @@ import { GridViewComponent } from './grid-view/grid-view.component';
 // Configs 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
-      [
-        // {
-        //   id: FacebookLoginProvider.PROVIDER_ID,
-        //   provider: new FacebookLoginProvider("Your-Facebook-app-id")
-        // },
+      [,
         {
           id: GoogleLoginProvider.PROVIDER_ID,
           provider: new GoogleLoginProvider("449875052890-b486rnik4snau6n34lk28940kh9lt1dj.apps.googleusercontent.com")
         },
-        //  {
-        //   id: LinkedinLoginProvider.PROVIDER_ID,
-        //   provider: new GoogleLoginProvider("Your-Linkedin-Client-Id")
-        // },
       ]
   );
   return config;

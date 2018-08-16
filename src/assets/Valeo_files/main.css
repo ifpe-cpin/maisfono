@@ -5026,7 +5026,6 @@ section .intro_section .slide_description_wrapper {
 }
 
 .template_footer .widgets-row .widget.widget_button_map {
-	/* background-image: url("../images/continents.png"); */
 	background-position: center;
 	background-size: contain;
 	background-repeat: no-repeat;
