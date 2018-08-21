@@ -43,7 +43,7 @@ import { GridViewComponent } from './grid-view/grid-view.component';
 // Configs 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
-      [,
+      [
         {
           id: GoogleLoginProvider.PROVIDER_ID,
           provider: new GoogleLoginProvider("449875052890-b486rnik4snau6n34lk28940kh9lt1dj.apps.googleusercontent.com")
