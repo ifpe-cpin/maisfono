@@ -48,10 +48,27 @@
 							<p class="yantramanov weight-black fontsize_25">+1(800) 450 7550</p>
 						</div>
 						<div class="col-sm-4 text-center text-sm-right contact-teaser">
-        					
-							<button type="button" (click)="socialSignIn('google')" class="btn pull-right">
-								<i class="fa fa-google"></i> Login com Google
-							</button>
+							
+							
+							<div *ngIf="auth.user | async; then authenticated else guest">
+								<!-- template will replace this div -->
+							</div>
+
+							<!-- User NOT logged in -->
+							<ng-template #guest>
+								<button (click)="login()">
+									<i class="fa fa-google"></i> Google login
+								</button>
+
+							</ng-template>	
+
+							<!-- User logged in -->
+							<ng-template #authenticated>
+								<div *ngIf="auth.user | async as user">
+									<h4>{{ user.displayName }}</h4>
+									<button (click)="auth.signOut()">Logout</button>
+								</div>
+							</ng-template>
 						</div>
 					</div>
 				</div>

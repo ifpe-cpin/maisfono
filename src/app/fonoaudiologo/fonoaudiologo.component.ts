@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../core/auth.service';
 
 
 declare const gapi: any;
@@ -6,7 +7,8 @@ declare const gapi: any;
 @Component({
   selector: 'app-home',
   templateUrl: './fonoaudiologo.component.html',
-  styleUrls: ['./fonoaudiologo.component.css']
+  styleUrls: ['./fonoaudiologo.component.css'],
+  providers: [AuthService]
 })
 
 export class FonoaudiologoComponent implements OnInit {
@@ -15,18 +17,20 @@ export class FonoaudiologoComponent implements OnInit {
 
   public auth2: any;
 
-  constructor() { 
+  constructor(public auth: AuthService) { 
 
   }
 
   ngOnInit() {
-    this.img = localStorage.getItem('img');
-    this.name = localStorage.getItem('name');
+      this.auth.user.subscribe( user =>{
+              this.img = user.photoURL;
+              this.name = user.displayName;
+    })
   }
 
 
   public attachSignout() {
-      
+      this.auth.signOut();
   }
 
 
