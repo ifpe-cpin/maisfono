@@ -9,14 +9,16 @@ import { LoginComponent } from './login/login.component';
 import { FonoaudiologoComponent } from './fonoaudiologo/fonoaudiologo.component';
 import { NovoUsuarioComponent } from './novo-usuario/novo-usuario.component';
 import { PacienteComponent } from './paciente/paciente.component';
+import { AuthGuard } from './core/auth.guard';
+import { AuthService } from './core/auth.service';
 
 
 
 const appRoutes: Routes = [
 	{ path: '', component: LoginComponent},
-	{ path: 'fonoaudiologo', component: FonoaudiologoComponent},
-	{ path: 'newUser', component: NovoUsuarioComponent},
-	{ path: 'paciente', component: PacienteComponent}
+	{ path: 'fonoaudiologo', component: FonoaudiologoComponent, canActivate: [AuthGuard]},
+	{ path: 'newUser', component: NovoUsuarioComponent,canActivate: [AuthGuard]},
+	{ path: 'paciente', component: PacienteComponent,canActivate: [AuthGuard]}
 ];
 ;
 
@@ -24,7 +26,10 @@ const appRoutes: Routes = [
 	imports: [
     RouterModule.forRoot(appRoutes),
   ],
-  exports:[RouterModule]
+  exports:[RouterModule],
+  providers:[
+	  AuthService
+  ]
 })
 
 export class AppRoutingModule {
