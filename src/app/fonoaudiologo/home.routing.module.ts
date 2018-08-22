@@ -34,43 +34,45 @@ import { DashboardComponent } from "./perfil/dashboard/dashboard.component";
 import { MeusDadosComponent } from "./perfil/meus-dados/meus-dados.component";
 import { FonoAdminComponent } from './fono/fono-admin/fono-admin.component';
 import { PacienteAdminComponent } from './paciente-admin/paciente-admin.component';
+import { AuthService } from '../core/auth.service';
+import { AuthGuard } from '../core/auth.guard';
 
 
 const homeRoutes = [
 		{path: 'fonoaudiologo', component: FonoaudiologoComponent, children:[
 			{path: 'fono', component: FonoComponent, children: [
-						{path: 'novo', component: FonoFormComponent},
-						{path: 'ver', component: FonoDetalheComponent},
-						{path: 'admin', component: FonoAdminComponent},
+						{path: 'novo', component: FonoFormComponent, canActivate: [AuthGuard]},
+						{path: 'ver', component: FonoDetalheComponent, canActivate: [AuthGuard]},
+						{path: 'admin', component: FonoAdminComponent, canActivate: [AuthGuard]},
 						// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'fono', component: FonoComponent, children: [
-				{path: 'consulta', component: ConsultarFonoComponent},
-				{path: 'consultarMeusFonos', component: ConsultarMeusFonosComponent},
+				{path: 'consulta', component: ConsultarFonoComponent, canActivate: [AuthGuard]},
+				{path: 'consultarMeusFonos', component: ConsultarMeusFonosComponent, canActivate: [AuthGuard]},
 				// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'paciente', component: PacienteComponent, children: [
-				{path: 'consulta', component: ConsultaComponent},
-				{path: 'consultarMeus', component: ConsultarMeusComponent},
-				{path: 'evolucao', component: PacienteEvolucaoComponent},
-				{path: 'novo', component: PacienteFormComponent},
-				{path: 'ver', component: PacienteDetalheComponent},
-				{path: 'admin', component: PacienteAdminComponent},
+				{path: 'consulta', component: ConsultaComponent, canActivate: [AuthGuard]},
+				{path: 'consultarMeus', component: ConsultarMeusComponent, canActivate: [AuthGuard]},
+				{path: 'evolucao', component: PacienteEvolucaoComponent, canActivate: [AuthGuard]},
+				{path: 'novo', component: PacienteFormComponent, canActivate: [AuthGuard]},
+				{path: 'ver', component: PacienteDetalheComponent, canActivate: [AuthGuard]},
+				{path: 'admin', component: PacienteAdminComponent, canActivate: [AuthGuard]},
 				// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'jogos', component: JogosComponent, children: [
-				{path: 'listaJogos', component: ListaJogosComponent},
+				{path: 'listaJogos', component: ListaJogosComponent, canActivate: [AuthGuard]},
 			]},
 			{path: 'agenda', component: AgendaComponent, children: [
-				{path: 'consultaAgenda', component: ConsultaAgendaComponent},
-				{path: 'calendarioAgenda', component: CalendarioAgendaComponent},
+				{path: 'consultaAgenda', component: ConsultaAgendaComponent, canActivate: [AuthGuard]},
+				{path: 'calendarioAgenda', component: CalendarioAgendaComponent, canActivate: [AuthGuard]},
 			]},
 			{path: 'perfil', component: PerfilComponent, children: [
-				{path: 'dashboard', component: DashboardComponent},
-				{path: 'meusDados', component: MeusDadosComponent},
+				{path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+				{path: 'meusDados', component: MeusDadosComponent, canActivate: [AuthGuard]},
 			]},
-			{path: 'dash', component: DashComponent},
-			{path: 'video', component: PacienteSelecionarComponent}
+			{path: 'dash', component: DashComponent, canActivate: [AuthGuard]},
+			{path: 'video', component: PacienteSelecionarComponent, canActivate: [AuthGuard]}
 		]}
 
 ];
@@ -79,6 +81,9 @@ const homeRoutes = [
 	imports: [
     RouterModule.forChild(homeRoutes),
   ],
-  exports:[RouterModule]
+  exports:[RouterModule],
+  providers:[
+	AuthService
+]
 })
 export class HomeRoutingModule{}
