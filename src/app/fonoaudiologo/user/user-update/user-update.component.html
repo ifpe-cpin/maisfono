@@ -39,6 +39,18 @@
             </div>
             <br>
            
+            <div class="input-group col-xs-12">
+                <label>Papéis
+                </label>
+                <br>
+                <span *ngFor="let role of roles">
+                  <input type="checkbox" name="{{role}}" 
+                  value="{{role}}" 
+                  [checked]="(user.roles && (-1 !== user.roles.indexOf(role)) ? 'checked' : '')"
+                  (change) ="updateRoles($event)"/> {{role}}<br>
+                </span>
+              </div>
+              <br>
 
 
 

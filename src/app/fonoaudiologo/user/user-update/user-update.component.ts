@@ -3,6 +3,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/user';
+import { ROLES } from '../../../models/role';
 
 @Component({
   selector: 'app-user-update',
@@ -14,6 +15,7 @@ export class UserUpdateComponent implements OnInit {
 
   user:User;
   id;
+  roles:string[];
   
   constructor(public db: AngularFirestore,
 		private route: ActivatedRoute,
@@ -22,6 +24,7 @@ export class UserUpdateComponent implements OnInit {
 
   ngOnInit() {
 
+	this.roles = ROLES;
     this.user = new User(this.db);
 
 		this.route
@@ -47,14 +50,14 @@ export class UserUpdateComponent implements OnInit {
 		if(this.user.id){
 			this.user.update().subscribe(
 				result => {
-					console.log(result)
+					console.log(this.user)
 					this.router.navigate(['/fonoaudiologo/user/ver'],{ queryParams: { id: this.user.id }});
 				});
 		}else{
 			
 			this.user.add().then(
 				result => {
-					console.log(result)
+					console.log(this.user)
 					this.router.navigate(['/fonoaudiologo/user/ver'],{ queryParams: { id: this.user.id }});
 				}
 				
@@ -62,6 +65,19 @@ export class UserUpdateComponent implements OnInit {
 
 		}
 
-    }
+	}
+	
+
+	updateRoles(event){
+		if (event.target.checked) {
+			if(this.user.roles.indexOf(event.target.name) < 0){
+			    this.user.roles.push(event.target.name);	
+			}
+		}else{
+			if(this.user.roles.indexOf(event.target.name) > -1){
+			    this.user.roles.splice(this.user.roles.indexOf(event.target.name),1);
+			}
+		}
+	}
 
 }
