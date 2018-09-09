@@ -27,7 +27,11 @@
         <tr>
             <th>E-mail</th>
             <td>{{user.email}}</td>
-        </tr>			   
+        </tr>
+        <tr>
+          <th>Papéis</th>
+          <td><div *ngFor="let role of user.roles">{{role}}</div></td>
+        </tr>		   
       </table>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
