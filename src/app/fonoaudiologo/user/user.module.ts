@@ -5,6 +5,7 @@ import { UserViewComponent } from './user-view/user-view.component';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialog } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { UserUpdateComponent } from './user-update/user-update.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { RouterModule } from '@angular/router';
   ],
   providers:[MatDialog],
   exports:[RouterModule],
-  declarations: [UserAdminComponent, UserViewComponent]
+  declarations: [UserAdminComponent, UserViewComponent, UserUpdateComponent]
 })
 export class UserModule { }
