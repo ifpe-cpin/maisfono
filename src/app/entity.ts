@@ -98,7 +98,8 @@ export class Entity {
         let myObj = {}
         x.forEach(element => {
 
-            if (typeof this[element] != "function" && typeof this[element] != "object")
+            if (typeof this[element] != "function" &&
+             (typeof this[element] != "object" || this[element] instanceof Array))
                 myObj[element] = this[element]
             else if (Entity.isDocument(this[element])) {
                 let nome = myObj[this[element].className()];
