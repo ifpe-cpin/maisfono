@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
         console.log("Login")
         this.router.navigate(['/fonoaudiologo/dash'])
       } 
-    ).catch(() =>{
-        console.log("Login Error")
+    ).catch(error =>{
+        console.log(error)
       } )
   }
   
