@@ -55,15 +55,35 @@ export class AuthService {
 
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`User/${user.uid}`);
 
-    const data: Object = {
+    let data: Object = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      roles:[]
     }
+
+    //verifica se o usuario já salvo possui o campo roles
+    return userRef.ref.get().then(function(doc) {
+      if (doc.exists) {
+          let obj = doc.data();
+
+          if(!('roles' in obj)){
+            data['roles']=[];
+        }
+
+        userRef.set(data, { merge: true })
+      } else {
+          console.log("No such document!");
+      }
+  }).catch(function(error) {
+      console.log("Error getting document:", error);
+  });
+
+
+    
+
    
-    return userRef.set(data, { merge: true })
+    
 
   }
 

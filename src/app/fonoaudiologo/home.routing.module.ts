@@ -1,6 +1,6 @@
 import { NgModule} from '@angular/core';
 
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 
 import { FonoaudiologoComponent } from './fonoaudiologo.component';
 
@@ -39,14 +39,15 @@ import { AuthGuard } from '../core/auth.guard';
 import { UserAdminComponent } from './user/user-admin/user-admin.component';
 import { UserViewComponent } from './user/user-view/user-view.component';
 import { UserUpdateComponent } from './user/user-update/user-update.component';
+import { AdminGuard } from '../core/admin.guard';
 
 
 const homeRoutes = [
 		{path: 'fonoaudiologo', component: FonoaudiologoComponent, children:[
 			{ path: 'user',children:[
-				{path: 'admin',component:UserAdminComponent},
-				{path: 'ver',component:UserViewComponent},
-				{path: 'atualizar',component:UserUpdateComponent},
+				{path: 'admin',component:UserAdminComponent, canActivate:[AdminGuard]},
+				{path: 'ver',component:UserViewComponent, canActivate:[AdminGuard]},
+				{path: 'atualizar',component:UserUpdateComponent, canActivate:[AdminGuard]},
 			]},
 			{path: 'fono', component: FonoComponent, children: [
 						{path: 'novo', component: FonoFormComponent, canActivate: [AuthGuard]},
@@ -91,7 +92,8 @@ const homeRoutes = [
   ],
   exports:[RouterModule],
   providers:[
-	AuthService
+	AuthService,
+	AdminGuard
 ]
 })
 export class HomeRoutingModule{}
