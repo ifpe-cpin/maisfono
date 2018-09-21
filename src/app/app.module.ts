@@ -32,6 +32,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 
 // import { HomeComponent } from './home/home.component';
 import { CoreModule } from './core/core.module';
+import { UserAdminComponent } from './fonoaudiologo/user/user-admin/user-admin.component';
+import { UserModule } from './fonoaudiologo/user/user.module';
 
 
 @NgModule({
@@ -61,7 +63,7 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,  
-    MatDialogModule,
+    MatDialogModule, UserModule,
     
   ],
   bootstrap: [AppComponent]

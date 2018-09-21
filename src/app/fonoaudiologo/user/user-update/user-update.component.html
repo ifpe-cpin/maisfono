@@ -1,0 +1,78 @@
+<section class="content-header">
+  <h1>
+    Usuário
+    <small>Atualização</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="fonoaudiologo/user/admin">Usuários</a></li>
+    <li><a href="fonoaudiologo/user/ver?id={{user.id}}">Vizualizar</a></li>
+    <li class="active">Atualizar</li>
+  </ol>
+</section>
+
+<section class="content">
+
+
+<div class="box box-primary">
+  <div class="box-header with-border">
+      <h3>Usuário</h3>
+    <div class="box-body">
+      <form id="form1" #f="ngForm"
+      (ngSubmit)="onSubmit()" class="form1" method="post">
+        <div class="col-md-12">
+          <!-- Custom Tabs (Pulled to the right) -->
+          <div class="nav-tabs-custom">
+            <div class="input-group col-xs-12">
+              <label>Nome
+                <em>*</em>
+              </label>
+              <input type="text" [(ngModel)]="user.displayName" name="Nome" id="nome" class="form-control" placeholder="Nome" required>
+              <input type="hidden" [(ngModel)]="user.id" name="id">
+            </div>
+            <br>
+
+            <div class="input-group col-xs-12">
+              <label>E-mail
+                <em>*</em>
+              </label>
+              <input type="text" [(ngModel)]="user.email" name="E-mail" id="email" class="form-control" placeholder="E-mail" required>
+            </div>
+            <br>
+           
+            <div class="input-group col-xs-12">
+                <label>Papéis
+                </label>
+                <br>
+                <span *ngFor="let role of roles">
+                  <input type="checkbox" name="{{role}}" 
+                  value="{{role}}" 
+                  [checked]="(user.roles && (-1 !== user.roles.indexOf(role)) ? 'checked' : '')"
+                  (change) ="updateRoles($event)"/> {{role}}<br>
+                </span>
+              </div>
+              <br>
+
+
+
+            
+            
+
+            
+          </div>
+        </div>
+      
+          <br>
+        <p align="right">
+          <button type="submit" class="btn btn-lg btn-primary fa fa-save" align="right">
+            <b style="margin-left: 10px"> Salvar</b>
+          </button>
+        </p>
+
+
+
+      </form>
+    </div>
+  </div>
+</div>
+</section>
