@@ -8,7 +8,7 @@ import { Fono } from '../../../models/fono';
 import { AngularFireDatabase } from 'angularfire2/database'
 import { Observable } from 'rxjs';
 
-declare var $:any;s
+declare var $:any;
 
 @Component({
   selector: 'app-consultar-fono',
@@ -27,10 +27,10 @@ export class ConsultarFonoComponent implements OnInit {
      
       //console.log(this.fonoaudiologo)
 
-      const afList = db.list('items');
-      afList.push({ name: 'fono' });
-      const listObservable = afList.snapshotChanges();
-      listObservable.subscribe();
+      // const afList = db.list('items');
+      // afList.push({ name: 'fono' });
+      // const listObservable = afList.snapshotChanges();
+      // listObservable.subscribe();
    } 
 
    OpenRum(){
