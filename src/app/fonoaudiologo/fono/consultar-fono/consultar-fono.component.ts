@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Fono } from '../../models/fono/fono';
+import { Fonoaudiologo } from '../../../models/fonoaudiologo';
 
 import { FonoService } from '../../../services/fono.service';
+
+import { AngularFireDatabase } from 'angularfire2/database'
+import { Observable } from 'rxjs';
 
 declare var $:any;
 
@@ -14,13 +17,17 @@ declare var $:any;
 })
 export class ConsultarFonoComponent implements OnInit {
 
-  fono: Fono[];
-
-
-
-  constructor(private fonoService: FonoService) {
-  
+  //fonoaudiologo: Observable<Fonoaudiologo[]>;
+  constructor(db: AngularFireDatabase ) {
+      //db.list<Item>('items').valueChanges().subscribe(console.log);
+      //const fonoaudiologo = db.list('/tb_fonoaudiologo').valueChanges().subscribe(console.log)
      
+      //console.log(this.fonoaudiologo)
+
+      const afList = db.list('items');
+      afList.push({ name: 'fono' });
+      const listObservable = afList.snapshotChanges();
+      listObservable.subscribe();
    } 
 
    OpenRum(){
@@ -30,7 +37,6 @@ export class ConsultarFonoComponent implements OnInit {
 
   ngOnInit() {
     
-    this.fono = this.fonoService.getFono();
     
     $(function () {
 			$("#pacientes").DataTable();
