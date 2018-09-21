@@ -21,6 +21,8 @@ export class AdminGuard implements CanActivate {
              if (!isAdmin) {
                console.log('access denied')
                this.router.navigate(['']);
+             }else{
+               console.log(state.url)
              }
          })
     )
