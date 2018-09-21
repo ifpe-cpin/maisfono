@@ -11,9 +11,6 @@ import { AgendaModule } from './fonoaudiologo/agenda/agenda.module';
 import { PacienteModule } from './fonoaudiologo/paciente/paciente.module';
 import { AppRoutingModule } from './app.routing.module';
 import { JogosModule } from "./fonoaudiologo/jogos/jogos.module";
-import { PacienteComponent } from './paciente/paciente.component';
-import { NovoUsuarioComponent } from './novo-usuario/novo-usuario.component';
-import { FonoComponent } from './novo-usuario/fono/fono.component';
 import { PerfilComponent } from './fonoaudiologo/perfil/perfil.component';
 import { DashboardComponent } from './fonoaudiologo/perfil/dashboard/dashboard.component';
 import { MeusDadosComponent } from './fonoaudiologo/perfil/meus-dados/meus-dados.component';
@@ -40,9 +37,6 @@ import { UserModule } from './fonoaudiologo/user/user.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    PacienteComponent,
-    NovoUsuarioComponent,
-    FonoComponent,
     PerfilComponent,
     DashboardComponent,
     MeusDadosComponent,

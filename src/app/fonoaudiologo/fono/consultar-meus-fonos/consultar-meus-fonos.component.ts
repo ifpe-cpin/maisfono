@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Fono } from '../../models/fono/fono';
 
-import { FonoService } from '../../../services/fono.service';
+import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
+import { Fono } from '../../../models/fono';
 
 declare var $:any;
 
@@ -10,19 +10,21 @@ declare var $:any;
   selector: 'app-consultar-meus-fonos',
   templateUrl: './consultar-meus-fonos.component.html',
   styleUrls: ['./consultar-meus-fonos.component.css'],
-  providers: [FonoService]
+  providers: [FonoaudiologoService]
 })
 export class ConsultarMeusFonosComponent implements OnInit {
 
   fono: Fono[];
 
-  constructor(private fonoService: FonoService) {
+  constructor(private fonoService: FonoaudiologoService) {
   } 
   
 
   ngOnInit() {
     
-    this.fono = this.fonoService.getFono();
+    this.fonoService.getAll().subscribe(
+      fono => this.fono = fono
+    );
     
     $(function () {
 			$("#pacientes").DataTable();

@@ -3,7 +3,6 @@ import { Fono } from '../../../models/fono';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable'
 import { Router, ActivatedRoute } from '@angular/router';
-import { FonoService } from '../../../services/fono.service';
 import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
 
 @Component({
