@@ -5,7 +5,10 @@ import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
 import { Fono } from '../../../models/fono';
 
 
-declare var $:any;
+import { AngularFireDatabase } from 'angularfire2/database'
+import { Observable } from 'rxjs';
+
+declare var $:any;s
 
 @Component({
   selector: 'app-consultar-fono',
@@ -22,6 +25,12 @@ export class ConsultarFonoComponent implements OnInit {
   constructor(private fonoService: FonoaudiologoService) {
   
      
+      //console.log(this.fonoaudiologo)
+
+      const afList = db.list('items');
+      afList.push({ name: 'fono' });
+      const listObservable = afList.snapshotChanges();
+      listObservable.subscribe();
    } 
 
    OpenRum(){
