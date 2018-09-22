@@ -6,6 +6,8 @@ import { AuthGuard } from './auth.guard';
 import { AuthService } from 'angular5-social-auth';
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseConfig } from '../../environments/firebase.config';
+import { FonoGuard } from './fono.guard';
+import { PacienteGuard } from './paciente.guard';
 
 @NgModule({
   imports: [
@@ -18,6 +20,8 @@ import { FirebaseConfig } from '../../environments/firebase.config';
   providers:[
     AuthGuard,
     AuthService,
+    FonoGuard,
+    PacienteGuard
   ]
 })
 export class CoreModule { }

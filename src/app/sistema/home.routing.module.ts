@@ -40,6 +40,8 @@ import { UserAdminComponent } from './user/user-admin/user-admin.component';
 import { UserViewComponent } from './user/user-view/user-view.component';
 import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { AdminGuard } from '../core/admin.guard';
+import { PacienteGuard } from '../core/paciente.guard';
+import { FonoGuard } from '../core/fono.guard';
 
 
 const homeRoutes = [
@@ -50,35 +52,35 @@ const homeRoutes = [
 				{path: 'atualizar',component:UserUpdateComponent, canActivate:[AdminGuard]},
 			]},
 			{path: 'fonoaudiologo', component: FonoComponent, children: [
-				{path: 'novo', component: FonoFormComponent, canActivate: [AuthGuard]},
-				{path: 'ver', component: FonoDetalheComponent, canActivate: [AuthGuard]},
-				{path: 'admin', component: FonoAdminComponent, canActivate: [AuthGuard]},
-				{path: 'consulta', component: ConsultarFonoComponent, canActivate: [AuthGuard]},
-				{path: 'consultarMeusFonos', component: ConsultarMeusFonosComponent, canActivate: [AuthGuard]},
+				{path: 'novo', component: FonoFormComponent, canActivate: [FonoGuard]},
+				{path: 'ver', component: FonoDetalheComponent, canActivate: [FonoGuard]},
+				{path: 'admin', component: FonoAdminComponent, canActivate: [FonoGuard]},
+				{path: 'consulta', component: ConsultarFonoComponent, canActivate: [FonoGuard]},
+				{path: 'consultarMeusFonos', component: ConsultarMeusFonosComponent, canActivate: [FonoGuard]},
 				// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'paciente', component: PacienteComponent, children: [
-				{path: 'consulta', component: ConsultaComponent, canActivate: [AuthGuard]},
-				{path: 'consultarMeus', component: ConsultarMeusComponent, canActivate: [AuthGuard]},
-				{path: 'evolucao', component: PacienteEvolucaoComponent, canActivate: [AuthGuard]},
-				{path: 'novo', component: PacienteFormComponent, canActivate: [AuthGuard]},
-				{path: 'ver', component: PacienteDetalheComponent, canActivate: [AuthGuard]},
-				{path: 'admin', component: PacienteAdminComponent, canActivate: [AuthGuard]},
+				{path: 'consulta', component: ConsultaComponent, canActivate: [PacienteGuard]},
+				{path: 'consultarMeus', component: ConsultarMeusComponent, canActivate: [PacienteGuard]},
+				{path: 'evolucao', component: PacienteEvolucaoComponent, canActivate: [PacienteGuard]},
+				{path: 'novo', component: PacienteFormComponent, canActivate: [PacienteGuard]},
+				{path: 'ver', component: PacienteDetalheComponent, canActivate: [PacienteGuard]},
+				{path: 'admin', component: PacienteAdminComponent, canActivate: [PacienteGuard]},
 				// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'jogos', component: JogosComponent, children: [
-				{path: 'listaJogos', component: ListaJogosComponent, canActivate: [AuthGuard]},
+				{path: 'listaJogos', component: ListaJogosComponent, canActivate: [AuthGuard,AdminGuard]},
 			]},
 			{path: 'agenda', component: AgendaComponent, children: [
-				{path: 'consultaAgenda', component: ConsultaAgendaComponent, canActivate: [AuthGuard]},
-				{path: 'calendarioAgenda', component: CalendarioAgendaComponent, canActivate: [AuthGuard]},
+				{path: 'consultaAgenda', component: ConsultaAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
+				{path: 'calendarioAgenda', component: CalendarioAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
 			]},
 			{path: 'perfil', component: PerfilComponent, children: [
-				{path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-				{path: 'meusDados', component: MeusDadosComponent, canActivate: [AuthGuard]},
+				{path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard,AdminGuard]},
+				{path: 'meusDados', component: MeusDadosComponent, canActivate: [AuthGuard,AdminGuard]},
 			]},
-			{path: 'dash', component: DashComponent, canActivate: [AuthGuard]},
-			{path: 'video', component: PacienteSelecionarComponent, canActivate: [AuthGuard]}
+			{path: 'dash', component: DashComponent, canActivate: [AuthGuard,AdminGuard]},
+			{path: 'video', component: PacienteSelecionarComponent, canActivate: [AuthGuard,AdminGuard]}
 		]}
 
 ];
