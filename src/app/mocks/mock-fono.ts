@@ -1,4 +1,4 @@
-import { Fono} from '../fonoaudiologo/models/fono/fono';
+import { Fono} from '../sistema/models/fono/fono';
 
 export const FONO: Fono[] = [
   {nome: 'Victor', email: 'victor.eacd@gmail.com', telefone: 'ddi'},

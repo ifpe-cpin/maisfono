@@ -5,7 +5,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from 'angular5-social-auth';
 import { AngularFireModule } from 'angularfire2';
-import { firebaseConfig } from '../../firebase-config';
+import { firebaseConfig } from '../../environments/firebase-config';
 
 @NgModule({
   imports: [

@@ -2,7 +2,7 @@ import { NgModule} from '@angular/core';
 
 import { Routes, RouterModule, CanActivate } from '@angular/router';
 
-import { FonoaudiologoComponent } from './fonoaudiologo.component';
+import { SistemaComponent } from './sistema.component';
 
 import { FonoComponent } from './fono/fono.component';
 import { ConsultarFonoComponent  } from './fono/consultar-fono/consultar-fono.component';
@@ -43,7 +43,7 @@ import { AdminGuard } from '../core/admin.guard';
 
 
 const homeRoutes = [
-		{path: 'fonoaudiologo', component: FonoaudiologoComponent, children:[
+		{path: 'fonoaudiologo', component: SistemaComponent, children:[
 			{ path: 'user',children:[
 				{path: 'admin',component:UserAdminComponent, canActivate:[AdminGuard]},
 				{path: 'ver',component:UserViewComponent, canActivate:[AdminGuard]},

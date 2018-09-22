@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { Paciente } from '../fonoaudiologo/models/paciente/paciente';
+import { Paciente } from '../sistema/models/paciente/paciente';
 
 
 

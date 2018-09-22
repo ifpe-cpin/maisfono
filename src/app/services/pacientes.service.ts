@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Fono } from '../models/fono';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
-import { Paciente } from '../fonoaudiologo/models/paciente/paciente';
+import { Paciente } from '../sistema/models/paciente/paciente';
 
 
 @Injectable()

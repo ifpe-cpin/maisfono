@@ -1,4 +1,4 @@
-import { Paciente} from '../fonoaudiologo/models/paciente/paciente';
+import { Paciente} from '../sistema/models/paciente/paciente';
 
 export const PACIENTES: Paciente[] = [
   //{nome: 'joao', email: 'joão@gg.com', telefone: 'ddi'},
