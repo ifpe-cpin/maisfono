@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; 
-import { PacienteService } from '../../../services/paciente.service';
-
+import { PacientesService } from '../../../services/pacientes.service';
 import { Paciente } from '../../models/paciente/paciente';
 
 import { ConsultarMeusComponent } from '../consultar-meus/consultar-meus.component';
@@ -11,14 +10,14 @@ import { AngularFirestore } from 'angularfire2/firestore';
   selector: 'app-paciente-form',
   templateUrl: './paciente-form.component.html',
   styleUrls: ['./paciente-form.component.css'],
-  providers: [PacienteService]
+  providers: [PacientesService]
 })
 export class PacienteFormComponent implements OnInit {
 
 	paciente: Paciente;
 
   constructor(private router: Router,
-     private pacienteService: PacienteService,
+     private pacienteService: PacientesService,
      public db: AngularFirestore) {
   	this.paciente = new Paciente(this.db);
    }
@@ -31,7 +30,7 @@ export class PacienteFormComponent implements OnInit {
      paciente.telefone = telefone;
      paciente.email = email;
      
-   	this.pacienteService.setPaciente(paciente);
+   	this.pacienteService.add(paciente);
 
    	this.router.navigate(['/home/paciente/consultarMeus']);
 

@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
 import { SistemaComponent } from './sistema/sistema.component';
-import { NovoUsuarioComponent } from './novo-usuario/novo-usuario.component';
-import { PacienteComponent } from './paciente/paciente.component';
 import { AuthGuard } from './core/auth.guard';
 import { AuthService } from './core/auth.service';
 import { UserAdminComponent } from './sistema/user/user-admin/user-admin.component';
@@ -20,8 +18,6 @@ import { UserModule } from './sistema/user/user.module';
 const appRoutes: Routes = [
 	{ path: '', component: LoginComponent},
 	{ path: 'fonoaudiologo', component: SistemaComponent, canActivate: [AuthGuard]},
-	{ path: 'newUser', component: NovoUsuarioComponent,canActivate: [AuthGuard]},
-	{ path: 'paciente', component: PacienteComponent,canActivate: [AuthGuard]},
 	
 ];
 ;

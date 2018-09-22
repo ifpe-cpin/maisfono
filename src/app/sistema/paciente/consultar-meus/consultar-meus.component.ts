@@ -4,7 +4,7 @@ import { Paciente } from '../../models/paciente/paciente';
 
 import { PacienteFormComponent } from '../paciente-form/paciente-form.component';
 
-import { PacienteService } from '../../../services/paciente.service';
+import { PacientesService } from '../../../services/pacientes.service';
 
 declare var $:any;
 
@@ -12,7 +12,7 @@ declare var $:any;
   selector: 'app-consultar-meus',
   templateUrl: './consultar-meus.component.html',
   styleUrls: ['./consultar-meus.component.css'],
-  providers: [PacienteService]
+  providers: [PacientesService]
 })
 export class ConsultarMeusComponent implements OnInit {
 
@@ -21,7 +21,7 @@ export class ConsultarMeusComponent implements OnInit {
 
 
 
-  constructor(private pacienteService: PacienteService) {
+  constructor(private pacienteService: PacientesService) {
        
    }
 
@@ -30,7 +30,9 @@ export class ConsultarMeusComponent implements OnInit {
 
   ngOnInit() {
     
-    this.paciente = this.pacienteService.getPaciente();
+    this.pacienteService.getAll().subscribe(
+      paciente=> this.paciente = paciente
+    );
 
       
 		$(function () {
