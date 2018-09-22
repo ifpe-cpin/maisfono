@@ -1,0 +1,19 @@
+<ul class="sidebar-menu">
+  <ul class="sidebar-menu" *ngFor="let menu of selectMenus">
+  <li  class="header">{{menu.titulo}}</li>
+  <li *ngFor="let categoria of menu.categorias" class="treeview">
+      <a>
+        <i class="fa fa-user"></i>
+        <span>{{categoria.nome}}</span>
+        <i class="fa fa-angle-left pull-right"></i>
+      </a>
+      <ul class="treeview-menu">
+          <li *ngFor="let item of categoria.itens">
+            <a routerLink="{{item.url}}">
+              <i class="{{item.icone}}"></i>{{item.nome}}</a>
+          </li>
+        
+      </ul>
+    </li>
+  </ul>
+</ul>

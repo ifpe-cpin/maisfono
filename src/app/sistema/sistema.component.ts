@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
-
+import { Menu } from '../role-menu/menu';
+import { MENU } from '../models/menus';
 
 declare const gapi: any;
 
@@ -17,6 +18,8 @@ export class SistemaComponent implements OnInit {
 
   public auth2: any;
 
+  menus: Menu[];
+
   constructor(public auth: AuthService) { 
 
   }
@@ -25,7 +28,10 @@ export class SistemaComponent implements OnInit {
       this.auth.user.subscribe( user =>{
               this.img = user.photoURL;
               this.name = user.displayName;
+              this.menus = MENU;
     })
+
+
   }
 
 

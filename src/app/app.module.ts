@@ -32,6 +32,7 @@ import { AngularFireModule } from 'angularfire2/index';
 import { CoreModule } from './core/core.module';
 import { UserAdminComponent } from './sistema/user/user-admin/user-admin.component';
 import { UserModule } from './sistema/user/user.module';
+import { RoleMenuComponent } from './role-menu/role-menu.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { UserModule } from './sistema/user/user.module';
     DashboardComponent,
     MeusDadosComponent,
     ConfirmDialogComponent,
+    //RoleMenuComponent,
     //GridViewComponent   
     // HomeComponent
   ],
