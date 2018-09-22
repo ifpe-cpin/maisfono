@@ -43,19 +43,16 @@ import { AdminGuard } from '../core/admin.guard';
 
 
 const homeRoutes = [
-		{path: 'fonoaudiologo', component: SistemaComponent, children:[
+		{path: 'sistema', component: SistemaComponent, children:[
 			{ path: 'user',children:[
 				{path: 'admin',component:UserAdminComponent, canActivate:[AdminGuard]},
 				{path: 'ver',component:UserViewComponent, canActivate:[AdminGuard]},
 				{path: 'atualizar',component:UserUpdateComponent, canActivate:[AdminGuard]},
 			]},
-			{path: 'fono', component: FonoComponent, children: [
-						{path: 'novo', component: FonoFormComponent, canActivate: [AuthGuard]},
-						{path: 'ver', component: FonoDetalheComponent, canActivate: [AuthGuard]},
-						{path: 'admin', component: FonoAdminComponent, canActivate: [AuthGuard]},
-						// {path: ':id/editar', component: FonoFormComponent}
-			]},
-			{path: 'fono', component: FonoComponent, children: [
+			{path: 'fonoaudiologo', component: FonoComponent, children: [
+				{path: 'novo', component: FonoFormComponent, canActivate: [AuthGuard]},
+				{path: 'ver', component: FonoDetalheComponent, canActivate: [AuthGuard]},
+				{path: 'admin', component: FonoAdminComponent, canActivate: [AuthGuard]},
 				{path: 'consulta', component: ConsultarFonoComponent, canActivate: [AuthGuard]},
 				{path: 'consultarMeusFonos', component: ConsultarMeusFonosComponent, canActivate: [AuthGuard]},
 				// {path: ':id/editar', component: FonoFormComponent}

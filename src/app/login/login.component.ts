@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     this.auth.googleLogin().then(
       () => {
         console.log("Login")
-        this.router.navigate(['/fonoaudiologo/dash'])
+        this.router.navigate(['/sistema/dash'])
       } 
     ).catch(error =>{
         console.log(error)

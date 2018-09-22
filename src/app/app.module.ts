@@ -22,7 +22,8 @@ import {MatDialogModule} from '@angular/material';
 
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
-
+import { FirebaseConfig } from '../environments/firebase.config'
+import { AngularFireModule } from 'angularfire2/index';
 
 
 
@@ -57,7 +58,9 @@ import { UserModule } from './sistema/user/user.module';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,  
-    MatDialogModule, UserModule,
+    MatDialogModule, 
+    UserModule,
+    AngularFireModule.initializeApp(FirebaseConfig)
     
   ],
   bootstrap: [AppComponent]

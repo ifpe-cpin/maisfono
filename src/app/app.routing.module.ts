@@ -17,7 +17,7 @@ import { UserModule } from './sistema/user/user.module';
 
 const appRoutes: Routes = [
 	{ path: '', component: LoginComponent},
-	{ path: 'fonoaudiologo', component: SistemaComponent, canActivate: [AuthGuard]},
+	{ path: 'sistema', component: SistemaComponent, canActivate: [AuthGuard]},
 	
 ];
 ;
