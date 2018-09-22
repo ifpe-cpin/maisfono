@@ -7,6 +7,7 @@ import { DashComponent } from './dash/dash.component';
 import { VideoComponent } from './video/video.component';
 import { PacienteModule } from './paciente/paciente.module';
 import { PacienteSelecionarComponent } from './paciente/paciente-selecionar/paciente-selecionar.component';
+import { RoleMenuComponent } from '../role-menu/role-menu.component';
 
 
 @NgModule({
@@ -16,6 +17,10 @@ import { PacienteSelecionarComponent } from './paciente/paciente-selecionar/paci
     HomeRoutingModule
    
   ],
-  declarations: [SistemaComponent, DashComponent,VideoComponent,PacienteSelecionarComponent]
+  declarations: [SistemaComponent,
+     DashComponent,
+     VideoComponent,
+     PacienteSelecionarComponent,
+    RoleMenuComponent]
 })
 export class SistemaModule { }

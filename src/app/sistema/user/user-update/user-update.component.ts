@@ -51,14 +51,14 @@ export class UserUpdateComponent implements OnInit {
 			this.user.update().subscribe(
 				result => {
 					console.log(this.user)
-					this.router.navigate(['/fonoaudiologo/user/ver'],{ queryParams: { id: this.user.id }});
+					this.router.navigate(['/sistema/user/ver'],{ queryParams: { id: this.user.id }});
 				});
 		}else{
 			
 			this.user.add().then(
 				result => {
 					console.log(this.user)
-					this.router.navigate(['/fonoaudiologo/user/ver'],{ queryParams: { id: this.user.id }});
+					this.router.navigate(['/sistema/user/ver'],{ queryParams: { id: this.user.id }});
 				}
 				
 			);

@@ -37,7 +37,7 @@
                   <td>{{f.nome}}</td>
                   <td>{{f.cpf}}</td>
                   <td align="center">
-                    <a [routerLink]="['/fonoaudiologo/fono/ver']" 
+                    <a [routerLink]="['/sistema/fono/ver']" 
                       [queryParams]="{ id: f.id }">
                       <i class="fa fa-eye" ></i>
                     </a>
@@ -45,7 +45,7 @@
                     <a (click)="delete(f)">
                       <i class="fa fa-trash-o" ></i>
                     </a>
-                    <a [routerLink]="['/fonoaudiologo/fono/novo']" 
+                    <a [routerLink]="['/sistema/fono/novo']" 
                        [queryParams]="{ id: f.id }">
                        <i class="fa fa-pencil-square-o" ></i>
                     </a>
