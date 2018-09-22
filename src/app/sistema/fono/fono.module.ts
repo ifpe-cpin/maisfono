@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { FonoAdminComponent } from './fono-admin/fono-admin.component';
 import { MatDialog, MatDialogModule } from '@angular/material';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { GridViewComponent } from '../../grid-view/grid-view.component';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @NgModule({
   imports: [
@@ -21,14 +21,16 @@ import { GridViewComponent } from '../../grid-view/grid-view.component';
     FormsModule,
     MatDialogModule,
   ],
-  providers:[MatDialog],
+  providers:[
+    MatDialog,
+    AngularFireDatabase
+  ],
   declarations: [
     FonoDetalheComponent,
      FonoFormComponent,
      FonoComponent,
      ConsultarFonoComponent,
      ConsultarMeusFonosComponent,
-     //GridViewComponent,
      FonoAdminComponent]
 })
 export class FonoModule { }

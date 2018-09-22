@@ -1,51 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-
-
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
-import { Fono } from '../../../models/fono';
-
-
-import { AngularFireDatabase } from 'angularfire2/database'
-import { Observable } from 'rxjs';
-
-declare var $:any;
+import { Fonoaudiologo } from '../../../models/fonoaudiologo';
 
 @Component({
   selector: 'app-consultar-fono',
   templateUrl: './consultar-fono.component.html',
   styleUrls: ['./consultar-fono.component.css'],
- 	providers: [FonoaudiologoService]
-})
+ 	providers: [FonoaudiologoService],
+   encapsulation: ViewEncapsulation.None
+}) 
 export class ConsultarFonoComponent implements OnInit {
-
-  fono: Fono[];
-
-
-
-  constructor(private fonoService: FonoaudiologoService) {
-  
-     
-      //console.log(this.fonoaudiologo)
-
-      // const afList = db.list('items');
-      // afList.push({ name: 'fono' });
-      // const listObservable = afList.snapshotChanges();
-      // listObservable.subscribe();
-   } 
-
-   OpenRum(){
-     var new_window = window.open('https://hangouts.google.com/hangouts/_/jyg7ajkibnf6pkmp7fqernkt7ue',"Hangout",'fullscreen=yes');
-   }
+  fonoaudiologos: Fonoaudiologo[];
+  editState: boolean = false;
+  fonoaudiologoToEdit: Fonoaudiologo;
+  dataTable: any;
   
 
+  constructor(private fonoaudiologoService: FonoaudiologoService) {}
+  
   ngOnInit() {
-    
-    this.fonoService.getAll().subscribe(
-      fono => this.fono = fono
-    );
-    
-    $(function () {
-			$("#pacientes").DataTable();
-		});
+    this.fonoaudiologoService.getFonoaudiologos().subscribe(fonoaudiologos => {
+      this.fonoaudiologos = fonoaudiologos;
+    });
   }
+
+  deleteFonoaudiologo(event, fonoaudiologo) {
+    const response = confirm('are you sure you want to delete?');
+    if (response ) {
+      this.fonoaudiologoService.deleteFonoaudiologo(fonoaudiologo);
+    }
+    return;
+  }
+
+  editFonoaudiologo(event, fonoaudiologo) {
+    this.editState = !this.editState;
+    this.fonoaudiologoToEdit = fonoaudiologo;
+  }
+
+  updateFonoaudiologo(fonoaudiologo) {
+    this.fonoaudiologoService.updateFonoaudiologo(fonoaudiologo);
+    this.fonoaudiologoToEdit = null;
+    this.editState = false;
+  }
+
 }

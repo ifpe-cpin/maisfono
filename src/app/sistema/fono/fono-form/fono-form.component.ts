@@ -67,7 +67,7 @@ export class FonoFormComponent implements OnInit {
 
 		});  
 
-
+		/*
 		this.fono = new Fono(this.db);
 
 		this.route
@@ -84,14 +84,14 @@ export class FonoFormComponent implements OnInit {
 
 			
 		});
-
-
+		*/
 
 	}
 
 	
 	
 	onSubmit() {
+		/*
 		if(this.fono.id){
 			this.fono.update().subscribe(
 				result => {
@@ -109,7 +109,7 @@ export class FonoFormComponent implements OnInit {
 			);
 
 		}
-
+*/
     }
   }
 

@@ -11,7 +11,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content">
+<section class="content"> 
   <div class="row">
     <div class="col-xs-12">
       <div class="box">
@@ -31,18 +31,18 @@
               </tr>
             </thead>
             <tbody>
-               <tr *ngFor="let lista of paciente">
-                <td>{{lista.nome}}</td>
-                <td>{{lista.telefone}}</td>
-                <td>{{lista.email}}</td>
-                <td>{{lista.Laudo}}</td>
+               <tr *ngFor="let lista of pacientes">
+                <td>{{lista.dsc_nome}}</td>
+                <td>{{lista.dsc_telefone1}}</td>
+                <td>{{lista.dsc_email}}</td>
+                <td></td>
                 <td align="center"><a routerLink="/home/paciente/evolucao"><i class="fa fa-line-chart"></i></a></td>
                 <td>Horario</td>
               </tr>
              
             </tbody>
             <tfoot>
-              <tr>
+              <tr> 
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>Email</th>

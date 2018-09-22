@@ -1,41 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { Evolucao } from "../../models/paciente/evolucao";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { EvolucaoService } from '../../../services/evolucao.service';
+import { Evolucao } from '../../../models/evolucao';
 
 @Component({
   selector: 'app-paciente-evolucao',
   templateUrl: './paciente-evolucao.component.html',
-  styleUrls: ['./paciente-evolucao.component.css']
-})
+  styleUrls: ['./paciente-evolucao.component.css'],
+ 	providers: [EvolucaoService],
+   encapsulation: ViewEncapsulation.None
+}) 
 export class PacienteEvolucaoComponent implements OnInit {
-  selectedEvolucao: Evolucao;
-  evolucao: Evolucao[] = [];
-  title: String;
-
-  constructor() { }
-
-  ngOnInit() {
-    this.evolucao.push(
-      new Evolucao('Título','descricao 1', '12:00', '22 Set. 2017', 2),
-      new Evolucao('Título','descricao 2', '12:03', '15 Set. 2017', 3),
-      new Evolucao('Título','descricao 3', '12:10', '08 Set. 2017', 2),
-      new Evolucao('Título','descricao 4', '12:01', '01 Set. 2017', 1)
-    );    
-    
-    this.selectedEvolucao = {titulo: '', descricao: '', hora: '', data: '', tipoEvolucao: 1};
-  }
-
-
-  adicionaEvolucao(titulo, descricao, hora, data, tipoEvolucao){  
-      let evolucao = new Evolucao(titulo, descricao, hora, data, tipoEvolucao);
-      this.evolucao.push(evolucao);
-  }  
+  evolucoes: Evolucao[];
+  editState: boolean = false;
+  evolucaoToEdit: Evolucao;
+  dataTable: any;
   
-  deletarEvolucao(id){  
-      this.evolucao.splice(id, 1);
+
+  constructor(private evolucaoService: EvolucaoService) {}
+  
+  ngOnInit() {
+    this.evolucaoService.getEvolucaos().subscribe(evolucoes => {
+      this.evolucoes = evolucoes;
+    });
   }
 
-  selecionaEvolucao(evolucao: Evolucao) {
-    this.selectedEvolucao = evolucao;
-    //this.title = this.selectedEvolucao.titulo;
+  deleteEvolucao(event, evolucao) {
+    const response = confirm('are you sure you want to delete?');
+    if (response ) {
+      this.evolucaoService.deleteEvolucao(evolucao);
+    }
+    return;
   }
+
+  editEvolucao(event, evolucao) {
+    this.editState = !this.editState;
+    this.evolucaoToEdit = evolucao;
+  }
+
+  updateEvolucao(evolucao) {
+    this.evolucaoService.updateEvolucao(evolucao);
+    this.evolucaoToEdit = null;
+    this.editState = false;
+  }
+
 }

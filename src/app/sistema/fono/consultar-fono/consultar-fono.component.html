@@ -21,7 +21,7 @@
           <h3 class="box-title">fonoaudiólogos</h3>
         </div><!-- /.box-header -->
         <div class="box-body">
-          <table id="pacientes" class="table table-bordered table-striped">
+          <table id="fonoaudiologos" class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>Nome</th>
@@ -31,9 +31,9 @@
               </tr>
             </thead>
             <tbody>
-               <tr *ngFor="let lista of fono">
+               <tr *ngFor="let lista of fonoaudiologos " >
                 <td>{{lista.dsc_nome}}</td>
-                <td>{{lista.dsc_telefone}}</td>
+                <td>{{lista.dsc_telefone1}}</td>
                 <td>{{lista.dsc_email}}</td>
                 <td align="center"><a (click)="OpenRum()"><i class="fa fa-external-link-square" ></i></a></td>
               

@@ -32,27 +32,19 @@ import { PacienteSelecionarComponent } from './paciente/paciente-selecionar/paci
 import { PerfilComponent } from "./perfil/perfil.component";
 import { DashboardComponent } from "./perfil/dashboard/dashboard.component";
 import { MeusDadosComponent } from "./perfil/meus-dados/meus-dados.component";
-import { FonoAdminComponent } from './fono/fono-admin/fono-admin.component';
-import { PacienteAdminComponent } from './paciente-admin/paciente-admin.component';
 import { AuthService } from '../core/auth.service';
-import { AuthGuard } from '../core/auth.guard';
-import { UserAdminComponent } from './user/user-admin/user-admin.component';
-import { UserViewComponent } from './user/user-view/user-view.component';
-import { UserUpdateComponent } from './user/user-update/user-update.component';
+import { AuthGuard } from '../core/auth.guard';import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { AdminGuard } from '../core/admin.guard';
 
 
 const homeRoutes = [
 		{path: 'sistema', component: SistemaComponent, children:[
 			{ path: 'user',children:[
-				{path: 'admin',component:UserAdminComponent, canActivate:[AdminGuard]},
-				{path: 'ver',component:UserViewComponent, canActivate:[AdminGuard]},
 				{path: 'atualizar',component:UserUpdateComponent, canActivate:[AdminGuard]},
 			]},
 			{path: 'fonoaudiologo', component: FonoComponent, children: [
 				{path: 'novo', component: FonoFormComponent, canActivate: [AuthGuard]},
 				{path: 'ver', component: FonoDetalheComponent, canActivate: [AuthGuard]},
-				{path: 'admin', component: FonoAdminComponent, canActivate: [AuthGuard]},
 				{path: 'consulta', component: ConsultarFonoComponent, canActivate: [AuthGuard]},
 				{path: 'consultarMeusFonos', component: ConsultarMeusFonosComponent, canActivate: [AuthGuard]},
 				// {path: ':id/editar', component: FonoFormComponent}
@@ -63,7 +55,7 @@ const homeRoutes = [
 				{path: 'evolucao', component: PacienteEvolucaoComponent, canActivate: [AuthGuard]},
 				{path: 'novo', component: PacienteFormComponent, canActivate: [AuthGuard]},
 				{path: 'ver', component: PacienteDetalheComponent, canActivate: [AuthGuard]},
-				{path: 'admin', component: PacienteAdminComponent, canActivate: [AuthGuard]},
+				//{path: 'admin', component: PacienteAdminComponent, canActivate: [AuthGuard]},
 				// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'jogos', component: JogosComponent, children: [
