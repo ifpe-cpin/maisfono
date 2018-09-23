@@ -26,17 +26,28 @@ export class FonoaudiologoService {
     return this.fonoaudiologos; 
   }
 
+  get(id:string){
+    
+    return new Observable(observer => {
+      this.fonoaudiologoDoc = this.db.doc('tb_fonoaudiologo/'+id);
+      observer.next(this.fonoaudiologoDoc);
+      observer.complete();
+    });
+  }
+
   addFonoaudiologo(fonoaudiologo: Fonoaudiologo) {
     this.fonoaudiologosCollection.add(fonoaudiologo);
   }
 
-  deleteFonoaudiologo(fonoaudiologo: Fonoaudiologo) {
+  deleteFonoaudiologo(fonoaudiologo: Fonoaudiologo): Promise<any> {
     this.fonoaudiologoDoc = this.db.doc('tb_fonoaudiologo/${fonoaudiologo.id}');
-    this.fonoaudiologoDoc.delete();
+    return this.fonoaudiologoDoc.delete();
   }
 
   updateFonoaudiologo(fonoaudiologo: Fonoaudiologo) {
     this.fonoaudiologoDoc = this.db.doc('tb_fonoaudiologo/${fonoaudiologo.id}');
     this.fonoaudiologoDoc.update(fonoaudiologo);
   }
+
+   
 }

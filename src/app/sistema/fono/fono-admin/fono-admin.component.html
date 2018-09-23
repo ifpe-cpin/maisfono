@@ -34,10 +34,10 @@
               </thead>
               <tbody>
                  <tr *ngFor="let f of fonos">
-                  <td>{{f.nome}}</td>
-                  <td>{{f.cpf}}</td>
+                  <td>{{f.dsc_nome}}</td>
+                  <td>{{f.dsc_cpf}}</td>
                   <td align="center">
-                    <a [routerLink]="['/sistema/fono/ver']" 
+                    <a [routerLink]="['/sistema/fonoaudiologo/ver']" 
                       [queryParams]="{ id: f.id }">
                       <i class="fa fa-eye" ></i>
                     </a>
@@ -45,7 +45,7 @@
                     <a (click)="delete(f)">
                       <i class="fa fa-trash-o" ></i>
                     </a>
-                    <a [routerLink]="['/sistema/fono/novo']" 
+                    <a [routerLink]="['/sistema/fonoaudiologo/novo']" 
                        [queryParams]="{ id: f.id }">
                        <i class="fa fa-pencil-square-o" ></i>
                     </a>

@@ -7,9 +7,9 @@
 				<h3 class="box-title">Detalhes</h3>
 
 				<button type="button" class="btn btn-info btn-detail"
-				 [routerLink]="['/sistema/fono/admin']">Admin</button>
+				 [routerLink]="['/sistema/fonoaudiologo/admin']">Admin</button>
 
-				 <button type="button" class="btn btn-info btn-detail" [routerLink]="['/sistema/fono/novo']" 
+				 <button type="button" class="btn btn-info btn-detail" [routerLink]="['/sistema/fonoaudiologo/novo']" 
                        [queryParams]="{ id: fono.id }">Atualizar</button>
 
 
@@ -18,19 +18,19 @@
 				<table id="fono" class="table table-bordered table-striped">
 					<tr>
 					   <th>Nome</th>
-					   <td>{{fono.nome}}</td>
+					   <td>{{fono.dsc_nome}}</td>
 					</tr>
 					<tr>
-							<th>Descrição</th>
-							<td>{{fono.descricao}}</td>
+							<th>CRF</th>
+							<td>{{fono.dsc_crf}}</td>
 					</tr>
 					<tr>
 							<th>CPF</th>
-							<td>{{fono.cpf}}</td>
+							<td>{{fono.dsc_cpf}}</td>
 					</tr>			
 					<tr>
 							<th>Data de Nascimento</th>
-							<td>{{fono.data_nascimento}}</td>
+							<td>{{fono.dat_nascimento}}</td>
 					</tr>			   
 				</table>
 			  </div><!-- /.box-body -->

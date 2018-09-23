@@ -8,6 +8,7 @@ declare var $:any;
 
 
 import { MatDialog } from "@angular/material";
+import { Fonoaudiologo } from '../../../models/fonoaudiologo';
 
 @Component({
   selector: 'app-fono-admin',
@@ -25,7 +26,7 @@ export class FonoAdminComponent implements OnInit {
     private chRef: ChangeDetectorRef,
     public dialog: MatDialog) { }
 
-  fonos: Fono[];
+  fonos: Fonoaudiologo[];
   dataTable: any;
 
   dataInfo = {
@@ -56,11 +57,11 @@ export class FonoAdminComponent implements OnInit {
 
   ngOnInit() {
 
-   //this.refreshData();
+   this.refreshData();
   }
-  /*
+  
   refreshData(){
-    this.fonoService.getAll().
+    this.fonoService.getFonoaudiologos().
                 subscribe( fonos => {
                   this.fonos = fonos
                   
@@ -100,7 +101,7 @@ export class FonoAdminComponent implements OnInit {
       console.log('The dialog was closed');
       if(result){
 
-        this.fonoService.delete(fono).then(
+        this.fonoService.deleteFonoaudiologo(fono).then(
           result=>{
               console.log(result)
               this.refreshData();
@@ -112,5 +113,5 @@ export class FonoAdminComponent implements OnInit {
       }
     });
   }
-*/
+
 }
