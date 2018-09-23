@@ -1,27 +1,42 @@
 import { Injectable } from '@angular/core';
-import { Fono } from '../models/fono';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
-
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
+import { Fonoaudiologo } from '../models/fonoaudiologo';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class FonoaudiologoService {
+  fonoaudiologosCollection: AngularFirestoreCollection<Fonoaudiologo>;
+  fonoaudiologos: Observable<Fonoaudiologo[]>;
+  fonoaudiologoDoc: AngularFirestoreDocument<Fonoaudiologo>;
 
-  constructor(public db: AngularFirestore) { }
-
-  add(fono:Fono):Promise<any>{
-    return fono.add();
+  constructor(public db:AngularFirestore) {
+    this.fonoaudiologosCollection = this.db.collection('tb_fonoaudiologo');
+    // this.fonoaudiologos = this.db.collection('fonoaudiologos').valueChanges();
+    this.fonoaudiologos = this.fonoaudiologosCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Fonoaudiologo;
+        data.id = a.payload.doc.id;
+        return data;
+      });
+    });
   }
 
-  getAll():Observable<Fono[]>{
-    return Fono.getAll(this.db);
+  getFonoaudiologos() {
+    return this.fonoaudiologos; 
   }
 
-  get(id): Observable<Fono>{
-    return Fono.get(this.db,id);
+  addFonoaudiologo(fonoaudiologo: Fonoaudiologo) {
+    this.fonoaudiologosCollection.add(fonoaudiologo);
   }
 
-  delete(fono:Fono):Promise<void>{
-    return fono.delete();
+  deleteFonoaudiologo(fonoaudiologo: Fonoaudiologo) {
+    this.fonoaudiologoDoc = this.db.doc('tb_fonoaudiologo/${fonoaudiologo.id}');
+    this.fonoaudiologoDoc.delete();
+  }
+
+  updateFonoaudiologo(fonoaudiologo: Fonoaudiologo) {
+    this.fonoaudiologoDoc = this.db.doc('tb_fonoaudiologo/${fonoaudiologo.id}');
+    this.fonoaudiologoDoc.update(fonoaudiologo);
   }
 }

@@ -21,11 +21,7 @@ export class ConsultarMeusFonosComponent implements OnInit {
   
 
   ngOnInit() {
-    
-    this.fonoService.getAll().subscribe(
-      fono => this.fono = fono
-    );
-    
+        
     $(function () {
 			$("#pacientes").DataTable();
 		});

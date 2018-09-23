@@ -26,17 +26,10 @@
                 <label>Nome
                   <em>*</em>
                 </label>
-                <input type="text" [(ngModel)]="fono.nome" name="Nome" id="nome" class="form-control" placeholder="Nome" required>
-                <input type="hidden" [(ngModel)]="fono.id" name="id">
+                <input type="text" [(ngModel)]="fonoaudiologo.dsc_nome" name="Nome" id="nome" class="form-control" placeholder="Nome" required>
+                <input type="hidden" [(ngModel)]="fonoaudiologo.id" name="id">
               </div>
               <br>
-              <div class="input-group col-xs-12">
-                <label>Descrição
-                  <em>*</em>
-                </label>
-                <textarea rows="5" [(ngModel)]="fono.descricao" name="Descrição" id="descrição" class="form-control" placeholder="Descrição" min="5" title="Breve descrição do seu perfil proficional."
-                  required></textarea>
-              </div>
               <div class="row">
                 <div class="col-lg-4">
                   <div class="col-lg-12 input-group">
@@ -49,7 +42,7 @@
                       <span class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </span>
-                      <input type="date" [(ngModel)]="fono.data_nascimento" maxlength="8" name="dn" id="dn" class="form-control" placeholder="Data de nascimento" required>
+                      <input type="date" [(ngModel)]="fonoaudiologo.dat_nascimento" maxlength="8" name="dn" id="dn" class="form-control" placeholder="Data de nascimento" required>
                     </div>
                   </div>
                   <!-- /input-group -->
@@ -66,7 +59,7 @@
                       <span class="input-group-addon">
                         <i class="fa fa-credit-card"></i>
                       </span>
-                      <input type="text" [(ngModel)]="fono.cpf" name="cpf" class="form-control" placeholder="CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Este campo deve conter apenas números"
+                      <input type="text" [(ngModel)]="fonoaudiologo.dsc_cpf" name="cpf" class="form-control" placeholder="CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Este campo deve conter apenas números"
                         maxlength="14" minlength="14" OnKeyPress="formatar('###.###.###-##', this)" id="cpf" required>
                     </div>
 
@@ -84,7 +77,7 @@
                       <span class="input-group-addon">
                         <i class="fa fa-credit-card"></i>
                       </span>
-                      <input type="text" name="crf" class="form-control" 
+                      <input type="text" [(ngModel)]="fonoaudiologo.dsc_crf" name="crf" class="form-control" 
                              placeholder="CRF" pattern="\d{11}" 
                              title="Este campo deve conter apenas números"
                              maxlength="11" minlength="11" 
@@ -149,7 +142,7 @@
                       <span class="input-group-addon">
                         <i class="fa fa-phone"></i>
                       </span>
-                      <input type="text" name="telefone1" class="form-control" placeholder="xx xxxx-xxxx" title="Telefone" maxlength="12" OnKeyPress="formatar('## ####-####', this);">
+                      <input type="text" [(ngModel)]="fonoaudiologo.dsc_telefone1" name="telefone1" class="form-control" placeholder="xx xxxx-xxxx" title="Telefone" maxlength="12" OnKeyPress="formatar('## ####-####', this);">
                     </div>
                   </div>
                   <!-- /input-group -->
@@ -272,7 +265,7 @@
                       <span class="input-group-addon">
                         <i class="fa fa-home"></i>
                       </span>
-                      <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Bairro" title="Bairro">
+                      <input type="text" [(ngModel)]="fonoaudiologo.dsc_endbairro" name="bairro" id="bairro" class="form-control" placeholder="Bairro" title="Bairro">
                     </div>
                   </div>
                   <!-- /input-group -->
@@ -293,7 +286,7 @@
                       <span class="input-group-addon">
                         <i class="fa fa-home"></i>
                       </span>
-                      <input type="text" name="rua" id="rua" class="form-control" placeholder="Endereço" min="5" title="Este campo deve conter apenas letras e um mínimo de 5 caracteres."
+                      <input type="text" [(ngModel)]="fonoaudiologo.dsc_endrua" name="rua" id="rua" class="form-control" placeholder="Endereço" min="5" title="Este campo deve conter apenas letras e um mínimo de 5 caracteres."
                         required>
                     </div>
                   </div>
@@ -309,7 +302,7 @@
                       <span class="input-group-addon">
                         <i class="fa fa-home"></i>
                       </span>
-                      <input type="text" name="num_end" class="form-control" placeholder="Número" title="Número">
+                      <input type="text" [(ngModel)]="fonoaudiologo.dsc_endnum" name="num_end" class="form-control" placeholder="Número" title="Número">
                     </div>
                   </div>
                   <!-- /input-group -->
@@ -385,7 +378,7 @@
             </div>
             <br>
           <p align="right">
-            <button type="submit" class="btn btn-lg btn-primary fa fa-save" align="right">
+            <button type="submit"  class="btn btn-lg btn-primary fa fa-save" align="right">
               <b style="margin-left: 10px"> Salvar</b>
             </button>
           </p>

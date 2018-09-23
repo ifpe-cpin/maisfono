@@ -19,6 +19,7 @@ export class FonoDetalheComponent implements OnInit {
     private fonoService:FonoaudiologoService) { }
 
   ngOnInit() {
+    /*
     this.route
 		.queryParams
 		.subscribe(params => {
@@ -32,7 +33,8 @@ export class FonoDetalheComponent implements OnInit {
 			}
 
 			
-		});
+    });
+    */
   }
 
 }

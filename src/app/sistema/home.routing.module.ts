@@ -32,26 +32,24 @@ import { PacienteSelecionarComponent } from './paciente/paciente-selecionar/paci
 import { PerfilComponent } from "./perfil/perfil.component";
 import { DashboardComponent } from "./perfil/dashboard/dashboard.component";
 import { MeusDadosComponent } from "./perfil/meus-dados/meus-dados.component";
-import { FonoAdminComponent } from './fono/fono-admin/fono-admin.component';
-import { PacienteAdminComponent } from './paciente-admin/paciente-admin.component';
 import { AuthService } from '../core/auth.service';
-import { AuthGuard } from '../core/auth.guard';
-import { UserAdminComponent } from './user/user-admin/user-admin.component';
-import { UserViewComponent } from './user/user-view/user-view.component';
-import { UserUpdateComponent } from './user/user-update/user-update.component';
+import { AuthGuard } from '../core/auth.guard';import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { AdminGuard } from '../core/admin.guard';
 import { PacienteGuard } from '../core/paciente.guard';
 import { FonoGuard } from '../core/fono.guard';
+import { FonoAdminComponent } from './fono/fono-admin/fono-admin.component';
+import { UserAdminComponent } from './user/user-admin/user-admin.component';
 
 
 const homeRoutes = [
 		{path: 'sistema', component: SistemaComponent, children:[
 			{ path: 'user',children:[
-				{path: 'admin',component:UserAdminComponent, canActivate:[AdminGuard]},
-				{path: 'ver',component:UserViewComponent, canActivate:[AdminGuard]},
 				{path: 'atualizar',component:UserUpdateComponent, canActivate:[AdminGuard]},
+				{path: 'admin',component:UserAdminComponent, canActivate:[AdminGuard]},
+
 			]},
 			{path: 'fonoaudiologo', component: FonoComponent, children: [
+
 				{path: 'novo', component: FonoFormComponent, canActivate: [FonoGuard]},
 				{path: 'ver', component: FonoDetalheComponent, canActivate: [FonoGuard]},
 				{path: 'admin', component: FonoAdminComponent, canActivate: [FonoGuard]},
@@ -65,7 +63,6 @@ const homeRoutes = [
 				{path: 'evolucao', component: PacienteEvolucaoComponent, canActivate: [PacienteGuard]},
 				{path: 'novo', component: PacienteFormComponent, canActivate: [PacienteGuard]},
 				{path: 'ver', component: PacienteDetalheComponent, canActivate: [PacienteGuard]},
-				{path: 'admin', component: PacienteAdminComponent, canActivate: [PacienteGuard]},
 				// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'jogos', component: JogosComponent, children: [

@@ -1,44 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; 
-import { PacientesService } from '../../../services/pacientes.service';
-import { Paciente } from '../../models/paciente/paciente';
-
-import { ConsultarMeusComponent } from '../consultar-meus/consultar-meus.component';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { PacienteService } from '../../../services/paciente.service';
+import { Paciente } from '../../../models/paciente';
 
 @Component({
   selector: 'app-paciente-form',
   templateUrl: './paciente-form.component.html',
   styleUrls: ['./paciente-form.component.css'],
-  providers: [PacientesService]
-})
+ 	providers: [PacienteService],
+   encapsulation: ViewEncapsulation.None
+}) 
 export class PacienteFormComponent implements OnInit {
+  pacientes: Paciente[];
+  editState: boolean = false;
+  pacienteToEdit: Paciente;
+  dataTable: any;
+  
 
-	paciente: Paciente;
-
-  constructor(private router: Router,
-     private pacienteService: PacientesService,
-     public db: AngularFirestore) {
-  	this.paciente = new Paciente(this.db);
-   }
-
-
-   gravar(nome, telefone, email ){
-
-     let paciente = new Paciente(this.db);
-     paciente.nome = nome;
-     paciente.telefone = telefone;
-     paciente.email = email;
-     
-   	this.pacienteService.add(paciente);
-
-   	this.router.navigate(['/home/paciente/consultarMeus']);
-
-   	console.log(paciente);
-   }
-
-
+  constructor(private pacienteService: PacienteService) {}
+  
   ngOnInit() {
+    this.pacienteService.getPacientes().subscribe(pacientes => {
+      this.pacientes = pacientes;
+    });
+  }
+
+  deletePaciente(event, paciente) {
+    const response = confirm('are you sure you want to delete?');
+    if (response ) {
+      this.pacienteService.deletePaciente(paciente);
+    }
+    return;
+  }
+
+  editPaciente(event, paciente) {
+    this.editState = !this.editState;
+    this.pacienteToEdit = paciente;
+  }
+
+  updatePaciente(paciente) {
+    this.pacienteService.updatePaciente(paciente);
+    this.pacienteToEdit = null;
+    this.editState = false;
   }
 
 }

@@ -1,44 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-
-import { Paciente } from '../../models/paciente/paciente';
-
-import { PacienteFormComponent } from '../paciente-form/paciente-form.component';
-
- import { PacientesService } from '../../../services/pacientes.service';
-
-
-declare var $:any;
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { PacienteService } from '../../../services/paciente.service';
+import { Paciente } from '../../../models/paciente';
 
 @Component({
   selector: 'app-consulta',
-  templateUrl: './consulta.component.html',
+  templateUrl: './consulta.component.html', 
   styleUrls: ['./consulta.component.css'],
-  providers: [PacientesService]
-})
-
+ 	providers: [PacienteService],
+   encapsulation: ViewEncapsulation.None
+}) 
 export class ConsultaComponent implements OnInit {
- 
-  paciente: Paciente[];
-
-
-
-  constructor(private pacienteService: PacientesService) {
-  
-     
-   }
-
-  
+  pacientes: Paciente[];
+  editState: boolean = false;
+  pacienteToEdit: Paciente;
+  dataTable: any;
   
 
+  constructor(private pacienteService: PacienteService) {}
+  
   ngOnInit() {
-    
-    this.pacienteService.getAll().subscribe(
-      paciente=> this.paciente = paciente
-    );
-    
-    $(function () {
-			$("#pacientes").DataTable();
-		});
+    this.pacienteService.getPacientes().subscribe(pacientes => {
+      this.pacientes = pacientes;
+    });
+  }
+
+  deletePaciente(event, paciente) {
+    const response = confirm('are you sure you want to delete?');
+    if (response ) {
+      this.pacienteService.deletePaciente(paciente);
+    }
+    return;
+  }
+
+  editPaciente(event, paciente) {
+    this.editState = !this.editState;
+    this.pacienteToEdit = paciente;
+  }
+
+  updatePaciente(paciente) {
+    this.pacienteService.updatePaciente(paciente);
+    this.pacienteToEdit = null;
+    this.editState = false;
   }
 
 }

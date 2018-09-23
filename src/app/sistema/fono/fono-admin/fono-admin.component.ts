@@ -56,9 +56,9 @@ export class FonoAdminComponent implements OnInit {
 
   ngOnInit() {
 
-   this.refreshData();
+   //this.refreshData();
   }
-
+  /*
   refreshData(){
     this.fonoService.getAll().
                 subscribe( fonos => {
@@ -112,5 +112,5 @@ export class FonoAdminComponent implements OnInit {
       }
     });
   }
-
+*/
 }

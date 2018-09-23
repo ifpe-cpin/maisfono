@@ -1,5 +1,6 @@
 import { OnInit, Component,AfterViewInit, Input,OnChanges,SimpleChanges } from '@angular/core';
-import { Paciente } from '../models/paciente/paciente';
+
+import { Paciente } from '../../models/paciente';
 
 
 declare const gapi: any;
@@ -25,7 +26,7 @@ export class VideoComponent implements OnInit,AfterViewInit,OnChanges{
             'render': 'createhangout',
             'initial_apps': [{'app_id' : '184219133185', 'start_data' : 'dQw4w9WgXcQ', 'app_type' : 'ROOM_APP' }],
             'widget_size': 175,
-            'invites':"[{ id:'"+this.paciente.email+"',invite_type:'EMAIL'}]"
+            'invites':"[{ id:'"+this.paciente.dsc_email+"',invite_type:'EMAIL'}]"
           });
     }
 
