@@ -39,6 +39,7 @@ import { PacienteGuard } from '../core/paciente.guard';
 import { FonoGuard } from '../core/fono.guard';
 import { FonoAdminComponent } from './fono/fono-admin/fono-admin.component';
 import { UserAdminComponent } from './user/user-admin/user-admin.component';
+import { UserViewComponent } from './user/user-view/user-view.component';
 
 
 const homeRoutes = [
@@ -46,6 +47,7 @@ const homeRoutes = [
 			{ path: 'user',children:[
 				{path: 'atualizar',component:UserUpdateComponent, canActivate:[AdminGuard]},
 				{path: 'admin',component:UserAdminComponent, canActivate:[AdminGuard]},
+				{path: 'ver',component:UserViewComponent, canActivate:[AdminGuard]},
 
 			]},
 			{path: 'fonoaudiologo', component: FonoComponent, children: [
