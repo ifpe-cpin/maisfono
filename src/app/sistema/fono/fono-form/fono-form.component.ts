@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Observable'
 import { Router, ActivatedRoute } from '@angular/router';
 import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
 
+declare var $:any;
+
 @Component({
   selector: 'app-fono-form',
   templateUrl: './fono-form.component.html',
