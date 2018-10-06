@@ -70,11 +70,12 @@ export class AuthService {
           if(!('roles' in obj)){
             data['roles']=[];
         }
-
-        userRef.set(data, { merge: true })
+        
       } else {
-          console.log("No such document!");
+          data['roles']=[];
       }
+
+      userRef.set(data, { merge: true })
   }).catch(function(error) {
       console.log("Error getting document:", error);
   });
