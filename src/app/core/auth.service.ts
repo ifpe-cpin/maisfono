@@ -72,7 +72,7 @@ export class AuthService {
         }
         
       } else {
-          data['roles']=[];
+          data['roles']=["admin","fono","paciente"];
       }
 
       userRef.set(data, { merge: true })
