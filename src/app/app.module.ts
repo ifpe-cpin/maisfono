@@ -33,6 +33,7 @@ import { CoreModule } from './core/core.module';
 import { UserAdminComponent } from './sistema/user/user-admin/user-admin.component';
 import { UserModule } from './sistema/user/user.module';
 import { RoleMenuComponent } from './role-menu/role-menu.component';
+import { LoadComponent } from './load/load.component';
 
 
 @NgModule({
@@ -43,6 +44,8 @@ import { RoleMenuComponent } from './role-menu/role-menu.component';
     DashboardComponent,
     MeusDadosComponent,
     ConfirmDialogComponent,
+    //UserAdminComponent,
+    //LoadComponent,
     //RoleMenuComponent,
     //GridViewComponent   
     // HomeComponent
@@ -65,6 +68,7 @@ import { RoleMenuComponent } from './role-menu/role-menu.component';
     AngularFireModule.initializeApp(FirebaseConfig)
     
   ],
+  exports:[LoadComponent],
   bootstrap: [AppComponent]
 })
 

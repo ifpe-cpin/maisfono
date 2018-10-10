@@ -6,13 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialog } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { UserUpdateComponent } from './user-update/user-update.component';
+import { SistemaModule } from '../sistema.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     MatDialogModule,
-    RouterModule
+    RouterModule,
+    SistemaModule
   ],
   providers:[MatDialog],
   exports:[RouterModule],

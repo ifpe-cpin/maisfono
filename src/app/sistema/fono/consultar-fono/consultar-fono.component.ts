@@ -14,13 +14,16 @@ export class ConsultarFonoComponent implements OnInit {
   editState: boolean = false;
   fonoaudiologoToEdit: Fonoaudiologo;
   dataTable: any;
+  loading:boolean;
   
 
   constructor(private fonoaudiologoService: FonoaudiologoService) {}
   
   ngOnInit() {
+    this.loading = true;
     this.fonoaudiologoService.getFonoaudiologos().subscribe(fonoaudiologos => {
       this.fonoaudiologos = fonoaudiologos;
+      this.loading = false;
     });
   }
 

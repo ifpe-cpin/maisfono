@@ -8,19 +8,23 @@ import { VideoComponent } from './video/video.component';
 import { PacienteModule } from './paciente/paciente.module';
 import { PacienteSelecionarComponent } from './paciente/paciente-selecionar/paciente-selecionar.component';
 import { RoleMenuComponent } from '../role-menu/role-menu.component';
+import { LoadComponent } from '../load/load.component';
+import { AppModule } from '../app.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
     PacienteModule,
-    HomeRoutingModule
+    HomeRoutingModule,
    
   ],
   declarations: [SistemaComponent,
      DashComponent,
      VideoComponent,
+     LoadComponent,
      PacienteSelecionarComponent,
-    RoleMenuComponent]
+    RoleMenuComponent],
+    exports:[LoadComponent]
 })
 export class SistemaModule { }

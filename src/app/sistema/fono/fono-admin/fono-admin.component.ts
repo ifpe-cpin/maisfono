@@ -28,6 +28,7 @@ export class FonoAdminComponent implements OnInit {
 
   fonos: Fonoaudiologo[];
   dataTable: any;
+  loading:boolean;
 
   dataInfo = {
     "language":{
@@ -56,7 +57,7 @@ export class FonoAdminComponent implements OnInit {
   };
 
   ngOnInit() {
-
+   this.loading = true;
    this.refreshData();
   }
   
@@ -78,7 +79,7 @@ export class FonoAdminComponent implements OnInit {
                      );
                 }
 
-
+                this.loading = false;
                   //this.dataTable = table.DataTable();
                 });
   }

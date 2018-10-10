@@ -13,6 +13,7 @@ import { FonoAdminComponent } from './fono-admin/fono-admin.component';
 import { MatDialog, MatDialogModule } from '@angular/material';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { SistemaModule } from '../sistema.module';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
     FonoRoutingModule,
     FormsModule,
     MatDialogModule,
+    SistemaModule,
   ],
   providers:[
     MatDialog,

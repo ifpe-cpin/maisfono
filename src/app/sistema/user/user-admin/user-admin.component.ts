@@ -4,6 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '../../../confirm-dialog/confirm-dialog.component';
+import { LoadComponent } from '../../../load/load.component';
 
 declare var $:any;
 
@@ -22,6 +23,7 @@ export class UserAdminComponent implements OnInit {
 
   users: User[];
   dataTable: any;
+  loading:boolean;
 
   dataInfo = {
     "language":{
@@ -50,7 +52,7 @@ export class UserAdminComponent implements OnInit {
   };
 
   ngOnInit() {
-
+   this.loading = true;
    this.refreshData();
   }
 
@@ -72,7 +74,7 @@ export class UserAdminComponent implements OnInit {
                      );
                 }
 
-
+                  this.loading = false;
                   //this.dataTable = table.DataTable();
                 });
   }

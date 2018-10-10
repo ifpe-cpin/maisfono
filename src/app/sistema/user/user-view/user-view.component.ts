@@ -12,11 +12,13 @@ import { User } from '../../../models/user';
 export class UserViewComponent implements OnInit {
 
   user: User;
+  loading:boolean;
 
   constructor(private route: ActivatedRoute,
     private userService:UserService) { }
 
     ngOnInit() {
+      this.loading = true;
       this.route
       .queryParams
       .subscribe(params => {
@@ -25,7 +27,10 @@ export class UserViewComponent implements OnInit {
   
         if(id!= undefined){
             this.userService.get(id).subscribe(
-              user => this.user = user
+              user => {
+                this.user = user
+                this.loading = false;
+              }
             );
         }
   
