@@ -14,8 +14,13 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]
     exit 0
 fi
 
-# entre na pasta onde está o build do seu projeto e inicie um novo repositório git
+# entre na pasta onde está o build do seu projeto 
 cd dist
+
+# cria o arquivo CNAME com o domínio
+"maisfono.com" > CNAME
+
+# inicie um novo repositório git
 git init
 
 # inside this git repo we'll pretend to be a new user
