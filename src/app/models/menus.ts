@@ -54,6 +54,20 @@ let fono = {
                
             ]
         },
+        {
+            nome:"Paciente",
+            itens:[
+                {
+                    nome:"Consultar Pacientes",
+                    url:"/sistema/fonoaudiologo/consultarPaciente",
+                    icone:"fa fa-circle-o"
+                },
+                {
+                    nome:"Meus Pacientes",
+                    url:"/sistema/fonoaudiologo/consultarMeus",
+                },
+            ],
+        },
     ]
 };
 

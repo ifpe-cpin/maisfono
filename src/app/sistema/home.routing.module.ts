@@ -58,13 +58,13 @@ const homeRoutes = [
 				{path: 'consulta', component: ConsultarFonoComponent, canActivate: [FonoGuard]},
 				{path: 'consultarMeusFonos', component: ConsultarMeusFonosComponent, canActivate: [FonoGuard]},
 				// {path: ':id/editar', component: FonoFormComponent}
-			]},
-			{path: 'paciente', component: PacienteComponent, children: [
-				{path: 'consulta', component: ConsultaComponent, canActivate: [PacienteGuard]},
-				{path: 'consultarMeus', component: ConsultarMeusComponent, canActivate: [PacienteGuard]},
-				{path: 'evolucao', component: PacienteEvolucaoComponent, canActivate: [PacienteGuard]},
-				{path: 'novo', component: PacienteFormComponent, canActivate: [PacienteGuard]},
-				{path: 'ver', component: PacienteDetalheComponent, canActivate: [PacienteGuard]},
+			//]},
+			//{path: 'paciente', component: PacienteComponent, children: [
+				{path: 'consulta', component: ConsultaComponent, canActivate: [FonoGuard]},
+				{path: 'consultarMeus', component: ConsultarMeusComponent, canActivate: [FonoGuard]},
+				{path: 'evolucao/:id', component: PacienteEvolucaoComponent, canActivate: [FonoGuard]},
+				{path: 'novo', component: PacienteFormComponent, canActivate: [FonoGuard]},
+				{path: 'ver', component: PacienteDetalheComponent, canActivate: [FonoGuard]},
 				// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'jogos', component: JogosComponent, children: [

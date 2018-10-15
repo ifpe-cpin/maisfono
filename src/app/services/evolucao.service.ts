@@ -7,13 +7,13 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class EvolucaoService {
   evolucaosCollection: AngularFirestoreCollection<Evolucao>;
-  evolucaos: Observable<Evolucao[]>;
+  evolucoes: Observable<Evolucao[]>;
   evolucaoDoc: AngularFirestoreDocument<Evolucao>;
 
   constructor(public db:AngularFirestore) {
     this.evolucaosCollection = this.db.collection('tb_evolucao');
-    // this.evolucaos = this.db.collection('evolucaos').valueChanges();
-    this.evolucaos = this.evolucaosCollection.snapshotChanges().map(changes => {
+    // this.evolucoes = this.db.collection('evolucoes').valueChanges();
+    this.evolucoes = this.evolucaosCollection.snapshotChanges().map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Evolucao;
         data.id = a.payload.doc.id;
@@ -22,8 +22,8 @@ export class EvolucaoService {
     });
   }
 
-  getEvolucaos() {
-    return this.evolucaos; 
+  getEvolucoes() {
+    return this.evolucoes; 
   }
 
   addEvolucao(evolucao: Evolucao) {
@@ -31,12 +31,13 @@ export class EvolucaoService {
   }
 
   deleteEvolucao(evolucao: Evolucao) {
-    this.evolucaoDoc = this.db.doc('tb_evolucao/${evolucao.id}');
+    this.evolucaoDoc = this.db.doc(`tb_evolucao/${evolucao.id}`);
     this.evolucaoDoc.delete();
   }
 
   updateEvolucao(evolucao: Evolucao) {
-    this.evolucaoDoc = this.db.doc('tb_evolucao/${evolucao.id}');
+    this.evolucaoDoc = this.db.doc(`tb_evolucao/${evolucao.id}`);
     this.evolucaoDoc.update(evolucao);
+  }
   }
 }

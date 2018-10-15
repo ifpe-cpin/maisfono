@@ -18,43 +18,45 @@
     <div class="row">
       <br>
       <div class="col-md-3"  >
-          <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-default">Incluir Evolução</button>
+          <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-inclusao">Incluir Evolução</button>
       </div>
       <br>
       <br>
       <br>
-      <div class="col-md-12">
-
+      <div class="col-md-12">           
         <!-- The time line -->
         <ul class="timeline">
-            <ng-container *ngFor="let evolucaoLine of evolucao.slice().reverse(); let i=index">
+    
+            <ng-container *ngFor="let evolucao of evolucoes">
+                
                 <li class="time-label">
                     <span class="bg-blue">
-                        {{evolucaoLine.data}}
+                        {{evolucao.dat_evolucao.seconds*1000 | date: 'dd-MM-yyyy'}}
                     </span>
                 </li>
                 <!-- /.timeline-label -->
                 <!-- timeline item -->
                 <li>
 
-                  <ng-container [ngSwitch]="evolucaoLine.tipoEvolucao" >
-                      <i *ngSwitchCase=3 class="fa fa-arrow-up bg-green"></i>
-                      <i *ngSwitchCase=2 class="fa fa-minus bg-yellow"></i>
-                      <i *ngSwitchCase=1 class="fa fa-arrow-down bg-red"></i>
+                  <ng-container [ngSwitch]="evolucao.num_status" >
+                      <i *ngSwitchCase=1 class="fa fa-arrow-up bg-green"></i>
+                      <i *ngSwitchCase=0 class="fa fa-minus bg-yellow"></i>
+                      <i *ngSwitchCase=-1 class="fa fa-arrow-down bg-red"></i>
                   </ng-container>
                   
       
                   <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> {{evolucaoLine.hora}}</span>
+                      <span class="time"><i class="fa fa-clock-o"></i> {{evolucao.dat_evolucao.seconds*1000 | date: 'hh:mm:ss a'}}</span>
         
-                      <h3 class="timeline-header">{{evolucaoLine.titulo}}</h3>
+                      <h3 class="timeline-header">{{evolucao.dsc_titulo}}</h3>
         
                       <div class="timeline-body">
-                          {{evolucaoLine.descricao}}
+                          {{evolucao.dsc_evolucao}}
                       </div>
+                      
                       <div class="timeline-footer">
-                        <a class="btn btn-primary btn-xs" (click)="selecionaEvolucao(evolucaoLine)"  data-toggle="modal" data-target="#modal-editar" >Editar</a>
-                        <a class="btn btn-danger btn-xs" (click)="deletarEvolucao(evolucao.length - i - 1)">Excluir</a>
+                        <a class="btn btn-primary btn-xs" (click)="editEvolucao($event, evolucao)" data-toggle="modal" data-target="#modal-edicao" >Editar</a>
+                        <a class="btn btn-danger btn-xs" (click)="deleteEvolucao($event, evolucao)">Excluir</a>
                       </div>
                   </div>
                 </li>
@@ -71,7 +73,7 @@
   </section>
 
 
-  <div class="modal fade" id="modal-default" style="display: none;">
+  <div class="modal fade" id="modal-inclusao" style="display: none;">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -79,15 +81,34 @@
               <span aria-hidden="true">×</span></button>
             <h4 class="modal-title">Incluir Evolução</h4>
           </div>
-          <div class="modal-body">
-                  <input type="text" class="form-control" placeholder="Título" name="titulo" #titulo >  
-                  <br>
-                  <textarea class="form-control" rows="3" placeholder="Descrição" name="descricao" #descricao></textarea>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-primary" (click)="adicionaEvolucao(titulo.value, descricao.value,'12:00','01 Nov. 2017',1)" data-dismiss="modal" >Salvar</button>
-          </div>
+          <form (ngSubmit)="onSubmit()" name="myForm" ng-controller="FormController" novalidate >
+            <div class="modal-body">
+                    <input type="number" 
+                           ng-model="num_status" 
+                           value="" class="form-control" 
+                           placeholder="Status" 
+                           [(ngModel)]="evolucao.num_status" 
+                           name="num_status" 
+                           #dsc_titulo 
+                           ng-required="true" >  
+                    <br>
+                    <input type="text" 
+                           ng-model="dsc_titulo" 
+                           value="" 
+                           class="form-control" 
+                           placeholder="Título" 
+                           [(ngModel)]="evolucao.dsc_titulo" 
+                           name="dsc_titulo" 
+                           #dsc_titulo 
+                           ng-required="true" >  
+                    <br>
+                    <textarea class="form-control" ng-model="dsc_evolucao" value="" rows="3" placeholder="Descrição" [(ngModel)]="evolucao.dsc_evolucao" name="dsc_evolucao" #descricao required ></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid" >Salvar</button>
+            </div>
+          </form>
         </div>
         <!-- /.modal-content -->
       </div>
@@ -97,24 +118,40 @@
 
 
     <!--Modal Editar -->
-    <div class="modal fade" id="modal-editar" style="display: none;">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span></button>
-            <h4 class="modal-title">Editar Evolução</h4>
+    <div class="modal fade" id="modal-edicao" style="display: none;" >
+      <form (ngSubmit)="updateEvolucao(evolucaoToEdit)" name="formEdit" >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Editar Evolução</h4>
+              </div>
+              <div class="modal-body">
+                      <input type="number" 
+                        class="form-control" 
+                        [(ngModel)]="evolucaoToEdit.num_status" 
+                        name="num_status" 
+                        #num_status 
+                        required >  
+                      <br>
+                      <input type="text" 
+                        class="form-control" 
+                        [(ngModel)]="evolucaoToEdit.dsc_titulo" 
+                        name="dsc_titulo" 
+                        #dsc_titulo 
+                        required >  
+                      <br>
+                      <textarea class="form-control" [(ngModel)]="evolucaoToEdit.dsc_evolucao" rows="3" name="dsc_evolucao" required ></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                <input type="submit" class="btn btn-primary" >
+              </div>
+            </div>
+            <!-- /.modal-content -->
           </div>
-          <div class="modal-body">
-                  <input [(ngModel)]="selectedEvolucao.titulo" type="text" class="form-control" name="titulo"  >  
-                  <br>
-                  <textarea [(ngModel)]="selectedEvolucao.descricao" class="form-control" rows="3" name="descricao" ></textarea>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Fechar</button>
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
+          <!-- /.modal-dialog -->
+      
+      </form>
     </div>
