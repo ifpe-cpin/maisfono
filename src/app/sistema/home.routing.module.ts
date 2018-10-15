@@ -60,7 +60,7 @@ const homeRoutes = [
 				// {path: ':id/editar', component: FonoFormComponent}
 			//]},
 			//{path: 'paciente', component: PacienteComponent, children: [
-				{path: 'consulta', component: ConsultaComponent, canActivate: [FonoGuard]},
+				{path: 'consultarPacientes', component: ConsultaComponent, canActivate: [FonoGuard]},
 				{path: 'consultarMeus', component: ConsultarMeusComponent, canActivate: [FonoGuard]},
 				{path: 'evolucao/:id', component: PacienteEvolucaoComponent, canActivate: [FonoGuard]},
 				{path: 'novo', component: PacienteFormComponent, canActivate: [FonoGuard]},

@@ -39,5 +39,4 @@ export class EvolucaoService {
     this.evolucaoDoc = this.db.doc(`tb_evolucao/${evolucao.id}`);
     this.evolucaoDoc.update(evolucao);
   }
-  }
 }
