@@ -18,21 +18,6 @@ let admin = {
                 }
             ]
         },
-        {
-            nome:"Paciente",
-            itens:[
-                {
-                    nome:"Admin",
-                    url:"/sistema/user/admin",
-                    icone:"fa fa-circle-o"
-                },
-                {
-                    nome:"Create",
-                    url:"/sistema/fonoaudiologo/novo",
-                    icone:"fa fa-circle-o"
-                }
-            ]
-        }
     ]
 };
 
@@ -74,19 +59,19 @@ let fono = {
 
 let custom = {
     role: CUSTOM,
-    titulo:"GERAL",
+    titulo:"",
     categorias:[
-        {
-            nome:"FALE CONOSCO",
-            itens:[
-                {
-                    nome:"Admin",
-                    url:"/sistema/fonoaudiologo/admin",
-                    icone:"fa fa-circle-o"
-                },
+        // {
+        //     nome:"FALE CONOSCO",
+        //     itens:[
+        //         {
+        //             nome:"Admin",
+        //             url:"/sistema/fonoaudiologo/admin",
+        //             icone:"fa fa-circle-o"
+        //         },
                
-            ]
-        },
+        //     ]
+        // },
     ]
 };
 
