@@ -61,17 +61,6 @@ let custom = {
     role: CUSTOM,
     titulo:"",
     categorias:[
-        // {
-        //     nome:"FALE CONOSCO",
-        //     itens:[
-        //         {
-        //             nome:"Admin",
-        //             url:"/sistema/fonoaudiologo/admin",
-        //             icone:"fa fa-circle-o"
-        //         },
-               
-        //     ]
-        // },
     ]
 };
 
