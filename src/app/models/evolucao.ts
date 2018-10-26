@@ -1,12 +1,11 @@
 export interface Evolucao{
-        id?:String;
-        frg_fonoaudiologo?: string;
-        frg_paciente?: string; 
-        dat_evolucao?: any;
-        dsc_evolucao?: string;
-        dsc_titulo?: string;
-        num_status?: number;   
-        //frg_paciente?: string;  
-        //frg_fonoaudiologo?: string;  
+
+       id?: number;
+       dsc_evolucao?: string;
+       fk_flag_evolucao?: number;
+       fk_fonoaudiologo?: number;
+       fk_paciente?: number;
+       dsc_titulo?: string;
+       dat_evolucao?: Date;  
 
 }

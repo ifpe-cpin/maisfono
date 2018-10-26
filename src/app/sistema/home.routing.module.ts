@@ -40,6 +40,7 @@ import { FonoGuard } from '../core/fono.guard';
 import { FonoAdminComponent } from './fono/fono-admin/fono-admin.component';
 import { UserAdminComponent } from './user/user-admin/user-admin.component';
 import { UserViewComponent } from './user/user-view/user-view.component';
+import { PacienteLaudoComponent } from './paciente/paciente-laudo/paciente-laudo.component';
 
 
 const homeRoutes = [
@@ -63,6 +64,7 @@ const homeRoutes = [
 				{path: 'consultarPacientes', component: ConsultaComponent, canActivate: [FonoGuard]},
 				{path: 'consultarMeus', component: ConsultarMeusComponent, canActivate: [FonoGuard]},
 				{path: 'evolucao/:id', component: PacienteEvolucaoComponent, canActivate: [FonoGuard]},
+				{path: 'laudo/:id', component: PacienteLaudoComponent, canActivate: [FonoGuard]},
 				{path: 'novo', component: PacienteFormComponent, canActivate: [FonoGuard]},
 				{path: 'ver', component: PacienteDetalheComponent, canActivate: [FonoGuard]},
 				// {path: ':id/editar', component: FonoFormComponent}

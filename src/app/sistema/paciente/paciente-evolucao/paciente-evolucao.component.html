@@ -1,157 +1,153 @@
 <section class="content-header">
-    <h1>
-      Evolução
-      <small>Timeline da Evolução</small>
-    </h1>
-    <ol class="breadcrumb">
-      <li><a routerLink="/home/dash"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li>Paciente</li>
-      <li><a routerLink="/home/paciente/consultarMeus">Meus Pacientes</a></li>
-      <li class="active">Evolução</li>
-    </ol>
-  </section>
+  <h1>
+    Evolução
+    <small>Timeline da Evolução</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a routerLink="/home/dash"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li>Paciente</li>
+    <li><a routerLink="/home/paciente/consultarMeus">Meus Pacientes</a></li>
+    <li class="active">Evolução</li>
+  </ol>
+</section>
 
 
-  <!-- Main content -->
-  <section class="content">
-    <!-- row -->
-    <div class="row">
-      <br>
-      <div class="col-md-3"  >
-          <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-inclusao">Incluir Evolução</button>
-      </div>
-      <br>
-      <br>
-      <br>
-      <div class="col-md-12">           
-        <!-- The time line -->
-        <ul class="timeline">
-    
-            <ng-container *ngFor="let evolucao of evolucoes">
-                
-                <li class="time-label">
-                    <span class="bg-blue">
-                        {{evolucao.dat_evolucao.seconds*1000 | date: 'dd-MM-yyyy'}}
-                    </span>
-                </li>
-                <!-- /.timeline-label -->
-                <!-- timeline item -->
-                <li>
+<!-- Main content -->
+<section class="content"> 
+  <!-- row -->
+  <div class="row">
+    <br>
+    <div class="col-md-3">
+      <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-inclusao">Incluir
+        Evolução</button>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="col-md-12">
+      <!-- The time line -->
+      <ul class="timeline">
 
-                  <ng-container [ngSwitch]="evolucao.num_status" >
-                      <i *ngSwitchCase=1 class="fa fa-arrow-up bg-green"></i>
-                      <i *ngSwitchCase=0 class="fa fa-minus bg-yellow"></i>
-                      <i *ngSwitchCase=-1 class="fa fa-arrow-down bg-red"></i>
-                  </ng-container>
-                  
-      
-                  <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> {{evolucao.dat_evolucao.seconds*1000 | date: 'hh:mm:ss a'}}</span>
-        
-                      <h3 class="timeline-header">{{evolucao.dsc_titulo}}</h3>
-        
-                      <div class="timeline-body">
-                          {{evolucao.dsc_evolucao}}
-                      </div>
-                      
-                      <div class="timeline-footer">
-                        <a class="btn btn-primary btn-xs" (click)="editEvolucao($event, evolucao)" data-toggle="modal" data-target="#modal-edicao" >Editar</a>
-                        <a class="btn btn-danger btn-xs" (click)="deleteEvolucao($event, evolucao)">Excluir</a>
-                      </div>
-                  </div>
-                </li>
-              <!-- END timeline item -->         
-            
+        <ng-container *ngFor="let evolucao of evolucoes ">
+
+          <li class="time-label">
+            <span class="bg-blue">
+              {{evolucao.dat_evolucao | date:'dd-MM-yyyy'}}
+            </span>
+          </li>
+          <!-- /.timeline-label -->
+          <!-- timeline item -->
+          <li>
+            <ng-container [ngSwitch]="evolucao.fk_flag_evolucao">
+              <i *ngSwitchCase=3 class="fa fa-arrow-up bg-green"></i>
+              <i *ngSwitchCase=2 class="fa fa-minus bg-yellow"></i>
+              <i *ngSwitchCase=1 class="fa fa-arrow-down bg-red"></i>
             </ng-container>
-            <li>
-              <i class="fa fa-clock-o bg-gray"></i>
-            </li>
-        </ul>
-      </div>
-      <!-- /.col -->
+
+
+            <div class="timeline-item">
+              <span class="time"><i class="fa fa-clock-o"></i> {{evolucao.dat_evolucao | date:'HH:mm:ss'}}</span>
+
+              <h3 class="timeline-header">{{evolucao.dsc_titulo}}</h3>
+
+              <div class="timeline-body">
+                {{evolucao.dsc_evolucao}}
+              </div>
+
+              <div class="timeline-footer">
+                <a class="btn btn-primary btn-xs" (click)="editEvolucao($event, evolucao)" data-toggle="modal"
+                  data-target="#modal-edicao">Editar</a>
+                <a class="btn btn-danger btn-xs" (click)="delEvolucaoRest(evolucao.id)">Excluir</a>
+              </div>
+            </div>
+          </li>
+          <!-- END timeline item -->
+
+        </ng-container>
+        <li>
+          <i class="fa fa-clock-o bg-gray"></i>
+        </li>
+      </ul>
     </div>
-  </section>
+    <!-- /.col -->
+  </div>
+</section>
 
 
-  <div class="modal fade" id="modal-inclusao" style="display: none;">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span></button>
-            <h4 class="modal-title">Incluir Evolução</h4>
+<div class="modal fade" id="modal-inclusao" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Incluir Evolução</h4>
+      </div>
+      <form (ngSubmit)="onSubmit()" name="myForm" ng-controller="FormController" novalidate>
+        <div class="modal-body">
+          <div class="radio-button">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" [(ngModel)]="evolucao.fk_flag_evolucao" name="fk_flag_evolucao" value="1">
+              <label class="form-check-label" >Regrediu</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" [(ngModel)]="evolucao.fk_flag_evolucao" name="fk_flag_evolucao" value="2">
+              <label class="form-check-label" >Não Evoluiu</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" [(ngModel)]="evolucao.fk_flag_evolucao" name="fk_flag_evolucao" value="3">
+              <label class="form-check-label" >Evoluiu</label>
+            </div>
           </div>
-          <form (ngSubmit)="onSubmit()" name="myForm" ng-controller="FormController" novalidate >
-            <div class="modal-body">
-                    <input type="number" 
-                           ng-model="num_status" 
-                           value="" class="form-control" 
-                           placeholder="Status" 
-                           [(ngModel)]="evolucao.num_status" 
-                           name="num_status" 
-                           #dsc_titulo 
-                           ng-required="true" >  
-                    <br>
-                    <input type="text" 
-                           ng-model="dsc_titulo" 
-                           value="" 
-                           class="form-control" 
-                           placeholder="Título" 
-                           [(ngModel)]="evolucao.dsc_titulo" 
-                           name="dsc_titulo" 
-                           #dsc_titulo 
-                           ng-required="true" >  
-                    <br>
-                    <textarea class="form-control" ng-model="dsc_evolucao" value="" rows="3" placeholder="Descrição" [(ngModel)]="evolucao.dsc_evolucao" name="dsc_evolucao" #descricao required ></textarea>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-              <button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid" >Salvar</button>
-            </div>
-          </form>
+          
+
+
+          <input type="text" ng-model="dsc_titulo" value="" class="form-control" placeholder="Título" [(ngModel)]="evolucao.dsc_titulo"
+            name="dsc_titulo" #dsc_titulo ng-required="true">
+          <br>
+          <textarea class="form-control" ng-model="dsc_evolucao" value="" rows="3" placeholder="Descrição" [(ngModel)]="evolucao.dsc_evolucao"
+            name="dsc_evolucao" #descricao required></textarea>
         </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-
-
-
-    <!--Modal Editar -->
-    <div class="modal fade" id="modal-edicao" style="display: none;" >
-      <form (ngSubmit)="updateEvolucao(evolucaoToEdit)" name="formEdit" >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Editar Evolução</h4>
-              </div>
-              <div class="modal-body">
-                      <input type="number" 
-                        class="form-control" 
-                        [(ngModel)]="evolucaoToEdit.num_status" 
-                        name="num_status" 
-                        #num_status 
-                        required >  
-                      <br>
-                      <input type="text" 
-                        class="form-control" 
-                        [(ngModel)]="evolucaoToEdit.dsc_titulo" 
-                        name="dsc_titulo" 
-                        #dsc_titulo 
-                        required >  
-                      <br>
-                      <textarea class="form-control" [(ngModel)]="evolucaoToEdit.dsc_evolucao" rows="3" name="dsc_evolucao" required ></textarea>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                <input type="submit" class="btn btn-primary" >
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid">Salvar</button>
+        </div>
       </form>
     </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+
+<!--Modal Editar -->
+<div class="modal fade" id="modal-edicao" style="display: none;">
+  <form (ngSubmit)="updEvolucaoRest(evolucaoToEdit, evolucaoToEdit.id)" name="formEdit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span></button>
+          <h4 class="modal-title">Editar Evolução</h4>
+        </div>
+        <div class="modal-body">
+          <input type="number" class="form-control" [(ngModel)]="evolucaoToEdit.fk_flag_evolucao" name="fk_flag_evolucao"
+            #num_status required>
+          <br>
+          <input type="text" class="form-control" [(ngModel)]="evolucaoToEdit.dsc_titulo" name="dsc_titulo" #dsc_titulo
+            required>
+          <br>
+          <textarea class="form-control" [(ngModel)]="evolucaoToEdit.dsc_evolucao" rows="3" name="dsc_evolucao"
+            required></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+          <input type="submit" class="btn btn-primary">
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+
+  </form>
+</div>

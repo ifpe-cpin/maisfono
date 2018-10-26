@@ -9,6 +9,7 @@ import { PacienteComponent } from './paciente.component';
 import { ConsultaComponent } from './consulta/consulta.component';
 import { ConsultarMeusComponent } from './consultar-meus/consultar-meus.component';
 import { PacienteEvolucaoComponent } from './paciente-evolucao/paciente-evolucao.component';
+import { PacienteLaudoComponent } from './paciente-laudo/paciente-laudo.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { PacienteEvolucaoComponent } from './paciente-evolucao/paciente-evolucao
   	PacienteComponent, 
   	ConsultaComponent, 
   	ConsultarMeusComponent, 
-	PacienteEvolucaoComponent
+	PacienteEvolucaoComponent,
+	PacienteLaudoComponent
   	]
 })
 export class PacienteModule { }

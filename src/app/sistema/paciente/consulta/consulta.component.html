@@ -36,7 +36,14 @@
                 <td>{{lista.dsc_telefone1}}</td>
                 <td>{{lista.dsc_email}}</td>
                 <td></td>
-                <td align="center"><a routerLink="/sistema/fonoaudiologo/evolucao/{{lista.id}}"><i class="fa fa-line-chart"></i></a></td>
+                <td>
+                    <ng-container [ngSwitch]="lista.situacao">
+                        <i *ngSwitchCase='1' class="fa fa-check-square bg-green"></i>
+                        <i *ngSwitchCase='' class="fa fa-square bg-red"></i>
+                    </ng-container>  
+                </td>                
+                
+                
                 <td>Horario</td>
               </tr>
              

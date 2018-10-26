@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { PacienteService } from '../../../services/paciente.service';
 import { Paciente } from '../../../models/paciente';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-consulta',
@@ -16,31 +18,20 @@ export class ConsultaComponent implements OnInit {
   dataTable: any;
   
 
-  constructor(private pacienteService: PacienteService) {}
+  constructor(private http: HttpClient, private pacienteService: PacienteService) {
+ 
+  }
   
   ngOnInit() {
-    this.pacienteService.getPacientes().subscribe(pacientes => {
-      this.pacientes = pacientes;
-    });
+    this.getEvolucoesRest().subscribe(data => {
+      this.pacientes = <any>data
+      console.log(this.pacientes);
+    })
   }
 
-  deletePaciente(event, paciente) {
-    const response = confirm('are you sure you want to delete?');
-    if (response ) {
-      this.pacienteService.deletePaciente(paciente);
-    }
-    return;
-  }
-
-  editPaciente(event, paciente) {
-    this.editState = !this.editState;
-    this.pacienteToEdit = paciente;
-  }
-
-  updatePaciente(paciente) {
-    this.pacienteService.updatePaciente(paciente);
-    this.pacienteToEdit = null;
-    this.editState = false;
+  getEvolucoesRest(){    
+    //passando como parametro o id do paciente e o id do fono
+    return this.http.get('http://localhost/slim/public/paciente/pacientes')
   }
 
 }

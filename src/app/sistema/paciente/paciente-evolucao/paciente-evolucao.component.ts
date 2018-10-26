@@ -3,7 +3,7 @@ import { EvolucaoService } from '../../../services/evolucao.service';
 import { Evolucao } from '../../../models/evolucao';
 import { ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase';
-
+import {  HttpClient } from '@angular/common/http'; 
 
 
 @Component({
@@ -26,78 +26,74 @@ export class PacienteEvolucaoComponent implements OnInit {
   //Podendo usar somente uma para os dois casos.
   //Inicializa um evolução que servirá para edição
   evolucaoToEdit: Evolucao= {
+    id: 0,
     dsc_evolucao: '',
     dsc_titulo: '',
-    num_status: 0,
-    dat_evolucao: this.getTimestamp()
+    fk_flag_evolucao: 0
    };
 
   //Inicializa um evolução que servirá para inclusão 
   evolucao: Evolucao = {
     dsc_evolucao: '',
     dsc_titulo: '',
-    num_status: 0,
-    dat_evolucao: this.getTimestamp()
+    fk_flag_evolucao: 0
    };
 
+  teste: Object;
    
-  constructor(private evolucaoService: EvolucaoService, private route: ActivatedRoute) {  }
+  constructor(private http: HttpClient, private evolucaoService: EvolucaoService, private route: ActivatedRoute) {  }
   
   ngOnInit() {
-    
-    this.pacienteId = this.route.snapshot.paramMap.get('id');
-    
-    //console.log(idFonoaudiologo)
-
-    this.evolucaoService.getEvolucoes().subscribe(evolucoes => {
-      this.evolucoes = evolucoes;
-      console.log(this.evolucoes);
-    });
+    this.getEvolucoesRest().subscribe(data => {
+      this.evolucoes = <any>data
+    })
   }
-
 
   onSubmit() {
-    this.evolucao.dat_evolucao = this.getTimestamp();
     if(this.evolucao.dsc_evolucao != '' && this.evolucao.dsc_titulo != '' 
-    && this.evolucao.num_status > -2 && this.evolucao.num_status < 2 ) {
-      this.evolucaoService.addEvolucao(this.evolucao);
-      this.evolucao.dsc_evolucao = '';
-      this.evolucao.dsc_titulo = '';
-      this.evolucao.dat_evolucao = '';
-      //this.evolucao.num_status = 0;
-    }
-  }
+    && this.evolucao.fk_flag_evolucao > 0 && this.evolucao.fk_flag_evolucao < 4 ) {
+      this.evolucao.fk_fonoaudiologo = 2;
+      this.evolucao.fk_paciente = 1;
 
-  deleteEvolucao(event, evolucao) {
-    const response = confirm('are you sure you want to delete?');
-    if (response ) {
-      this.evolucaoService.deleteEvolucao(evolucao);
+      let teste = this.setEvolucaoRest(this.evolucao);
     }
-    return;
   }
 
   editEvolucao(event, evolucao) {
-    console.log("entrou")
     this.editState = !this.editState;
     this.evolucaoToEdit = evolucao;
   }
 
-  updateEvolucao(evolucao) {
-    this.evolucaoService.updateEvolucao(evolucao);
-    this.evolucaoToEdit = {
-      dsc_evolucao: '',
-      dsc_titulo: '',
-      num_status: 0,
-      dat_evolucao: this.getTimestamp()
-     };
-    //this.editState = false;
+  getEvolucoesRest(){    
+    let idPaciente = this.route.snapshot.paramMap.get('id');
+    //passando como parametro o id do paciente e o id do fono
+    return this.http.get('http://localhost/slim/public/evolucao/evolucoes/'+idPaciente+'/2')
   }
 
+  setEvolucaoRest(evolucao){
+    //passando como parametro o id do paciente e o id do fono    
+    evolucao = JSON.stringify(evolucao);
 
-  getTimestamp(){
-    let time = firebase.firestore.Timestamp.now();
+    return this.http.post('http://localhost/slim/public/evolucao/create', evolucao)
+    .subscribe(res => console.log("done"));
 
-    return time
   }
 
+  delEvolucaoRest(id){
+    const response = confirm('Tem certeza que quer deletar este registro?');
+    if (response ) {
+      return this.http.delete('http://localhost/slim/public/evolucao/delete/'+id)
+      .subscribe(res => console.log('Done'));
+    }
+    return;
+  }
+
+  updEvolucaoRest(evolucaoToEdit, id){
+    //passando como parametro o evolução e o id da evolução    
+    evolucaoToEdit = JSON.stringify(evolucaoToEdit);
+
+    return this.http.put('http://localhost/slim/public/evolucao/update/'+id, evolucaoToEdit)
+    .subscribe(res => console.log("done"));
+
+  }
 }

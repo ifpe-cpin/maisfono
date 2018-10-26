@@ -1,0 +1,86 @@
+<section class="content-header">
+		<h1>
+		  Laudo
+		  <small>Registro de Laudos</small>
+		</h1>
+		<ol class="breadcrumb">
+		  <li><a routerLink="/home/dash"><i class="fa fa-dashboard"></i> Home</a></li>
+		  <li>Paciente</li>
+		  <li><a routerLink="/home/paciente/consultarMeus">Meus Pacientes</a></li>
+		  <li class="active">Laudo</li>
+		</ol>
+	  </section>
+	  
+	  
+	  <!-- Main content -->
+	  <section class="content"> 
+		<!-- row -->
+		<div class="row">
+		  <br>
+		  <div class="col-md-3">
+			<button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-inclusao">Incluir
+			  Laudo</button>
+		  </div>
+		  <br>
+		  <br>
+		  <br>
+		  <div class="col-md-12">
+				<textarea name="editor1"></textarea>
+		  </div>
+		  <!-- /.col -->
+		</div>
+	  </section>
+	  
+	  
+	  <div class="modal fade" id="modal-inclusao" style="display: none;">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span></button>
+			  <h4 class="modal-title">Incluir Laudo</h4>
+			</div>
+			<form (ngSubmit)="onSubmit()" name="myForm" ng-controller="FormController" >
+			  <div class="modal-body">
+				
+
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+				<button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid">Salvar</button>
+			  </div>
+			</form>
+		  </div>
+		  <!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	  </div>
+	  
+	  
+	  
+	  <!--Modal Editar -->
+	  <div class="modal fade" id="modal-edicao" style="display: none;">
+		<form (ngSubmit)="updEvolucaoRest(laudoToEdit, laudoToEdit.id)" name="formEdit">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Editar Laudo</h4>
+			  </div>
+			  <div class="modal-body">
+				
+				
+				
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+				<input type="submit" class="btn btn-primary">
+			  </div>
+			</div>
+			<!-- /.modal-content -->
+		  </div>
+		  <!-- /.modal-dialog -->
+	  
+		</form>
+	  </div>

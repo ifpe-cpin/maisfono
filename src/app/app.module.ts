@@ -26,8 +26,6 @@ import { FirebaseConfig } from '../environments/firebase.config'
 import { AngularFireModule } from 'angularfire2/index';
 
 
-
-
 // import { HomeComponent } from './home/home.component';
 import { CoreModule } from './core/core.module';
 import { UserAdminComponent } from './sistema/user/user-admin/user-admin.component';

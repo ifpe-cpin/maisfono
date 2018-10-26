@@ -31,12 +31,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let lista of paciente">
-                <td>{{lista.nome}}</td>
-                <td>{{lista.telefone}}</td>
-                <td>{{lista.email}}</td>
-                <td>{{lista.Laudo}}</td>
-                <td align="center"><a routerLink="/fonoaudiologo/paciente/evolucao"><i class="fa fa-line-chart"></i></a></td>
+              <tr *ngFor="let lista of pacientes">
+                <td>{{lista.dsc_nome}}</td>
+                <td>{{lista.dsc_telefone}}</td>
+                <td>{{lista.dsc_email}}</td>
+                <td align="center">
+                  <a routerLink="/sistema/fonoaudiologo/laudo/{{lista.id}}">
+                    <i class="fa fa-file-text-o"></i>
+                  </a>
+                </td>
+                <td align="center"><a routerLink="/sistema/fonoaudiologo/evolucao/{{lista.id}}"><i class="fa fa-line-chart"></i></a></td>
                 <td>Horario</td>
               </tr>
              
