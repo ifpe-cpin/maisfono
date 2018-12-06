@@ -10,6 +10,9 @@ import { PacienteSelecionarComponent } from './paciente/paciente-selecionar/paci
 import { RoleMenuComponent } from '../role-menu/role-menu.component';
 import { LoadComponent } from '../load/load.component';
 import { AppModule } from '../app.module';
+import { VideochamadaComponent } from '../videochamada/videochamada.component';
+
+
 
 
 @NgModule({
@@ -18,13 +21,15 @@ import { AppModule } from '../app.module';
     PacienteModule,
     HomeRoutingModule,
    
+   
   ],
   declarations: [SistemaComponent,
      DashComponent,
      VideoComponent,
      LoadComponent,
      PacienteSelecionarComponent,
-    RoleMenuComponent],
+    RoleMenuComponent,
+    VideochamadaComponent],
     exports:[LoadComponent]
 })
 export class SistemaModule { }

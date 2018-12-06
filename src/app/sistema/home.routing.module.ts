@@ -41,10 +41,15 @@ import { FonoAdminComponent } from './fono/fono-admin/fono-admin.component';
 import { UserAdminComponent } from './user/user-admin/user-admin.component';
 import { UserViewComponent } from './user/user-view/user-view.component';
 import { PacienteLaudoComponent } from './paciente/paciente-laudo/paciente-laudo.component';
+import { VideochamadaComponent } from '../videochamada/videochamada.component';
 
 
 const homeRoutes = [
 		{path: 'sistema', component: SistemaComponent, children:[
+			{ path: 'video',children:[
+				{path: 'play',component:VideochamadaComponent, canActivate:[AdminGuard]},
+				
+			]},
 			{ path: 'user',children:[
 				{path: 'atualizar',component:UserUpdateComponent, canActivate:[AdminGuard]},
 				{path: 'admin',component:UserAdminComponent, canActivate:[AdminGuard]},

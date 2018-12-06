@@ -61,6 +61,17 @@ let custom = {
     role: CUSTOM,
     titulo:"",
     categorias:[
+        {
+            nome:"Video",
+            itens:[
+                {
+                    nome:"Play",
+                    url:"/sistema/video/play",
+                    icone:"fa fa-circle-o"
+                },
+               
+            ]
+        },
     ]
 };
 

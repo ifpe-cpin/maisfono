@@ -32,6 +32,11 @@ import { UserAdminComponent } from './sistema/user/user-admin/user-admin.compone
 import { UserModule } from './sistema/user/user.module';
 import { RoleMenuComponent } from './role-menu/role-menu.component';
 import { LoadComponent } from './load/load.component';
+import { AngularAgoraRtcModule, AgoraConfig } from 'angular-agora-rtc'; 
+
+const agoraConfig: AgoraConfig = {
+  AppID: '6b428753b1fe4c54b7f6f4ea88d62d57',
+};
 
 
 @NgModule({
@@ -63,7 +68,8 @@ import { LoadComponent } from './load/load.component';
     BrowserAnimationsModule,  
     MatDialogModule, 
     UserModule,
-    AngularFireModule.initializeApp(FirebaseConfig)
+    AngularFireModule.initializeApp(FirebaseConfig),
+    AngularAgoraRtcModule.forRoot(agoraConfig)
     
   ],
   exports:[LoadComponent],
