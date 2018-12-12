@@ -8,6 +8,9 @@ import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc';
 })
 export class VideochamadaComponent implements OnInit {
 
+  activeCall: boolean = false;
+  audioEnabled: boolean = true;
+  videoEnabled: boolean = true;
   localStream: Stream
   remoteCalls: any = [];
 
@@ -21,6 +24,7 @@ export class VideochamadaComponent implements OnInit {
 
   // Add
   startCall() {
+    this.activeCall = true;
     this.agoraService.client.join(null, '1000', null, (uid) => {
       this.localStream = this.agoraService.createStream(uid, true, null, null, true, false);
       this.localStream.setVideoProfile('720p_3');
@@ -51,7 +55,6 @@ export class VideochamadaComponent implements OnInit {
       console.log("getUserMedia failed", err);
     });
 
-    // Add
     this.agoraService.client.on('error', (err) => {
       console.log("Got error msg:", err.reason);
       if (err.reason === 'DYNAMIC_KEY_TIMEOUT') {
@@ -63,7 +66,6 @@ export class VideochamadaComponent implements OnInit {
       }
     });
 
-    // Add
     this.agoraService.client.on('stream-added', (evt) => {
       const stream = evt.stream;
       this.agoraService.client.subscribe(stream, (err) => {
@@ -71,14 +73,12 @@ export class VideochamadaComponent implements OnInit {
       });
     });
 
-    // Add
     this.agoraService.client.on('stream-subscribed', (evt) => {
       const stream = evt.stream;
       if (!this.remoteCalls.includes(`agora_remote${stream.getId()}`)) this.remoteCalls.push(`agora_remote${stream.getId()}`);
       setTimeout(() => stream.play(`agora_remote${stream.getId()}`), 2000);
     });
 
-    // Add
     this.agoraService.client.on('stream-removed', (evt) => {
       const stream = evt.stream;
       stream.stop();
@@ -86,7 +86,6 @@ export class VideochamadaComponent implements OnInit {
       console.log(`Remote stream is removed ${stream.getId()}`);
     });
 
-    // Add
     this.agoraService.client.on('peer-leave', (evt) => {
       const stream = evt.stream;
       if (stream) {
@@ -95,5 +94,26 @@ export class VideochamadaComponent implements OnInit {
         console.log(`${evt.uid} left from this channel`);
       }
     });
+  }
+  leave() {
+    this.agoraService.client.leave(() => {
+      this.activeCall = false;
+      document.getElementById('agora_local').innerHTML = "";
+      console.log("Leavel channel successfully");
+    }, (err) => {
+      console.log("Leave channel failed");
+    });
+  }
+
+  toggleAudio() {
+    this.audioEnabled = !this.audioEnabled;
+    if (this.audioEnabled) this.localStream.enableAudio();
+    else this.localStream.disableAudio();
+  }
+
+  toggleVideo() {
+    this.videoEnabled = !this.videoEnabled;
+    if (this.videoEnabled) this.localStream.enableVideo();
+    else this.localStream.disableVideo();
   }
 }
