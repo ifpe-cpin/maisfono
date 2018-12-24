@@ -11,5 +11,3 @@ jobs:
        script:
         - echo "npm test temporarily disabled"
         - bash ./deploy.sh
-    - stage: deploy 2
-      la
