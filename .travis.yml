@@ -1,12 +1,12 @@
-language: node_js
-
-node_js:
-  - '10.7.0'
-
-cache:
-  yarn: true
-  directories:
-    - node_modules
-
-script:
-  - bash ./deploy.sh
+jobs: 
+  include: 
+    - stage: deploy
+      language: node_js
+      node_js:
+       - '10.7.0'
+      cache:
+       yarn: true
+       directories:
+        - node_modules
+       script:
+        - bash ./deploy.sh
