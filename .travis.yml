@@ -1,6 +1,17 @@
 jobs:
   include:
-  - stage: deploy 2
+  - stage: deploy Angular
+    language: node_js
+    node_js:
+    - '10.7.0'
+    cache:
+      yarn: true
+      directories:
+       - node_modules
+    before_install: echo "npm test temporarily disabled"
+    script:
+      - bash ./deploy.sh
+  - stage: deploy PHP
     language: php
     php:
     - 7.1
@@ -23,7 +34,7 @@ jobs:
       provider: script
       skip_cleanup: true
       script: rsync -r -e  'ssh -i ./deploy_key -p 2222' --quiet --delete-after ./*
-        jrpiresc@108.167.188.84:~/public_html/rest
+        jrpiresc@108.167.188.84:~/public_html/mais-fono-rest
       on:
         branch: master
 
