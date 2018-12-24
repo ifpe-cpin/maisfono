@@ -8,6 +8,6 @@ jobs:
        yarn: true
        directories:
         - node_modules
-       script:
-        - echo "npm test temporarily disabled"
+      before_install: echo "npm test temporarily disabled"
+      script:
         - bash ./deploy.sh
