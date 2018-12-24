@@ -9,8 +9,9 @@ jobs:
       - "$HOME/.composer/cache"
     before_install:
     - cd Slim
+    - pwd
     - travis_retry composer self-update
-    - openssl aes-256-cbc -K $encrypted_0b41b2239e5d_key -iv $encrypted_0b41b2239e5d_iv
+    - openssl aes-256-cbc -K $encrypted_e520008242f7_key -iv $encrypted_e520008242f7_iv
       -in deploy_key.enc -out ./deploy_key -d
     - eval "$(ssh-agent -s)"
     - chmod 600 ./deploy_key
