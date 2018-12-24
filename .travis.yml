@@ -1,6 +1,8 @@
-matrix:
+jobs:
   include:
-    - language: node_js
+    - stage: test
+      name: "Deploy angular project"
+      language: node_js
       node_js:
         - '10.7.0'
       cache:
@@ -9,7 +11,9 @@ matrix:
           - node_modules
       script:
         - bash ./deploy.sh
-    - language: php
+    - stage: test
+      name: "Deploy PHP project"
+      language: php
       php:
         - 7.1
       cache:
