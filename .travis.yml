@@ -1,7 +1,6 @@
 jobs:
   include:
-    - stage: test
-      name: "Deploy angular project"
+    - stage: "deploy 1"
       language: node_js
       node_js:
         - '10.7.0'
@@ -12,8 +11,7 @@ jobs:
       script:
         - bash ./deploy.sh
 
-    - stage: test
-      name: "Deploy PHP project"
+    - stage: "deploy 2"
       language: php
       php:
         - 7.1
