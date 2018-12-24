@@ -1,6 +1,6 @@
 jobs: 
   include: 
-    - stage: deploy
+    - stage: deploy 1
       language: node_js
       node_js:
        - '10.7.0'
@@ -9,4 +9,7 @@ jobs:
        directories:
         - node_modules
        script:
+        - echo "npm test temporarily disabled"
         - bash ./deploy.sh
+    - stage: deploy 2
+      la
