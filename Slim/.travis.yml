@@ -11,7 +11,7 @@ jobs:
     - cd Slim
     - pwd
     - travis_retry composer self-update
-    - openssl aes-256-cbc -K $encrypted_57e385864280_key -iv $encrypted_57e385864280_iv
+    - openssl aes-256-cbc -K $encrypted_3c6974f3ff74_key -iv $encrypted_3c6974f3ff74_iv
       -in deploy_key.enc -out ./deploy_key -d
     - eval "$(ssh-agent -s)"
     - chmod 600 ./deploy_key
@@ -26,4 +26,3 @@ jobs:
         jrpiresc@108.167.188.84:~/public_html/rest
       on:
         branch: master
-
