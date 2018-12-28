@@ -17,33 +17,35 @@ declare var $:any;
 })
 export class FonoFormComponent implements OnInit {
 
-	fonoaudiologo:Fonoaudiologo={
-		dsc_nome: '',
-		dat_nascimento: '',
-		dsc_cpf: '',
-		dsc_crf: '',
-		dsc_email: '',
-		dsc_endbairro: '',
-		dsc_endcep: '',
-		dsc_endnum: '',
-		dsc_endrua: '',
-		dsc_nomemae: '',
-		dsc_nomepai: '',
-		dsc_telefone1: '',
-		dsc_telefone2: '',
-		frg_cor: '',
-		frg_endestado: '',
-		frg_endmunicipio: '',
-		frg_endzona: '',
-		frg_estadocivil: '',
-		frg_estadonascimento: '',
-		frg_municipionasc: '',
-		frg_nacionalidade: '',
-		frg_sexo: '',
-		frg_tpsangue: '',        
-		arr_cursos: '',
-		arr_areas: ''
-	}
+	 fonoaudiologo:Fonoaudiologo;
+	 //={
+	// 	id:'',
+	// 	dsc_nome: '',
+	// 	dat_nascimento: '',
+	// 	dsc_cpf: '',
+	// 	dsc_crf: '',
+	// 	dsc_email: '',
+	// 	dsc_endbairro: '',
+	// 	dsc_endcep: '',
+	// 	dsc_endnum: '',
+	// 	dsc_endrua: '',
+	// 	dsc_nomemae: '',
+	// 	dsc_nomepai: '',
+	// 	dsc_telefone1: '',
+	// 	dsc_telefone2: '',
+	// 	frg_cor: '',
+	// 	frg_endestado: '',
+	// 	frg_endmunicipio: '',
+	// 	frg_endzona: '',
+	// 	frg_estadocivil: '',
+	// 	frg_estadonascimento: '',
+	// 	frg_municipionasc: '',
+	// 	frg_nacionalidade: '',
+	// 	frg_sexo: '',
+	// 	frg_tpsangue: '',        
+	// 	arr_cursos: '',
+	// 	arr_areas: ''
+	// }
 
 	constructor(
 		public db: AngularFirestore,
@@ -120,55 +122,55 @@ export class FonoFormComponent implements OnInit {
 
 	
 	
-	onSubmit() {
+// 	onSubmit() {
 
-		this.fonoaudiologoService.addFonoaudiologo(this.fonoaudiologo)
-		this.fonoaudiologo.dsc_nome = '';
-        this.fonoaudiologo.dat_nascimento = '';
-        this.fonoaudiologo.dsc_cpf = '';
-        this.fonoaudiologo.dsc_crf = '';
-        this.fonoaudiologo.dsc_email = '';
-        this.fonoaudiologo.dsc_endbairro = '';
-        this.fonoaudiologo.dsc_endcep = '';
-        this.fonoaudiologo.dsc_endnum = '';
-        this.fonoaudiologo.dsc_endrua = '';
-        this.fonoaudiologo.dsc_nomemae = '';
-        this.fonoaudiologo.dsc_nomepai = '';
-        this.fonoaudiologo.dsc_telefone1 = '';
-        this.fonoaudiologo.dsc_telefone2 = '';
-        this.fonoaudiologo.frg_cor = '';
-        this.fonoaudiologo.frg_endestado = '';
-        this.fonoaudiologo.frg_endmunicipio = '';
-        this.fonoaudiologo.frg_endzona = '';
-        this.fonoaudiologo.frg_estadocivil = '';
-        this.fonoaudiologo.frg_estadonascimento = '';
-        this.fonoaudiologo.frg_municipionasc = '';
-        this.fonoaudiologo.frg_nacionalidade = '';
-        this.fonoaudiologo.frg_sexo = '';
-        this.fonoaudiologo.frg_tpsangue = '';        
-        this.fonoaudiologo.arr_cursos = '';
-        this.fonoaudiologo.arr_areas = '';
+// 		this.fonoaudiologoService.addFonoaudiologo(this.fonoaudiologo)
+// 		this.fonoaudiologo.dsc_nome = '';
+//         this.fonoaudiologo.dat_nascimento = '';
+//         this.fonoaudiologo.dsc_cpf = '';
+//         this.fonoaudiologo.dsc_crf = '';
+//         this.fonoaudiologo.dsc_email = '';
+//         this.fonoaudiologo.dsc_endbairro = '';
+//         this.fonoaudiologo.dsc_endcep = '';
+//         this.fonoaudiologo.dsc_endnum = '';
+//         this.fonoaudiologo.dsc_endrua = '';
+//         this.fonoaudiologo.dsc_nomemae = '';
+//         this.fonoaudiologo.dsc_nomepai = '';
+//         this.fonoaudiologo.dsc_telefone1 = '';
+//         this.fonoaudiologo.dsc_telefone2 = '';
+//         this.fonoaudiologo.frg_cor = '';
+//         this.fonoaudiologo.frg_endestado = '';
+//         this.fonoaudiologo.frg_endmunicipio = '';
+//         this.fonoaudiologo.frg_endzona = '';
+//         this.fonoaudiologo.frg_estadocivil = '';
+//         this.fonoaudiologo.frg_estadonascimento = '';
+//         this.fonoaudiologo.frg_municipionasc = '';
+//         this.fonoaudiologo.frg_nacionalidade = '';
+//         this.fonoaudiologo.frg_sexo = '';
+//         this.fonoaudiologo.frg_tpsangue = '';        
+//         this.fonoaudiologo.arr_cursos = '';
+//         this.fonoaudiologo.arr_areas = '';
 
-		/*
-		if(this.fono.id){
-			this.fono.update().subscribe(
-				result => {
-					console.log(result)
-					this.router.navigate(['/sistema/fono/ver'],{ queryParams: { id: result.id }});
-				});
-		}else{
+// 		/*
+// 		if(this.fono.id){
+// 			this.fono.update().subscribe(
+// 				result => {
+// 					console.log(result)
+// 					this.router.navigate(['/sistema/fono/ver'],{ queryParams: { id: result.id }});
+// 				});
+// 		}else{
 			
-			this.fono.add().then(
-				result => {
-					console.log(result)
-					this.router.navigate(['/sistema/fono/ver'],{ queryParams: { id: result.id }});
-				}
+// 			this.fono.add().then(
+// 				result => {
+// 					console.log(result)
+// 					this.router.navigate(['/sistema/fono/ver'],{ queryParams: { id: result.id }});
+// 				}
 				
-			);
-;
-		}
-*/
-    }
+// 			);
+// ;
+// 		}
+// */
+//     }
   }
 
 

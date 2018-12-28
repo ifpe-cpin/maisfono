@@ -22,12 +22,12 @@ $app->group('/evolucao', function () use ($app) {
 |                                                       |
 |               Route's - Fonoaudiologo                 |
 |______________________________________________________*/
-$app->group('/fonoaudiologo', function () use ($app) {
-    $app->get('/fonoaudiologos', 'getFonoaudiologos');
-    $app->get('/fonoaudiologo/{id}', 'getFonoaudiologo');
-    $app->post('/create', 'addFonoaudiologo');
-    $app->put('/update/{id}', 'updateFonoaudiologo');
-    $app->delete('/delete/{id}', 'deleteFonoaudiologo');
+$app->group('/fonoaudiologos', function () use ($app) {
+    $app->get('/', 'getFonoaudiologos');
+    $app->get('/{id}', 'getFonoaudiologo');
+    $app->post('/', 'addFonoaudiologo');
+    $app->put('/{id}', 'updateFonoaudiologo');
+    $app->delete('/{id}', 'deleteFonoaudiologo');
 });
 
 

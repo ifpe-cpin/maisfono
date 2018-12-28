@@ -19,31 +19,31 @@ export class ConsultarFonoComponent implements OnInit {
 
   constructor(private fonoaudiologoService: FonoaudiologoService) {}
   
-  ngOnInit() {
-    this.loading = true;
-    this.fonoaudiologoService.getFonoaudiologos().subscribe(fonoaudiologos => {
-      this.fonoaudiologos = fonoaudiologos;
-      this.loading = false;
-    });
-  }
+   ngOnInit() {
+  //   this.loading = true;
+  //   this.fonoaudiologoService.getFonoaudiologos().subscribe(fonoaudiologos => {
+  //     this.fonoaudiologos = fonoaudiologos;
+  //     this.loading = false;
+  //   });
+   }
 
-  deleteFonoaudiologo(event, fonoaudiologo) {
-    const response = confirm('are you sure you want to delete?');
-    if (response ) {
-      this.fonoaudiologoService.deleteFonoaudiologo(fonoaudiologo);
-    }
-    return;
-  }
+  // deleteFonoaudiologo(event, fonoaudiologo) {
+  //   const response = confirm('are you sure you want to delete?');
+  //   if (response ) {
+  //     this.fonoaudiologoService.deleteFonoaudiologo(fonoaudiologo);
+  //   }
+  //   return;
+  // }
 
-  editFonoaudiologo(event, fonoaudiologo) {
-    this.editState = !this.editState;
-    this.fonoaudiologoToEdit = fonoaudiologo;
-  }
+  // editFonoaudiologo(event, fonoaudiologo) {
+  //   this.editState = !this.editState;
+  //   this.fonoaudiologoToEdit = fonoaudiologo;
+  // }
 
-  updateFonoaudiologo(fonoaudiologo) {
-    this.fonoaudiologoService.updateFonoaudiologo(fonoaudiologo);
-    this.fonoaudiologoToEdit = null;
-    this.editState = false;
-  }
+  // updateFonoaudiologo(fonoaudiologo) {
+  //   this.fonoaudiologoService.updateFonoaudiologo(fonoaudiologo);
+  //   this.fonoaudiologoToEdit = null;
+  //   this.editState = false;
+  // }
 
 }

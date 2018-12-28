@@ -9,6 +9,7 @@ declare var $:any;
 
 import { MatDialog } from "@angular/material";
 import { Fonoaudiologo } from '../../../models/fonoaudiologo';
+import { QueryOptions } from '../../../models/query-options';
 
 @Component({
   selector: 'app-fono-admin',
@@ -62,7 +63,7 @@ export class FonoAdminComponent implements OnInit {
   }
   
   refreshData(){
-    this.fonoService.getFonoaudiologos().
+    this.fonoService.list(new QueryOptions).
                 subscribe( fonos => {
                   this.fonos = fonos
                   
@@ -83,7 +84,7 @@ export class FonoAdminComponent implements OnInit {
                   //this.dataTable = table.DataTable();
                 });
   }
-  delete(fono:Fono){
+  delete(fono:Fonoaudiologo){
     this.openDialog(fono);
     
   }
@@ -93,7 +94,7 @@ export class FonoAdminComponent implements OnInit {
   }
 
 
-  openDialog(fono:Fono): void {
+  openDialog(fono:Fonoaudiologo): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {msg: "Deseja realmente apagar esse registro?"}
     });
@@ -102,13 +103,11 @@ export class FonoAdminComponent implements OnInit {
       console.log('The dialog was closed');
       if(result){
 
-        this.fonoService.deleteFonoaudiologo(fono).then(
+        this.fonoService.delete(fono.id).subscribe(
           result=>{
               console.log(result)
               this.refreshData();
         }
-        ).catch(
-          result=>console.log(result)
         );
 
       }

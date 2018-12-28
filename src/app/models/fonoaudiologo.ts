@@ -1,5 +1,7 @@
-export interface Fonoaudiologo{
-        id?:String;
+import { Resource } from "./resource";
+
+export class Fonoaudiologo extends Resource{
+        id:number;
         dsc_nome?:string;
         dat_nascimento?:string;
         dsc_cpf?: string;
