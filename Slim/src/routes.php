@@ -25,7 +25,7 @@ $app->group('/evolucao', function () use ($app) {
 $app->group('/fonoaudiologos', function () use ($app) {
     $app->get('/', 'getFonoaudiologos');
     $app->get('/{id}', 'getFonoaudiologo');
-    $app->post('/', 'addFonoaudiologo');
+    $app->post('', 'addFonoaudiologo');
     $app->put('/{id}', 'updateFonoaudiologo');
     $app->delete('/{id}', 'deleteFonoaudiologo');
 });
