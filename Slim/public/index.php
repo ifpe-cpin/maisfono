@@ -1,4 +1,9 @@
 <?php
+
+use Slim\Http\Request;
+use Slim\Http\Response;
+
+
 if (PHP_SAPI == 'cli-server') {
     // To help the built-in PHP dev server, check if the request was actually for
     // something which should probably be served as a static file
@@ -142,7 +147,85 @@ function deleteEvolucao($request) {
 |               RESTS's - Fonoaudiologo                 |
 |______________________________________________________*/
 
-function getFonoaudiologos($response) {
+function addFonoaudiologo(Request $request, Response $response){
+    $fonoaudiologo = json_decode($request->getBody());
+	
+    $sqlPessoa = "INSERT INTO tb_pessoa(dsc_cpf,dsc_nome,img_perfil,dsc_email,dat_nascimento,
+                                    dsc_telefone1,dsc_telefone2,frg_cor,frg_endestado,
+                                    frg_endcidade,dsc_endbairro,dsc_endcep,dsc_endnum,
+                                    dsc_endrua,dsc_nomemae,dsc_nomepai,frg_estado_civil,
+                                    frg_sexo,frg_nasestado,frg_nascidade,frg_tipo_sanguineo
+                                    )
+     VALUES (:dsc_cpf,:dsc_nome,:img_perfil,:dsc_email,:dat_nascimento,
+            :dsc_telefone1,:dsc_telefone2,:frg_cor,:frg_endestado,
+            :frg_endcidade,:dsc_endbairro,:dsc_endcep,:dsc_endnum,
+            :dsc_endrua,:dsc_nomemae,:dsc_nomepai,:frg_estado_civil,
+            :frg_sexo,:frg_nasestado,:frg_nascidade,:frg_tipo_sanguineo)";
+
+    $sqlFono = "INSERT INTO tb_fonoaudiologo(frg_pessoa,num_crf,frg_grau_formacao,arr_areas,arr_cursos) 
+                VALUES (:frg_pessoa,:num_crf,:frg_grau_formacao,:arr_areas,:arr_cursos)";
+    
+    
+    $db = getConnection();
+    try {
+        
+        $db->beginTransaction();
+
+        $stmt = $db->prepare($sqlPessoa);
+
+        $stmt->bindParam("dsc_cpf", $fonoaudiologo->dsc_cpf);
+        $stmt->bindParam("dsc_nome", $fonoaudiologo->dsc_nome);
+        $stmt->bindParam("img_perfil", $fonoaudiologo->img_perfil);
+        $stmt->bindParam("dsc_email", $fonoaudiologo->dsc_email);
+        $stmt->bindParam("dat_nascimento", $fonoaudiologo->dat_nascimento);
+        $stmt->bindParam("dsc_telefone1", $fonoaudiologo->dsc_telefone1);
+        $stmt->bindParam("dsc_telefone2", $fonoaudiologo->dsc_telefone2);
+        $stmt->bindParam("frg_cor", $fonoaudiologo->frg_cor);
+        $stmt->bindParam("frg_endestado", $fonoaudiologo->frg_endestado);
+        $stmt->bindParam("frg_endcidade", $fonoaudiologo->frg_endcidade);
+        $stmt->bindParam("dsc_endbairro", $fonoaudiologo->dsc_endbairro);
+        $stmt->bindParam("dsc_endcep", $fonoaudiologo->dsc_endcep);
+        $stmt->bindParam("dsc_endnum", $fonoaudiologo->dsc_endnum);
+        $stmt->bindParam("dsc_endrua", $fonoaudiologo->dsc_endrua);
+        $stmt->bindParam("dsc_nomemae", $fonoaudiologo->dsc_nomemae);
+        $stmt->bindParam("dsc_nomepai", $fonoaudiologo->dsc_nomepai);
+        $stmt->bindParam("frg_estado_civil", $fonoaudiologo->frg_estado_civil);
+        $stmt->bindParam("frg_sexo", $fonoaudiologo->frg_sexo);
+        $stmt->bindParam("frg_nasestado", $fonoaudiologo->frg_nasestado);
+        $stmt->bindParam("frg_nascidade", $fonoaudiologo->frg_nascidade);
+        $stmt->bindParam("frg_tipo_sanguineo", $fonoaudiologo->frg_tipo_sanguineo);
+       
+        $stmt->execute();
+
+        $idPessoa = $db->lastInsertId();
+
+        $fonoaudiologo->frg_pessoa = $idPessoa;
+
+        $stmt2 = $db->prepare($sqlFono);
+
+        $stmt2->bindParam("frg_pessoa", $fonoaudiologo->frg_pessoa);
+        $stmt2->bindParam("num_crf", $fonoaudiologo->num_crf);
+        $stmt2->bindParam("frg_grau_formacao", $fonoaudiologo->frg_grau_formacao);
+        $stmt2->bindParam("arr_areas", $fonoaudiologo->arr_areas);
+        $stmt2->bindParam("arr_cursos", $fonoaudiologo->arr_cursos);
+
+        $stmt2->execute();
+
+        $fonoaudiologo->id = $db->lastInsertId();
+
+        $db->commit();
+        $db = null;
+
+        return $response->withJson($fonoaudiologo, 201)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        $db->rollBack();
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function getFonoaudiologos(Request $request, Response $response) {
     $sql = "SELECT * FROM tb_pessoa p 
             INNER JOIN tb_fonoaudiologo f 
             ON p.id = f.frg_pessoa";
@@ -151,12 +234,43 @@ function getFonoaudiologos($response) {
         $stmt = getConnection()->query($sql);
         $fonoaudiologos = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-		
-        return json_encode($fonoaudiologos, JSON_UNESCAPED_UNICODE);
+        
+        return  $response->withJson($fonoaudiologos, 200)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+
+    
+}
+
+function getFonoaudiologo(Request $request, Response $response) {
+    $id = $request->getAttribute('id');
+    
+    $sql = "SELECT * FROM tb_pessoa p 
+    INNER JOIN tb_fonoaudiologo f 
+    ON p.id = f.frg_pessoa WHERE f.id=:id";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+
+        $fonoaudiologo = $stmt->fetch(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return  $response->withJson($fonoaudiologo, 200)
+        ->withHeader('Content-type', 'application/json');
+
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
+
 
 /*______________________________________________________
 |                                                       |
@@ -164,7 +278,7 @@ function getFonoaudiologos($response) {
 |______________________________________________________*/
 
 
-function getPacientes($response) {
+function getPacientes(Request $request, Response $response) {
     $sql = "SELECT pe.*, (
                 SELECT flag_situacao FROM tb_fonoaudiologo_paciente WHERE flag_situacao = 1 AND PE.ID = FRG_PACIENTE
             ) AS situacao
@@ -182,6 +296,7 @@ function getPacientes($response) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
+
 
 
 /*______________________________________________________
