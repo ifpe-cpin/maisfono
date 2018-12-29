@@ -14,7 +14,9 @@ export class ResourceService<T extends Resource> {
       public create(item: T): Observable<T> {
         return this.httpClient
           .post<T>(`${this.url}/${this.endpoint}`, this.serializer.toJson(item))
-          .map(data => this.serializer.fromJson(data) as T);
+          .map(data => this.serializer.fromJson(data) as T,
+                err => err
+          );
       }
     
       public update(item: T): Observable<T> {
@@ -28,7 +30,7 @@ export class ResourceService<T extends Resource> {
         return this.httpClient
           .get(`${this.url}/${this.endpoint}/${id}`)
           .map((data: any) =>{
-              console.log(data)
+              console.log(`${this.url}/${this.endpoint}/${id}`)
               return this.serializer.fromJson(data) as T
             });
       }
