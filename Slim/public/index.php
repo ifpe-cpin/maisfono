@@ -225,6 +225,96 @@ function addFonoaudiologo(Request $request, Response $response){
     }
 }
 
+function updateFonoaudiologo(Request $request, Response $response) {
+    $fonoaudiologo = json_decode($request->getBody());
+
+    $id = $request->getAttribute('id');
+    
+    $sqlPessoa = "UPDATE tb_pessoa 
+            SET 
+            dsc_cpf = :dsc_cpf,
+            dsc_nome = :dsc_nome,
+            img_perfil = :img_perfil,
+            dsc_email = :dsc_email,
+            dat_nascimento = :dat_nascimento,
+            dsc_telefone1 = :dsc_telefone1,
+            dsc_telefone2 = :dsc_telefone2,
+            frg_cor= :frg_cor,
+            frg_endestado = :frg_endestado,
+            frg_endcidade = :frg_endcidade,
+            dsc_endbairro = :dsc_endbairro,
+            dsc_endcep = :dsc_endcep,
+            dsc_endnum = :dsc_endnum,
+            dsc_endrua = :dsc_endrua,
+            dsc_nomemae = :dsc_nomemae,
+            dsc_nomepai = :dsc_nomepai,
+            frg_estado_civil = :frg_estado_civil,
+            frg_sexo = :frg_sexo,
+            frg_nasestado = :frg_nasestado,
+            frg_nascidade = :frg_nascidade,
+            frg_tipo_sanguineo = :frg_tipo_sanguineo
+            WHERE id=:id";
+
+    $sqlFono = "UPDATE tb_fonoaudiologo 
+            SET 
+            num_crf = :num_crf,
+            frg_grau_formacao = :frg_grau_formacao,
+            arr_areas = :arr_areas,
+            arr_cursos = :arr_cursos
+            WHERE id=:id";    
+
+        $db = getConnection();
+    try {
+        $db->beginTransaction();
+        
+        $stmt = $db->prepare($sqlPessoa);
+        
+        $stmt->bindParam("dsc_cpf", $fonoaudiologo->dsc_cpf);
+        $stmt->bindParam("dsc_nome", $fonoaudiologo->dsc_nome);
+        $stmt->bindParam("img_perfil", $fonoaudiologo->img_perfil);
+        $stmt->bindParam("dsc_email", $fonoaudiologo->dsc_email);
+        $stmt->bindParam("dat_nascimento", $fonoaudiologo->dat_nascimento);
+        $stmt->bindParam("dsc_telefone1", $fonoaudiologo->dsc_telefone1);
+        $stmt->bindParam("dsc_telefone2", $fonoaudiologo->dsc_telefone2);
+        $stmt->bindParam("frg_cor", $fonoaudiologo->frg_cor);
+        $stmt->bindParam("frg_endestado", $fonoaudiologo->frg_endestado);
+        $stmt->bindParam("frg_endcidade", $fonoaudiologo->frg_endcidade);
+        $stmt->bindParam("dsc_endbairro", $fonoaudiologo->dsc_endbairro);
+        $stmt->bindParam("dsc_endcep", $fonoaudiologo->dsc_endcep);
+        $stmt->bindParam("dsc_endnum", $fonoaudiologo->dsc_endnum);
+        $stmt->bindParam("dsc_endrua", $fonoaudiologo->dsc_endrua);
+        $stmt->bindParam("dsc_nomemae", $fonoaudiologo->dsc_nomemae);
+        $stmt->bindParam("dsc_nomepai", $fonoaudiologo->dsc_nomepai);
+        $stmt->bindParam("frg_estado_civil", $fonoaudiologo->frg_estado_civil);
+        $stmt->bindParam("frg_sexo", $fonoaudiologo->frg_sexo);
+        $stmt->bindParam("frg_nasestado", $fonoaudiologo->frg_nasestado);
+        $stmt->bindParam("frg_nascidade", $fonoaudiologo->frg_nascidade);
+        $stmt->bindParam("frg_tipo_sanguineo", $fonoaudiologo->frg_tipo_sanguineo);
+
+        $stmt->bindParam("id", $fonoaudiologo->frg_pessoa);
+
+        $stmt->execute();
+
+        $stmt2 = $db->prepare($sqlFono);
+
+        $stmt2->bindParam("num_crf", $fonoaudiologo->num_crf);
+        $stmt2->bindParam("frg_grau_formacao", $fonoaudiologo->frg_grau_formacao);
+        $stmt2->bindParam("arr_areas", $fonoaudiologo->arr_areas);
+        $stmt2->bindParam("arr_cursos", $fonoaudiologo->arr_cursos);
+        $stmt2->bindParam("id", $id);
+
+        $stmt2->execute();
+
+        $db->commit();
+        $db = null;
+        return $response->withJson($fonoaudiologo, 200)
+        ->withHeader('Content-type', 'application/json');
+    } catch(PDOException $e) {
+        $db->rollBack();
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
 function getFonoaudiologos(Request $request, Response $response) {
     $sql = "SELECT * FROM tb_pessoa p 
             INNER JOIN tb_fonoaudiologo f 
