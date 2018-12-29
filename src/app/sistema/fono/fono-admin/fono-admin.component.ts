@@ -90,7 +90,7 @@ export class FonoAdminComponent implements OnInit {
   }
 
   createPage(){
-    this.router.navigate(['/sistema/fono/novo']);
+    this.router.navigate(['/sistema/fonoaudiologo/novo']);
   }
 
 

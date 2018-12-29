@@ -98,7 +98,7 @@ export class FonoFormComponent implements OnInit {
 
 		});  
 
-		//this.fonoaudiologo = new Fonoaudiologo();
+		this.fonoaudiologo = new Fonoaudiologo();
 		/*
 		this.fono = new Fono(this.db);
 
@@ -122,55 +122,57 @@ export class FonoFormComponent implements OnInit {
 
 	
 	
-// 	onSubmit() {
+	onSubmit() {
 
-// 		this.fonoaudiologoService.addFonoaudiologo(this.fonoaudiologo)
-// 		this.fonoaudiologo.dsc_nome = '';
-//         this.fonoaudiologo.dat_nascimento = '';
-//         this.fonoaudiologo.dsc_cpf = '';
-//         this.fonoaudiologo.dsc_crf = '';
-//         this.fonoaudiologo.dsc_email = '';
-//         this.fonoaudiologo.dsc_endbairro = '';
-//         this.fonoaudiologo.dsc_endcep = '';
-//         this.fonoaudiologo.dsc_endnum = '';
-//         this.fonoaudiologo.dsc_endrua = '';
-//         this.fonoaudiologo.dsc_nomemae = '';
-//         this.fonoaudiologo.dsc_nomepai = '';
-//         this.fonoaudiologo.dsc_telefone1 = '';
-//         this.fonoaudiologo.dsc_telefone2 = '';
-//         this.fonoaudiologo.frg_cor = '';
-//         this.fonoaudiologo.frg_endestado = '';
-//         this.fonoaudiologo.frg_endmunicipio = '';
-//         this.fonoaudiologo.frg_endzona = '';
-//         this.fonoaudiologo.frg_estadocivil = '';
-//         this.fonoaudiologo.frg_estadonascimento = '';
-//         this.fonoaudiologo.frg_municipionasc = '';
-//         this.fonoaudiologo.frg_nacionalidade = '';
-//         this.fonoaudiologo.frg_sexo = '';
-//         this.fonoaudiologo.frg_tpsangue = '';        
-//         this.fonoaudiologo.arr_cursos = '';
-//         this.fonoaudiologo.arr_areas = '';
+		this.fonoaudiologoService.create(this.fonoaudiologo).subscribe(
+			data => console.log(data)
+		)
+		// this.fonoaudiologo.dsc_nome = '';
+        // this.fonoaudiologo.dat_nascimento = '';
+        // this.fonoaudiologo.dsc_cpf = '';
+        // this.fonoaudiologo.dsc_crf = '';
+        // this.fonoaudiologo.dsc_email = '';
+        // this.fonoaudiologo.dsc_endbairro = '';
+        // this.fonoaudiologo.dsc_endcep = '';
+        // this.fonoaudiologo.dsc_endnum = '';
+        // this.fonoaudiologo.dsc_endrua = '';
+        // this.fonoaudiologo.dsc_nomemae = '';
+        // this.fonoaudiologo.dsc_nomepai = '';
+        // this.fonoaudiologo.dsc_telefone1 = '';
+        // this.fonoaudiologo.dsc_telefone2 = '';
+        // this.fonoaudiologo.frg_cor = '';
+        // this.fonoaudiologo.frg_endestado = '';
+        // this.fonoaudiologo.frg_endmunicipio = '';
+        // this.fonoaudiologo.frg_endzona = '';
+        // this.fonoaudiologo.frg_estadocivil = '';
+        // this.fonoaudiologo.frg_estadonascimento = '';
+        // this.fonoaudiologo.frg_municipionasc = '';
+        // this.fonoaudiologo.frg_nacionalidade = '';
+        // this.fonoaudiologo.frg_sexo = '';
+        // this.fonoaudiologo.frg_tpsangue = '';        
+        // this.fonoaudiologo.arr_cursos = '';
+        // this.fonoaudiologo.arr_areas = '';
 
-// 		/*
-// 		if(this.fono.id){
-// 			this.fono.update().subscribe(
-// 				result => {
-// 					console.log(result)
-// 					this.router.navigate(['/sistema/fono/ver'],{ queryParams: { id: result.id }});
-// 				});
-// 		}else{
+		/*
+		if(this.fono.id){
+			this.fono.update().subscribe(
+				result => {
+					console.log(result)
+					this.router.navigate(['/sistema/fono/ver'],{ queryParams: { id: result.id }});
+				});
+		}else{
 			
-// 			this.fono.add().then(
-// 				result => {
-// 					console.log(result)
-// 					this.router.navigate(['/sistema/fono/ver'],{ queryParams: { id: result.id }});
-// 				}
+			this.fono.add().then(
+				result => {
+					console.log(result)
+					this.router.navigate(['/sistema/fono/ver'],{ queryParams: { id: result.id }});
+				}
 				
-// 			);
-// ;
-// 		}
-// */
-//     }
+			);
+;
+		}
+*/
+    }
   }
 
 

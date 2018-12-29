@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Fono } from '../../../models/fono';
 import { ActivatedRoute } from '@angular/router';
 import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
+import { Fonoaudiologo } from '../../../models/fonoaudiologo';
 
 @Component({
   selector: 'app-fono-detalhe',
@@ -11,7 +12,7 @@ import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
 })
 export class FonoDetalheComponent implements OnInit {
 
-  fono: Fono;
+  fono: Fonoaudiologo;
 
 
   constructor(
@@ -19,7 +20,7 @@ export class FonoDetalheComponent implements OnInit {
     private fonoService:FonoaudiologoService) { }
 
   ngOnInit() {
-    /*
+    
     this.route
 		.queryParams
 		.subscribe(params => {
@@ -27,14 +28,17 @@ export class FonoDetalheComponent implements OnInit {
 			let id = params['id'];
 
 			if(id!= undefined){
-					this.fonoService.get(id).subscribe(
-						fono => this.fono = fono
+					this.fonoService.read(id).subscribe(
+						fono => {
+              console.log(fono)
+              this.fono = fono
+            }
 					);
 			}
 
 			
     });
-    */
+    
   }
 
 }
