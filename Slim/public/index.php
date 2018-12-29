@@ -361,6 +361,42 @@ function getFonoaudiologo(Request $request, Response $response) {
     }
 }
 
+function deleteFonoaudiologo(Request $request, Response $response) {
+	$id = $request->getAttribute('id');
+    $sqlFono = "DELETE FROM tb_fonoaudiologo WHERE id=:id";
+    $sqlPessoa = "DELETE FROM tb_pessoa WHERE id=:id";
+    $sqlSelectFono = "SELECT * FROM tb_fonoaudiologo WHERE id=:id";
+
+    $db = getConnection();
+    try {
+        $db->beginTransaction();
+
+        $stmt = $db->prepare($sqlSelectFono);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+
+        $fonoaudiologo = $stmt->fetch(PDO::FETCH_OBJ);
+        
+        $stmt2 = $db->prepare($sqlFono);
+        $stmt2->bindParam("id", $fonoaudiologo->id);
+        $stmt2->execute();
+
+        $stmt3 = $db->prepare($sqlPessoa);
+        $stmt3->bindParam("id", $fonoaudiologo->frg_pessoa);
+        $stmt3->execute();
+
+        $db->commit();
+        $db = null;
+        
+		return $response->withJson(['msg' => "Deletando o fonoaudiologo {$id}"], 204)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        $db->rollBack();
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
 
 /*______________________________________________________
 |                                                       |
