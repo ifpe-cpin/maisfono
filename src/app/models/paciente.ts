@@ -1,5 +1,6 @@
-export interface Paciente{
-    id?:string;
+import { Resource } from "./resource";
+
+export class Paciente extends Resource{
     dsc_nome?: string;
     dsc_cpf?: string;
     //img_perfil?: string;

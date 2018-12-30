@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { PacienteService } from '../../../services/paciente.service';
 import { Paciente } from '../../../models/paciente';
+import { QueryOptions } from '../../../models/query-options';
 
 @Component({
   selector: 'app-paciente-form',
@@ -19,15 +20,15 @@ export class PacienteFormComponent implements OnInit {
   constructor(private pacienteService: PacienteService) {}
   
   ngOnInit() {
-    this.pacienteService.getPacientes().subscribe(pacientes => {
+    this.pacienteService.list(new QueryOptions).subscribe(pacientes => {
       this.pacientes = pacientes;
     });
   }
 
-  deletePaciente(event, paciente) {
+  deletePaciente(event, paciente: Paciente) {
     const response = confirm('are you sure you want to delete?');
     if (response ) {
-      this.pacienteService.deletePaciente(paciente);
+      this.pacienteService.delete(paciente.id);
     }
     return;
   }
@@ -38,7 +39,7 @@ export class PacienteFormComponent implements OnInit {
   }
 
   updatePaciente(paciente) {
-    this.pacienteService.updatePaciente(paciente);
+    this.pacienteService.update(paciente);
     this.pacienteToEdit = null;
     this.editState = false;
   }
