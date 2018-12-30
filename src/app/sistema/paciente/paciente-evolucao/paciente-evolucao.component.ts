@@ -2,8 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { EvolucaoService } from '../../../services/evolucao.service';
 import { Evolucao } from '../../../models/evolucao';
 import { ActivatedRoute } from '@angular/router';
-import * as firebase from 'firebase';
 import {  HttpClient } from '@angular/common/http'; 
+import { QueryOptions } from '../../../models/query-options';
 
 
 @Component({
@@ -33,18 +33,20 @@ export class PacienteEvolucaoComponent implements OnInit {
    };
 
   //Inicializa um evolução que servirá para inclusão 
-  evolucao: Evolucao = {
-    dsc_evolucao: '',
-    dsc_titulo: '',
-    fk_flag_evolucao: 0
-   };
+  evolucao: Evolucao
+  //  = {
+  //   dsc_evolucao: '',
+  //   dsc_titulo: '',
+  //   fk_flag_evolucao: 0
+  //  };
 
   teste: Object;
    
   constructor(private http: HttpClient, private evolucaoService: EvolucaoService, private route: ActivatedRoute) {  }
   
   ngOnInit() {
-    this.getEvolucoesRest().subscribe(data => {
+    this.evolucao = new Evolucao();
+    this.evolucaoService.list(new QueryOptions).subscribe(data => {
       this.evolucoes = <any>data
     })
   }
@@ -55,7 +57,7 @@ export class PacienteEvolucaoComponent implements OnInit {
       this.evolucao.fk_fonoaudiologo = 2;
       this.evolucao.fk_paciente = 1;
 
-      let teste = this.setEvolucaoRest(this.evolucao);
+      let teste = this.evolucaoService.create(this.evolucao);
     }
   }
 
@@ -64,36 +66,36 @@ export class PacienteEvolucaoComponent implements OnInit {
     this.evolucaoToEdit = evolucao;
   }
 
-  getEvolucoesRest(){    
-    let idPaciente = this.route.snapshot.paramMap.get('id');
-    //passando como parametro o id do paciente e o id do fono
-    return this.http.get('http://localhost/slim/public/evolucao/evolucoes/'+idPaciente+'/2')
-  }
+  // getEvolucoesRest(){    
+  //   let idPaciente = this.route.snapshot.paramMap.get('id');
+  //   //passando como parametro o id do paciente e o id do fono
+  //   return this.http.get('http://localhost/slim/public/evolucao/evolucoes/'+idPaciente+'/2')
+  // }
 
-  setEvolucaoRest(evolucao){
-    //passando como parametro o id do paciente e o id do fono    
-    evolucao = JSON.stringify(evolucao);
+  // setEvolucaoRest(evolucao){
+  //   //passando como parametro o id do paciente e o id do fono    
+  //   evolucao = JSON.stringify(evolucao);
 
-    return this.http.post('http://localhost/slim/public/evolucao/create', evolucao)
-    .subscribe(res => console.log("done"));
+  //   return this.http.post('http://localhost/slim/public/evolucao/create', evolucao)
+  //   .subscribe(res => console.log("done"));
 
-  }
+  // }
 
-  delEvolucaoRest(id){
-    const response = confirm('Tem certeza que quer deletar este registro?');
-    if (response ) {
-      return this.http.delete('http://localhost/slim/public/evolucao/delete/'+id)
-      .subscribe(res => console.log('Done'));
-    }
-    return;
-  }
+  // delEvolucaoRest(id){
+  //   const response = confirm('Tem certeza que quer deletar este registro?');
+  //   if (response ) {
+  //     return this.http.delete('http://localhost/slim/public/evolucao/delete/'+id)
+  //     .subscribe(res => console.log('Done'));
+  //   }
+  //   return;
+  // }
 
-  updEvolucaoRest(evolucaoToEdit, id){
-    //passando como parametro o evolução e o id da evolução    
-    evolucaoToEdit = JSON.stringify(evolucaoToEdit);
+  // updEvolucaoRest(evolucaoToEdit, id){
+  //   //passando como parametro o evolução e o id da evolução    
+  //   evolucaoToEdit = JSON.stringify(evolucaoToEdit);
 
-    return this.http.put('http://localhost/slim/public/evolucao/update/'+id, evolucaoToEdit)
-    .subscribe(res => console.log("done"));
+  //   return this.http.put('http://localhost/slim/public/evolucao/update/'+id, evolucaoToEdit)
+  //   .subscribe(res => console.log("done"));
 
-  }
+  // }
 }

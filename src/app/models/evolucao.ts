@@ -1,6 +1,7 @@
-export interface Evolucao{
+import { Resource } from "./resource";
 
-       id?: number;
+export class Evolucao extends Resource{
+
        dsc_evolucao?: string;
        fk_flag_evolucao?: number;
        fk_fonoaudiologo?: number;
