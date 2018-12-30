@@ -3,8 +3,9 @@ import { HttpClient } from "@angular/common/http";
 import { Resource } from "../models/resource";
 import { Serializer } from "../serializers/serializer";
 import { QueryOptions } from "../models/query-options";
+import { ResourceServiceInterface } from "./resource.service.interface";
 
-export class ResourceService<T extends Resource> {
+export class ResourceService<T extends Resource> implements ResourceServiceInterface<T>{
     constructor(
         private httpClient: HttpClient,
         private url: string,
@@ -26,7 +27,7 @@ export class ResourceService<T extends Resource> {
           .map(data => this.serializer.fromJson(data) as T);
       }
     
-      read(id: number): Observable<T> {
+      public read(id: number): Observable<T> {
         return this.httpClient
           .get(`${this.url}/${this.endpoint}/${id}`)
           .map((data: any) =>{

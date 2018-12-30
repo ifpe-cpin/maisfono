@@ -1,14 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Fono } from '../../../models/fono';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
 import { Fonoaudiologo } from '../../../models/fonoaudiologo';
+import { ResourceServiceInterface } from '../../../services/resource.service.interface';
 
 @Component({
   selector: 'app-fono-detalhe',
   templateUrl: './fono-detalhe.component.html',
   styleUrls: ['./fono-detalhe.component.css'],
-  providers:[FonoaudiologoService]
+  providers:[{provide: 'ResourceServiceInterface', useClass: FonoaudiologoService}]
 })
 export class FonoDetalheComponent implements OnInit {
 
@@ -17,7 +17,7 @@ export class FonoDetalheComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private fonoService:FonoaudiologoService) { }
+    @Inject('ResourceServiceInterface') private fonoService:ResourceServiceInterface<Fonoaudiologo>) { }
 
   ngOnInit() {
     

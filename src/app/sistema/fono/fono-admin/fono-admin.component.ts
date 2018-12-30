@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
 import { Fono } from '../../../models/fono';
 import { Router } from '@angular/router';
@@ -10,19 +10,21 @@ declare var $:any;
 import { MatDialog } from "@angular/material";
 import { Fonoaudiologo } from '../../../models/fonoaudiologo';
 import { QueryOptions } from '../../../models/query-options';
+import { ResourceServiceInterface } from '../../../services/resource.service.interface';
+//import { ResourceServiceInterface } from '../../../services/resource.service.interface';
 
 @Component({
   selector: 'app-fono-admin',
   templateUrl: './fono-admin.component.html',
   styleUrls: ['./fono-admin.component.css'],
-  providers:[
-    FonoaudiologoService,
+  providers:[{provide: 'ResourceServiceInterface', useClass: FonoaudiologoService}
+    ,
   ]
 })
 export class FonoAdminComponent implements OnInit {
 
   constructor(
-    private fonoService:FonoaudiologoService,
+    @Inject('ResourceServiceInterface') private fonoService:ResourceServiceInterface<Fonoaudiologo>,
     private router: Router,
     private chRef: ChangeDetectorRef,
     public dialog: MatDialog) { }

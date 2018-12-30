@@ -1,11 +1,13 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { PacienteService } from '../../../services/paciente.service';
 import { Paciente } from '../../../models/paciente';
+import { QueryOptions } from '../../../models/query-options';
+import { ResourceServiceInterface } from '../../../services/resource.service.interface';
 
 @Component({
   selector: 'app-paciente-selecionar',
   templateUrl: './paciente-selecionar.component.html',
- 	providers: [PacienteService],
+ 	providers: [{provide: 'ResourceServiceInterface', useClass: PacienteService}],
    encapsulation: ViewEncapsulation.None
 }) 
 export class PacienteSelecionarComponent implements OnInit {
@@ -15,10 +17,10 @@ export class PacienteSelecionarComponent implements OnInit {
   dataTable: any;
   
 
-  constructor(private pacienteService: PacienteService) {}
+  constructor(@Inject('ResourceServiceInterface') private pacienteService: ResourceServiceInterface<Paciente>) {}
   
   ngOnInit() {
-    this.pacienteService.getPacientes().subscribe(pacientes => {
+    this.pacienteService.list(new QueryOptions).subscribe(pacientes => {
       this.pacientes = pacientes;
     });
   }
@@ -26,7 +28,7 @@ export class PacienteSelecionarComponent implements OnInit {
   deletePaciente(event, paciente) {
     const response = confirm('are you sure you want to delete?');
     if (response ) {
-      this.pacienteService.deletePaciente(paciente);
+      this.pacienteService.delete(paciente.id);
     }
     return;
   }
@@ -37,7 +39,7 @@ export class PacienteSelecionarComponent implements OnInit {
   }
 
   updatePaciente(paciente) {
-    this.pacienteService.updatePaciente(paciente);
+    this.pacienteService.update(paciente);
     this.pacienteToEdit = null;
     this.editState = false;
   }

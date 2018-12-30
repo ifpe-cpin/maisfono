@@ -7,9 +7,11 @@ import { HttpClient } from '@angular/common/http';
 import { ResourceService } from './resource.service';
 import { FonoaudiologoSerializer } from '../serializers/fonoaudiologo.serializer';
 import { REQUEST_BASE_URL } from '../models/request';
+import { ResourceServiceInterface } from './resource.service.interface';
 
 @Injectable()
-export class FonoaudiologoService extends ResourceService<Fonoaudiologo>{
+export class FonoaudiologoService extends ResourceService<Fonoaudiologo>
+ implements ResourceServiceInterface<Fonoaudiologo>{
   
 
   constructor(httpClient: HttpClient) {
