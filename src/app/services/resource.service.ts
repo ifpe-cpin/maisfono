@@ -27,7 +27,7 @@ export class ResourceService<T extends Resource> implements ResourceServiceInter
           .map(data => this.serializer.fromJson(data) as T);
       }
     
-      public read(id: number): Observable<T> {
+      public read(id: any): Observable<T> {
         return this.httpClient
           .get(`${this.url}/${this.endpoint}/${id}`)
           .map((data: any) =>{
@@ -46,7 +46,7 @@ export class ResourceService<T extends Resource> implements ResourceServiceInter
             });
       }
     
-      delete(id: number) {
+      delete(id: any) {
         return this.httpClient
           .delete(`${this.url}/${this.endpoint}/${id}`);
       }
