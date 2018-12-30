@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { ResourceService } from './resource.service';
 import { HttpClient } from '@angular/common/http';
 import { PacienteSerializer } from '../serializers/paciente.serializer';
+import { REQUEST_BASE_URL } from '../models/request';
 
 
 
@@ -12,7 +13,7 @@ export class PacienteService extends ResourceService<Paciente>{
   constructor(httpClient: HttpClient) {
     super(
       httpClient,
-      'http://localhost/maisfono/Slim/public/index.php',
+      REQUEST_BASE_URL,
       'pacientes',
       new PacienteSerializer);
   }
