@@ -86,7 +86,7 @@ const homeRoutes = [
 				{path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard,AdminGuard]},
 				{path: 'meusDados', component: MeusDadosComponent, canActivate: [AuthGuard,AdminGuard]},
 			]},
-			{path: 'dash', component: DashComponent,},//canActivate: [AuthGuard]},
+			{path: 'dash', component: DashComponent,canActivate: [AuthGuard]},
 			{path: 'video', component: PacienteSelecionarComponent, canActivate: [AuthGuard,AdminGuard]}
 		]}
 

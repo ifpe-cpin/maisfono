@@ -44,6 +44,7 @@ export class UserCreateComponent implements OnInit {
           this.userService.create(this.user).subscribe(
             result => {
               console.log(this.user)
+              localStorage.setItem('roles', this.user.roles.toString());
               this.router.navigate(['/sistema/dash']);
             }
             );

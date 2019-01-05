@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
         this.userService.read(userData.id).subscribe(
           user => {
               if(user){
+                localStorage.setItem('roles', user.roles.toString());
                 this.router.navigate(['/sistema/dash'],);
               }else{
                 console.log({queryParams:this.user})

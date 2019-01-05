@@ -12,17 +12,10 @@ export class AuthGuard implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> {
+    state: RouterStateSnapshot): Observable<boolean> | boolean{
 
-      return this.auth.user.pipe(
-           take(1),
-           map(user => !!user),
-           tap(loggedIn => {
-             if (!loggedIn) {
-               console.log('access denied')
-               this.router.navigate(['']);
-             }
-         })
-    )
+      let roles = localStorage.getItem('roles');
+
+      return roles!="";
   }
 }

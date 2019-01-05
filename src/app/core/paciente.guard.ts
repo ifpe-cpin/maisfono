@@ -12,19 +12,23 @@ export class PacienteGuard implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> {
+    state: RouterStateSnapshot): Observable<boolean> | boolean{
 
-      return this.auth.user.pipe(
-           take(1),
-           map(user => user && user.roles.includes('paciente')?true:false),
-           tap(isPaciente => {
-             if (!isPaciente) {
-               console.log('access denied')
-               this.router.navigate(['']);
-             }else{
-               console.log(state.url)
-             }
-         })
-    )
+      let roles = localStorage.getItem('roles');
+      let list = roles.split(",")
+
+      return list.includes('paciente');
+    //   return this.auth.user.pipe(
+    //        take(1),
+    //        map(user => user && user.roles.includes('paciente')?true:false),
+    //        tap(isPaciente => {
+    //          if (!isPaciente) {
+    //            console.log('access denied')
+    //            this.router.navigate(['']);
+    //          }else{
+    //            console.log(state.url)
+    //          }
+    //      })
+    // )
   }
 }

@@ -21,19 +21,29 @@ export class RoleMenuComponent implements OnInit {
   constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    
-    this.auth.user.subscribe(
-      user=> {
-        this.selectMenus=[];
-        this.roles = user.roles
+    let roles = localStorage.getItem('roles');
+    this.roles = roles.split(",")
+
+    this.selectMenus=[];
+    this.menus.forEach(element => {
+      if(this.roles.includes(element.role) || element.role == CUSTOM ){
+          this.selectMenus.push(element);
+      }
+    });
+
+
+    // this.auth.user.subscribe(
+    //   user=> {
+    //     this.selectMenus=[];
+    //     this.roles = user.roles
       
-        this.menus.forEach(element => {
-          if(this.roles.includes(element.role) || element.role == CUSTOM ){
-              this.selectMenus.push(element);
-          }
-        });
-      } 
-    );
+    //     this.menus.forEach(element => {
+    //       if(this.roles.includes(element.role) || element.role == CUSTOM ){
+    //           this.selectMenus.push(element);
+    //       }
+    //     });
+    //   } 
+    // );
   }
 
 }

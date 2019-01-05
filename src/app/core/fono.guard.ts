@@ -12,19 +12,24 @@ export class FonoGuard implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> {
+    state: RouterStateSnapshot): Observable<boolean> | boolean{
 
-      return this.auth.user.pipe(
-           take(1),
-           map(user => user && user.roles.includes('fono')?true:false),
-           tap(isFono => {
-             if (!isFono) {
-               console.log('access denied')
-               this.router.navigate(['']);
-             }else{
-               console.log(state.url)
-             }
-         })
-    )
+      let roles = localStorage.getItem('roles');
+      let list = roles.split(",")
+
+      return list.includes('admin');
+
+    //   return this.auth.user.pipe(
+    //        take(1),
+    //        map(user => user && user.roles.includes('fono')?true:false),
+    //        tap(isFono => {
+    //          if (!isFono) {
+    //            console.log('access denied')
+    //            this.router.navigate(['']);
+    //          }else{
+    //            console.log(state.url)
+    //          }
+    //      })
+    // )
   }
 }

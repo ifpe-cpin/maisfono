@@ -28,6 +28,8 @@ export class SistemaComponent implements OnInit {
     this.img = localStorage.getItem('img');
     this.name = localStorage.getItem('name');
 
+    this.menus = MENU;
+
   }
 
 
