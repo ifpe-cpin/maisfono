@@ -107,8 +107,8 @@ function addUsuario(Request $request, Response $response){
     $sqlFono = "INSERT INTO tb_fonoaudiologo(frg_pessoa,frg_user) 
                 VALUES (:frg_pessoa,:frg_user)";
     
-    $sqlPaciente = "INSERT INTO tb_paciente(frg_pessoa,frg_user) 
-                VALUES (:frg_pessoa:frg_user)";
+    $sqlPaciente = "INSERT INTO tb_paciente(id_pessoa,frg_user) 
+                VALUES (:frg_pessoa,:frg_user)";
     
 
     $db = getConnection();

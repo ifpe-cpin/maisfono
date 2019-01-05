@@ -3,6 +3,7 @@ import { User } from '../../../models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { ROLES } from '../../../models/role';
+import { FONOAUDIOLOGO, PACIENTE } from '../../../models/tipoUsuario';
 
 @Component({
   selector: 'app-user-create',
@@ -15,6 +16,7 @@ export class UserCreateComponent implements OnInit {
 
   user:User;
   roles:string[];
+  tipos:number[];
   
   constructor(private route: ActivatedRoute,
 		private router: Router,
@@ -23,6 +25,7 @@ export class UserCreateComponent implements OnInit {
     ngOnInit() {
 
         this.user = new User();
+        this.tipos = [FONOAUDIOLOGO,PACIENTE]
 
     
         this.route
@@ -34,16 +37,25 @@ export class UserCreateComponent implements OnInit {
             this.user.email = params['email'];
             this.user.photoUrl =params['photoUrl'];
             this.user.displayName = params['displayName']; 
-            this.user.roles = ROLES
+
+            
+            
         });
       }
 
 
       onSubmit() {
+          
+          if(this.user.tipo==FONOAUDIOLOGO){
+            this.user.roles = ["admin","fono"]
+          }else if(this.user.tipo==PACIENTE){
+            this.user.roles = ["admin","paciente"]
+          }
 
           this.userService.create(this.user).subscribe(
             result => {
               console.log(this.user)
+              
               localStorage.setItem('roles', this.user.roles.toString());
               this.router.navigate(['/sistema/dash']);
             }
