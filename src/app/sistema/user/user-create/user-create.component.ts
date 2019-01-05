@@ -45,7 +45,8 @@ export class UserCreateComponent implements OnInit {
             result => {
               console.log(this.user)
               this.router.navigate(['/sistema/dash']);
-            });
+            }
+            );
     
       }
     

@@ -38,9 +38,12 @@ require __DIR__ . '/../src/routes.php';
 // Run app
 $app->run();
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
 $corsOptions = array(
     "origin" => "*",
-    "exposeHeaders" => array("Content-Type", "X-Requested-With", "X-authentication", "X-client"),
+    "exposeHeaders" => array("Content-Type","Access-Control-Allow-Headers", "X-Requested-With", "X-authentication", "X-client"),
     "allowMethods" => array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS')
 );
 $cors = new \CorsSlim\CorsSlim($corsOptions);
@@ -88,6 +91,88 @@ function getUsuario(Request $request, Response $response) {
         ->withHeader('Content-type', 'application/json');
 
     } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function addUsuario(Request $request, Response $response){
+    $usuario = json_decode($request->getBody());
+    
+    $sqlUsuario = "INSERT INTO tb_user(id,email,photoUrl,displayName,roles,tipo) 
+                VALUES (:id,:email,:photoUrl,:displayName,:roles,:tipo)";
+
+    $sqlPessoa = "INSERT INTO tb_pessoa(dsc_nome,img_perfil,dsc_email)
+            VALUES (:dsc_nome,:img_perfil,:dsc_email)";
+
+    $sqlFono = "INSERT INTO tb_fonoaudiologo(frg_pessoa,frg_user) 
+                VALUES (:frg_pessoa,:frg_user)";
+    
+    $sqlPaciente = "INSERT INTO tb_paciente(frg_pessoa,frg_user) 
+                VALUES (:frg_pessoa:frg_user)";
+    
+
+    $db = getConnection();
+    try {
+        
+        $db->beginTransaction();
+
+        $stmt = $db->prepare($sqlUsuario);
+        $roles = implode(",", $usuario->roles);
+
+        $stmt->bindParam("id", $usuario->id);
+        $stmt->bindParam("email", $usuario->email);
+        $stmt->bindParam("photoUrl", $usuario->photoUrl);
+        $stmt->bindParam("displayName", $usuario->displayName);
+        $stmt->bindParam("roles",$roles);   
+        $stmt->bindParam("tipo", $usuario->tipo);
+       
+        $stmt->execute();
+
+        $stmt2 = $db->prepare($sqlPessoa);
+
+        $stmt2->bindParam("dsc_nome", $usuario->displayName);
+        $stmt2->bindParam("img_perfil", $usuario->photoUrl);
+        $stmt2->bindParam("dsc_email", $usuario->email);
+       
+        $stmt2->execute();
+
+        $idPessoa = $db->lastInsertId();
+
+        switch ($usuario->tipo) {
+            case 1:
+
+                $stmt3 = $db->prepare($sqlFono);
+
+                $stmt3->bindParam("frg_pessoa", $idPessoa);
+                $stmt3->bindParam("frg_user", $usuario->id);
+
+                $stmt3->execute();
+                break;
+
+            case 2:
+
+                $stmt3 = $db->prepare($sqlPaciente);
+
+                $stmt3->bindParam("frg_pessoa", $idPessoa);
+                $stmt3->bindParam("frg_user", $usuario->id);
+
+                $stmt3->execute();
+
+                break;
+        } 
+       
+
+        
+
+
+        $db->commit();
+        $db = null;
+
+        return $response->withJson($usuario, 201)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        $db->rollBack();
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }

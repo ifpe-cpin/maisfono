@@ -10,6 +10,18 @@ export class UsuarioSerializer {
     }
   
     toJson(user: User): any {
-      return JSON.stringify(user)
+      let json = {
+        "id":user.id,
+        "email":user.email,
+        "photoUrl":user.photoURL,
+        "displayName":user.displayName,
+        "tipo":user.tipo,
+        "roles":user.roles
+      }
+
+      console.log(json)
+      return json
+      
+      
     }
   }

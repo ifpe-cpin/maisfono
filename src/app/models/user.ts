@@ -6,7 +6,6 @@ const FONOAUDIOLOGO=1;
 const PACIENTE = 2;
 
 export class User extends Resource{
-    uid: string;
     email: string;
     photoURL?: string;
     displayName?: string;
