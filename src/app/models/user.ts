@@ -7,7 +7,7 @@ const PACIENTE = 2;
 
 export class User extends Resource{
     email: string;
-    photoURL?: string;
+    photoUrl?: string;
     displayName?: string;
     roles?: string[];
     tipo:number;

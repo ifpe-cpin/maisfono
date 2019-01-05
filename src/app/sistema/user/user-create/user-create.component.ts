@@ -32,7 +32,7 @@ export class UserCreateComponent implements OnInit {
           // Defaults to 0 if no query param provided.
             this.user.id = params['id'];
             this.user.email = params['email'];
-            this.user.photoURL =params['photoURL'];
+            this.user.photoUrl =params['photoUrl'];
             this.user.displayName = params['displayName']; 
             this.user.roles = ROLES
         });

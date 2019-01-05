@@ -17,8 +17,7 @@ export class UserUpdateComponent implements OnInit {
   id;
   roles:string[];
   
-  constructor(public db: AngularFirestore,
-		private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
 		private router: Router,
 		private userService:UserService) { }
 

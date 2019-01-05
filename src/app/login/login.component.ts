@@ -38,18 +38,19 @@ export class LoginComponent implements OnInit {
 
             this.user.id = userData.id
             this.user.email = userData.email
-            this.user.photoURL = userData.image
+            this.user.photoUrl = userData.image
             this.user.displayName = userData.name
 
             localStorage.setItem('id', this.user.id);
             localStorage.setItem('email', this.user.email);
-            localStorage.setItem('img', this.user.photoURL);
+            localStorage.setItem('img', this.user.photoUrl);
             localStorage.setItem('name', this.user.displayName);
             
 
         this.userService.read(userData.id).subscribe(
           user => {
-              if(user){
+              if(user.id!=undefined){
+                console.log(user)
                 localStorage.setItem('roles', user.roles.toString());
                 this.router.navigate(['/sistema/dash'],);
               }else{

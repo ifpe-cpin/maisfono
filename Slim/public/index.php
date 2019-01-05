@@ -117,7 +117,7 @@ function addUsuario(Request $request, Response $response){
         $db->beginTransaction();
 
         $stmt = $db->prepare($sqlUsuario);
-        $roles = implode(",", $usuario->roles);
+        $roles = $usuario->roles;
 
         $stmt->bindParam("id", $usuario->id);
         $stmt->bindParam("email", $usuario->email);
@@ -171,6 +171,48 @@ function addUsuario(Request $request, Response $response){
         return $response->withJson($usuario, 201)
         ->withHeader('Content-type', 'application/json');
 
+    } catch(PDOException $e) {
+        $db->rollBack();
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function updateUsuario(Request $request, Response $response) {
+    $usuario = json_decode($request->getBody());
+
+    $id = $request->getAttribute('id');
+    
+    $sqlUser = "UPDATE tb_user 
+            SET 
+            email = :email,
+            photoUrl = :photoUrl,
+            displayName = :displayName,
+            roles = :roles,
+            tipo = :tipo
+            WHERE id=:id";
+
+    
+
+        $db = getConnection();
+    try {
+        $db->beginTransaction();
+        
+        $stmt = $db->prepare($sqlUser);
+        
+        $stmt->bindParam("email", $usuario->email);
+        $stmt->bindParam("photoUrl", $usuario->photoUrl);
+        $stmt->bindParam("displayName", $usuario->displayName);
+        $stmt->bindParam("roles", $usuario->roles);
+        $stmt->bindParam("tipo", $usuario->tipo);
+        $stmt->bindParam("id", $usuario->id);
+        
+
+        $stmt->execute();
+
+        $db->commit();
+        $db = null;
+        return $response->withJson($usuario, 200)
+        ->withHeader('Content-type', 'application/json');
     } catch(PDOException $e) {
         $db->rollBack();
         echo '{"error":{"text":'. $e->getMessage() .'}}';
