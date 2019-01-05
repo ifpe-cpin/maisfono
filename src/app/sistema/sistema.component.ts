@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../core/auth.service';
 import { Menu } from '../role-menu/menu';
 import { MENU } from '../models/menus';
 
@@ -9,7 +8,7 @@ declare const gapi: any;
   selector: 'app-home',
   templateUrl: './sistema.component.html',
   styleUrls: ['./sistema.component.css'],
-  providers: [AuthService]
+  providers: []
 })
 
 export class SistemaComponent implements OnInit {
@@ -20,7 +19,7 @@ export class SistemaComponent implements OnInit {
 
   menus: Menu[];
 
-  constructor(public auth: AuthService) { 
+  constructor() { 
 
   }
 

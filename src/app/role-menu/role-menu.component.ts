@@ -1,12 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Menu, CUSTOM } from './menu';
-import { AuthService } from '../core/auth.service';
 
 @Component({
   selector: 'app-role-menu',
   templateUrl: './role-menu.component.html',
   styleUrls: ['./role-menu.component.css'],
-  providers: [AuthService]
+  providers: []
 })
 export class RoleMenuComponent implements OnInit {
 
@@ -18,7 +17,7 @@ export class RoleMenuComponent implements OnInit {
   roles: String[];
 
 
-  constructor(private auth: AuthService) { }
+  constructor() { }
 
   ngOnInit() {
     let roles = localStorage.getItem('roles');

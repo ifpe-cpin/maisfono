@@ -22,9 +22,6 @@ import {MatDialogModule} from '@angular/material';
 
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
-import { FirebaseConfig } from '../environments/firebase.config'
-import { AngularFireModule } from 'angularfire2/index';
-
 
 // import { HomeComponent } from './home/home.component';
 import { CoreModule } from './core/core.module';
@@ -89,7 +86,6 @@ const agoraConfig: AgoraConfig = {
     BrowserAnimationsModule,  
     MatDialogModule, 
     UserModule,
-    AngularFireModule.initializeApp(FirebaseConfig),
     AngularAgoraRtcModule.forRoot(agoraConfig)
     
   ],

@@ -6,7 +6,6 @@ import { LoginComponent } from './login/login.component';
 
 import { SistemaComponent } from './sistema/sistema.component';
 import { AuthGuard } from './core/auth.guard';
-import { AuthService } from './core/auth.service';
 
 
 
@@ -24,7 +23,6 @@ const appRoutes: Routes = [
   ],
   exports:[RouterModule],
   providers:[
-	  AuthService
   ]
 })
 

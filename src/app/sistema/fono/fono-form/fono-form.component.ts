@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 // import { Fono } from '../../../models/fono';
 import {Fonoaudiologo} from '../../../models/fonoaudiologo'
-import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable'
 import { Router, ActivatedRoute } from '@angular/router';
 import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
@@ -21,7 +20,6 @@ export class FonoFormComponent implements OnInit {
 	 fonoaudiologo:Fonoaudiologo;
 
 	constructor(
-		public db: AngularFirestore,
 		private route: ActivatedRoute,
 		private router: Router,
 		@Inject('ResourceServiceInterface') private fonoaudiologoService:ResourceServiceInterface<Fonoaudiologo>) { }
