@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/sistema/dash'],);
               }else{
                 console.log({queryParams:this.user})
-                this.router.navigate(['/sistema/user/novo'],{queryParams:this.user});
+                this.router.navigate(['user-create'],{queryParams:this.user});
               }
           }
         );

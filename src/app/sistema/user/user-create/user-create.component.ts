@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../../models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
-import { ROLES } from '../../../models/role';
 import { FONOAUDIOLOGO, PACIENTE } from '../../../models/tipoUsuario';
 
 @Component({
