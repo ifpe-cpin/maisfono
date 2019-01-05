@@ -49,6 +49,7 @@ export class UserUpdateComponent implements OnInit {
 			this.userService.update(this.user).subscribe(
 				result => {
 					console.log(this.user)
+					localStorage.setItem("roles",result.roles.toString())
 					this.router.navigate(['/sistema/user/ver'],{ queryParams: { id: this.user.id }});
 				});
 		}else{
