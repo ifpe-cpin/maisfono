@@ -32,7 +32,6 @@ import { PacienteSelecionarComponent } from './paciente/paciente-selecionar/paci
 import { PerfilComponent } from "./perfil/perfil.component";
 import { DashboardComponent } from "./perfil/dashboard/dashboard.component";
 import { MeusDadosComponent } from "./perfil/meus-dados/meus-dados.component";
-import { AuthService } from '../core/auth.service';
 import { AuthGuard } from '../core/auth.guard';import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { AdminGuard } from '../core/admin.guard';
 import { PacienteGuard } from '../core/paciente.guard';
@@ -42,6 +41,7 @@ import { UserAdminComponent } from './user/user-admin/user-admin.component';
 import { UserViewComponent } from './user/user-view/user-view.component';
 import { PacienteLaudoComponent } from './paciente/paciente-laudo/paciente-laudo.component';
 import { VideochamadaComponent } from '../videochamada/videochamada.component';
+import { UserCreateComponent } from './user/user-create/user-create.component';
 
 
 const homeRoutes = [
@@ -54,6 +54,7 @@ const homeRoutes = [
 				{path: 'atualizar',component:UserUpdateComponent, canActivate:[AdminGuard]},
 				{path: 'admin',component:UserAdminComponent, canActivate:[AdminGuard]},
 				{path: 'ver',component:UserViewComponent, canActivate:[AdminGuard]},
+				{path: 'novo',component:UserCreateComponent},
 
 			]},
 			{path: 'fonoaudiologo', component: FonoComponent, children: [
@@ -85,7 +86,7 @@ const homeRoutes = [
 				{path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard,AdminGuard]},
 				{path: 'meusDados', component: MeusDadosComponent, canActivate: [AuthGuard,AdminGuard]},
 			]},
-			{path: 'dash', component: DashComponent,canActivate: [AuthGuard]},
+			{path: 'dash', component: DashComponent,},//canActivate: [AuthGuard]},
 			{path: 'video', component: PacienteSelecionarComponent, canActivate: [AuthGuard,AdminGuard]}
 		]}
 
@@ -97,7 +98,6 @@ const homeRoutes = [
   ],
   exports:[RouterModule],
   providers:[
-	AuthService,
 	AdminGuard
 ]
 })

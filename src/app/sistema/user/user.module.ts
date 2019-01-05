@@ -7,6 +7,7 @@ import { MatDialogModule, MatDialog } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { SistemaModule } from '../sistema.module';
+import { UserCreateComponent } from './user-create/user-create.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { SistemaModule } from '../sistema.module';
   ],
   providers:[MatDialog],
   exports:[RouterModule],
-  declarations: [UserAdminComponent, UserViewComponent, UserUpdateComponent]
+  declarations: [UserAdminComponent, UserViewComponent, UserUpdateComponent, UserCreateComponent]
 })
 export class UserModule { }

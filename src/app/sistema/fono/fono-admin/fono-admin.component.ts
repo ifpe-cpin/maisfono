@@ -95,6 +95,7 @@ export class FonoAdminComponent implements OnInit {
     this.router.navigate(['/sistema/fonoaudiologo/novo']);
   }
 
+  
 
   openDialog(fono:Fonoaudiologo): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {

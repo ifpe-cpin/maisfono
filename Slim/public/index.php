@@ -47,6 +47,53 @@ $cors = new \CorsSlim\CorsSlim($corsOptions);
 
 /*______________________________________________________
 |                                                       |
+|                RESTS's - Usuário                      |
+|______________________________________________________*/
+
+
+function getUsuarios(Request $request, Response $response) {
+	$sql = "SELECT * FROM tb_user u ";
+
+    try {
+        $stmt = getConnection()->query($sql);
+        $usuarios = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return  $response->withJson($usuarios, 200)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function getUsuario(Request $request, Response $response) {
+    $id = $request->getAttribute('id');
+    
+    $sql = "SELECT * FROM tb_user u 
+     WHERE u.id=:id";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+
+        $usuario = $stmt->fetch(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return  $response->withJson($usuario, 200)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+/*______________________________________________________
+|                                                       |
 |                RESTS's - Evolução                     |
 |______________________________________________________*/
 

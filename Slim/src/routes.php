@@ -7,6 +7,19 @@ use Slim\Http\Response;
 $app->group('/v1', function () use ($app) {
 // Routes
 // API group
+
+/*______________________________________________________
+|                                                       |
+|                Route's - Usuário                      |
+|______________________________________________________*/
+$app->group('/usuarios', function () use ($app) {
+    $app->get('/', 'getUsuarios');
+    $app->get('/{id}', 'getUsuario');
+    $app->post('', 'addUsuario');
+    $app->put('/{id}', 'updateUsuario');
+});
+
+
 /*______________________________________________________
 |                                                       |
 |                Route's - Evolução                     |

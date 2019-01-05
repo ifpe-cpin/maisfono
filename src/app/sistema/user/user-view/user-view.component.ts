@@ -26,7 +26,7 @@ export class UserViewComponent implements OnInit {
         let id = params['id'];
   
         if(id!= undefined){
-            this.userService.get(id).subscribe(
+            this.userService.read(id).subscribe(
               user => {
                 this.user = user
                 this.loading = false;

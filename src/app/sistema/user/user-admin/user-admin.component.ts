@@ -4,7 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '../../../confirm-dialog/confirm-dialog.component';
-import { LoadComponent } from '../../../load/load.component';
+import { QueryOptions } from '../../../models/query-options';
 
 declare var $:any;
 
@@ -57,7 +57,7 @@ export class UserAdminComponent implements OnInit {
   }
 
   refreshData(){
-    this.userService.getAll().
+    this.userService.list(new QueryOptions()).
                 subscribe( users => {
                   this.users = users
                   
@@ -97,13 +97,13 @@ export class UserAdminComponent implements OnInit {
       console.log('The dialog was closed');
       if(result){
 
-        this.userService.delete(user).then(
+        this.userService.delete(user.id).subscribe(
           result=>{
               console.log(result)
               this.refreshData();
-        }
-        ).catch(
-          result=>console.log(result)
+        },
+          err => console.log(err)
+          
         );
 
       }

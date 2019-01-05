@@ -25,12 +25,8 @@ export class SistemaComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.auth.user.subscribe( user =>{
-              this.img = user.photoURL;
-              this.name = user.displayName;
-              this.menus = MENU;
-    })
-
+    this.img = localStorage.getItem('img');
+    this.name = localStorage.getItem('name');
 
   }
 

@@ -25,7 +25,7 @@ export class UserUpdateComponent implements OnInit {
   ngOnInit() {
 
 	this.roles = ROLES;
-    this.user = new User(this.db);
+    this.user = new User();
 
 		this.route
 		.queryParams
@@ -34,7 +34,7 @@ export class UserUpdateComponent implements OnInit {
 			let id = params['id'];
 
 			if(id!= undefined){
-					this.userService.get(id).subscribe(
+					this.userService.read(id).subscribe(
 						user => this.user = user
 					);
 			}
@@ -48,14 +48,14 @@ export class UserUpdateComponent implements OnInit {
 
   onSubmit() {
 		if(this.user.id){
-			this.user.update().subscribe(
+			this.userService.update(this.user).subscribe(
 				result => {
 					console.log(this.user)
 					this.router.navigate(['/sistema/user/ver'],{ queryParams: { id: this.user.id }});
 				});
 		}else{
 			
-			this.user.add().then(
+			this.userService.create(this.user).subscribe(
 				result => {
 					console.log(this.user)
 					this.router.navigate(['/sistema/user/ver'],{ queryParams: { id: this.user.id }});
