@@ -1,6 +1,6 @@
 import { NgModule} from '@angular/core';
 
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { PacienteComponent } from './paciente.component';
 import { PacienteFormComponent  } from './paciente-form/paciente-form.component';

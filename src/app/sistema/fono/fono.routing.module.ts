@@ -14,7 +14,6 @@ const fonoRoutes = [
 					{path: 'novo', component: FonoFormComponent},
 					{path: 'ver', component: FonoDetalheComponent},
 					{path: 'admin', component: FonoAdminComponent},
-					// {path: ':id/editar', component: FonoFormComponent}
 		]}
 
 ];

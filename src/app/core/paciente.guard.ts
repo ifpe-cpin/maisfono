@@ -1,8 +1,7 @@
-  import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { tap, map, take } from 'rxjs/operators';
 
 @Injectable()
 export class PacienteGuard implements CanActivate {
@@ -16,18 +15,12 @@ export class PacienteGuard implements CanActivate {
       let roles = localStorage.getItem('roles');
       let list = roles.split(",")
 
-      return list.includes('paciente');
-    //   return this.auth.user.pipe(
-    //        take(1),
-    //        map(user => user && user.roles.includes('paciente')?true:false),
-    //        tap(isPaciente => {
-    //          if (!isPaciente) {
-    //            console.log('access denied')
-    //            this.router.navigate(['']);
-    //          }else{
-    //            console.log(state.url)
-    //          }
-    //      })
-    // )
+      if(!list.includes('paciente')){
+        console.log('access denied')
+        return false;
+      }
+
+      return true;
+    
   }
 }

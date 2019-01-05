@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { tap, map, take } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -15,6 +14,11 @@ export class AuthGuard implements CanActivate {
 
       let roles = localStorage.getItem('roles');
 
-      return roles!="";
+      if(roles==""){
+        console.log('access denied')
+        return false;
+      }
+
+      return true;
   }
 }

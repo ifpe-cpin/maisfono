@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
-// import { Fono } from '../../../models/fono';
 import {Fonoaudiologo} from '../../../models/fonoaudiologo'
-import { Observable } from 'rxjs/Observable'
 import { Router, ActivatedRoute } from '@angular/router';
 import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
 import { ResourceServiceInterface } from '../../../services/resource.service.interface';

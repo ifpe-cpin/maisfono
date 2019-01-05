@@ -1,8 +1,7 @@
-  import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { tap, map, take } from 'rxjs/operators';
 
 @Injectable()
 export class FonoGuard implements CanActivate {
@@ -16,19 +15,13 @@ export class FonoGuard implements CanActivate {
       let roles = localStorage.getItem('roles');
       let list = roles.split(",")
 
-      return list.includes('admin');
+      if(!list.includes('fono')){
 
-    //   return this.auth.user.pipe(
-    //        take(1),
-    //        map(user => user && user.roles.includes('fono')?true:false),
-    //        tap(isFono => {
-    //          if (!isFono) {
-    //            console.log('access denied')
-    //            this.router.navigate(['']);
-    //          }else{
-    //            console.log(state.url)
-    //          }
-    //      })
-    // )
+        console.log('access denied')
+        return false;
+      }
+
+      return true;
+
   }
 }

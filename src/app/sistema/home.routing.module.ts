@@ -1,6 +1,6 @@
 import { NgModule} from '@angular/core';
 
-import { Routes, RouterModule, CanActivate } from '@angular/router';
+import { RouterModule, CanActivate } from '@angular/router';
 
 import { SistemaComponent } from './sistema.component';
 
@@ -10,7 +10,6 @@ import { ConsultarMeusFonosComponent  } from './fono/consultar-meus-fonos/consul
 import { FonoFormComponent  } from './fono/fono-form/fono-form.component';
 import { FonoDetalheComponent } from './fono/fono-detalhe/fono-detalhe.component';
 
-import { PacienteComponent } from './paciente/paciente.component';
 import { ConsultaComponent  } from './paciente/consulta/consulta.component';
 import { ConsultarMeusComponent  } from './paciente/consultar-meus/consultar-meus.component';
 import { PacienteEvolucaoComponent  } from './paciente/paciente-evolucao/paciente-evolucao.component';
@@ -34,7 +33,6 @@ import { DashboardComponent } from "./perfil/dashboard/dashboard.component";
 import { MeusDadosComponent } from "./perfil/meus-dados/meus-dados.component";
 import { AuthGuard } from '../core/auth.guard';import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { AdminGuard } from '../core/admin.guard';
-import { PacienteGuard } from '../core/paciente.guard';
 import { FonoGuard } from '../core/fono.guard';
 import { FonoAdminComponent } from './fono/fono-admin/fono-admin.component';
 import { UserAdminComponent } from './user/user-admin/user-admin.component';

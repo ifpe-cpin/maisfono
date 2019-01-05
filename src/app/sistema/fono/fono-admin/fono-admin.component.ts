@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
-import { Fono } from '../../../models/fono';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '../../../confirm-dialog/confirm-dialog.component';
 

@@ -11,7 +11,6 @@ import { ConsultarMeusFonosComponent } from './consultar-meus-fonos/consultar-me
 import { FormsModule } from '@angular/forms';
 import { FonoAdminComponent } from './fono-admin/fono-admin.component';
 import { MatDialog, MatDialogModule } from '@angular/material';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { SistemaModule } from '../sistema.module';
 
 

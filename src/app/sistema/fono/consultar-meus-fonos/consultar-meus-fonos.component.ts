@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 import { FonoaudiologoService } from '../../../services/fonoaudiologo.service';
-import { Fono } from '../../../models/fono';
+import { Fonoaudiologo } from '../../../models/fonoaudiologo';
 
 declare var $:any;
 
@@ -14,7 +14,7 @@ declare var $:any;
 })
 export class ConsultarMeusFonosComponent implements OnInit {
 
-  fono: Fono[];
+  fono: Fonoaudiologo[];
 
   constructor(private fonoService: FonoaudiologoService) {
   } 
