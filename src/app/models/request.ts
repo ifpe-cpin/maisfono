@@ -1,1 +1,1 @@
-export const REQUEST_BASE_URL = 'http://localhost/maisfono/Slim/public/index.php/v1'
+export const REQUEST_BASE_URL = 'http://jrpires.com/mais-fono-rest/Slim/public/index.php/v1'
