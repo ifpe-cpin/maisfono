@@ -35,19 +35,32 @@ require __DIR__ . '/../src/middleware.php';
 // Register routes
 require __DIR__ . '/../src/routes.php';
 
-// Run app
-$app->run();
+
 
 //header('Access-Control-Allow-Origin: *');
 //header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
-$corsOptions = array(
+/*$corsOptions = array(
     "origin" => "*",
-    "exposeHeaders" => array("Content-Type","Access-Control-Allow-Headers", "X-Requested-With", "X-authentication", "X-client"),
+    //"exposeHeaders" => array("Content-Type","Access-Control-Allow-Headers", "X-Requested-With", "X-authentication", "X-client"),
     "allowMethods" => array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS')
 );
-$cors = new \CorsSlim\CorsSlim($corsOptions);
+$cors = new \CorsSlim\CorsSlim($corsOptions);*/
 
+$app->options('/{routes:.+}', function ($request, $response, $args) {
+    return $response;
+});
+
+$app->add(function ($req, $res, $next) {
+    $response = $next($req, $res);
+    return $response
+            ->withHeader('Access-Control-Allow-Origin', 'https://maisfono.com')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+});
+
+// Run app
+$app->run();
 /*______________________________________________________
 |                                                       |
 |                RESTS's - Usuário                      |
@@ -597,6 +610,13 @@ function getPacientes(Request $request, Response $response) {
     }
 }
 
+
+// Catch-all route to serve a 404 Not Found page if none of the routes match
+// NOTE: make sure this route is defined last
+$app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($req, $res) {
+    $handler = $this->notFoundHandler; // handle using the default Slim page not found handler
+    return $handler($req, $res);
+});
 
 
 /*______________________________________________________
