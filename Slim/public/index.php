@@ -14,9 +14,9 @@ if (PHP_SAPI == 'cli-server') {
     }
 }
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: PUT, POST, GET, DELETE,OPTIONS');
-header('always_populate_raw_post_data: -1');
+//header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Methods: PUT, POST, GET, DELETE,OPTIONS');
+//header('always_populate_raw_post_data: -1');
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -36,17 +36,6 @@ require __DIR__ . '/../src/middleware.php';
 require __DIR__ . '/../src/routes.php';
 
 
-
-//header('Access-Control-Allow-Origin: *');
-//header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-
-/*$corsOptions = array(
-    "origin" => "*",
-    //"exposeHeaders" => array("Content-Type","Access-Control-Allow-Headers", "X-Requested-With", "X-authentication", "X-client"),
-    "allowMethods" => array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS')
-);
-$cors = new \CorsSlim\CorsSlim($corsOptions);*/
-
 $app->options('/{routes:.+}', function ($request, $response, $args) {
     return $response;
 });
@@ -54,7 +43,7 @@ $app->options('/{routes:.+}', function ($request, $response, $args) {
 $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
-            ->withHeader('Access-Control-Allow-Origin', 'https://maisfono.com')
+            ->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 });
@@ -625,14 +614,12 @@ $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($r
 |______________________________________________________*/
 
 function getConnection() {
-    //   $dbhost="127.0.0.1";
-    //   $dbuser="root";
-    //   $dbpass="";
-    //   $dbname="db_maisfono";
-    $dbhost="jrpires.com";
-    $dbuser="jrpiresc_ifpe";
-    $dbpass="maisfono_0001";
-    $dbname="jrpiresc_maisfono_rest";
+    
+    $dbhost="127.0.0.1";
+    $dbuser="root";
+    $dbpass="";
+    $dbname="db_maisfono";
+    
     $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $dbh;
