@@ -38,8 +38,8 @@ require __DIR__ . '/../src/routes.php';
 // Run app
 $app->run();
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+//header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
 $corsOptions = array(
     "origin" => "*",
