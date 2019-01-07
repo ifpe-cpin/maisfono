@@ -72,14 +72,14 @@ const homeRoutes = [
 				{path: 'laudo/:id', component: PacienteLaudoComponent, canActivate: [FonoGuard]},
 				{path: 'novo', component: PacienteFormComponent, canActivate: [FonoGuard]},
 				{path: 'ver', component: PacienteDetalheComponent, canActivate: [FonoGuard]},
+				{path: 'agenda', component: AgendaComponent, children: [
+					{path: 'consultaAgenda', component: ConsultaAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
+					{path: 'calendarioAgenda', component: CalendarioAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
+				]},
 				// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'jogos', component: JogosComponent, children: [
 				{path: 'listaJogos', component: ListaJogosComponent, canActivate: [AuthGuard,AdminGuard]},
-			]},
-			{path: 'agenda', component: AgendaComponent, children: [
-				{path: 'consultaAgenda', component: ConsultaAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
-				{path: 'calendarioAgenda', component: CalendarioAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
 			]},
 			{path: 'perfil', component: PerfilComponent, children: [
 				{path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard,AdminGuard]},

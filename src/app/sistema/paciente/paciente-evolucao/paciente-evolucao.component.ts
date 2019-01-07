@@ -18,6 +18,7 @@ export class PacienteEvolucaoComponent implements OnInit {
   editState: boolean = false;
   pacienteId: String;
   time: Date;
+  idPaciente = this.route.snapshot.paramMap.get('id'); 
   /*
     Alterar
     Pegar id do fono no login e setar como global
@@ -65,13 +66,13 @@ export class PacienteEvolucaoComponent implements OnInit {
   }
 
   getEvolucoesRest(){    
-    let idPaciente = this.route.snapshot.paramMap.get('id');
     //passando como parametro o id do paciente e o id do fono
-    return this.http.get('http://localhost/slim/public/evolucao/evolucoes/'+idPaciente+'/2')
+    return this.http.get('http://localhost/slim/public/evolucao/evolucoes/'+this.idPaciente+'/2')
   }
 
   setEvolucaoRest(evolucao){
-    //passando como parametro o id do paciente e o id do fono    
+    //passando como parametro o id do paciente e o id do fono  
+    evolucao.fk_paciente = this.idPaciente;
     evolucao = JSON.stringify(evolucao);
 
     return this.http.post('http://localhost/slim/public/evolucao/create', evolucao)
