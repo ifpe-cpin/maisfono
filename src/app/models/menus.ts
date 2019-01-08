@@ -11,11 +11,6 @@ let admin = {
                     url:"/sistema/user/admin",
                     icone:"fa fa-circle-o"
                 },
-                {
-                    nome:"Create",
-                    url:"/sistema/fonoaudiologo/novo",
-                    icone:"fa fa-circle-o"
-                }
             ]
         },
     ]

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../core/auth.service';
 import { Menu } from '../role-menu/menu';
 import { MENU } from '../models/menus';
 
@@ -9,10 +8,14 @@ declare const gapi: any;
   selector: 'app-home',
   templateUrl: './sistema.component.html',
   styleUrls: ['./sistema.component.css'],
-  providers: [AuthService]
+  providers: []
 })
 
 export class SistemaComponent implements OnInit {
+  
+  bodyClasses = 'skin-blue sidebar-mini';
+  body: HTMLBodyElement = document.getElementsByTagName('body')[0];
+  
   img: String;
   name: String;
 
@@ -20,23 +23,31 @@ export class SistemaComponent implements OnInit {
 
   menus: Menu[];
 
-  constructor(public auth: AuthService) { 
+  constructor() { 
 
   }
 
   ngOnInit() {
-      this.auth.user.subscribe( user =>{
-              this.img = user.photoURL;
-              this.name = user.displayName;
-              this.menus = MENU;
-    })
 
+    this.body.classList.add('skin-blue');
+    this.body.classList.add('sidebar-mini');
+    
+    this.img = localStorage.getItem('img');
+    this.name = localStorage.getItem('name');
+
+    this.menus = MENU;
 
   }
 
 
   public attachSignout() {
       
+    localStorage.setItem('id',"");
+    localStorage.setItem('email',"");
+    localStorage.setItem('img',"");
+    localStorage.setItem('name',"");
+    localStorage.setItem('roles',"");
+
     window.location.href = 'https://accounts.google.com/Logout?continue=https%3A%2F%2Fappengine.google.com%2F_ah%2Flogout%3Fcontinue=http%3A%2F%2Flocalhost%3A4200';
       //auth.signOut().then(() => {
 

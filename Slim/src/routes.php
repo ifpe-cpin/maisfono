@@ -3,18 +3,33 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
+
+$app->group('/v1', function () use ($app) {
 // Routes
 // API group
+
+/*______________________________________________________
+|                                                       |
+|                Route's - Usuário                      |
+|______________________________________________________*/
+$app->group('/usuarios', function () use ($app) {
+    $app->get('/', 'getUsuarios');
+    $app->get('/{id}', 'getUsuario');
+    $app->post('', 'addUsuario');
+    $app->put('/{id}', 'updateUsuario');
+});
+
+
 /*______________________________________________________
 |                                                       |
 |                Route's - Evolução                     |
 |______________________________________________________*/
-$app->group('/evolucao', function () use ($app) {
-    $app->get('/evolucoes/{idPaciente}/{idFonoaudiologo}', 'getEvolucoes');
-    $app->get('/evolucao/{id}', 'getEvolucao');
-    $app->post('/create', 'addEvolucao');
-    $app->put('/update/{id}', 'updateEvolucao');
-    $app->delete('/delete/{id}', 'deleteEvolucao');
+$app->group('/evolucoes', function () use ($app) {
+    $app->get('/{idPaciente}/{idFonoaudiologo}', 'getEvolucoes');
+    $app->get('/{id}', 'getEvolucao');
+    $app->post('', 'addEvolucao');
+    $app->put('/{id}', 'updateEvolucao');
+    $app->delete('/{id}', 'deleteEvolucao');
 });
 
 
@@ -22,12 +37,12 @@ $app->group('/evolucao', function () use ($app) {
 |                                                       |
 |               Route's - Fonoaudiologo                 |
 |______________________________________________________*/
-$app->group('/fonoaudiologo', function () use ($app) {
-    $app->get('/fonoaudiologos', 'getFonoaudiologos');
-    $app->get('/fonoaudiologo/{id}', 'getFonoaudiologo');
-    $app->post('/create', 'addFonoaudiologo');
-    $app->put('/update/{id}', 'updateFonoaudiologo');
-    $app->delete('/delete/{id}', 'deleteFonoaudiologo');
+$app->group('/fonoaudiologos', function () use ($app) {
+    $app->get('/', 'getFonoaudiologos');
+    $app->get('/{id}', 'getFonoaudiologo');
+    $app->post('', 'addFonoaudiologo');
+    $app->put('/{id}', 'updateFonoaudiologo');
+    $app->delete('/{id}', 'deleteFonoaudiologo');
 });
 
 
@@ -43,6 +58,8 @@ $app->group('/paciente', function () use ($app) {
     $app->delete('/delete/{id}', 'deletePaciente');
 });
 
+});
+
 
 $app->get('/[{name}]', function (Request $request, Response $response, array $args) {
     // Sample log message
@@ -51,3 +68,4 @@ $app->get('/[{name}]', function (Request $request, Response $response, array $ar
     // Render index view
     return $this->renderer->render($response, 'index.phtml', $args);
 });
+

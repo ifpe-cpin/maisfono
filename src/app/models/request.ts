@@ -1,0 +1,1 @@
+export const REQUEST_BASE_URL = 'https://jrpires.com/mais-fono-rest/public/index.php/v1'

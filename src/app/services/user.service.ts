@@ -1,27 +1,21 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
+import { ResourceService } from './resource.service';
+import { ResourceServiceInterface } from './resource.service.interface';
+import { HttpClient } from '@angular/common/http';
+import { REQUEST_BASE_URL } from '../models/request';
+import { UsuarioSerializer } from '../serializers/usuario.serializer';
 import { User } from '../models/user';
 
 
 @Injectable()
-export class UserService {
+export class UserService extends ResourceService<User> implements ResourceServiceInterface<User>{
+  
 
-  constructor(public db: AngularFirestore) { }
-
-  add(user:User):Promise<any>{
-    return user.add();
-  }
-
-  getAll():Observable<User[]>{
-    return User.getAll(this.db);
-  }
-
-  get(id): Observable<User>{
-    return User.get(this.db,id);
-  }
-
-  delete(user:User):Promise<void>{
-    return user.delete();
+  constructor(httpClient: HttpClient) {
+    super(
+      httpClient,
+      REQUEST_BASE_URL,
+      'usuarios',
+      new UsuarioSerializer);
   }
 }

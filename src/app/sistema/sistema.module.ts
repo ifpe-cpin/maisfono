@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home.routing.module';
 import { SistemaComponent } from './sistema.component';
-import { DashComponent } from './dash/dash.component';
-import { VideoComponent } from './video/video.component';
-import { PacienteModule } from './paciente/paciente.module';
-import { PacienteSelecionarComponent } from './paciente/paciente-selecionar/paciente-selecionar.component';
+import { DashComponent } from './pages/dash/dash.component';
+import { VideoComponent } from './pages/video/video.component';
+import { PacienteModule } from './pages/paciente/paciente.module';
+import { PacienteSelecionarComponent } from './pages/paciente/paciente-selecionar/paciente-selecionar.component';
 import { RoleMenuComponent } from '../role-menu/role-menu.component';
 import { LoadComponent } from '../load/load.component';
 import { AppModule } from '../app.module';

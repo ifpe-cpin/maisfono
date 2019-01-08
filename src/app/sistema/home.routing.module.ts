@@ -1,47 +1,45 @@
 import { NgModule} from '@angular/core';
 
-import { Routes, RouterModule, CanActivate } from '@angular/router';
+import { RouterModule, CanActivate } from '@angular/router';
 
 import { SistemaComponent } from './sistema.component';
 
-import { FonoComponent } from './fono/fono.component';
-import { ConsultarFonoComponent  } from './fono/consultar-fono/consultar-fono.component';
-import { ConsultarMeusFonosComponent  } from './fono/consultar-meus-fonos/consultar-meus-fonos.component';
-import { FonoFormComponent  } from './fono/fono-form/fono-form.component';
-import { FonoDetalheComponent } from './fono/fono-detalhe/fono-detalhe.component';
+import { FonoComponent } from './pages/fono/fono.component';
+import { ConsultarFonoComponent  } from './pages/fono/consultar-fono/consultar-fono.component';
+import { ConsultarMeusFonosComponent  } from './pages/fono/consultar-meus-fonos/consultar-meus-fonos.component';
+import { FonoFormComponent  } from './pages/fono/fono-form/fono-form.component';
+import { FonoDetalheComponent } from './pages/fono/fono-detalhe/fono-detalhe.component';
 
-import { PacienteComponent } from './paciente/paciente.component';
-import { ConsultaComponent  } from './paciente/consulta/consulta.component';
-import { ConsultarMeusComponent  } from './paciente/consultar-meus/consultar-meus.component';
-import { PacienteEvolucaoComponent  } from './paciente/paciente-evolucao/paciente-evolucao.component';
-import { PacienteFormComponent  } from './paciente/paciente-form/paciente-form.component';
-import { PacienteDetalheComponent } from './paciente/paciente-detalhe/paciente-detalhe.component';
+import { ConsultaComponent  } from './pages/paciente/consulta/consulta.component';
+import { ConsultarMeusComponent  } from './pages/paciente/consultar-meus/consultar-meus.component';
+import { PacienteEvolucaoComponent  } from './pages/paciente/paciente-evolucao/paciente-evolucao.component';
+import { PacienteFormComponent  } from './pages/paciente/paciente-form/paciente-form.component';
+import { PacienteDetalheComponent } from './pages/paciente/paciente-detalhe/paciente-detalhe.component';
 
-import { AgendaComponent } from './agenda/agenda.component';
-import { ConsultaAgendaComponent  } from './agenda/consulta-agenda/consulta-agenda.component';
-import { CalendarioAgendaComponent  } from './agenda/calendario-agenda/calendario-agenda.component';
+import { AgendaComponent } from './pages/agenda/agenda.component';
+import { ConsultaAgendaComponent  } from './pages/agenda/consulta-agenda/consulta-agenda.component';
+import { CalendarioAgendaComponent  } from './pages/agenda/calendario-agenda/calendario-agenda.component';
 
-import { DashComponent } from './dash/dash.component';
+import { DashComponent } from './pages/dash/dash.component';
 
-import { JogosComponent } from "./jogos/jogos.component";
-import { ListaJogosComponent } from "./jogos/lista-jogos/lista-jogos.component";
-import { VideoComponent } from './video/video.component';
-import { PacienteSelecionarComponent } from './paciente/paciente-selecionar/paciente-selecionar.component';
+import { JogosComponent } from "./pages/jogos/jogos.component";
+import { ListaJogosComponent } from "./pages/jogos/lista-jogos/lista-jogos.component";
+import { VideoComponent } from './pages/video/video.component';
+import { PacienteSelecionarComponent } from './pages/paciente/paciente-selecionar/paciente-selecionar.component';
 
 
-import { PerfilComponent } from "./perfil/perfil.component";
-import { DashboardComponent } from "./perfil/dashboard/dashboard.component";
-import { MeusDadosComponent } from "./perfil/meus-dados/meus-dados.component";
-import { AuthService } from '../core/auth.service';
-import { AuthGuard } from '../core/auth.guard';import { UserUpdateComponent } from './user/user-update/user-update.component';
+import { PerfilComponent } from "./pages/perfil/perfil.component";
+import { DashboardComponent } from "./pages/perfil/dashboard/dashboard.component";
+import { MeusDadosComponent } from "./pages/perfil/meus-dados/meus-dados.component";
+import { AuthGuard } from '../core/auth.guard';import { UserUpdateComponent } from './pages/user/user-update/user-update.component';
 import { AdminGuard } from '../core/admin.guard';
-import { PacienteGuard } from '../core/paciente.guard';
 import { FonoGuard } from '../core/fono.guard';
-import { FonoAdminComponent } from './fono/fono-admin/fono-admin.component';
-import { UserAdminComponent } from './user/user-admin/user-admin.component';
-import { UserViewComponent } from './user/user-view/user-view.component';
-import { PacienteLaudoComponent } from './paciente/paciente-laudo/paciente-laudo.component';
+import { FonoAdminComponent } from './pages/fono/fono-admin/fono-admin.component';
+import { UserAdminComponent } from './pages/user/user-admin/user-admin.component';
+import { UserViewComponent } from './pages/user/user-view/user-view.component';
+import { PacienteLaudoComponent } from './pages/paciente/paciente-laudo/paciente-laudo.component';
 import { VideochamadaComponent } from '../videochamada/videochamada.component';
+import { UserCreateComponent } from './pages/user/user-create/user-create.component';
 
 
 const homeRoutes = [
@@ -54,6 +52,7 @@ const homeRoutes = [
 				{path: 'atualizar',component:UserUpdateComponent, canActivate:[AdminGuard]},
 				{path: 'admin',component:UserAdminComponent, canActivate:[AdminGuard]},
 				{path: 'ver',component:UserViewComponent, canActivate:[AdminGuard]},
+				{path: 'novo',component:UserCreateComponent},
 
 			]},
 			{path: 'fonoaudiologo', component: FonoComponent, children: [
@@ -97,7 +96,6 @@ const homeRoutes = [
   ],
   exports:[RouterModule],
   providers:[
-	AuthService,
 	AdminGuard
 ]
 })

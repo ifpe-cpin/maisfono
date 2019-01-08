@@ -36,3 +36,8 @@ Thumbs.db
 
 # Ignore lock file
 package-lock.json
+
+#ignore key ssh
+/Slim/deploy_key
+deploy_key
+

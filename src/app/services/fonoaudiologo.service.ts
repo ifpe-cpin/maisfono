@@ -1,53 +1,25 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
 import { Fonoaudiologo } from '../models/fonoaudiologo';
 import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
+import { ResourceService } from './resource.service';
+import { FonoaudiologoSerializer } from '../serializers/fonoaudiologo.serializer';
+import { REQUEST_BASE_URL } from '../models/request';
+import { ResourceServiceInterface } from './resource.service.interface';
 
 @Injectable()
-export class FonoaudiologoService {
-  fonoaudiologosCollection: AngularFirestoreCollection<Fonoaudiologo>;
-  fonoaudiologos: Observable<Fonoaudiologo[]>;
-  fonoaudiologoDoc: AngularFirestoreDocument<Fonoaudiologo>;
+export class FonoaudiologoService extends ResourceService<Fonoaudiologo>
+ implements ResourceServiceInterface<Fonoaudiologo>{
+  
 
-  constructor(public db:AngularFirestore) {
-    this.fonoaudiologosCollection = this.db.collection('tb_fonoaudiologo');
-    // this.fonoaudiologos = this.db.collection('fonoaudiologos').valueChanges();
-    this.fonoaudiologos = this.fonoaudiologosCollection.snapshotChanges().map(changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as Fonoaudiologo;
-        data.id = a.payload.doc.id;
-        return data;
-      });
-    });
+  constructor(httpClient: HttpClient) {
+    super(
+      httpClient,
+      REQUEST_BASE_URL,
+      'fonoaudiologos',
+      new FonoaudiologoSerializer);
   }
 
-  getFonoaudiologos() {
-    return this.fonoaudiologos; 
-  }
-
-  get(id:string){
-    
-    return new Observable(observer => {
-      this.fonoaudiologoDoc = this.db.doc('tb_fonoaudiologo/'+id);
-      observer.next(this.fonoaudiologoDoc);
-      observer.complete();
-    });
-  }
-
-  addFonoaudiologo(fonoaudiologo: Fonoaudiologo) {
-    this.fonoaudiologosCollection.add(fonoaudiologo);
-  }
-
-  deleteFonoaudiologo(fonoaudiologo: Fonoaudiologo): Promise<any> {
-    this.fonoaudiologoDoc = this.db.doc('tb_fonoaudiologo/${fonoaudiologo.id}');
-    return this.fonoaudiologoDoc.delete();
-  }
-
-  updateFonoaudiologo(fonoaudiologo: Fonoaudiologo) {
-    this.fonoaudiologoDoc = this.db.doc('tb_fonoaudiologo/${fonoaudiologo.id}');
-    this.fonoaudiologoDoc.update(fonoaudiologo);
-  }
-
+  
    
 }

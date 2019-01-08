@@ -39,3 +39,6 @@ git commit -m "Deploy to GitHub Pages"
 # tokens GH_TOKEN e GH_REF serão fornecidos como variáveis de ambiente Travis CI
 git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
 
+
+
+
