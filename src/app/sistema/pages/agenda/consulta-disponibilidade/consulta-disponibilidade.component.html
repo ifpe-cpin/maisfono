@@ -1,0 +1,92 @@
+<section class="content-header">
+  <h1>
+    Disponibilidade
+    <small>Lista Disponibilidade</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a routerLink="/home/dash"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li>Agenda</li>
+    <li class="active">Consulta Disponibilidade</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content"> 
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Disponibilidade</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+          <table id="pacientes" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th width="30%">Data</th>
+                <th width="30%">Hora Início</th>
+                <th width="30%">Hora Término</th>
+                <th width="10%">Cancelar</th>
+              </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let lista of disponibilidade">
+                <td>{{lista.data}}</td>
+                <td>{{lista.hora_inicio}}</td>
+                <td>{{lista.hora_fim}}</td>
+                <td align='center'>
+                    <i (click)="confirmExclusao($event, lista)" data-toggle="modal"
+                    data-target="#modal-confirm-exclusao" class="fa fa-fw fa-trash-o"></i>
+                </td>
+                
+              </tr>
+             
+            </tbody>
+            <tfoot>
+              <tr> 
+                <th>Data</th>
+                <th>Hora Início</th>
+                <th>Hora Término</th>
+                <th>Cancelar</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+</section><!-- /.content -->
+
+
+
+<!--Modal Editar -->
+<div class="modal fade" id="modal-confirm-exclusao" style="display: none;">
+  <form (ngSubmit)="confirmacaoExclusao(disponibilidadeToConfirm, disponibilidadeToConfirm.id)" name="formEdit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span></button>
+          <h4 class="modal-title">Confirmação de Exclusão</h4>
+        </div>
+        <div class="modal-body">
+            <input type="date" class="form-control"  name="dat_atendimento"
+            #dat_atendimento required>
+          <br>
+          <input type="text" class="form-control"  name="hor_inicio" #hor_inicio
+            required>
+          <br>
+          <input type="text" class="form-control"  name="hor_inicio" #hor_fim
+            required>
+          <br>          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Confirmar</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+
+  </form>
+</div>

@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "mais-fono": {
-      "root": "",
+      "root": "e2e",
       "projectType": "application",
       "architect": {
         "build": {
@@ -43,13 +43,12 @@
             ],
             "scripts": [
 
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/jquery/dist/jquery.slim.min.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-
-              "node_modules/jquery/dist/jquery.js",
               "node_modules/jqueryui/jquery-ui.js",
-              "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/raphael/raphael.js",
               "node_modules/morris.js/morris.js",
               "node_modules/jquery-sparkline/jquery.sparkline.js",

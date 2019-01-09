@@ -67,7 +67,7 @@ let fono = {
                 },
                 {
                     nome:"Consulta Disponibilidade",
-                    url:"/sistema/fonoaudiologo/consultarMeus",
+                    url:"/sistema/fonoaudiologo/agenda/calendarioDisponibilidade",
                     icone:"fa fa-circle-o"
                 },
                 {

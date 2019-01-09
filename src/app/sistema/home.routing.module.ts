@@ -40,7 +40,7 @@ import { UserViewComponent } from './pages/user/user-view/user-view.component';
 import { PacienteLaudoComponent } from './pages/paciente/paciente-laudo/paciente-laudo.component';
 import { VideochamadaComponent } from '../videochamada/videochamada.component';
 import { UserCreateComponent } from './pages/user/user-create/user-create.component';
-
+import { ConsultaDisponibilidadeComponent } from './pages/agenda/consulta-disponibilidade/consulta-disponibilidade.component';
 
 const homeRoutes = [
 		{path: 'sistema', component: SistemaComponent, children:[
@@ -74,6 +74,7 @@ const homeRoutes = [
 				{path: 'agenda', component: AgendaComponent, children: [
 					{path: 'consultaAgenda', component: ConsultaAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
 					{path: 'calendarioAgenda', component: CalendarioAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
+					{path: 'calendarioDisponibilidade', component: ConsultaDisponibilidadeComponent, canActivate: [AuthGuard,AdminGuard]},
 				]},
 				// {path: ':id/editar', component: FonoFormComponent}
 			]},
