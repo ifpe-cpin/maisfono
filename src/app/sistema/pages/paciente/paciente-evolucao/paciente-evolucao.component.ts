@@ -47,18 +47,24 @@ export class PacienteEvolucaoComponent implements OnInit {
   
   ngOnInit() {
     this.evolucao = new Evolucao();
+    this.evolucao.fk_flag_evolucao = 1
     this.evolucaoService.list(new QueryOptions).subscribe(data => {
       this.evolucoes = <any>data
     })
   }
 
   onSubmit() {
+    console.log(this.evolucao)
     if(this.evolucao.dsc_evolucao != '' && this.evolucao.dsc_titulo != '' 
     && this.evolucao.fk_flag_evolucao > 0 && this.evolucao.fk_flag_evolucao < 4 ) {
       this.evolucao.fk_fonoaudiologo = 2;
       this.evolucao.fk_paciente = 1;
 
-      let teste = this.evolucaoService.create(this.evolucao);
+      this.evolucaoService.create(this.evolucao).subscribe(
+        result => {
+          console.log(result)
+        }
+        );;
     }
   }
 

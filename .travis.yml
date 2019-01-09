@@ -4,10 +4,10 @@ jobs:
     language: node_js
     node_js:
     - '10.7.0'
-    cache:
-      yarn: true
-      directories:
-       - node_modules
+    #cache:
+     # yarn: true
+      #directories:
+       #- node_modules
     before_install: echo "npm test temporarily disabled"
     script:
       - bash ./deploy.sh

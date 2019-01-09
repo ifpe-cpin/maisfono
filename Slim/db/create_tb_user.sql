@@ -1,1 +1,1 @@
-CREATE TABLE `tb_user` ( `id` VARCHAR(200) NOT NULL , `email` VARCHAR(200) NOT NULL , `photoUrl` VARCHAR(200) NULL , `displayName` VARCHAR(200) NULL , `roles` VARCHAR(200) NOT NULL , `tipo` INT(1) NOT NULL , PRIMARY KEY (`id`), ENGINE = InnoDB;
+CREATE TABLE `tb_user` ( `id` VARCHAR(200) NOT NULL , `email` VARCHAR(200) NOT NULL , `photoUrl` VARCHAR(200) NULL , `displayName` VARCHAR(200) NULL , `roles` VARCHAR(200) NOT NULL , `tipo` INT(1) NOT NULL , PRIMARY KEY (`id`)), ENGINE = InnoDB;

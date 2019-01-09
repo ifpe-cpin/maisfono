@@ -47,9 +47,9 @@ require __DIR__ . '/../src/routes.php';
 );
 $cors = new \CorsSlim\CorsSlim($corsOptions);*/
 
-$app->options('/{routes:.+}', function ($request, $response, $args) {
+/*$app->options('/{routes:.+}', function ($request, $response, $args) {
     return $response;
-});
+});*/
 
 $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
@@ -237,7 +237,7 @@ function updateUsuario(Request $request, Response $response) {
 |                RESTS's - Evolução                     |
 |______________________________________________________*/
 
-function getEvolucoes($request) {
+function getEvolucoes(Request $request, Response $response) {
 	$idPaciente = $request->getAttribute('idPaciente');
     $idFonoaudiologo = $request->getAttribute('idFonoaudiologo');
     
@@ -254,7 +254,8 @@ function getEvolucoes($request) {
         $evolucoes = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
 		
-        return json_encode($evolucoes, JSON_UNESCAPED_UNICODE);
+        return  $response->withJson($evolucoes, 200)
+        ->withHeader('Content-type', 'application/json');
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
@@ -262,7 +263,7 @@ function getEvolucoes($request) {
 
 
 
-function addEvolucao($request) {
+function addEvolucao(Request $request, Response $response) {
     $evolucao = json_decode($request->getBody());
 	
     $sql = "INSERT INTO tb_evolucao(dsc_evolucao,fk_flag_evolucao,fk_fonoaudiologo,fk_paciente,dsc_titulo) VALUES (:dsc_evolucao, :fk_flag_evolucao, :fk_fonoaudiologo, :fk_paciente, :dsc_titulo)";
