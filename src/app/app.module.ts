@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FullCalendarModule } from 'ng-fullcalendar';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -96,7 +97,8 @@ const agoraConfig: AgoraConfig = {
     BrowserAnimationsModule,  
     MatDialogModule, 
     UserModule,
-    AngularAgoraRtcModule.forRoot(agoraConfig)
+    AngularAgoraRtcModule.forRoot(agoraConfig),
+    FullCalendarModule
     
   ],
   exports:[LoadComponent],

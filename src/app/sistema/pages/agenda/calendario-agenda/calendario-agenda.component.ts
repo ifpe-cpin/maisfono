@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { CalendarComponent } from 'ng-fullcalendar';
+import { Options } from 'fullcalendar';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 declare var $:any;
 
@@ -7,48 +11,35 @@ declare var $:any;
   templateUrl: './calendario-agenda.component.html',
   styleUrls: ['./calendario-agenda.component.css']
 })
+
 export class CalendarioAgendaComponent implements OnInit {
+    calendarOptions: Options;
+    events: any[];
+    @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+    constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
-  constructor() { }
+    ngOnInit() {
+        this.getEventsCalendarRest().subscribe(data => {
+            this.events = <any>data
+        })
+        
 
-  ngOnInit() {
-
-      $('#calendar').fullCalendar({
-        header: {
-            left  : 'prev,next today',
-            center: 'title',
-            right : 'month,agendaWeek,agendaDay'
-        },
-        events: [
-            {
-                title: 'Ana Silva',
-                start: '2017-09-25T10:00:00',
-                end: '2017-9-25T11:00:00'
+        this.calendarOptions = {
+            locale: 'pt-br',
+            editable: true,
+            eventLimit: false,
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listMonth'
             },
-            {
-                title: 'Event2',
-                start: '2017-09-05'
-            }
-          
-        ],
-        minTime: "08:00:00",
-        maxTime: "18:00:00",
-        businessHours: [
-          {
-            // days of week. an array of zero-based day of week integers (0=Sunday)
-            dow: [ 1, 2, 3 ], // Monday - Wednesday
-            start: '10:00', // a start time (10am in this example)
-            end: '18:00', // an end time (6pm in this example)
-          },
-          {
-              // days of week. an array of zero-based day of week integers (0=Sunday)
-              dow: [ 4, 5 ], // Thursday - Friday
-              start: '13:00', // a start time (10am in this example)
-              end: '18:00', // an end time (6pm in this example)
-          },
-
-        ]
-      });
-  }
-
+            events: this.events
+          };
+    }
+    
+    getEventsCalendarRest(){    
+        let idFonoaudiologo = 2;//this.route.snapshot.paramMap.get('id');
+        //passando como parametro o id do paciente e o id do fono
+        return this.http.get('http://localhost/slim/public/fonoaudiologo/calendario/'+idFonoaudiologo)
+    }
 }

@@ -3,7 +3,7 @@
   <li  class="header">{{menu.titulo}}</li>
   <li *ngFor="let categoria of menu.categorias" class="treeview">
       <a>
-        <i class="fa fa-user"></i>
+        <i class="{{categoria.icon}}"></i>
         <span>{{categoria.nome}}</span>
         <i class="fa fa-angle-left pull-right"></i>
       </a>

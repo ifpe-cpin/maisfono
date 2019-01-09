@@ -1,10 +1,65 @@
 <section class="content-header">
-    <h1>
-      Agenda
-    </h1>
-    <ol class="breadcrumb">
-      <li><a routerLink="/home/dash"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li>Agenda</li>
-      <li class="active">Consulta</li>
-    </ol>
-  </section>
+  <h1>
+    Agenda
+    <small>Agenda de Pacientes</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a routerLink="/home/dash"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li>Agenda</li>
+    <li class="active">Consultar Agenda</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content"> 
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Agenda</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+          <table id="pacientes" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Paciente</th>
+                <th width="11%">Data</th>
+                <th width="11%">Hora Início</th>
+                <th width="11%">Hora Término</th>
+                <th width="11%">Desmarcar</th>
+                <th width="7%">Atender</th>
+              </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let lista of agenda">
+                <td>{{lista.paciente}}</td>
+                <td>{{lista.data}}</td>
+                <td>{{lista.hora_inicio}}</td>
+                <td>{{lista.hora_fim}}</td>
+                <td></td>
+                <td>
+                    <ng-container [ngSwitch]="lista.situacao">
+                        <i *ngSwitchCase='1' class="fa fa-check-square bg-green"></i>
+                        <i *ngSwitchCase='' class="fa fa-square bg-red"></i>
+                    </ng-container>  
+                </td>
+                
+              </tr>
+             
+            </tbody>
+            <tfoot>
+              <tr> 
+                <th>Paciente</th>
+                <th>Data</th>
+                <th>Hora Início</th>
+                <th>Hora Término</th>
+                <th>Desmarcar</th>
+                <th>Atender</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+</section><!-- /.content -->

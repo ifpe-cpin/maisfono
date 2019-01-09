@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FullCalendarModule } from 'ng-fullcalendar';
 
 import { HomeRoutingModule } from './home.routing.module';
 import { SistemaComponent } from './sistema.component';
@@ -20,7 +21,7 @@ import { VideochamadaComponent } from '../videochamada/videochamada.component';
     CommonModule,
     PacienteModule,
     HomeRoutingModule,
-   
+    FullCalendarModule
    
   ],
   declarations: [SistemaComponent,
