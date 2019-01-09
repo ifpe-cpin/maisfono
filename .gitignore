@@ -41,3 +41,6 @@ package-lock.json
 /Slim/deploy_key
 deploy_key
 
+
+#ignore request url
+#/opt/lampp/htdocs/maisfono/src/app/models/request.ts
