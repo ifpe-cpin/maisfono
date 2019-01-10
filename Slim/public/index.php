@@ -629,8 +629,7 @@ function getCalendario($response) {
                 WHEN s.id = 3 THEN 'grey'
                 WHEN s.id = 4 THEN 'red'
                 WHEN s.id = 5 THEN 'green'
-           END as color,
-           s.dsc_nome
+           END as color
                 FROM  tb_agenda a
                 INNER JOIN tb_pessoa p
                 ON a.fk_paciente = p.id
@@ -656,7 +655,7 @@ function getCalendarAgenda($response) {
                    d.dat_atendimento as data,
                    d.hor_inicio as hora_inicio, 
                    d.hor_fim as hora_fim, 
-                   s.id as id_status,
+                   s.id as fk_status,
                    s.dsc_nome as nome_status
                 FROM  tb_agenda a
                 INNER JOIN tb_pessoa p
@@ -761,7 +760,6 @@ function getSumAtendidos($request) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
-
 
 function getSumFaltou($request) {
     $idFonoaudiologo = $request->getAttribute('id');
