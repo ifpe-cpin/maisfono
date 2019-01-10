@@ -50,14 +50,53 @@ $app->group('/fonoaudiologos', function () use ($app) {
 |                                                       |
 |                 Route's - Paciente                    |
 |______________________________________________________*/
-$app->group('/paciente', function () use ($app) {
-    $app->get('/pacientes', 'getPacientes');
-    $app->get('/paciente/{id}', 'getPaciente');
-    $app->post('/create', 'addPaciente');
-    $app->put('/update/{id}', 'updatePaciente');
-    $app->delete('/delete/{id}', 'deletePaciente');
+$app->group('/pacientes', function () use ($app) {
+    $app->get('/', 'getPacientes');
+    $app->get('/{id}', 'getPaciente');
+    $app->post('', 'addPaciente');
+    $app->put('/{id}', 'updatePaciente');
+    $app->delete('/{id}', 'deletePaciente');
 });
 
+
+/*______________________________________________________
+|                                                       |
+|                 Route's - Dashboard                   |
+|______________________________________________________*/
+$app->group('/dashboard', function () use ($app) {
+    $app->get('/agenda/{id}', 'getAgenda');
+
+    $app->get('/atendidos/{id}', 'getSumAtendidos');
+    $app->get('/faltaram/{id}', 'getSumFaltou');
+    $app->get('/aguardando/{id}', 'getSumAguardando');
+    $app->get('/marcados/{id}', 'getSumMarcados');
+       
+    $app->put('/update/{id}', 'updateAgenda');
+});
+
+
+/*______________________________________________________
+|                                                       |
+|        Route's - Fonoaudiologo - Calendário           |
+|______________________________________________________*/
+$app->group('/fonoaudiologoCalendario', function () use ($app) {
+    $app->get('/{id}', 'getCalendario');
+});
+
+/*______________________________________________________
+|                                                       |
+|         Route's - Fonoaudiologo - Agenda              |
+|______________________________________________________*/
+$app->group('/fonoaudiologoAgenda', function () use ($app) {
+    $app->get('/{id}', 'getCalendarAgenda');
+});
+
+/*______________________________________________________
+|                                                       |
+|  Route's - Fonoaudiologo - Agenda - Disponibilidade   |
+|______________________________________________________*/
+$app->group('/fonoaudiologoDisponibilidade', function () use ($app) {
+    $app->get('/{id}', 'getCalendarDisponibilidade');
 });
 
 

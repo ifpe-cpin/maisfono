@@ -612,13 +612,266 @@ function getPacientes(Request $request, Response $response) {
 }
 
 
+
+
+/*______________________________________________________
+|                                                       |
+|          RESTS's - Fonoaudiologo - Agenda             |
+|______________________________________________________*/
+
+function getCalendario($response) {
+    $sql = "SELECT p.dsc_nome as title, 
+           CONCAT(d.dat_atendimento, ' ', d.hor_inicio) as start, 
+           CONCAT(d.dat_atendimento, ' ', d.hor_fim) as end, 
+           CASE
+                WHEN s.id = 1 THEN 'yellow'
+                WHEN s.id = 2 THEN 'liteblue'
+                WHEN s.id = 3 THEN 'grey'
+                WHEN s.id = 4 THEN 'red'
+                WHEN s.id = 5 THEN 'green'
+           END as color,
+           s.dsc_nome
+                FROM  tb_agenda a
+                INNER JOIN tb_pessoa p
+                ON a.fk_paciente = p.id
+                INNER JOIN tb_agenda_disponibilidade d
+                ON a.fk_agenda_disponibilidade =  d.id 
+                INNER JOIN aux_status s
+                ON a.fk_status = s.id 
+                WHERE d.fk_fonoaudiologo = 2";
+
+    try {
+        $stmt = getConnection()->query($sql);
+        $eventsCalendario = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return json_encode($eventsCalendario, JSON_UNESCAPED_UNICODE);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function getCalendarAgenda($response) {
+    $sql = "SELECT p.dsc_nome as paciente, 
+                   d.dat_atendimento as data,
+                   d.hor_inicio as hora_inicio, 
+                   d.hor_fim as hora_fim, 
+                   s.id as id_status,
+                   s.dsc_nome as nome_status
+                FROM  tb_agenda a
+                INNER JOIN tb_pessoa p
+                ON a.fk_paciente = p.id
+                INNER JOIN tb_agenda_disponibilidade d
+                ON a.fk_agenda_disponibilidade =  d.id 
+                INNER JOIN aux_status s
+                ON a.fk_status = s.id 
+                WHERE d.fk_fonoaudiologo = 2";
+
+    try {
+        $stmt = getConnection()->query($sql);
+        $eventsAgenda = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return json_encode($eventsAgenda, JSON_UNESCAPED_UNICODE);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function getCalendarDisponibilidade($response) {
+    $sql = "SELECT d.id as id, 
+                   d.dat_atendimento as data, 
+                   d.hor_inicio as hora_inicio,
+                   d.hor_fim as hora_fim
+            FROM  tb_agenda_disponibilidade d
+            WHERE d.fk_fonoaudiologo = 2";
+
+    try {
+        $stmt = getConnection()->query($sql);
+        $eventsDisponibilidade = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return json_encode($eventsDisponibilidade, JSON_UNESCAPED_UNICODE);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+
+
+/*______________________________________________________
+|                                                       |
+|                  RESTS's - Dashboard                  |
+|______________________________________________________*/
+/*
+        * | Status
+        1 | Pendente
+        2 | Confirmado
+        3 | Em Atendimento
+        4 | Faltou
+        5 | Atendido 
+*/
+function getAgenda($request) {
+    $idFonoaudiologo = $request->getAttribute('id');
+    $dataAtual = date("Y-m-d"); 
+    $sql = "SELECT a.fk_status as id_status, p.dsc_nome, d.dat_atendimento, d.hor_inicio, d.hor_fim, s.dsc_nome as status 
+            FROM  tb_agenda a
+            INNER JOIN tb_pessoa p
+            ON a.fk_paciente = p.id
+            INNER JOIN tb_agenda_disponibilidade d
+            ON a.fk_agenda_disponibilidade =  d.id 
+            INNER JOIN aux_status s
+            ON a.fk_status = s.id 
+            WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
+            and d.dat_atendimento = '". $dataAtual ."'";
+
+    try {
+        $stmt = getConnection()->query($sql);
+        $agenda = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return json_encode($agenda, JSON_UNESCAPED_UNICODE);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function getSumAtendidos($request) {
+    $idFonoaudiologo = $request->getAttribute('id');
+    $dataAtual = date("Y-m-d"); 
+    $sql = "SELECT count(*) as total
+            FROM  tb_agenda a
+            INNER JOIN tb_pessoa p
+            ON a.fk_paciente = p.id
+            INNER JOIN tb_agenda_disponibilidade d
+            ON a.fk_agenda_disponibilidade =  d.id 
+            INNER JOIN aux_status s
+            ON a.fk_status = s.id 
+            WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
+            and d.dat_atendimento = '". $dataAtual ."'
+            and a.fk_status = 5";
+
+    try {
+        $stmt = getConnection()->query($sql);
+        $atendidos = $stmt->fetch();
+        $db = null;
+        
+        return $atendidos['total'];
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+
+function getSumFaltou($request) {
+    $idFonoaudiologo = $request->getAttribute('id');
+    $dataAtual = date("Y-m-d"); 
+    $sql = "SELECT count(*) as total
+            FROM  tb_agenda a
+            INNER JOIN tb_pessoa p
+            ON a.fk_paciente = p.id
+            INNER JOIN tb_agenda_disponibilidade d
+            ON a.fk_agenda_disponibilidade =  d.id 
+            INNER JOIN aux_status s
+            ON a.fk_status = s.id 
+            WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
+            and d.dat_atendimento = '". $dataAtual ."'
+            and a.fk_status = 4";
+
+    try {
+        $stmt = getConnection()->query($sql);
+        $faltaram = $stmt->fetch();
+        $db = null;
+        
+        return $faltaram['total'];
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function getSumAguardando($request) {
+    $idFonoaudiologo = $request->getAttribute('id');
+    $dataAtual = date("Y-m-d"); 
+    $sql = "SELECT count(*) as total 
+            FROM  tb_agenda a
+            INNER JOIN tb_pessoa p
+            ON a.fk_paciente = p.id
+            INNER JOIN tb_agenda_disponibilidade d
+            ON a.fk_agenda_disponibilidade =  d.id 
+            INNER JOIN aux_status s
+            ON a.fk_status = s.id 
+            WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
+            and d.dat_atendimento = '". $dataAtual ."'
+            and a.fk_status = 1 or a.fk_status = 2";
+
+    try {
+        $stmt = getConnection()->query($sql);
+        $atendidos = $stmt->fetch();
+        $db = null;
+        
+        return $atendidos['total'];
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+
+function getSumMarcados($request) {
+    $idFonoaudiologo = $request->getAttribute('id');
+    $dataAtual = date("Y-m-d"); 
+    $sql = "SELECT count(*) as total 
+            FROM  tb_agenda a
+            INNER JOIN tb_pessoa p
+            ON a.fk_paciente = p.id
+            INNER JOIN tb_agenda_disponibilidade d
+            ON a.fk_agenda_disponibilidade =  d.id 
+            INNER JOIN aux_status s
+            ON a.fk_status = s.id 
+            WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
+            and d.dat_atendimento = '". $dataAtual ."'";
+
+    try {
+        $stmt = getConnection()->query($sql);
+        $marcados = $stmt->fetch();
+        $db = null;
+        
+        return $marcados['total'];
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+
+/*______________________________________________________
+|                                                       |
+|                 RESTS's - Atendimento                 |
+|______________________________________________________*/
+function updateAgenda($request) {
+    $novo_status = json_decode($request->getBody());
+    $id = $request->getAttribute('id');
+    $sql = "UPDATE tb_agenda 
+            SET fk_status=:novo_status
+            WHERE id=:id";
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam("novo_status", $novo_status);
+        $stmt->bindParam("id", $id);
+        $stmt->execute();
+        $db = null;
+        echo json_encode($evolucao);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+
 // Catch-all route to serve a 404 Not Found page if none of the routes match
 // NOTE: make sure this route is defined last
 $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($req, $res) {
     $handler = $this->notFoundHandler; // handle using the default Slim page not found handler
     return $handler($req, $res);
 });
-
 
 /*______________________________________________________
 |                                                       |

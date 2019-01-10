@@ -59,7 +59,7 @@
 
 
 <!--Modal Editar -->
-<div class="modal fade" id="modal-confirm-exclusao" style="display: none;">
+<div class="modal modal-success fade" id="modal-confirm-exclusao" style="display: none;">
   <form (ngSubmit)="confirmacaoExclusao(disponibilidadeToConfirm, disponibilidadeToConfirm.id)" name="formEdit">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -69,8 +69,8 @@
           <h4 class="modal-title">Confirmação de Exclusão</h4>
         </div>
         <div class="modal-body">
-            <input type="date" class="form-control"  name="dat_atendimento"
-            #dat_atendimento required>
+            <input type="text" class="form-control"  name="data"
+            #data required>
           <br>
           <input type="text" class="form-control"  name="hor_inicio" #hor_inicio
             required>

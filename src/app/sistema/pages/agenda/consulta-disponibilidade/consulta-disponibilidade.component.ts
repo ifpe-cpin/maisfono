@@ -9,13 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ConsultaDisponibilidadeComponent implements OnInit {
   disponibilidade: any[];
+  disponibilidadeToConfirm: any[];
 
-  disponibilidadeToConfirm = {
-    id: 0,
-    data: '',
-    hora_inicio: '',
-    hora_fim: ''
-   };
 
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
@@ -35,6 +30,7 @@ export class ConsultaDisponibilidadeComponent implements OnInit {
 
   confirmExclusao(event, lista) {
     this.disponibilidadeToConfirm = lista;
+    console.log(this.disponibilidadeToConfirm);
   }
 
 }
