@@ -12,6 +12,10 @@ declare const gapi: any;
 })
 
 export class SistemaComponent implements OnInit {
+  
+  bodyClasses = 'skin-blue sidebar-mini';
+  body: HTMLBodyElement = document.getElementsByTagName('body')[0];
+  
   img: String;
   name: String;
 
@@ -24,6 +28,10 @@ export class SistemaComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.body.classList.add('skin-blue');
+    this.body.classList.add('sidebar-mini');
+    
     this.img = localStorage.getItem('img');
     this.name = localStorage.getItem('name');
 

@@ -17,7 +17,7 @@ img {
 
 .btn {
 	border: 3px solid #3d6889;
-	padding: 10px 30px;
+	/* padding: 10px 30px; */
 	color: #3d6889;
 	font-size: 14px;
 	line-height: 20px;
@@ -90,13 +90,13 @@ img {
 
 /*Login*/
 .login{
-	position: absolute;
+	position: relative;
 	margin-top: -15px;
-	margin-bottom: 40px;
+	/* margin-bottom: 40px; */
 	background: #333;
 	height: 40px;
 	width: 100%;
-	padding: 0 5px;
+	/* padding: 0 5px; */
 	/*display: inline-block;*/
 }
 .login h4{
@@ -108,10 +108,11 @@ img {
 }
 .login button{
 	float: right;
+	background: #eee;
 	color: #3d6889;
 	font-weight: bold;
 	display: inline-block;
-	margin: 5px 10px;
+	/* margin: 5px 10px; */
 }
 /* Header */
 
@@ -121,12 +122,12 @@ img {
 	width: 100%;
 	height: auto;
 	background: #3d6889; /* Azul */
-	padding: 15px 0;
+	padding: 20px 0;
 	z-index: 10;
 }
 .header .logo {
 	
-	margin-top: 35px;
+	margin-top: 15px;
 }
 
 .header_menu {

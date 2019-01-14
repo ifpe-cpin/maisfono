@@ -1,4 +1,3 @@
-import { Fonoaudiologo } from "../models/fonoaudiologo";
 import { Paciente } from "../models/paciente";
 
 export class PacienteSerializer {

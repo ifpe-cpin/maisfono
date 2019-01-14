@@ -5,6 +5,7 @@ let admin = {
     categorias:[
         {
             nome:"Usuário",
+            icon: "fa fa-user",
             itens:[
                 {
                     nome:"Admin",
@@ -25,6 +26,7 @@ let fono = {
     categorias:[
         {
             nome:"Fono",
+            icon: "fa fa-user-md",
             itens:[
                 {
                     nome:"Admin",
@@ -36,6 +38,7 @@ let fono = {
         },
         {
             nome:"Paciente",
+            icon: "fa fa-user",
             itens:[
                 {
                     nome:"Consultar Pacientes",
@@ -44,6 +47,31 @@ let fono = {
                 },
                 {
                     nome:"Meus Pacientes",
+                    url:"/sistema/fonoaudiologo/consultarMeus",
+                    icone:"fa fa-circle-o"
+                },
+            ],
+        },
+        {
+            nome:"Agenda",
+            icon: "fa fa-calendar",
+            itens:[
+                {
+                    nome:"Calendário",
+                    url:"/sistema/fonoaudiologo/agenda/calendarioAgenda",
+                    icone:"fa fa-circle-o"
+                },{
+                    nome:"Consultar Agenda",
+                    url:"/sistema/fonoaudiologo/agenda/consultaAgenda",
+                    icone:"fa fa-circle-o"
+                },
+                {
+                    nome:"Consulta Disponibilidade",
+                    url:"/sistema/fonoaudiologo/agenda/calendarioDisponibilidade",
+                    icone:"fa fa-circle-o"
+                },
+                {
+                    nome:"Incluir Disponibilidade",
                     url:"/sistema/fonoaudiologo/consultarMeus",
                     icone:"fa fa-circle-o"
                 },
@@ -58,6 +86,7 @@ let custom = {
     categorias:[
         {
             nome:"Video",
+            icon: "fa fa-user",
             itens:[
                 {
                     nome:"Play",

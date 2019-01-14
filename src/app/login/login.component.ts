@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService, GoogleLoginProvider} from 'angular5-social-auth';
 import { UserService } from '../services/user.service';
@@ -12,8 +12,10 @@ import { User } from '../models/user';
   styleUrls: ['./login.component.css'],
   providers: [AuthService,{provide: 'ResourceServiceInterface', useClass: UserService}]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy{
   
+  bodyClasses = 'skin-blue sidebar-mini';
+  body: HTMLBodyElement = document.getElementsByTagName('body')[0];
   user:User;
 
   constructor(@Inject('ResourceServiceInterface') 
@@ -69,7 +71,16 @@ export class LoginComponent implements OnInit {
   
 
   ngOnInit() {
+    // add the the body classes
+    this.body.classList.add('skin-blue');
+    this.body.classList.add('sidebar-mini');
     
+  }
+
+   ngOnDestroy() {
+    // remove the the body classes
+    this.body.classList.remove('skin-blue');
+    this.body.classList.remove('sidebar-mini');
   }
 
 

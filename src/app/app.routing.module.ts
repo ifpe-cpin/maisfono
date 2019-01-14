@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 
 import { SistemaComponent } from './sistema/sistema.component';
 import { AuthGuard } from './core/auth.guard';
-import { UserCreateComponent } from './sistema/user/user-create/user-create.component';
+import { UserCreateComponent } from './sistema/pages/user/user-create/user-create.component';
 
 
 
