@@ -17,6 +17,7 @@ export class DashComponent implements OnInit {
   constructor(private http: HttpClient, private route: ActivatedRoute){}
 
   ngOnInit(){
+    /*
     this.getAgendaRest().subscribe(data => {
       this.marcacoes = <any>data
     })
@@ -35,11 +36,11 @@ export class DashComponent implements OnInit {
       this.totalMarcados = <any>data
     })
 
-
+*/
 
   }
 
-
+/*
   getAgendaRest(){    
     let idFonoaudiologo = 2;//this.route.snapshot.paramMap.get('id');
     //passando como parametro o id do paciente e o id do fono
@@ -70,5 +71,5 @@ export class DashComponent implements OnInit {
     return this.http.get('http://localhost/slim/public/dashboard/marcados/'+idFonoaudiologo)
   }
 
-
+*/
 }
