@@ -1,4 +1,6 @@
+/*
 $.widget.bridge('uibutton', $.ui.button);
+*/
 
 //receive calls from typescript code to update the layouts
 var AdminLTE = (function() {
