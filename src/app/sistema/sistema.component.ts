@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Menu } from '../role-menu/menu';
 import { MENU } from '../models/menus';
+import { ActivatedRoute, Router } from '@angular/router';
 
 declare const gapi: any;
 
@@ -18,12 +19,13 @@ export class SistemaComponent implements OnInit {
   
   img: String;
   name: String;
+  id: String;
 
   public auth2: any;
 
   menus: Menu[];
 
-  constructor() { 
+  constructor(private route: ActivatedRoute, private router: Router,) { 
 
   }
 
@@ -34,6 +36,7 @@ export class SistemaComponent implements OnInit {
     
     this.img = localStorage.getItem('img');
     this.name = localStorage.getItem('name');
+    this.id = localStorage.getItem('id');
 
     this.menus = MENU;
 
@@ -55,11 +58,8 @@ export class SistemaComponent implements OnInit {
 
 
    openRoom(){
-    var new_window = window.open('https://hangouts.google.com/hangouts/_/jyg7ajkibnf6pkmp7fqernkt7ue',"Hangout",'fullscreen=yes');
-    
-    new_window.onunload = function(){
-      console.log("fechou");
-    }
+     console.log("user-id: "+this.id)
+    this.router.navigate(['/sistema/video/play'],{ queryParams: { id: this.id }});
    }
 }
 
