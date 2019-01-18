@@ -1,3 +1,7 @@
 .clearfix{
     clear:both;
 }
+
+.user-panel{
+    padding-bottom: 40px;
+}
