@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarComponent } from 'ng-fullcalendar';
-//import { Options } from 'fullcalendar';
+import { Options } from 'fullcalendar';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,7 +13,7 @@ declare var $:any;
 })
 
 export class CalendarioAgendaComponent implements OnInit {
-    calendarOptions;
+    calendarOptions:Options;
     events: any[];
     @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
     constructor(private http: HttpClient, private route: ActivatedRoute) { }
