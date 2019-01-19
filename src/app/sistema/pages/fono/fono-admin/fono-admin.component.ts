@@ -10,15 +10,12 @@ import { MatDialog } from "@angular/material";
 import { Fonoaudiologo } from '../../../../models/fonoaudiologo';
 import { QueryOptions } from '../../../../models/query-options';
 import { ResourceServiceInterface } from '../../../../services/resource.service.interface';
-//import { ResourceServiceInterface } from '../../../services/resource.service.interface';
 
 @Component({
   selector: 'app-fono-admin',
   templateUrl: './fono-admin.component.html',
   styleUrls: ['./fono-admin.component.css'],
-  providers:[{provide: 'ResourceServiceInterface', useClass: FonoaudiologoService}
-    ,
-  ]
+  providers:[{provide: 'ResourceServiceInterface', useClass: FonoaudiologoService},]
 })
 export class FonoAdminComponent implements OnInit {
 

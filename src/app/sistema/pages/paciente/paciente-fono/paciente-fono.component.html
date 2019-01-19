@@ -1,3 +1,55 @@
-<p>
-  paciente-fono works!
-</p>
+<section class="content-header">
+  <h1>
+    Fonoaudiólogos
+    <small>Tabela de Fonoaudiólogos</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a routerLink="/home/dash"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li>Fono</li>
+    <li class="active">Admin</li>
+  </ol>
+</section>
+
+
+<app-load [loading]="loading"></app-load>
+<!-- Main content -->
+<section class="content">
+    
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">fonoaudiólogos</h3> 
+          <button type="button" class="btn btn-default bt-novo" (click)="createPage()">Vincular Novo</button>        
+        </div><!-- /.box-header -->
+        <div class="box-body">
+          <table id="fonoaudiologos" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th >Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let f of fonos">
+                <td>{{f.dsc_nome}}</td>
+                <td align="center">
+                  <a [routerLink]="['/sistema/fonoaudiologo/ver']" 
+                    [queryParams]="{ id: f.id }">
+                    <i class="fa fa-eye" ></i>
+                  </a>
+
+                  <a (click)="console.log('video')">
+                     <i class="fa fa-pencil-square-o" ></i>
+                  </a>
+                </td>
+              
+              </tr>
+             
+            </tbody>
+          </table>
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+</section><!-- /.content -->
