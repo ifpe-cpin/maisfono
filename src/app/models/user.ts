@@ -1,11 +1,12 @@
 import { Resource } from './resource';
 import { Fonoaudiologo } from './fonoaudiologo';
-import { Paciente } from './paciente';
+import { Paciente } from "./Paciente";
 
 const FONOAUDIOLOGO=1;
 const PACIENTE = 2;
 
 export class User extends Resource{
+    frg_pessoa:number;
     email: string;
     photoUrl?: string;
     displayName?: string;

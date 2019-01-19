@@ -6,6 +6,7 @@ export class UsuarioSerializer {
       let user = new User();
 
       user.id = json.id
+      user.frg_pessoa = json.frg_pessoa
       user.photoUrl = json.photoUrl
       user.displayName = json.displayName
       user.email = json.email
@@ -21,6 +22,7 @@ export class UsuarioSerializer {
     toJson(user: User): any {
       let json = {
         "id":user.id,
+        "frg_pessoa":user.frg_pessoa,
         "email":user.email,
         "photoUrl":user.photoUrl,
         "displayName":user.displayName,

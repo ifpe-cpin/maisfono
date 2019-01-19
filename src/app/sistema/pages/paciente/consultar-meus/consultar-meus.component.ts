@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { PacienteService } from '../../../../services/paciente.service';
-import { Paciente } from '../../../../models/paciente';
+import { Paciente } from "../../../../models/Paciente";
 import {  HttpClient } from '@angular/common/http'; 
 
 @Component({

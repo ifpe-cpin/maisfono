@@ -9,8 +9,6 @@ import { User } from '../models/user';
 
 @Injectable()
 export class UserService extends ResourceService<User> implements ResourceServiceInterface<User>{
-  
-
   constructor(httpClient: HttpClient) {
     super(
       httpClient,

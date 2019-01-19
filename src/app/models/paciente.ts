@@ -1,6 +1,6 @@
 import { Resource } from "./resource";
 
-export class Paciente extends Resource{
+export class Paciente extends Resource {
     dsc_nome?: string;
     dsc_cpf?: string;
     //img_perfil?: string;
@@ -23,6 +23,6 @@ export class Paciente extends Resource{
     frg_municipionasc?: string;
     frg_nacionalidade?: string;
     frg_sexo?: string;
-    arr_deficiencia?:Array<any>;
-    arr_fonema?:Array<any>;
+    arr_deficiencia?: Array<any>;
+    arr_fonema?: Array<any>;
 }

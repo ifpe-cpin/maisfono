@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Paciente } from '../models/paciente';
-import 'rxjs/add/operator/map';
 import { ResourceService } from './resource.service';
-import { HttpClient } from '@angular/common/http';
-import { PacienteSerializer } from '../serializers/paciente.serializer';
-import { REQUEST_BASE_URL } from '../models/request';
 import { ResourceServiceInterface } from './resource.service.interface';
+import { HttpClient } from '@angular/common/http';
+import { REQUEST_BASE_URL } from '../models/request';
+import { PacienteSerializer } from '../serializers/paciente.serializer';
+import { Paciente } from "../models/paciente";
 
 
 

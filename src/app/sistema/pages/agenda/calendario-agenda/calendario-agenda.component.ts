@@ -1,27 +1,33 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef  } from '@angular/core';
+import { Calendario } from '../../../../models/calendario';
+import { CalendarioService } from '../../../../services/calendario.service';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
-import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-declare var $:any;
 
 @Component({
   selector: 'app-calendario-agenda',
   templateUrl: './calendario-agenda.component.html',
-  styleUrls: ['./calendario-agenda.component.css']
+  styleUrls: ['./calendario-agenda.component.css'],
+  providers: [CalendarioService]
+
 })
 
 export class CalendarioAgendaComponent implements OnInit {
-    calendarOptions: Options;
-    events: any[];
+    
     @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
-    constructor(private http: HttpClient, private route: ActivatedRoute) { }
+    constructor(private calendarioService:CalendarioService,
+                private route: ActivatedRoute,
+                private router: Router) { }
+
+    calendarOptions: Options;
+    events: Calendario;
+    loading:boolean;
 
     ngOnInit() {
-        this.getEventsCalendarRest().subscribe(data => {
-            this.events = <any>data
-        })
+        this.loading = true;
+        this.refreshData();
         
 
         this.calendarOptions = {
@@ -36,10 +42,26 @@ export class CalendarioAgendaComponent implements OnInit {
             events: this.events
           };
     }
-    
-    getEventsCalendarRest(){    
-        let idFonoaudiologo = 2;//this.route.snapshot.paramMap.get('id');
-        //passando como parametro o id do paciente e o id do fono
-        return this.http.get('http://localhost/slim/public/fonoaudiologo/calendario/'+idFonoaudiologo)
+
+    refreshData(){
+        
+        this.events = new Calendario();
+
+        this.route
+		.queryParams
+		.subscribe(params => {
+			// Defaults to 0 if no query param provided.
+			let id = localStorage.getItem('frg_pessoa');
+            console.log("Id do fono: "+ id);
+			if(id!= undefined){
+					this.calendarioService.read(id).subscribe(
+						events => this.events = events
+					);
+			}
+
+			
+		});
     }
+
+
 }
