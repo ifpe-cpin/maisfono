@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-videochamada',
@@ -13,19 +14,36 @@ export class VideochamadaComponent implements OnInit {
   videoEnabled: boolean = true;
   localStream: Stream
   remoteCalls: any = [];
+  id:String;
 
-  constructor(private agoraService: AngularAgoraRtcService) {
+  constructor(private agoraService: AngularAgoraRtcService,private route: ActivatedRoute,) {
     
     this.agoraService.createClient();
   }
 
   ngOnInit() {
+    this.id = "1000";
+    this.route
+		.queryParams
+		.subscribe(params => {
+			// Defaults to 0 if no query param provided.
+			let id = params['id'];
+
+			if(id!= undefined){
+					this.id = id;
+			}
+
+
+			
+    });
+    
+    //this.startCall()
   }
 
   // Add
   startCall() {
     this.activeCall = true;
-    this.agoraService.client.join(null, '1000', null, (uid) => {
+    this.agoraService.client.join(null, this.id, null, (uid) => {
       this.localStream = this.agoraService.createStream(uid, true, null, null, true, false);
       this.localStream.setVideoProfile('720p_3');
       this.subscribeToStreams();

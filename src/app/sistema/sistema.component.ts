@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Menu } from '../role-menu/menu';
 import { MENU } from '../models/menus';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../services/user.service';
+import { User } from '../models/user';
+import { ResourceServiceInterface } from '../services/resource.service.interface';
 
 declare const gapi: any;
 
@@ -8,7 +12,7 @@ declare const gapi: any;
   selector: 'app-home',
   templateUrl: './sistema.component.html',
   styleUrls: ['./sistema.component.css'],
-  providers: []
+  providers: [{provide: 'ResourceServiceInterface', useClass: UserService}]
 })
 
 export class SistemaComponent implements OnInit {
@@ -18,12 +22,15 @@ export class SistemaComponent implements OnInit {
   
   img: String;
   name: String;
+  id: String;
+  visible: String;
 
   public auth2: any;
 
   menus: Menu[];
 
-  constructor() { 
+  constructor(private route: ActivatedRoute, private router: Router,
+    @Inject('ResourceServiceInterface') private userService:ResourceServiceInterface<User>) { 
 
   }
 
@@ -34,11 +41,27 @@ export class SistemaComponent implements OnInit {
     
     this.img = localStorage.getItem('img');
     this.name = localStorage.getItem('name');
+    this.id = localStorage.getItem('id');
 
     this.menus = MENU;
 
+
+    this.showVideoChatButton();
+   
+
   }
 
+
+  private showVideoChatButton() {
+    this.userService.read(this.id).subscribe(user => {
+      if (user.isFonoaudiologo()) {
+        this.visible = "visible";
+      }
+      else {
+        this.visible = "hidden";
+      }
+    });
+  }
 
   public attachSignout() {
       
@@ -49,17 +72,12 @@ export class SistemaComponent implements OnInit {
     localStorage.setItem('roles',"");
 
     window.location.href = 'https://accounts.google.com/Logout?continue=https%3A%2F%2Fappengine.google.com%2F_ah%2Flogout%3Fcontinue=http%3A%2F%2Flocalhost%3A4200';
-      //auth.signOut().then(() => {
 
   }
 
 
    openRoom(){
-    var new_window = window.open('https://hangouts.google.com/hangouts/_/jyg7ajkibnf6pkmp7fqernkt7ue',"Hangout",'fullscreen=yes');
-    
-    new_window.onunload = function(){
-      console.log("fechou");
-    }
+    this.router.navigate(['/sistema/video/play'],{ queryParams: { id: this.id }});
    }
 }
 
