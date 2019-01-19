@@ -10,6 +10,7 @@ import { ConsultaComponent } from './consulta/consulta.component';
 import { ConsultarMeusComponent } from './consultar-meus/consultar-meus.component';
 import { PacienteEvolucaoComponent } from './paciente-evolucao/paciente-evolucao.component';
 import { PacienteLaudoComponent } from './paciente-laudo/paciente-laudo.component';
+import { PacienteFonoComponent } from './paciente-fono/paciente-fono.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { PacienteLaudoComponent } from './paciente-laudo/paciente-laudo.componen
   	ConsultaComponent, 
   	ConsultarMeusComponent, 
 	PacienteEvolucaoComponent,
-	PacienteLaudoComponent
+	PacienteLaudoComponent,
+	PacienteFonoComponent
   	]
 })
 export class PacienteModule { }
