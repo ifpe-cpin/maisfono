@@ -41,6 +41,9 @@ import { PacienteLaudoComponent } from './pages/paciente/paciente-laudo/paciente
 import { VideochamadaComponent } from '../videochamada/videochamada.component';
 import { UserCreateComponent } from './pages/user/user-create/user-create.component';
 import { ConsultaDisponibilidadeComponent } from './pages/agenda/consulta-disponibilidade/consulta-disponibilidade.component';
+import { PacienteComponent } from './pages/paciente/paciente.component';
+import { PacienteFonoComponent } from './pages/paciente/paciente-fono/paciente-fono.component';
+import { PacienteGuard } from '../core/paciente.guard';
 
 const homeRoutes = [
 		{path: 'sistema', component: SistemaComponent, children:[
@@ -55,6 +58,9 @@ const homeRoutes = [
 				{path: 'novo',component:UserCreateComponent},
 
 			]},
+			{path: 'paciente', component: PacienteComponent, children: [
+				{path: 'paciente-fono', component: PacienteFonoComponent, canActivate: [PacienteGuard]},]
+			},
 			{path: 'fonoaudiologo', component: FonoComponent, children: [
 
 				{path: 'novo', component: FonoFormComponent, canActivate: [FonoGuard]},
@@ -62,9 +68,6 @@ const homeRoutes = [
 				{path: 'admin', component: FonoAdminComponent, canActivate: [FonoGuard]},
 				{path: 'consulta', component: ConsultarFonoComponent, canActivate: [FonoGuard]},
 				{path: 'consultarMeusFonos', component: ConsultarMeusFonosComponent, canActivate: [FonoGuard]},
-				// {path: ':id/editar', component: FonoFormComponent}
-			//]},
-			//{path: 'paciente', component: PacienteComponent, children: [
 				{path: 'consultarPacientes', component: ConsultaComponent, canActivate: [FonoGuard]},
 				{path: 'consultarMeus', component: ConsultarMeusComponent, canActivate: [FonoGuard]},
 				{path: 'evolucao/:id', component: PacienteEvolucaoComponent, canActivate: [FonoGuard]},
@@ -76,7 +79,6 @@ const homeRoutes = [
 					{path: 'calendarioAgenda', component: CalendarioAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
 					{path: 'calendarioDisponibilidade', component: ConsultaDisponibilidadeComponent, canActivate: [AuthGuard,AdminGuard]},
 				]},
-				// {path: ':id/editar', component: FonoFormComponent}
 			]},
 			{path: 'jogos', component: JogosComponent, children: [
 				{path: 'listaJogos', component: ListaJogosComponent, canActivate: [AuthGuard,AdminGuard]},
