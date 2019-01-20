@@ -10,23 +10,26 @@ import { MatDialog } from '@angular/material';
 import { FonoaudiologoService } from '../../../../services/fonoaudiologo.service';
 import { QueryOptions } from '../../../../models/query-options';
 import { ConfirmDialogComponent } from '../../../../confirm-dialog/confirm-dialog.component';
+import { FonoaudiologoPaciente } from '../../../../models/fonoaudiologo-paciente';
+import { FonoaudiologoPacienteService } from '../../../../services/fonoaudiologo-paciente.service';
+import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-paciente-fono',
   templateUrl: './paciente-fono.component.html',
   styleUrls: ['./paciente-fono.component.css'],
-  providers:[{provide: 'ResourceServiceInterface', useClass: FonoaudiologoService}]
+  providers:[{provide: 'ResourceServiceInterface', useClass: FonoaudiologoPacienteService}]
 })
 export class PacienteFonoComponent implements OnInit {
 
   constructor(@Inject('ResourceServiceInterface') 
-              private fonoService:ResourceServiceInterface<Fonoaudiologo>,
+              private fonoPacienteService:ResourceServiceInterface<FonoaudiologoPaciente>,
   private router: Router,
   private chRef: ChangeDetectorRef,
   public dialog: MatDialog) { }
 
 
-  fonos: Fonoaudiologo[];
+  fonos: FonoaudiologoPaciente[];
   dataTable: any;
   loading:boolean;
 
@@ -62,7 +65,10 @@ export class PacienteFonoComponent implements OnInit {
    }
 
    refreshData(){
-    this.fonoService.list(new QueryOptions).
+     let queryMap = new Map<string,string>()
+     queryMap.set("idPaciente","1")
+
+     this.fonoPacienteService.list(new QueryOptions(queryMap)).
                 subscribe( fonos => {
                   this.fonos = fonos
                   
@@ -83,35 +89,13 @@ export class PacienteFonoComponent implements OnInit {
                   //this.dataTable = table.DataTable();
                 });
   }
-  delete(fono:Fonoaudiologo){
-    this.openDialog(fono);
-    
-  }
 
   createPage(){
     this.router.navigate(['/sistema/fonoaudiologo/novo']);
   }
 
-  
-
-  openDialog(fono:Fonoaudiologo): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: {msg: "Deseja realmente apagar esse registro?"}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if(result){
-
-        this.fonoService.delete(fono.id).subscribe(
-          result=>{
-              console.log(result)
-              this.refreshData();
-        }
-        );
-
-      }
-    });
+  videoCall(idFono){
+    this.router.navigate(['/sistema/video/play'],{ queryParams: { id: idFono }});
   }
 
 }

@@ -32,15 +32,15 @@
             </thead>
             <tbody>
                <tr *ngFor="let f of fonos">
-                <td>{{f.dsc_nome}}</td>
+                <td>{{f._fonoaudiologo_nome}}</td>
                 <td align="center">
                   <a [routerLink]="['/sistema/fonoaudiologo/ver']" 
-                    [queryParams]="{ id: f.id }">
-                    <i class="fa fa-eye" ></i>
+                    [queryParams]="{ id: f.id }" class="space-10">
+                    <i class="fa fa-search-plus" ></i>
                   </a>
-
-                  <a (click)="console.log('video')">
-                     <i class="fa fa-pencil-square-o" ></i>
+                   
+                  <a (click)="videoCall(f._user_id)">
+                     <i class="fa fa-video-camera" ></i>
                   </a>
                 </td>
               

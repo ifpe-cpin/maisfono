@@ -37,7 +37,7 @@ export class ResourceService<T extends Resource> implements ResourceServiceInter
       }
     
       list(queryOptions: QueryOptions): Observable<T[]> {
-          console.log(`${this.url}/${this.endpoint}/${queryOptions.toQueryString()}`)
+          console.log("URL"+`${this.url}/${this.endpoint}/${queryOptions.toQueryString()}`)
         return this.httpClient
           .get(`${this.url}/${this.endpoint}/${queryOptions.toQueryString()}`)
           .map((data: any) => {

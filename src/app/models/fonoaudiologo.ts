@@ -27,7 +27,9 @@ export class Fonoaudiologo extends Resource{
         frg_nasestado?: string;
         frg_nascidade?: string;
         frg_sexo?: string;
-        frg_tipo_sanguineo?: string;        
+        frg_tipo_sanguineo?: string;
+        
+        frg_user?:string;
         
         
 

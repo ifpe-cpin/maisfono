@@ -860,9 +860,111 @@ function updateAgenda($request) {
         echo json_encode($evolucao);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }  
+}
+
+/*______________________________________________________
+|                                                       |
+|                RESTS's - FonoaudiologoPaciente        |
+|______________________________________________________*/
+
+
+
+function getFonoaudiologosByPaciente(Request $request, Response $response) {
+    $idPaciente = $request->getAttribute('idPaciente');
+    
+    $sql = "SELECT fon_pac.frg_paciente,pes.dsc_nome as _fonoaudiologo_nome,usr.id as _user_id FROM tb_fonoaudiologo_paciente as fon_pac INNER JOIN tb_fonoaudiologo as fon
+    ON  fon_pac.frg_fonoaudiologo=fon.id
+    INNER JOIN tb_pessoa as pes ON fon.frg_pessoa=pes.id
+    INNER JOIN tb_user usr ON fon.frg_user=usr.id
+    WHERE fon_pac.frg_paciente=:idPaciente and fon_pac.flag_situacao=1";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":idPaciente", $idPaciente);
+
+        $stmt->execute();
+
+        $fonoaudiologos = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return  $response->withJson($fonoaudiologos, 200)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
+function addFonoaudiologoPaciente(Request $request, Response $response){
+    $fonoaudiologoPaciente = json_decode($request->getBody());
+    
+   
+    $sql = "INSERT INTO tb_fonoaudiologo_paciente(frg_fonoaudiologo,frg_paciente,flag_situacao) 
+                VALUES (:frg_fonoaudiologo,:frg_paciente,1)";
+    
+    
+
+    $db = getConnection();
+    try {
+        
+        $db->beginTransaction();
+
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindParam("frg_fonoaudiologo", $fonoaudiologoPaciente->frg_fonoaudiologo);
+        $stmt->bindParam("frg_paciente", $fonoaudiologoPaciente->frg_paciente);
+       
+        $stmt->execute();
+
+        $db->commit();
+        $db = null;
+
+        return $response->withJson($fonoaudiologoPaciente, 201)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        $db->rollBack();
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function updateFonoaudiologoPaciente(Request $request, Response $response) {
+    $fonoaudiologoPaciente = json_decode($request->getBody());
+
+    $id = $request->getAttribute('id');
+    
+    $sql = "UPDATE tb_fonoaudiologo_paciente 
+            SET 
+            flag_situacao = :flag_situacao,
+
+            WHERE id=:id";
+
+    
+
+        $db = getConnection();
+    try {
+        $db->beginTransaction();
+        
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam("flag_situacao", $fonoaudiologoPaciente->flag_situacao);
+        $stmt->bindParam("id", $fonoaudiologoPaciente->id);
+        
+
+        $stmt->execute();
+
+        $db->commit();
+        $db = null;
+        return $response->withJson($fonoaudiologoPaciente, 200)
+        ->withHeader('Content-type', 'application/json');
+    } catch(PDOException $e) {
+        $db->rollBack();
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}   
 
 // Catch-all route to serve a 404 Not Found page if none of the routes match
 // NOTE: make sure this route is defined last
@@ -870,6 +972,8 @@ $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($r
     $handler = $this->notFoundHandler; // handle using the default Slim page not found handler
     return $handler($req, $res);
 });
+
+
 
 /*______________________________________________________
 |                                                       |

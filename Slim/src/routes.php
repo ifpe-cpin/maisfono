@@ -45,6 +45,16 @@ $app->group('/fonoaudiologos', function () use ($app) {
     $app->delete('/{id}', 'deleteFonoaudiologo');
 });
 
+/*______________________________________________________
+|                                                       |
+|               Route's - FonoaudiologoPaciente                 |
+|______________________________________________________*/
+$app->group('/fonoaudiologosPacientes', function () use ($app) {
+    $app->get('/idPaciente/{idPaciente}', 'getFonoaudiologosByPaciente');
+    $app->post('', 'addFonoaudiologoPaciente');
+    $app->put('/{id}', 'updateFonoaudiologoPaciente');
+});
+
 
 /*______________________________________________________
 |                                                       |
