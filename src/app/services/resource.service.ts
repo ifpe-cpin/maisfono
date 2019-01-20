@@ -35,6 +35,23 @@ export class ResourceService<T extends Resource> implements ResourceServiceInter
             });
       }
     
+      listWithID(id: any): Observable<T> {
+        return this.httpClient
+          .get(`${this.url}/${this.endpoint}/${id}`)
+          .map((data: any) => {
+              return data
+            });
+      }
+
+      listWithID2(id: any): Observable<T> {
+        return this.httpClient
+          .get(`${this.url}/${this.endpoint}/${id}`)
+          .map((data: any) => {
+            console.log(data);
+            return this.serializer.fromJson(data) as T
+            });
+      }
+    
       list(queryOptions: QueryOptions): Observable<T[]> {
           console.log("URL"+`${this.url}/${this.endpoint}/${queryOptions.toQueryString()}`)
         return this.httpClient

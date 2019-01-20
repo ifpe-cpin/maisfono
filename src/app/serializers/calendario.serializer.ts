@@ -13,12 +13,11 @@ export class CalendarioSerializer {
     }
   
     toJson(calendario: Calendario): any {
-
       let json = {
-        "title": calendario.title,
-        "start": calendario.start,
-        "end": calendario.end,
-        "color": calendario.color,
+        "title":calendario.title,
+        "start":calendario.start,
+        "end":calendario.end,
+        "color":calendario.color
       }
       
       return json

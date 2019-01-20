@@ -73,6 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy{
                              fonos.forEach(
                                fono=>{
                                 localStorage.setItem('fonoId', fono.id); 
+                                localStorage.setItem('pessoaId', <any>fono.frg_pessoa); 
                                }
                              )
                         }

@@ -17,12 +17,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CalendarioAgendaComponent implements OnInit {
     
     @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+   
     constructor(private calendarioService:CalendarioService,
                 private route: ActivatedRoute,
                 private router: Router) { }
 
     calendarOptions: Options;
-    events: Calendario;
+    events;
     loading:boolean;
 
     ngOnInit() {
@@ -40,27 +41,25 @@ export class CalendarioAgendaComponent implements OnInit {
                 right: 'month,agendaWeek,agendaDay,listMonth'
             },
             events: this.events
-          };
+        };
     }
 
     refreshData(){
-        
-        this.events = new Calendario();
-
         this.route
 		.queryParams
 		.subscribe(params => {
 			// Defaults to 0 if no query param provided.
-			let id = localStorage.getItem('frg_pessoa');
-            console.log("Id do fono: "+ id);
+            let id = localStorage.getItem('pessoaId');
+            
 			if(id!= undefined){
-					this.calendarioService.read(id).subscribe(
-						events => this.events = events
-					);
-			}
-
-			
-		});
+                this.calendarioService.listWithID(id).subscribe(
+                    events => {
+                        this.events = events
+                    }
+                );
+            } 
+        });
+       
     }
 
 
