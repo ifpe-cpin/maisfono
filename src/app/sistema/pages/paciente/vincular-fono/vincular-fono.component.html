@@ -1,0 +1,38 @@
+
+
+<app-load [loading]="loading"></app-load>
+<!-- Main content -->
+<section class="content">
+    
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Vincular Fonoaudiólogos</h3> 
+        </div><!-- /.box-header -->
+        <div class="box-body">
+          <table id="vincular" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th >Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let f of fonos">
+                <td>{{f.dsc_nome}}</td>
+                <td align="center">
+                  <a (click)="vincular(f.id)">
+                    <i class="fa fa-plus" ></i>
+                  </a>
+                </td>
+              
+              </tr>
+             
+            </tbody>
+          </table>
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+</section><!-- /.content -->
