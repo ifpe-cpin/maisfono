@@ -38,8 +38,8 @@ $app->group('/evolucoes', function () use ($app) {
 |               Route's - Fonoaudiologo                 |
 |______________________________________________________*/
 $app->group('/fonoaudiologos', function () use ($app) {
-    $app->get('/', 'getFonoaudiologos');
     $app->get('/notIdPaciente/{notIdPaciente}', 'getFonoaudiologosNotPaciente');
+    $app->get('/', 'getFonoaudiologos');
     $app->get('/{id}', 'getFonoaudiologo');
     $app->get('/idUser/{idUser}', 'getFonoaudiologoByUser');
     
