@@ -1,18 +1,14 @@
 import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { ResourceServiceInterface } from '../../../../services/resource.service.interface';
-import { Fonoaudiologo } from '../../../../models/fonoaudiologo';
 
 declare var $:any;
 
 
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { FonoaudiologoService } from '../../../../services/fonoaudiologo.service';
 import { QueryOptions } from '../../../../models/query-options';
-import { ConfirmDialogComponent } from '../../../../confirm-dialog/confirm-dialog.component';
 import { FonoaudiologoPaciente } from '../../../../models/fonoaudiologo-paciente';
 import { FonoaudiologoPacienteService } from '../../../../services/fonoaudiologo-paciente.service';
-import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-paciente-fono',
@@ -32,6 +28,7 @@ export class PacienteFonoComponent implements OnInit {
   fonos: FonoaudiologoPaciente[];
   dataTable: any;
   loading:boolean;
+  vincularVisible: boolean;
   pacienteId: string;
 
   dataInfo = {
@@ -62,11 +59,15 @@ export class PacienteFonoComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.vincularVisible = false;
     this.pacienteId = localStorage.getItem("pacienteId")
     console.log(this.pacienteId)
     this.refreshData();
    }
 
+   changeData(){
+      this.refreshData()
+   }
    refreshData(){
      let queryMap = new Map<string,string>()
      queryMap.set("idPaciente",this.pacienteId)
@@ -99,6 +100,10 @@ export class PacienteFonoComponent implements OnInit {
 
   videoCall(idFono){
     this.router.navigate(['/sistema/video/play'],{ queryParams: { id: idFono }});
+  }
+
+  showVincular(){
+    this.vincularVisible = !this.vincularVisible
   }
 
 }
