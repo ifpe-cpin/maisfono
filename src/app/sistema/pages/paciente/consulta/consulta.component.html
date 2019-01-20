@@ -10,6 +10,7 @@
   </ol>
 </section>
 
+<!-- <app-load [loading]="loading"></app-load> -->
 <!-- Main content -->
 <section class="content"> 
   <div class="row">
@@ -17,6 +18,7 @@
       <div class="box">
         <div class="box-header">
           <h3 class="box-title">Pacientes</h3>
+          <button type="button" class="btn btn-default bt-novo" (click)="createPage()">Novo</button>  
         </div><!-- /.box-header -->
         <div class="box-body">
           <table id="pacientes" class="table table-bordered table-striped">
@@ -31,11 +33,11 @@
               </tr>
             </thead>
             <tbody>
-               <tr *ngFor="let lista of pacientes">
-                <td>{{lista.dsc_nome}}</td>
-                <td>{{lista.dsc_telefone1}}</td>
-                <td>{{lista.dsc_email}}</td>
-                <td></td>
+               <tr *ngFor="let pa of paciente">
+                <td>{{pa.dsc_nome}}</td>
+                <td>{{pa.dsc_telefone1}}</td>
+                <td>{{pa.dsc_email}}</td>
+                <td> 4</td>
                 <td>
                     <ng-container [ngSwitch]="lista.situacao">
                         <i *ngSwitchCase='1' class="fa fa-check-square bg-green"></i>

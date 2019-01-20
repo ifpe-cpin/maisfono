@@ -594,7 +594,7 @@ function deleteFonoaudiologo(Request $request, Response $response) {
 
 function getPacientes(Request $request, Response $response) {
     $sql = "SELECT pe.*, (
-                SELECT flag_situacao FROM tb_fonoaudiologo_paciente WHERE flag_situacao = 1 AND PE.ID = FRG_PACIENTE
+                SELECT flag_situacao FROM tb_fonoaudiologo_paciente WHERE flag_situacao = 1 AND pe.id = frg_paciente
             ) AS situacao
             FROM tb_pessoa pe 
             INNER JOIN tb_paciente pa 
@@ -606,6 +606,32 @@ function getPacientes(Request $request, Response $response) {
         $db = null;
         
         return json_encode($pacientes, JSON_UNESCAPED_UNICODE);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function getPaciente(Request $request, Response $response) {
+    $id = $request->getAttribute('id');
+    
+    $sql = "SELECT * FROM tb_pessoa pe 
+    INNER JOIN tb_paciente pa
+    ON pe.id = pa.frg_pessoa WHERE pa.id=:id";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+
+        $paciente = $stmt->fetch(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return  $response->withJson($paciente, 200)
+        ->withHeader('Content-type', 'application/json');
+
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }

@@ -38,7 +38,7 @@
     "angular2-google-login": "^1.0.9",
     "angular5-social-auth": "^1.0.11",
     "angular5-social-login": "^1.0.9",
-    "bootstrap": "3.3.7",
+    "bootstrap": "^4.2.1",
     "bootstrap-datepicker": "^1.7.1",
     "bootstrap3-wysihtml5-bower": "^0.3.3",
     "core-js": "^2.6.1",
