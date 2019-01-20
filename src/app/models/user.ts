@@ -1,6 +1,7 @@
 import { Resource } from './resource';
 import { Fonoaudiologo } from './fonoaudiologo';
-import { Paciente } from "./Paciente";
+import { Paciente } from './paciente';
+
 
 const FONOAUDIOLOGO=1;
 const PACIENTE = 2;

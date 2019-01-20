@@ -1,4 +1,5 @@
-import { Paciente } from "../models/Paciente";
+import { Paciente } from "../models/paciente";
+
 
 export class PacienteSerializer {
     fromJson(json: any): Paciente {

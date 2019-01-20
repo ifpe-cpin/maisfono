@@ -1,6 +1,6 @@
 import { OnInit, Component,AfterViewInit, Input,OnChanges,SimpleChanges } from '@angular/core';
 
-import { Paciente } from "../../../models/Paciente";
+import { Paciente } from "../../../models/paciente";
 
 
 declare const gapi: any;
