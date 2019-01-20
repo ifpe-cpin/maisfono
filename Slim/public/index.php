@@ -591,7 +591,6 @@ function deleteFonoaudiologo(Request $request, Response $response) {
 |                 RESTS's - Paciente                    |
 |______________________________________________________*/
 
-
 function getPacientes(Request $request, Response $response) {
     $sql = "SELECT pe.*, (
                 SELECT flag_situacao FROM tb_fonoaudiologo_paciente WHERE flag_situacao = 1 AND pe.id = frg_paciente
@@ -610,6 +609,7 @@ function getPacientes(Request $request, Response $response) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
+
 
 function getPaciente(Request $request, Response $response) {
     $id = $request->getAttribute('id');
@@ -636,6 +636,34 @@ function getPaciente(Request $request, Response $response) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
+
+
+function getPacienteByUser(Request $request, Response $response) {
+    $idUser = $request->getAttribute('idUser');
+    
+    $sql = "SELECT * FROM tb_pessoa p 
+    INNER JOIN tb_paciente pac 
+    ON p.id = pac.id_pessoa WHERE pac.frg_user=:idUser";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":idUser", $idUser);
+
+        $stmt->execute();
+
+        $paciente = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return  $response->withJson($paciente, 200)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
 
 
 

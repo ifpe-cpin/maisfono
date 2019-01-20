@@ -24,7 +24,7 @@
           <table id="pacientes" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>Nome</th>
+                <th>Nomes</th>
                 <th width="11%">Telefone</th>
                 <th width="11%">Email</th>
                 <th width="11%">Patologias</th>
@@ -33,11 +33,11 @@
               </tr>
             </thead>
             <tbody>
-               <tr *ngFor="let pa of paciente">
-                <td>{{pa.dsc_nome}}</td>
-                <td>{{pa.dsc_telefone1}}</td>
-                <td>{{pa.dsc_email}}</td>
-                <td> 4</td>
+              <tr *ngFor="let lista of pacientes">
+                <td>{{lista.dsc_nome}}</td>
+                <td>{{lista.dsc_telefone1}}</td>
+                <td>{{lista.dsc_email}}</td>
+                <td>?</td>
                 <td>
                     <ng-container [ngSwitch]="lista.situacao">
                         <i *ngSwitchCase='1' class="fa fa-check-square bg-green"></i>
