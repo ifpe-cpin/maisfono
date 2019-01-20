@@ -70,6 +70,8 @@ export class SistemaComponent implements OnInit {
     localStorage.setItem('img',"");
     localStorage.setItem('name',"");
     localStorage.setItem('roles',"");
+    localStorage.setItem('fonoId',"");
+    localStorage.setItem('pacienteId',"");
 
     window.location.href = 'https://accounts.google.com/Logout?continue=https%3A%2F%2Fappengine.google.com%2F_ah%2Flogout%3Fcontinue=http%3A%2F%2Flocalhost%3A4200';
 

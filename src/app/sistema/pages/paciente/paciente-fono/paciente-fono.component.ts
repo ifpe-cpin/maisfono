@@ -1,33 +1,38 @@
-import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
-import { FonoaudiologoService } from '../../../../services/fonoaudiologo.service';
-import { Router } from '@angular/router';
-import { ConfirmDialogComponent } from '../../../../confirm-dialog/confirm-dialog.component';
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
+import { ResourceServiceInterface } from '../../../../services/resource.service.interface';
+import { Fonoaudiologo } from '../../../../models/fonoaudiologo';
 
 declare var $:any;
 
 
-import { MatDialog } from "@angular/material";
-import { Fonoaudiologo } from '../../../../models/fonoaudiologo';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { FonoaudiologoService } from '../../../../services/fonoaudiologo.service';
 import { QueryOptions } from '../../../../models/query-options';
-import { ResourceServiceInterface } from '../../../../services/resource.service.interface';
+import { ConfirmDialogComponent } from '../../../../confirm-dialog/confirm-dialog.component';
+import { FonoaudiologoPaciente } from '../../../../models/fonoaudiologo-paciente';
+import { FonoaudiologoPacienteService } from '../../../../services/fonoaudiologo-paciente.service';
+import { query } from '@angular/animations';
 
 @Component({
-  selector: 'app-fono-admin',
-  templateUrl: './fono-admin.component.html',
-  styleUrls: ['./fono-admin.component.css'],
-  providers:[{provide: 'ResourceServiceInterface', useClass: FonoaudiologoService},]
+  selector: 'app-paciente-fono',
+  templateUrl: './paciente-fono.component.html',
+  styleUrls: ['./paciente-fono.component.css'],
+  providers:[{provide: 'ResourceServiceInterface', useClass: FonoaudiologoPacienteService}]
 })
-export class FonoAdminComponent implements OnInit {
+export class PacienteFonoComponent implements OnInit {
 
-  constructor(
-    @Inject('ResourceServiceInterface') private fonoService:ResourceServiceInterface<Fonoaudiologo>,
-    private router: Router,
-    private chRef: ChangeDetectorRef,
-    public dialog: MatDialog) { }
+  constructor(@Inject('ResourceServiceInterface') 
+              private fonoPacienteService:ResourceServiceInterface<FonoaudiologoPaciente>,
+  private router: Router,
+  private chRef: ChangeDetectorRef,
+  public dialog: MatDialog) { }
 
-  fonos: Fonoaudiologo[];
+
+  fonos: FonoaudiologoPaciente[];
   dataTable: any;
   loading:boolean;
+  pacienteId: string;
 
   dataInfo = {
     "language":{
@@ -56,12 +61,17 @@ export class FonoAdminComponent implements OnInit {
   };
 
   ngOnInit() {
-   this.loading = true;
-   this.refreshData();
-  }
-  
-  refreshData(){
-    this.fonoService.list(new QueryOptions).
+    this.loading = true;
+    this.pacienteId = localStorage.getItem("pacienteId")
+    console.log(this.pacienteId)
+    this.refreshData();
+   }
+
+   refreshData(){
+     let queryMap = new Map<string,string>()
+     queryMap.set("idPaciente",this.pacienteId)
+
+     this.fonoPacienteService.list(new QueryOptions(queryMap)).
                 subscribe( fonos => {
                   this.fonos = fonos
                   
@@ -82,35 +92,13 @@ export class FonoAdminComponent implements OnInit {
                   //this.dataTable = table.DataTable();
                 });
   }
-  delete(fono:Fonoaudiologo){
-    this.openDialog(fono);
-    
-  }
 
   createPage(){
     this.router.navigate(['/sistema/fonoaudiologo/novo']);
   }
 
-  
-
-  openDialog(fono:Fonoaudiologo): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: {msg: "Deseja realmente apagar esse registro?"}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if(result){
-
-        this.fonoService.delete(fono.id).subscribe(
-          result=>{
-              console.log(result)
-              this.refreshData();
-        }
-        );
-
-      }
-    });
+  videoCall(idFono){
+    this.router.navigate(['/sistema/video/play'],{ queryParams: { id: idFono }});
   }
 
 }

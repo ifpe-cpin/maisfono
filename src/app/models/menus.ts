@@ -17,6 +17,24 @@ let admin = {
     ]
 };
 
+let paciente = {
+    role:"paciente",
+    titulo:"Paciente",
+    categorias:[
+        {
+            nome:"Fono",
+            icon: "fa fa-user",
+            itens:[
+                {
+                    nome:"Admin",
+                    url:"/sistema/paciente/paciente-fono",
+                    icone:"fa fa-circle-o"
+                },
+            ]
+        },
+    ]
+};
+
 
 
 
@@ -82,7 +100,7 @@ let fono = {
 
 let custom = {
     role: CUSTOM,
-    titulo:"",
+    titulo:"Geral",
     categorias:[
         {
             nome:"Video",
@@ -100,4 +118,4 @@ let custom = {
 };
 
 
-export const MENU: Menu[] =[admin,fono,custom]; 
+export const MENU: Menu[] =[admin,fono,paciente,custom]; 

@@ -44,6 +44,7 @@ import {
   LinkedinLoginProvider
 } from "angular5-social-auth";
 
+
 // Configs 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -80,7 +81,7 @@ const agoraConfig: AgoraConfig = {
     LoginComponent,
     PerfilComponent,
     DashboardComponent,
-    MeusDadosComponent
+    MeusDadosComponent,
   ],
   entryComponents:[ConfirmDialogComponent],
   imports: [

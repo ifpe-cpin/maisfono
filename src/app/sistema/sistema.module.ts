@@ -19,7 +19,6 @@ import { VideochamadaComponent } from '../videochamada/videochamada.component';
 @NgModule({
   imports: [
     CommonModule,
-    PacienteModule,
     HomeRoutingModule,
     FullCalendarModule
    

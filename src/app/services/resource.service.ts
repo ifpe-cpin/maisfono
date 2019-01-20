@@ -31,13 +31,12 @@ export class ResourceService<T extends Resource> implements ResourceServiceInter
         return this.httpClient
           .get(`${this.url}/${this.endpoint}/${id}`)
           .map((data: any) =>{
-              console.log(`${this.url}/${this.endpoint}/${id}`)
               return this.serializer.fromJson(data) as T
             });
       }
     
       list(queryOptions: QueryOptions): Observable<T[]> {
-          console.log(`${this.url}/${this.endpoint}/${queryOptions.toQueryString()}`)
+          console.log("URL"+`${this.url}/${this.endpoint}/${queryOptions.toQueryString()}`)
         return this.httpClient
           .get(`${this.url}/${this.endpoint}/${queryOptions.toQueryString()}`)
           .map((data: any) => {

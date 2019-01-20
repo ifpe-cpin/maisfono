@@ -40,9 +40,20 @@ $app->group('/evolucoes', function () use ($app) {
 $app->group('/fonoaudiologos', function () use ($app) {
     $app->get('/', 'getFonoaudiologos');
     $app->get('/{id}', 'getFonoaudiologo');
+    $app->get('/idUser/{idUser}', 'getFonoaudiologoByUser');
     $app->post('', 'addFonoaudiologo');
     $app->put('/{id}', 'updateFonoaudiologo');
     $app->delete('/{id}', 'deleteFonoaudiologo');
+});
+
+/*______________________________________________________
+|                                                       |
+|               Route's - FonoaudiologoPaciente                 |
+|______________________________________________________*/
+$app->group('/fonoaudiologosPacientes', function () use ($app) {
+    $app->get('/idPaciente/{idPaciente}', 'getFonoaudiologosByPaciente');
+    $app->post('', 'addFonoaudiologoPaciente');
+    $app->put('/{id}', 'updateFonoaudiologoPaciente');
 });
 
 
@@ -53,6 +64,7 @@ $app->group('/fonoaudiologos', function () use ($app) {
 $app->group('/pacientes', function () use ($app) {
     $app->get('/', 'getPacientes');
     $app->get('/{id}', 'getPaciente');
+    $app->get('/idUser/{idUser}', 'getPacienteByUser');
     $app->post('', 'addPaciente');
     $app->put('/{id}', 'updatePaciente');
     $app->delete('/{id}', 'deletePaciente');
