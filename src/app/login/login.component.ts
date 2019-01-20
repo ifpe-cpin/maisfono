@@ -4,13 +4,19 @@ import {AuthService, GoogleLoginProvider} from 'angular5-social-auth';
 import { UserService } from '../services/user.service';
 import { ResourceServiceInterface } from '../services/resource.service.interface';
 import { User } from '../models/user';
+import { FonoaudiologoService } from '../services/fonoaudiologo.service';
+import { PacienteService } from '../services/paciente.service';
+import { Fonoaudiologo } from '../models/fonoaudiologo';
+import { Paciente } from '../models/paciente';
+import { QueryOptions } from '../models/query-options';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [AuthService,{provide: 'ResourceServiceInterface', useClass: UserService}]
+  providers: [AuthService, FonoaudiologoService,PacienteService,
+  {provide: 'ResourceServiceInterface', useClass: UserService},]
 })
 export class LoginComponent implements OnInit, OnDestroy{
   
@@ -18,7 +24,9 @@ export class LoginComponent implements OnInit, OnDestroy{
   body: HTMLBodyElement = document.getElementsByTagName('body')[0];
   user:User;
 
-  constructor(@Inject('ResourceServiceInterface') 
+  constructor(private fonoService:FonoaudiologoService,
+              private pacienteService:PacienteService,
+              @Inject('ResourceServiceInterface') 
               private userService:ResourceServiceInterface<User>,
   private socialAuthService: AuthService, private router: Router){ 
 
@@ -52,14 +60,52 @@ export class LoginComponent implements OnInit, OnDestroy{
         this.userService.read(userData.id).subscribe(
           user => {
               if(user.id!=undefined){
-                console.log(user)
+
+                this.user.tipo = user.tipo;
+                
+                if(this.user.isFonoaudiologo()){
+                  
+                    let queryMap = new Map<string,string>()
+                    queryMap.set("idUser",user.id)
+
+                    this.fonoService.list(new QueryOptions(queryMap)).subscribe(
+                        fonos => {
+                             fonos.forEach(
+                               fono=>{
+                                localStorage.setItem('fonoId', fono.id); 
+                               }
+                             )
+                        }
+                    )
+                }else{
+                  
+                    let queryMap = new Map<string,string>()
+                    queryMap.set("idUser",user.id)
+
+                    this.pacienteService.list(new QueryOptions(queryMap)).subscribe(
+                        pacientes => {
+                          pacientes.forEach(
+                            paciente=>{
+                             localStorage.setItem('pacienteId', paciente.id); 
+                            }
+                          )
+                        }
+                    )
+                }
+
                 localStorage.setItem('roles', user.roles.toString());
+                
+                
+
+                
                 this.router.navigate(['/sistema/dash'],);
               }else{
                 console.log({queryParams:this.user})
                 this.router.navigate(['user-create'],{queryParams:this.user});
               }
           }
+
+          
         );
         
 

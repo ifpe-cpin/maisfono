@@ -31,7 +31,6 @@ export class ResourceService<T extends Resource> implements ResourceServiceInter
         return this.httpClient
           .get(`${this.url}/${this.endpoint}/${id}`)
           .map((data: any) =>{
-              console.log(`${this.url}/${this.endpoint}/${id}`)
               return this.serializer.fromJson(data) as T
             });
       }

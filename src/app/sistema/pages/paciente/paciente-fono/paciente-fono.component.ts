@@ -32,6 +32,7 @@ export class PacienteFonoComponent implements OnInit {
   fonos: FonoaudiologoPaciente[];
   dataTable: any;
   loading:boolean;
+  pacienteId: string;
 
   dataInfo = {
     "language":{
@@ -61,12 +62,14 @@ export class PacienteFonoComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.pacienteId = localStorage.getItem("pacienteId")
+    console.log(this.pacienteId)
     this.refreshData();
    }
 
    refreshData(){
      let queryMap = new Map<string,string>()
-     queryMap.set("idPaciente","1")
+     queryMap.set("idPaciente",this.pacienteId)
 
      this.fonoPacienteService.list(new QueryOptions(queryMap)).
                 subscribe( fonos => {

@@ -549,6 +549,32 @@ function getFonoaudiologo(Request $request, Response $response) {
     }
 }
 
+function getFonoaudiologoByUser(Request $request, Response $response) {
+    $idUser = $request->getAttribute('idUser');
+    
+    $sql = "SELECT * FROM tb_pessoa p 
+    INNER JOIN tb_fonoaudiologo f 
+    ON p.id = f.frg_pessoa WHERE f.frg_user=:idUser";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":idUser", $idUser);
+
+        $stmt->execute();
+
+        $fonoaudiologo = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return  $response->withJson($fonoaudiologo, 200)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
 function deleteFonoaudiologo(Request $request, Response $response) {
 	$id = $request->getAttribute('id');
     $sqlFono = "DELETE FROM tb_fonoaudiologo WHERE id=:id";
@@ -606,6 +632,32 @@ function getPacientes(Request $request, Response $response) {
         $db = null;
         
         return json_encode($pacientes, JSON_UNESCAPED_UNICODE);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function getPacienteByUser(Request $request, Response $response) {
+    $idUser = $request->getAttribute('idUser');
+    
+    $sql = "SELECT * FROM tb_pessoa p 
+    INNER JOIN tb_paciente pac 
+    ON p.id = pac.id_pessoa WHERE pac.frg_user=:idUser";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":idUser", $idUser);
+
+        $stmt->execute();
+
+        $paciente = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return  $response->withJson($paciente, 200)
+        ->withHeader('Content-type', 'application/json');
+
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
