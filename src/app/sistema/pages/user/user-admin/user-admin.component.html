@@ -27,13 +27,15 @@
             <thead>
               <tr>
                 <th>Nome</th>
-                <th >E-mail</th>
-                <th >Ações</th>
+                <th>Tipo</th>
+                <th width="21%">E-mail</th>
+                <th width="11%">Ações</th>
               </tr>
             </thead>
             <tbody>
                <tr *ngFor="let u of users">
                 <td>{{u.displayName}}</td>
+                <td>{{u.tipo}}</td>
                 <td>{{u.email}}</td>
                 <td align="center">
                   <a [routerLink]="['/sistema/user/ver']" 

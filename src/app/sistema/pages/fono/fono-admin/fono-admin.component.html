@@ -16,26 +16,27 @@
   <section class="content">
       
     <div class="row">
-      <div class="col-xs-12">
-        <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">fonoaudiólogos</h3>
-            <button type="button" class="btn btn-default bt-novo" (click)="createPage()">Novo</button>
-            
-          </div><!-- /.box-header -->
+        <div class="col-xs-12">
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">fonoaudiólogos</h3>
+                <button type="button" class="btn btn-default bt-novo" (click)="createPage()">Novo</button>            
+              </div><!-- /.box-header -->
           <div class="box-body">
             <table id="fonoaudiologos" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Nome</th>
-                  <th >CPF</th>
-                  <th >Ações</th>
+                  <th>Nomes</th>
+                  <th>CPF</th>
+                  <th width="21%">Telefone</th>
+                  <th width="11%">Ações</th>
                 </tr>
               </thead>
               <tbody>
                  <tr *ngFor="let f of fonos">
-                  <td>{{f.dsc_nome}}</td>
-                  <td>{{f.dsc_cpf}}</td>
+                  <td >{{f.dsc_nome}}</td>
+                  <td >{{f.dsc_cpf}}</td>
+                  <td >{{f.dsc_telefone1}}</td>
                   <td align="center">
                     <a [routerLink]="['/sistema/fonoaudiologo/ver']" 
                       [queryParams]="{ id: f.id }">
@@ -49,15 +50,12 @@
                        [queryParams]="{ id: f.id }">
                        <i class="fa fa-pencil-square-o" ></i>
                     </a>
-                  </td>
-                
-                </tr>
-               
+                  </td>                
+                </tr>               
               </tbody>
             </table>
           </div><!-- /.box-body -->
         </div><!-- /.box -->
       </div><!-- /.col -->
     </div><!-- /.row -->
-  </section><!-- /.content -->
-  
+  </section><!-- /.content -->  
