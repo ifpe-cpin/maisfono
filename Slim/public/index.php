@@ -14,10 +14,6 @@ if (PHP_SAPI == 'cli-server') {
     }
 }
 
-//header('Access-Control-Allow-Origin: *');
-//header('Access-Control-Allow-Methods: PUT, POST, GET, DELETE,OPTIONS');
-//header('always_populate_raw_post_data: -1');
-
 require __DIR__ . '/../vendor/autoload.php';
 
 session_start();
@@ -35,17 +31,6 @@ require __DIR__ . '/../src/middleware.php';
 // Register routes
 require __DIR__ . '/../src/routes.php';
 
-
-
-//header('Access-Control-Allow-Origin: *');
-//header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-
-/*$corsOptions = array(
-    "origin" => "*",
-    //"exposeHeaders" => array("Content-Type","Access-Control-Allow-Headers", "X-Requested-With", "X-authentication", "X-client"),
-    "allowMethods" => array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS')
-);
-$cors = new \CorsSlim\CorsSlim($corsOptions);*/
 
 $app->options('/{routes:.+}', function ($request, $response, $args) {
     return $response;
