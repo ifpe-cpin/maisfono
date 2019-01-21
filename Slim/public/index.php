@@ -14,10 +14,6 @@ if (PHP_SAPI == 'cli-server') {
     }
 }
 
-//header('Access-Control-Allow-Origin: *');
-//header('Access-Control-Allow-Methods: PUT, POST, GET, DELETE,OPTIONS');
-//header('always_populate_raw_post_data: -1');
-
 require __DIR__ . '/../vendor/autoload.php';
 
 session_start();
@@ -35,17 +31,6 @@ require __DIR__ . '/../src/middleware.php';
 // Register routes
 require __DIR__ . '/../src/routes.php';
 
-
-
-//header('Access-Control-Allow-Origin: *');
-//header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-
-/*$corsOptions = array(
-    "origin" => "*",
-    //"exposeHeaders" => array("Content-Type","Access-Control-Allow-Headers", "X-Requested-With", "X-authentication", "X-client"),
-    "allowMethods" => array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS')
-);
-$cors = new \CorsSlim\CorsSlim($corsOptions);*/
 
 $app->options('/{routes:.+}', function ($request, $response, $args) {
     return $response;
@@ -722,13 +707,14 @@ function getPacienteByUser(Request $request, Response $response) {
 
 
 
-
 /*______________________________________________________
 |                                                       |
-|          RESTS's - Fonoaudiologo - Agenda             |
+|        RESTS's - Fonoaudiologo - Calendário           |
 |______________________________________________________*/
 
-function getCalendario($response) {
+function getCalendario(Request $request, Response $response) {
+    $id= $request->getAttribute('id');
+
     $sql = "SELECT p.dsc_nome as title, 
            CONCAT(d.dat_atendimento, ' ', d.hor_inicio) as start, 
            CONCAT(d.dat_atendimento, ' ', d.hor_fim) as end, 
@@ -746,20 +732,29 @@ function getCalendario($response) {
                 ON a.fk_agenda_disponibilidade =  d.id 
                 INNER JOIN aux_status s
                 ON a.fk_status = s.id 
-                WHERE d.fk_fonoaudiologo = 2";
+                WHERE d.fk_fonoaudiologo=:id";
 
     try {
-        $stmt = getConnection()->query($sql);
-        $eventsCalendario = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+
+        $events = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
         
-        return json_encode($eventsCalendario, JSON_UNESCAPED_UNICODE);
+        return  $response->withJson($events, 200)
+        ->withHeader('Content-type', 'application/json');
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
-function getCalendarAgenda($response) {
+function getCalendarAgenda(Request $request, Response $response) {
+    $id= $request->getAttribute('id');
+
     $sql = "SELECT p.dsc_nome as paciente, 
                    d.dat_atendimento as data,
                    d.hor_inicio as hora_inicio, 
@@ -773,37 +768,52 @@ function getCalendarAgenda($response) {
                 ON a.fk_agenda_disponibilidade =  d.id 
                 INNER JOIN aux_status s
                 ON a.fk_status = s.id 
-                WHERE d.fk_fonoaudiologo = 2";
+                WHERE d.fk_fonoaudiologo=:id";
 
     try {
-        $stmt = getConnection()->query($sql);
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+
         $eventsAgenda = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
         
-        return json_encode($eventsAgenda, JSON_UNESCAPED_UNICODE);
+    return json_encode($eventsAgenda, JSON_UNESCAPED_UNICODE);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
-function getCalendarDisponibilidade($response) {
+function getCalendarDisponibilidade(Request $request, Response $response) {
+    $id= $request->getAttribute('id');
+
     $sql = "SELECT d.id as id, 
                    d.dat_atendimento as data, 
                    d.hor_inicio as hora_inicio,
                    d.hor_fim as hora_fim
             FROM  tb_agenda_disponibilidade d
-            WHERE d.fk_fonoaudiologo = 2";
+            WHERE d.fk_fonoaudiologo=:id";
 
     try {
-        $stmt = getConnection()->query($sql);
-        $eventsDisponibilidade = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+
+        $fonoaudiologoDisponibilidade = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
         
-        return json_encode($eventsDisponibilidade, JSON_UNESCAPED_UNICODE);
+        return json_encode($fonoaudiologoDisponibilidade, JSON_UNESCAPED_UNICODE);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
+
 
 
 
