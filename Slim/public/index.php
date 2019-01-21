@@ -622,7 +622,10 @@ function deleteFonoaudiologo(Request $request, Response $response) {
 
 function getPacientes(Request $request, Response $response) {
     $sql = "SELECT pe.*, (
-                SELECT flag_situacao FROM tb_fonoaudiologo_paciente WHERE flag_situacao = 1 AND PE.ID = FRG_PACIENTE
+                SELECT flag_situacao 
+                FROM tb_fonoaudiologo_paciente 
+                WHERE flag_situacao = 1 and pe.id = frg_paciente
+                GROUP BY frg_paciente
             ) AS situacao
             FROM tb_pessoa pe 
             INNER JOIN tb_paciente pa 
@@ -667,13 +670,14 @@ function getPacienteByUser(Request $request, Response $response) {
 
 
 
-
 /*______________________________________________________
 |                                                       |
-|          RESTS's - Fonoaudiologo - Agenda             |
+|        RESTS's - Fonoaudiologo - Calendário           |
 |______________________________________________________*/
 
-function getCalendario($response) {
+function getCalendario(Request $request, Response $response) {
+    $id= $request->getAttribute('id');
+
     $sql = "SELECT p.dsc_nome as title, 
            CONCAT(d.dat_atendimento, ' ', d.hor_inicio) as start, 
            CONCAT(d.dat_atendimento, ' ', d.hor_fim) as end, 
@@ -691,20 +695,29 @@ function getCalendario($response) {
                 ON a.fk_agenda_disponibilidade =  d.id 
                 INNER JOIN aux_status s
                 ON a.fk_status = s.id 
-                WHERE d.fk_fonoaudiologo = 2";
+                WHERE d.fk_fonoaudiologo=:id";
 
     try {
-        $stmt = getConnection()->query($sql);
-        $eventsCalendario = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+
+        $events = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
         
-        return json_encode($eventsCalendario, JSON_UNESCAPED_UNICODE);
+        return  $response->withJson($events, 200)
+        ->withHeader('Content-type', 'application/json');
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
-function getCalendarAgenda($response) {
+function getCalendarAgenda(Request $request, Response $response) {
+    $id= $request->getAttribute('id');
+
     $sql = "SELECT p.dsc_nome as paciente, 
                    d.dat_atendimento as data,
                    d.hor_inicio as hora_inicio, 
@@ -718,37 +731,52 @@ function getCalendarAgenda($response) {
                 ON a.fk_agenda_disponibilidade =  d.id 
                 INNER JOIN aux_status s
                 ON a.fk_status = s.id 
-                WHERE d.fk_fonoaudiologo = 2";
+                WHERE d.fk_fonoaudiologo=:id";
 
     try {
-        $stmt = getConnection()->query($sql);
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+
         $eventsAgenda = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
         
-        return json_encode($eventsAgenda, JSON_UNESCAPED_UNICODE);
+    return json_encode($eventsAgenda, JSON_UNESCAPED_UNICODE);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
-function getCalendarDisponibilidade($response) {
+function getCalendarDisponibilidade(Request $request, Response $response) {
+    $id= $request->getAttribute('id');
+
     $sql = "SELECT d.id as id, 
                    d.dat_atendimento as data, 
                    d.hor_inicio as hora_inicio,
                    d.hor_fim as hora_fim
             FROM  tb_agenda_disponibilidade d
-            WHERE d.fk_fonoaudiologo = 2";
+            WHERE d.fk_fonoaudiologo=:id";
 
     try {
-        $stmt = getConnection()->query($sql);
-        $eventsDisponibilidade = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+
+        $fonoaudiologoDisponibilidade = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
         
-        return json_encode($eventsDisponibilidade, JSON_UNESCAPED_UNICODE);
+        return json_encode($fonoaudiologoDisponibilidade, JSON_UNESCAPED_UNICODE);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
+
 
 
 
