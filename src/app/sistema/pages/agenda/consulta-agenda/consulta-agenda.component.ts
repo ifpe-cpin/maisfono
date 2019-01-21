@@ -19,7 +19,7 @@ export class ConsultaAgendaComponent implements OnInit {
               private route: ActivatedRoute,
               private chRef: ChangeDetectorRef) { }
  
-  agenda: Agenda[];
+  agenda;//: Agenda[];
   dataTable: any;
   loading:boolean;
 
