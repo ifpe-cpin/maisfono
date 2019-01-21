@@ -593,7 +593,8 @@ function deleteFonoaudiologo(Request $request, Response $response) {
 
 function getPacientes(Request $request, Response $response) {
     $sql = "SELECT pe.*, (
-                SELECT flag_situacao FROM tb_fonoaudiologo_paciente WHERE flag_situacao = 1 AND pe.id = frg_paciente
+                SELECT flag_situacao FROM tb_fonoaudiologo_paciente WHERE flag_situacao = 1 and pe.id = frg_paciente
+                GROUP BY frg_paciente
             ) AS situacao
             FROM tb_pessoa pe 
             INNER JOIN tb_paciente pa 
