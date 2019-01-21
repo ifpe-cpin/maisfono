@@ -678,33 +678,6 @@ function getPaciente(Request $request, Response $response) {
 }
 
 
-function getPacienteByUser(Request $request, Response $response) {
-    $idUser = $request->getAttribute('idUser');
-    
-    $sql = "SELECT * FROM tb_pessoa p 
-    INNER JOIN tb_paciente pac 
-    ON p.id = pac.id_pessoa WHERE pac.frg_user=:idUser";
-
-    try {
-        $db = getConnection();
-        $stmt = $db->prepare($sql);
-        
-        $stmt->bindParam(":idUser", $idUser);
-
-        $stmt->execute();
-
-        $paciente = $stmt->fetchAll(PDO::FETCH_OBJ);
-        $db = null;
-        
-        return  $response->withJson($paciente, 200)
-        ->withHeader('Content-type', 'application/json');
-
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
-
-
 
 
 /*______________________________________________________
