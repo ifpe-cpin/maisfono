@@ -66,7 +66,7 @@ export class ConsultaAgendaComponent implements OnInit {
 			if(id!= undefined){
                 this.agendaService.listWithID2(id).
                 subscribe(agenda => {
-                        this.agenda = agenda
+                        this.agenda.push(agenda)
 
                         this.chRef.detectChanges();
                         
