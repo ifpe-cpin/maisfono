@@ -523,58 +523,7 @@ function getFonoaudiologos(Request $request, Response $response) {
     
 }
 
-function getFonoaudiologosNotPaciente(Request $request, Response $response) {
-    $idPaciente = $request->getAttribute('notIdPaciente');
-    
-    $sql = "SELECT fon.id as id,fon.frg_pessoa,
-    fon.num_crf,
-    fon.arr_areas,
-    fon.frg_grau_formacao,
-    fon.arr_cursos,
-    fon.frg_user,
-    pes.dsc_nome,
-    pes.dat_nascimento,
-    pes.dsc_cpf,
-    pes.dsc_email,
-    pes.dsc_endbairro,
-    pes.dsc_endcep,
-    pes.dsc_endnum,
-    pes.dsc_endrua,
-    pes.dsc_nomemae,
-    pes.dsc_nomepai,
-    pes.dsc_telefone1,
-    pes.dsc_telefone2,
-    pes.frg_cor,
-    pes.frg_endestado,
-    pes.frg_endcidade,
-    pes.frg_estado_civil,
-    pes.frg_nasestado,
-    pes.frg_nascidade,
-    pes.frg_sexo,
-    pes.frg_tipo_sanguineo
-    FROM `tb_fonoaudiologo` fon INNER JOIN tb_pessoa AS pes ON fon.frg_pessoa=pes.id
-    where fon.id NOT IN
-     (SELECT fon_pac.frg_fonoaudiologo FROM tb_fonoaudiologo_paciente AS fon_pac 
-     WHERE fon_pac.frg_paciente=:idPaciente AND fon_pac.flag_situacao=1) ";
 
-    try {
-        $db = getConnection();
-        $stmt = $db->prepare($sql);
-        
-        $stmt->bindParam(":idPaciente", $idPaciente);
-
-        $stmt->execute();
-
-        $fonoaudiologos = $stmt->fetchAll(PDO::FETCH_OBJ);
-        $db = null;
-        
-        return  $response->withJson($fonoaudiologos, 200)
-        ->withHeader('Content-type', 'application/json');
-
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
 
 function getFonoaudiologo(Request $request, Response $response) {
     $id = $request->getAttribute('id');
@@ -974,6 +923,58 @@ function updateAgenda($request) {
 |______________________________________________________*/
 
 
+function getFonoaudiologosNotPaciente(Request $request, Response $response) {
+    $idPaciente = $request->getAttribute('notIdPaciente');
+    
+    $sql = "SELECT fon.id as id,fon.frg_pessoa,
+    fon.num_crf,
+    fon.arr_areas,
+    fon.frg_grau_formacao,
+    fon.arr_cursos,
+    fon.frg_user,
+    pes.dsc_nome,
+    pes.dat_nascimento,
+    pes.dsc_cpf,
+    pes.dsc_email,
+    pes.dsc_endbairro,
+    pes.dsc_endcep,
+    pes.dsc_endnum,
+    pes.dsc_endrua,
+    pes.dsc_nomemae,
+    pes.dsc_nomepai,
+    pes.dsc_telefone1,
+    pes.dsc_telefone2,
+    pes.frg_cor,
+    pes.frg_endestado,
+    pes.frg_endcidade,
+    pes.frg_estado_civil,
+    pes.frg_nasestado,
+    pes.frg_nascidade,
+    pes.frg_sexo,
+    pes.frg_tipo_sanguineo
+    FROM `tb_fonoaudiologo` fon INNER JOIN tb_pessoa AS pes ON fon.frg_pessoa=pes.id
+    where fon.id NOT IN
+     (SELECT fon_pac.frg_fonoaudiologo FROM tb_fonoaudiologo_paciente AS fon_pac 
+     WHERE fon_pac.frg_paciente=:idPaciente AND fon_pac.flag_situacao=1) ";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":idPaciente", $idPaciente);
+
+        $stmt->execute();
+
+        $fonoaudiologos = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return  $response->withJson($fonoaudiologos, 200)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
 
 function getFonoaudiologosByPaciente(Request $request, Response $response) {
     $idPaciente = $request->getAttribute('idPaciente');
