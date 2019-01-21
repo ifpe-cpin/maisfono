@@ -19,7 +19,7 @@
           <h3 class="box-title">Disponibilidade</h3>
         </div><!-- /.box-header -->
         <div class="box-body">
-          <table id="pacientes" class="table table-bordered table-striped">
+          <table id="disponibilidade" class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th width="30%">Data</th>
@@ -29,7 +29,7 @@
               </tr>
             </thead>
             <tbody>
-               <tr *ngFor="let lista of disponibilidade">
+               <tr *ngFor="let lista of fonoaudiologoDisponibilidade">
                 <td>{{lista.data}}</td>
                 <td>{{lista.hora_inicio}}</td>
                 <td>{{lista.hora_fim}}</td>

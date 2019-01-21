@@ -3,18 +3,18 @@ import { ResourceService } from './resource.service';
 import { ResourceServiceInterface } from './resource.service.interface';
 import { HttpClient } from '@angular/common/http';
 import { REQUEST_BASE_URL } from '../models/request';
-import { CalendarioSerializer } from '../serializers/calendario.serializer';
-import { Calendario } from '../models/calendario';
+import { AgendaSerializer } from '../serializers/agenda.serializer';
+import { Agenda } from '../models/agenda';
 
 
 @Injectable()
-export class CalendarioService extends ResourceService<Calendario> implements ResourceServiceInterface<Calendario>{
+export class AgendaService extends ResourceService<Agenda> implements ResourceServiceInterface<Agenda>{
   
   constructor(httpClient: HttpClient) {
     super(
       httpClient,
       REQUEST_BASE_URL,
-      'fonoaudiologoCalendario',
-      new CalendarioSerializer);
+      'fonoaudiologoAgenda',
+      new AgendaSerializer);
   }
 }
