@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc';
 import { ActivatedRoute } from '@angular/router';
+import { VideoCall } from '../models/videocall.interface';
 
 @Component({
   selector: 'app-videochamada',
   templateUrl: './videochamada.component.html',
   styleUrls: ['./videochamada.component.css']
 })
-export class VideochamadaComponent implements OnInit {
+export class VideochamadaComponent implements OnInit, VideoCall {
 
   activeCall: boolean = false;
   audioEnabled: boolean = true;
@@ -36,22 +37,20 @@ export class VideochamadaComponent implements OnInit {
 
 			
     });
-    
-    //this.startCall()
   }
 
   // Add
-  startCall() {
+  start() {
     this.activeCall = true;
     this.agoraService.client.join(null, this.id, null, (uid) => {
       this.localStream = this.agoraService.createStream(uid, true, null, null, true, false);
       this.localStream.setVideoProfile('720p_3');
-      this.subscribeToStreams();
+      this.subscribe();
     });
   }
 
   // Add
-  private subscribeToStreams() {
+   subscribe() {
     this.localStream.on("accessAllowed", () => {
       console.log("accessAllowed");
     });
