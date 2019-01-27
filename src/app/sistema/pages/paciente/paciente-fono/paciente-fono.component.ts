@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { ResourceServiceInterface } from '../../../../services/resource.service.interface';
 
 declare var $:any;
@@ -16,7 +16,7 @@ import { FonoaudiologoPacienteService } from '../../../../services/fonoaudiologo
   styleUrls: ['./paciente-fono.component.css'],
   providers:[{provide: 'ResourceServiceInterface', useClass: FonoaudiologoPacienteService}]
 })
-export class PacienteFonoComponent implements OnInit {
+export class PacienteFonoComponent implements OnInit, OnChanges {
 
   constructor(@Inject('ResourceServiceInterface') 
               private fonoPacienteService:ResourceServiceInterface<FonoaudiologoPaciente>,
@@ -57,10 +57,14 @@ export class PacienteFonoComponent implements OnInit {
   }
   };
 
+  ngOnChanges(){
+    this.pacienteId = localStorage.getItem("pacienteId")
+  }
+  
   ngOnInit() {
     this.loading = true;
     this.vincularVisible = false;
-    this.pacienteId = localStorage.getItem("pacienteId")
+    
     console.log(this.pacienteId)
     this.refreshData();
    }

@@ -105,14 +105,16 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
     });
 
     this.agoraService.client.on('stream-removed', (evt) => {
+      console.log("Stream REMOVED")
       const stream = evt.stream;
       stream.stop();
-      this.pusherService.changeUserStatus(1,this.userId);
+      this.pusherService.disponivel(this.userId);
       this.remoteCalls = this.remoteCalls.filter(call => call !== `#agora_remote${stream.getId()}`);
       console.log(`Remote stream is removed ${stream.getId()}`);
     });
 
     this.agoraService.client.on('peer-leave', (evt) => {
+      console.log("PEER LEAVE")
       const stream = evt.stream;
       if (stream) {
         stream.stop();
@@ -121,10 +123,14 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
       }
     });
   }
+
+
+  
   leave() {
     this.agoraService.client.leave(() => {
       this.activeCall = false;
       document.getElementById('agora_local').innerHTML = "";
+      this.remoteCalls = []
       console.log("Leavel channel successfully");
       this.pusherService.disponivel(this.userId);
     }, (err) => {
