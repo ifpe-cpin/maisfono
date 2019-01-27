@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc';
 import { ActivatedRoute } from '@angular/router';
 import { VideoCall } from '../models/videocall.interface';
+import { PusherService } from '../services/pusher.service';
 
 @Component({
   selector: 'app-videochamada',
   templateUrl: './videochamada.component.html',
-  styleUrls: ['./videochamada.component.css']
+  styleUrls: ['./videochamada.component.css'],
+  providers: [PusherService]
 })
-export class VideochamadaComponent implements OnInit, VideoCall {
+export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
 
   activeCall: boolean = false;
   audioEnabled: boolean = true;
@@ -16,13 +18,19 @@ export class VideochamadaComponent implements OnInit, VideoCall {
   localStream: Stream
   remoteCalls: any = [];
   id:String;
+  userId:string;
 
-  constructor(private agoraService: AngularAgoraRtcService,private route: ActivatedRoute,) {
+  constructor(
+    private agoraService: AngularAgoraRtcService,
+    private route: ActivatedRoute,
+    private pusherService: PusherService) {
     
     this.agoraService.createClient();
   }
 
+
   ngOnInit() {
+    this.userId = localStorage.getItem("id")
     this.id = "1000";
     this.route
 		.queryParams
@@ -33,10 +41,9 @@ export class VideochamadaComponent implements OnInit, VideoCall {
 			if(id!= undefined){
 					this.id = id;
 			}
-
-
-			
     });
+
+    this.pusherService.disponivel(this.userId);
   }
 
   // Add
@@ -45,6 +52,7 @@ export class VideochamadaComponent implements OnInit, VideoCall {
     this.agoraService.client.join(null, this.id, null, (uid) => {
       this.localStream = this.agoraService.createStream(uid, true, null, null, true, false);
       this.localStream.setVideoProfile('720p_3');
+      this.pusherService.ocupado(this.userId);
       this.subscribe();
     });
   }
@@ -99,6 +107,7 @@ export class VideochamadaComponent implements OnInit, VideoCall {
     this.agoraService.client.on('stream-removed', (evt) => {
       const stream = evt.stream;
       stream.stop();
+      this.pusherService.changeUserStatus(1,this.userId);
       this.remoteCalls = this.remoteCalls.filter(call => call !== `#agora_remote${stream.getId()}`);
       console.log(`Remote stream is removed ${stream.getId()}`);
     });
@@ -117,6 +126,7 @@ export class VideochamadaComponent implements OnInit, VideoCall {
       this.activeCall = false;
       document.getElementById('agora_local').innerHTML = "";
       console.log("Leavel channel successfully");
+      this.pusherService.disponivel(this.userId);
     }, (err) => {
       console.log("Leave channel failed");
     });
@@ -132,5 +142,10 @@ export class VideochamadaComponent implements OnInit, VideoCall {
     this.videoEnabled = !this.videoEnabled;
     if (this.videoEnabled) this.localStream.enableVideo();
     else this.localStream.disableVideo();
+  }
+
+
+  ngOnDestroy(){
+    this.pusherService.ausente(this.userId);
   }
 }

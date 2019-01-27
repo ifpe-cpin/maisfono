@@ -68,7 +68,8 @@
               "node_modules/datatables.net-buttons/js/buttons.print.js",
               "node_modules/admin-lte/dist/js/app.js",
               "src/assets/js/adminLTEOptions.js",
-              "src/assets/js/scripts.js"
+              "src/assets/js/scripts.js",
+              "node_modules/pusher-js/dist/web/pusher.min.js"
             ]
           },
           "configurations": {

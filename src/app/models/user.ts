@@ -13,6 +13,7 @@ export class User extends Resource{
     displayName?: string;
     roles?: string[];
     tipo:number;
+    status:number;
 
     _fonoaudiologo: Fonoaudiologo;
     _paciente: Paciente;

@@ -217,6 +217,35 @@ function updateUsuario(Request $request, Response $response) {
     }
 }
 
+function changeStatusUsuario($id,$status) {
+    
+    $sqlUser = "UPDATE tb_user 
+            SET 
+            status=:status
+            WHERE id=:id";
+
+    
+
+        $db = getConnection();
+    try {
+        $db->beginTransaction();
+        
+        $stmt = $db->prepare($sqlUser);
+        $stmt->bindParam("status", $status);
+        $stmt->bindParam("id", $id);
+        
+
+        $stmt->execute();
+
+        $db->commit();
+        $db = null;
+        return "User ".$id." changed status for ".$status;
+    } catch(PDOException $e) {
+        $db->rollBack();
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
 /*______________________________________________________
 |                                                       |
 |                RESTS's - Evolução                     |
@@ -1120,7 +1149,40 @@ $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($r
 });
 
 
+/*
 
+        PUSHER
+
+*/
+
+
+
+  
+
+function changeStatus(Request $request, Response $response){
+
+    $options = array(
+        'cluster' => 'us2',
+        'useTLS' => true
+      );
+      $pusher = new Pusher\Pusher(
+        '527a8eb84680c6505dbe',
+        '6ec5dc6e5d200ce23fa7',
+        '700073',
+        $options
+      );
+      
+    $status = json_decode($request->getBody());
+
+    
+    $data['status'] = $status->status;
+    $pusher->trigger('status-channel', $status->userId, $data);
+
+    changeStatusUsuario($status->userId,$status->status);
+
+    return $response->withJson($status, 200)
+        ->withHeader('Content-type', 'application/json');
+}
 /*______________________________________________________
 |                                                       |
 |                  Conecção com BD                      |
@@ -1128,15 +1190,15 @@ $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($r
 
 function getConnection() {
     
-    // $dbhost="127.0.0.1";
-    // $dbuser="root";
-    // $dbpass="";
-    // $dbname="db_maisfono";
+    $dbhost="127.0.0.1";
+    $dbuser="root";
+    $dbpass="";
+    $dbname="db_maisfono";
 
-    $dbhost="jrpires.com";
-    $dbuser="jrpiresc_ifpe";
-    $dbpass="maisfono_0001";
-    $dbname="jrpiresc_maisfono_rest";
+    // $dbhost="jrpires.com";
+    // $dbuser="jrpiresc_ifpe";
+    // $dbpass="maisfono_0001";
+    // $dbname="jrpiresc_maisfono_rest";
     
     $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

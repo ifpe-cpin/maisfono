@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 import { ResourceServiceInterface } from '../services/resource.service.interface';
+import { PusherService } from '../services/pusher.service';
 
 declare const gapi: any;
 
@@ -12,7 +13,7 @@ declare const gapi: any;
   selector: 'app-home',
   templateUrl: './sistema.component.html',
   styleUrls: ['./sistema.component.css'],
-  providers: [{provide: 'ResourceServiceInterface', useClass: UserService}]
+  providers: [{provide: 'ResourceServiceInterface', useClass: UserService},PusherService]
 })
 
 export class SistemaComponent implements OnInit {
@@ -30,7 +31,8 @@ export class SistemaComponent implements OnInit {
   menus: Menu[];
 
   constructor(private route: ActivatedRoute, private router: Router,
-    @Inject('ResourceServiceInterface') private userService:ResourceServiceInterface<User>) { 
+    @Inject('ResourceServiceInterface') private userService:ResourceServiceInterface<User>,
+    private pusherService: PusherService) { 
 
   }
 
@@ -72,6 +74,10 @@ export class SistemaComponent implements OnInit {
     localStorage.setItem('roles',"");
     localStorage.setItem('fonoId',"");
     localStorage.setItem('pacienteId',"");
+
+    this.pusherService.offLine(this.id)
+
+
 
     window.location.href = 'https://accounts.google.com/Logout?continue=https%3A%2F%2Fappengine.google.com%2F_ah%2Flogout%3Fcontinue=http%3A%2F%2Flocalhost%3A4200';
 

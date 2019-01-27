@@ -3,7 +3,9 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-
+$app->group('/pusher',function() use ($app){
+    $app->post('/',"changeStatus");
+});
 $app->group('/v1', function () use ($app) {
 // Routes
 // API group

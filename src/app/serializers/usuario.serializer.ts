@@ -11,6 +11,7 @@ export class UsuarioSerializer {
       user.displayName = json.displayName
       user.email = json.email
       user.tipo = json.tipo
+      user.status = json.status
       if(json.roles!=undefined){
          user.roles = json.roles.split(",")
       }
@@ -27,6 +28,7 @@ export class UsuarioSerializer {
         "photoUrl":user.photoUrl,
         "displayName":user.displayName,
         "tipo":user.tipo,
+        "status":user.status,
         "roles": user.roles.join()
       }
 

@@ -9,6 +9,7 @@ import { PacienteService } from '../services/paciente.service';
 import { Fonoaudiologo } from '../models/fonoaudiologo';
 import { Paciente } from '../models/paciente';
 import { QueryOptions } from '../models/query-options';
+import { PusherService } from '../services/pusher.service';
 
 
 @Component({
@@ -16,7 +17,8 @@ import { QueryOptions } from '../models/query-options';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   providers: [AuthService, FonoaudiologoService,PacienteService,
-  {provide: 'ResourceServiceInterface', useClass: UserService},]
+  {provide: 'ResourceServiceInterface', useClass: UserService},
+  PusherService]
 })
 export class LoginComponent implements OnInit, OnDestroy{
   
@@ -28,7 +30,9 @@ export class LoginComponent implements OnInit, OnDestroy{
               private pacienteService:PacienteService,
               @Inject('ResourceServiceInterface') 
               private userService:ResourceServiceInterface<User>,
-  private socialAuthService: AuthService, private router: Router){ 
+              private socialAuthService: AuthService,
+              private router: Router,
+              private pusherService: PusherService){ 
 
   }
 
@@ -95,7 +99,7 @@ export class LoginComponent implements OnInit, OnDestroy{
                 }
 
                 localStorage.setItem('roles', user.roles.toString());
-                
+                this.pusherService.ausente(this.user.id)
                 
 
                 
