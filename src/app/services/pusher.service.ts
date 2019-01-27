@@ -3,6 +3,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { HOST_URL } from '../models/request';
 
 declare const Pusher: any;
 
@@ -22,7 +23,7 @@ export class PusherService {
   }
 
   changeUserStatus(status,userId) {
-    this.http.post('http://localhost/maisfono/Slim/public/index.php/pusher/', 
+    this.http.post(HOST_URL+'/pusher/', 
     {'status': status,'userId':userId})
     .subscribe(data => {});
   }
