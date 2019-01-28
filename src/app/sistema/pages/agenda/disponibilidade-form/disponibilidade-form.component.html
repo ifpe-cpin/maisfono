@@ -15,10 +15,10 @@
 <section class="content">
   <div class="box box-primary">
     <div class="box-header with-border">
-      <h3 class="box-title">Editar Perfil</h3>
+      <h3 class="box-title">Incluir Disponibilidade</h3>
     </div><!-- /.box-header -->
     <div class="box-body">
-      <form id="form1" class="form1" method="post">
+      <form id="form1" class="form1" name="incluiDisponibilidade" onlyvalidate>
         <div class="col-md-12">
               <!-- Custom Tabs (Pulled to the right) -->
               <div class="nav-tabs-custom">
@@ -30,7 +30,7 @@
                       </div>
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input type="date" maxlength="8" name="dn" id="dn" class="form-control" placeholder="Data de nascimento" required>
+                        <input type="date" maxlength="8" name="fonoaudiologoDisponibilidade.data_inicial" id="fonoaudiologoDisponibilidade.data_inicial" class="form-control" placeholder="Data Inicial de Atendimento" required>
                       </div>
                     </div><!-- /input-group -->
                   </div><!-- /.col-lg-6 -->
@@ -41,7 +41,7 @@
                       </div>
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input type="date" maxlength="8" name="dn" id="dn" class="form-control" placeholder="Data de nascimento" required>
+                        <input type="date" maxlength="8" name="fonoaudiologoDisponibilidade.data_final" id="fonoaudiologoDisponibilidade.data_final" class="form-control" placeholder="Data Final de Atendimento" required>
                       </div>
                     </div><!-- /input-group -->
                   </div><!-- /.col-lg-6 -->
@@ -55,7 +55,39 @@
                       </div>
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                        <input type="time" maxlength="8" name="dn" id="dn" class="form-control" placeholder="Data de nascimento" required>
+                        <input type="time" maxlength="8" name="fonoaudiologoDisponibilidade.horario_inicial" id="fonoaudiologoDisponibilidade.horario_inicial" class="form-control" placeholder="Horário Inicial de Atendimento" required>
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-4">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>Horário Final <em>*</em></label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                        <input type="time" maxlength="8" name="fonoaudiologoDisponibilidade.horario_final" id="fonoaudiologoDisponibilidade.horario_final" class="form-control" placeholder="Horário Final de Atendimento" required>
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                <br>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>Dias <em>*</em></label>
+                      </div>
+                      <div class="input-group" class="col-lg-12 input-group">
+                        <select multiple class="form-control" name="fonoaudiologoDisponibilidade.dias_semana" required>
+                          <option>Domingo</option>
+                          <option>Segunda</option>
+                          <option>Terça</option>
+                          <option>Quarta</option>
+                          <option>Quinta</option>
+                          <option>Sexta</option>
+                          <option>Sábado</option>
+                        </select>
                       </div>
                     </div><!-- /input-group -->
                   </div><!-- /.col-lg-6 -->
@@ -63,7 +95,9 @@
                 <br>
 
                 <p align="right">
-                  <button class="btn btn-lg btn-primary fa fa-save" align="right"><b style="margin-left: 10px"> Salvar</b></button>
+                  <button type="button" class="btn btn-lg btn-primary fa fa-save" align="right" (click)="incluiDisponibilidade()" >
+                      <b style="margin-left: 10px"> Salvar</b>
+                  </button>
                 </p>
           	</div><!-- nav-tabs-custom -->
         </div><!-- /.col -->

@@ -42,7 +42,8 @@ export class ResourceService<T extends Resource> implements ResourceServiceInter
             return this.convertData(data)
             });
       }
-      
+
+           
       list(queryOptions: QueryOptions): Observable<T[]> {
           console.log("URL"+`${this.url}/${this.endpoint}/${queryOptions.toQueryString()}`)
         return this.httpClient

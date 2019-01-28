@@ -707,6 +707,33 @@ function getPaciente(Request $request, Response $response) {
 }
 
 
+function getPacienteByFonoaudiologo(Request $request, Response $response) {
+    $id = $request->getAttribute('id');
+    
+    $sql = "SELECT pa.* 
+    FROM tb_pessoa pa 
+    INNER JOIN tb_fonoaudiologo_paciente fp
+    ON (pa.id = fp.frg_paciente )
+    where fp.frg_fonoaudiologo =:id";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+
+        $pacientes = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return  $response->withJson($pacientes, 200)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
 
 
 /*______________________________________________________
