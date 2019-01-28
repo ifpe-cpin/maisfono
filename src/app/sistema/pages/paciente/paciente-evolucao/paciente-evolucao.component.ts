@@ -89,7 +89,7 @@ export class PacienteEvolucaoComponent implements OnInit {
         let id = localStorage.getItem('pessoaId');
             
         if(id!= undefined){
-            this.evolucaoService.listWithTwoID(id, this.idPaciente).subscribe(
+            this.evolucaoService.listWithTwoID(this.idPaciente, id).subscribe(
                 evolucao => {
                     this.evolucoes = evolucao
 
