@@ -42,6 +42,14 @@ export class ResourceService<T extends Resource> implements ResourceServiceInter
             return this.convertData(data)
             });
       }
+    
+      listWithTwoID(id1: any, id2: any): Observable<T[]> {
+        return this.httpClient
+          .get(`${this.url}/${this.endpoint}/${id1}/${id2}`)
+          .map((data: any) => {
+            return this.convertData(data)
+            });
+      }
 
            
       list(queryOptions: QueryOptions): Observable<T[]> {
