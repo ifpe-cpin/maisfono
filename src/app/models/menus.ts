@@ -90,7 +90,7 @@ let fono = {
                 },
                 {
                     nome:"Incluir Disponibilidade",
-                    url:"/sistema/fonoaudiologo/consultarMeus",
+                    url:"/sistema/fonoaudiologo/agenda/incluiDisponibilidade",
                     icone:"fa fa-circle-o"
                 },
             ],

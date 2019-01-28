@@ -1,3 +1,73 @@
-<p>
-  disponibilidade-form works!
-</p>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Disponibilidade
+    <small>Formulário de Disponibilidade</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="#">Agenda</a></li>
+    <li class="active">Incluir Disponibilidade</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Editar Perfil</h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+      <form id="form1" class="form1" method="post">
+        <div class="col-md-12">
+              <!-- Custom Tabs (Pulled to the right) -->
+              <div class="nav-tabs-custom">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>Data Inicial <em>*</em></label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="date" maxlength="8" name="dn" id="dn" class="form-control" placeholder="Data de nascimento" required>
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-4">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>Data Final <em>*</em></label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="date" maxlength="8" name="dn" id="dn" class="form-control" placeholder="Data de nascimento" required>
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                <br>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="col-lg-12 input-group">
+                      <div>
+                        <label>Horário Inicial <em>*</em></label>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                        <input type="time" maxlength="8" name="dn" id="dn" class="form-control" placeholder="Data de nascimento" required>
+                      </div>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                <br>
+
+                <p align="right">
+                  <button class="btn btn-lg btn-primary fa fa-save" align="right"><b style="margin-left: 10px"> Salvar</b></button>
+                </p>
+          	</div><!-- nav-tabs-custom -->
+        </div><!-- /.col -->
+      </form>
+    </div>
+  </div>
+</section><!-- /.content -->

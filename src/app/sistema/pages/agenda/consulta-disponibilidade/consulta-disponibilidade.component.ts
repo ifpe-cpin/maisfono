@@ -68,11 +68,11 @@ export class ConsultaDisponibilidadeComponent implements OnInit {
 
                             this.chRef.detectChanges();
                         
-                            if ( $.fn.dataTable.isDataTable( '#agenda' ) ) {
-                            this.dataTable = $('#agenda').DataTable();
+                            if ( $.fn.dataTable.isDataTable( '#consultaDisponibilidade' ) ) {
+                            this.dataTable = $('#consultaDisponibilidade').DataTable();
                             }
                             else {
-                                this.dataTable = $('#agenda').DataTable(
+                                this.dataTable = $('#consultaDisponibilidade').DataTable(
                                     this.dataInfo 
                                 );
                             }
