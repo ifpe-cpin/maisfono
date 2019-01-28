@@ -52,16 +52,17 @@ export class PacienteEvolucaoComponent implements OnInit {
     
     this.loading = true;
     this.refreshData();
-
+    /*
     this.evolucao = new Evolucao();
     this.evolucao.fk_flag_evolucao = 1
     this.evolucaoService.list(new QueryOptions).subscribe(data => {
       this.evolucoes = <any>data
     })
+    */
   }
 
   onSubmit() {
-    
+    /*
     console.log(this.evolucao)
     if(this.evolucao.dsc_evolucao != '' && this.evolucao.dsc_titulo != '' 
     && this.evolucao.fk_flag_evolucao > 0 && this.evolucao.fk_flag_evolucao < 4 ) {
@@ -74,6 +75,7 @@ export class PacienteEvolucaoComponent implements OnInit {
         }
         );;
     }
+    */
   }
 
   editEvolucao(event, evolucao) {
