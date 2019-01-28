@@ -5,6 +5,6 @@ export class Agenda extends Resource{
         data?: string;
         hora_inicio?: string;
         hora_fim?: string;
-        fk_status?: number;
+        fk_status: number;
         nome_status?: string;
 }

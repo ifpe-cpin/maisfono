@@ -63,7 +63,7 @@ export class ConsultaDisponibilidadeComponent implements OnInit {
           if(id!= undefined){
                     this.fonoaudiologoDisponibilidadeService.listWithID(id).subscribe(
                         fonoaudiologoDisponibilidade => {
-                            this.fonoaudiologoDisponibilidade = this.fonoaudiologoDisponibilidade
+                            this.fonoaudiologoDisponibilidade = fonoaudiologoDisponibilidade
                         }
                     );
           } 
