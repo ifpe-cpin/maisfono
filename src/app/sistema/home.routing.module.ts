@@ -59,8 +59,11 @@ const homeRoutes = [
 
 			]},
 			{path: 'paciente', component: PacienteComponent, children: [
-				{path: 'paciente-fono', component: PacienteFonoComponent, canActivate: [PacienteGuard]},]
-			},
+				{path: 'paciente-fono', component: PacienteFonoComponent, canActivate: [PacienteGuard]},
+				{path: 'admin',component:ConsultarMeusComponent, canActivate:[AdminGuard]},
+				{path: 'ver',component:PacienteDetalheComponent, canActivate:[AdminGuard]},
+				{path: 'novo',component:PacienteFormComponent},
+			]},
 			{path: 'fonoaudiologo', component: FonoComponent, children: [
 
 				{path: 'novo', component: FonoFormComponent, canActivate: [FonoGuard]},

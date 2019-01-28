@@ -13,7 +13,7 @@ declare var $:any;
  	providers: [PacienteService]
 }) 
 export class ConsultaComponent implements OnInit {
-  
+    
   constructor(private pacienteService:PacienteService,
               private router: Router,
               private chRef: ChangeDetectorRef) {

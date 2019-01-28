@@ -67,7 +67,7 @@ $app->group('/pacientes', function () use ($app) {
     $app->get('/', 'getPacientes');
     $app->get('/{id}', 'getPaciente');
     $app->get('/idUser/{idUser}', 'getPacienteByUser');
-    $app->post('', 'addPaciente');
+    $app->post('', 'addPacientes');
     $app->put('/{id}', 'updatePaciente');
     $app->delete('/{id}', 'deletePaciente');
 });

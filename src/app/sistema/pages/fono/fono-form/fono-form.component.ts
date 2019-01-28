@@ -17,7 +17,7 @@ export class FonoFormComponent implements OnInit {
 
 	 fonoaudiologo:Fonoaudiologo;
 
-	constructor(
+	 constructor(
 		private route: ActivatedRoute,
 		private router: Router,
 		@Inject('ResourceServiceInterface') private fonoaudiologoService:ResourceServiceInterface<Fonoaudiologo>) { }

@@ -17,6 +17,7 @@
       <div class="box">
         <div class="box-header">
           <h3 class="box-title">Pacientes</h3>
+          <button type="button" class="btn btn-default bt-novo" (click)="createPage()">Novo</button>  
         </div><!-- /.box-header -->
         <div class="box-body">
           <table id="pacientesMeus" class="table table-bordered table-striped">
@@ -27,34 +28,40 @@
                 <th width="11%">Email</th>
                 <th width="11%">Laudo</th>
                 <th width="7%">Evolução</th>
-                <th width="5%">Horarios</th>
+                <th>Ação</th>
+
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let lista of pacientes">
                 <td>{{lista.dsc_nome}}</td>
-                <td>{{lista.dsc_telefone}}</td>
+                <td>{{lista.dsc_telefone1}}</td>
                 <td>{{lista.dsc_email}}</td>
+
                 <td align="center">
                   <a routerLink="/sistema/fonoaudiologo/laudo/{{lista.id}}">
                     <i class="fa fa-file-text-o"></i>
                   </a>
                 </td>
                 <td align="center"><a routerLink="/sistema/fonoaudiologo/evolucao/{{lista.id}}"><i class="fa fa-line-chart"></i></a></td>
-                <td>Horario</td>
+                <td align="center">
+                  <a [routerLink]="['/sistema/paciente/ver']" 
+                    [queryParams]="{ id: lista.id }">
+                    <i class="fa fa-eye" ></i>
+                  </a>
+
+                  <a (click)="delete(f)">
+                    <i class="fa fa-trash-o" ></i>
+                  </a>
+                  <a [routerLink]="['/sistema/paciente/novo']" 
+                     [queryParams]="{ id: lista.id }">
+                     <i class="fa fa-pencil-square-o" ></i>
+                  </a>
+                </td>   
               </tr>
              
             </tbody>
-            <tfoot>
-              <tr>
-                <th>Nome</th>
-                <th>Telefone</th>
-                <th>Email</th>
-                <th>Laudo</th>
-                <th>Evolução</th>
-                <th>Horarios</th>
-              </tr>
-            </tfoot>
+            
           </table>
             <!--<button class="btn btn-block btn-primary btn-lg" routerLink="/home/paciente/novo">CADASTRAR NOVO</button>-->
         </div><!-- /.box-body -->
