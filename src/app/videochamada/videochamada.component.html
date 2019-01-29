@@ -3,7 +3,7 @@
 	</div>
 	<div class="agora_local">
 		<div class="video-buttons">
-			<i class="startCall material-icons" (click)="startCall()" *ngIf="!activeCall">videocam</i>
+			<i class="startCall material-icons" (click)="start()" *ngIf="!activeCall">videocam</i>
 			<ng-container *ngIf="activeCall">
 				<i class="endCall material-icons" (click)="leave()" *ngIf="activeCall">phone</i>
 
@@ -16,7 +16,7 @@
 		</div>
 		<div id="agora_local"></div>
 	</div>
-	<div class="agora_remote" *ngFor="let remote of remoteCalls" [id]="remote">
+	<div  class="agora_remote" *ngFor="let remote of remoteCalls" [id]="remote">
 
 	</div>
 </div>

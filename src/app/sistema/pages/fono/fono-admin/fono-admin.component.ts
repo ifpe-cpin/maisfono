@@ -18,7 +18,7 @@ import { ResourceServiceInterface } from '../../../../services/resource.service.
   providers:[{provide: 'ResourceServiceInterface', useClass: FonoaudiologoService},]
 })
 export class FonoAdminComponent implements OnInit {
-
+  
   constructor(
     @Inject('ResourceServiceInterface') private fonoService:ResourceServiceInterface<Fonoaudiologo>,
     private router: Router,

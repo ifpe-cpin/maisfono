@@ -12,6 +12,7 @@ import { RoleMenuComponent } from '../role-menu/role-menu.component';
 import { LoadComponent } from '../load/load.component';
 import { AppModule } from '../app.module';
 import { VideochamadaComponent } from '../videochamada/videochamada.component';
+import { UserStatusComponent } from './user-status/user-status.component';
 
 
 
@@ -29,7 +30,8 @@ import { VideochamadaComponent } from '../videochamada/videochamada.component';
      LoadComponent,
      PacienteSelecionarComponent,
     RoleMenuComponent,
-    VideochamadaComponent],
-    exports:[LoadComponent]
+    VideochamadaComponent,
+    UserStatusComponent],
+    exports:[LoadComponent,UserStatusComponent]
 })
 export class SistemaModule { }

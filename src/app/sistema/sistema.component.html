@@ -63,7 +63,7 @@
                 </div>
                 <div class="pull-left info">
                   <p>{{name}}</p>
-                  <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                 <app-user-status [userId]="id" [nameVisible]="true"></app-user-status>
                   
                   <button type="button" (click)="openRoom()" class="btn btn-primary {{visible}}">Sala</button>
                 </div>

@@ -1,12 +1,12 @@
 <section class="content-header">
   <h1>
-    Cadastrar meus Pacientes
-    
+    Paciente
+    <small>Formulário de Cadastro</small>
   </h1>
   <ol class="breadcrumb">
     <li><a routerLink="/home/dash"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li>Paciente</li>
-    <li class="active">Cadastrar Meus Pacientes</li>
+    <li><a href="#">Paciente</a></li>
+    <li class="active">Cadastro</li>
   </ol>
 </section>
 <!-- Main content -->
@@ -16,12 +16,11 @@
 
               <div class="box box-danger">
                 <div class="box-header">
-                  <h3 class="box-title">Cadastrar Pacientes</h3>
+                  <h3 class="box-title">Informações Pessoais</h3>
                 </div>
                 <div class="box-body">
               <form id="form1" #f="ngForm"
-                    (ngSubmit)="onSubmit()" class="form1" method="post">
-                      
+                    (ngSubmit)="onSubmit()" class="form1" method="post">                      
                 <div class="form-group">
                     <label>Nome:</label>
                     <div class="input-group">
@@ -30,10 +29,88 @@
                       </div>
                       <input type="text" [(ngModel)]="paciente.dsc_nome" name="Nome" id="nome" class="form-control" placeholder="Nome" required>
                       <input type="hidden" [(ngModel)]="paciente.id" name="id">
-                      <input type="hidden" [(ngModel)]="paciente.frg_pessoa" name="pessoa_id">
+                      <input type="hidden" [(ngModel)]="paciente.id_pessoa" name="pessoa_id">
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->
-                  
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="col-lg-12 input-group">
+                        <div>
+                          <label>Data de Nascimento
+                            <em>*</em>
+                          </label>
+                        </div>
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </span>
+                          <input type="date" [(ngModel)]="paciente.dat_nascimento" maxlength="8" name="dn" id="dn" class="form-control" placeholder="Data de nascimento" required>
+                        </div>
+                      </div>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <div class="col-lg-4">
+                      <div class="col-lg-12 input-group">
+                        <div>
+                          <label>CPF
+                            <em>*</em>
+                          </label>
+                        </div>
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="fa fa-credit-card"></i>
+                          </span>
+                          <input type="text" [(ngModel)]="paciente.dsc_cpf" name="cpf" class="form-control" placeholder="CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Este campo deve conter apenas números"
+                            maxlength="14" minlength="14" OnKeyPress="formatar('###.###.###-##', this)" id="cpf" required>
+                        </div>
+    
+                      </div>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                  </div>
+                  <!-- /.row -->
+                  <br>
+    
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Sexo
+                        </label>
+                        <select [(ngModel)]="paciente.frg_sexo" name="num_sexo" id="num_sexo" 
+                                class="form-control select2"
+                                title="Por favor, selecione uma opção.">
+                          <option value="">--Selecione--</option>
+                          <option value='1'>Feminino</option>
+                          <option value='2'>Masculino</option>
+                        </select>
+    
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Cor
+                        </label>
+                        <select [(ngModel)]="paciente.frg_cor" name="cor" id="cor" 
+                                class="form-control select2"
+                                title="Por favor, selecione uma opção.">
+                          <option value="">--Selecione--</option>
+                          <option value='1'>Branco</option>
+                          <option value='2'>Pardo</option>
+                          <option value='3'>Preto</option>
+                          <option value='4'>Amarelo(a)</option>
+                          <option value='5'>Indígena</option>
+                          <option value='6'>Não declarada</option>
+                        </select>
+    
+                      </div>
+                    </div>
+                    <!-- /.col (right) -->
+    
+                  </div>
+                  <!-- /.row -->  
 
                 
                   <h3>Contato</h3>

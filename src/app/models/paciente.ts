@@ -3,7 +3,7 @@ import { Resource } from "./resource";
 export class Paciente extends Resource {
     dsc_nome?: string;
     dsc_cpf?: string;
-    id_pessoa?:number;se
+    id_pessoa?:number;
     //img_perfil?: string;
     data_nascimento?: string;
     dsc_email?: string;

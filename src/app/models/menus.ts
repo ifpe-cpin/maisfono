@@ -60,17 +60,12 @@ let fono = {
             itens:[
                 {
                     nome:"Admin",
-                    url:"/sistema/fonoaudiologo/adminPaciente",
+                    url:"/sistema/paciente/admin",
                     icone:"fa fa-circle-o"
                 },
                 {
                     nome:"Consultar Pacientes",
                     url:"/sistema/fonoaudiologo/consultarPacientes",
-                    icone:"fa fa-circle-o"
-                },
-                {
-                    nome:"Meus Pacientes",
-                    url:"/sistema/fonoaudiologo/consultarMeus",
                     icone:"fa fa-circle-o"
                 },
             ],

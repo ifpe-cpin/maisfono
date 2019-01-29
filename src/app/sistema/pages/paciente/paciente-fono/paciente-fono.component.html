@@ -27,12 +27,14 @@
             <thead>
               <tr>
                 <th>Nome</th>
+                <th>Status</th>
                 <th >Ações</th>
               </tr>
             </thead>
             <tbody>
                <tr *ngFor="let f of fonos">
                 <td>{{f._fonoaudiologo_nome}}</td>
+                <td><app-user-status [userId]="f._user_id" [nameVisible]="true"></app-user-status></td>
                 <td align="center">
                   <a [routerLink]="['/sistema/fonoaudiologo/ver']" 
                     [queryParams]="{ id: f.id }" class="space-10">

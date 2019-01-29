@@ -17,7 +17,6 @@
       <div class="box">
         <div class="box-header">
           <h3 class="box-title">Pacientes</h3>
-          <button type="button" class="btn btn-default bt-novo" (click)="createPage()">Novo</button>  
         </div><!-- /.box-header -->
         <div class="box-body">
           <table id="pacientesMeus" class="table table-bordered table-striped">
@@ -50,7 +49,7 @@
                     <i class="fa fa-eye" ></i>
                   </a>
 
-                  <a (click)="delete(f)">
+                  <a (click)="delete(lista)">
                     <i class="fa fa-trash-o" ></i>
                   </a>
                   <a [routerLink]="['/sistema/paciente/novo']" 

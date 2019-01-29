@@ -1,0 +1,1 @@
+ALTER TABLE `tb_user` ADD `status` INT(1) NOT NULL DEFAULT '0' AFTER `tipo`;

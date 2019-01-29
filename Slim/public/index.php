@@ -217,6 +217,35 @@ function updateUsuario(Request $request, Response $response) {
     }
 }
 
+function changeStatusUsuario($id,$status) {
+    
+    $sqlUser = "UPDATE tb_user 
+            SET 
+            status=:status
+            WHERE id=:id";
+
+    
+
+        $db = getConnection();
+    try {
+        $db->beginTransaction();
+        
+        $stmt = $db->prepare($sqlUser);
+        $stmt->bindParam("status", $status);
+        $stmt->bindParam("id", $id);
+        
+
+        $stmt->execute();
+
+        $db->commit();
+        $db = null;
+        return "User ".$id." changed status for ".$status;
+    } catch(PDOException $e) {
+        $db->rollBack();
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
 /*______________________________________________________
 |                                                       |
 |                RESTS's - Evolução                     |
@@ -605,14 +634,18 @@ function deleteFonoaudiologo(Request $request, Response $response) {
 |______________________________________________________*/
 
 function getPacientes(Request $request, Response $response) {
-    $sql = "SELECT pe.*, (
-                SELECT flag_situacao FROM tb_fonoaudiologo_paciente WHERE flag_situacao = 1 and pe.id = frg_paciente
+         
+    $sql = "SELECT pac.*, p.dsc_nome,p.dsc_cpf, p.dsc_email,p.dat_nascimento,
+    p.dsc_telefone1,p.dsc_telefone2,p.frg_cor,p.frg_endestado,
+    p.frg_endcidade,p.dsc_endbairro,p.dsc_endcep,p.dsc_endnum,
+    p.dsc_endrua,p.dsc_nomemae,p.dsc_nomepai,p.frg_estado_civil,
+    p.frg_sexo,p.frg_nasestado,p.frg_nascidade, (
+                SELECT flag_situacao FROM tb_fonoaudiologo_paciente WHERE flag_situacao = 1 and p.id = frg_paciente
                 GROUP BY frg_paciente
-            ) AS situacao
-            FROM tb_pessoa pe 
-            INNER JOIN tb_paciente pa 
-            ON pe.id = pa.id_pessoa";
-        
+            ) AS situacao 
+            FROM tb_pessoa p 
+            INNER JOIN tb_paciente pac 
+            ON p.id = pac.id_pessoa";
     try {
         $stmt = getConnection()->query($sql);
         $pacientes = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -656,7 +689,7 @@ function getPaciente(Request $request, Response $response) {
     
     $sql = "SELECT * FROM tb_pessoa p
     INNER JOIN tb_paciente pac
-    ON p.id = pac.frg_pessoa WHERE pac.id=:id";
+    ON p.id = pac.id_pessoa WHERE pac.id=:id";
 
     try {
         $db = getConnection();
@@ -726,7 +759,7 @@ function addPacientes(Request $request, Response $response){
 
         $idPessoa = $db->lastInsertId();
 
-        $paciente->frg_pessoa = $idPessoa;
+        $paciente->id_pessoa = $idPessoa;
 
         $stmt2 = $db->prepare($sqlPaciente);
 
@@ -759,7 +792,6 @@ function updatePaciente(Request $request, Response $response) {
             SET 
             dsc_cpf = :dsc_cpf,
             dsc_nome = :dsc_nome,
-            img_perfil = :img_perfil,
             dsc_email = :dsc_email,
             dat_nascimento = :dat_nascimento,
             dsc_telefone1 = :dsc_telefone1,
@@ -776,24 +808,21 @@ function updatePaciente(Request $request, Response $response) {
             frg_estado_civil = :frg_estado_civil,
             frg_sexo = :frg_sexo,
             frg_nasestado = :frg_nasestado,
-            frg_nascidade = :frg_nascidade,
-            frg_tipo_sanguineo = :frg_tipo_sanguineo
+            frg_nascidade = :frg_nascidade
             WHERE id=:id";
 
     $sqlPaciente = "UPDATE tb_paciente 
             SET 
-            num_crf = :num_crf,
-            frg_grau_formacao = :frg_grau_formacao,
-            arr_areas = :arr_areas,
-            arr_cursos = :arr_cursos
+            arr_deficiencia = :arr_deficiencia,
+            arr_fonema = :arr_fonema
             WHERE id=:id";    
+
 
         $db = getConnection();
     try {
         $db->beginTransaction();
         
         $stmt = $db->prepare($sqlPessoa);
-        
         $stmt->bindParam("dsc_nome", $paciente->dsc_nome);
         $stmt->bindParam("dsc_cpf", $paciente->dsc_cpf);
         $stmt->bindParam("dat_nascimento", $paciente->dat_nascimento);
@@ -802,7 +831,7 @@ function updatePaciente(Request $request, Response $response) {
         $stmt->bindParam("dsc_telefone2", $paciente->dsc_telefone2);
         $stmt->bindParam("frg_cor", $paciente->frg_cor);
         $stmt->bindParam("frg_endestado", $paciente->frg_endestado);
-        $stmt->bindParam("frg_endmunicipio", $paciente->frg_endmunicipio);
+        $stmt->bindParam("frg_endcidade", $paciente->frg_endcidade);
         $stmt->bindParam("dsc_endbairro", $paciente->dsc_endbairro);
         $stmt->bindParam("dsc_endcep", $paciente->dsc_endcep);
         $stmt->bindParam("dsc_endnum", $paciente->dsc_endnum);
@@ -811,18 +840,18 @@ function updatePaciente(Request $request, Response $response) {
         $stmt->bindParam("dsc_nomepai", $paciente->dsc_nomepai);
         $stmt->bindParam("frg_estado_civil", $paciente->frg_estado_civil);
         $stmt->bindParam("frg_sexo", $paciente->frg_sexo);
-        $stmt->bindParam("frg_estadonascimento", $paciente->frg_estadonascimento);
-        $stmt->bindParam("frg_municipionasc", $paciente->frg_municipionasc);
+        $stmt->bindParam("frg_nasestado", $paciente->frg_nasestado);
+        $stmt->bindParam("frg_nascidade", $paciente->frg_nascidade);
 
-        $stmt->bindParam("id", $paciente->frg_pessoa);
+        $stmt->bindParam("id", $paciente->id_pessoa);
 
         $stmt->execute();
 
-        $stmt2 = $db->prepare($sqlFono);
+        $stmt2 = $db->prepare($sqlPaciente);
 
-        $stmt2->bindParam("frg_pessoa", $paciente->frg_pessoa);
         $stmt2->bindParam("arr_deficiencia", $paciente->arr_deficiencia);
         $stmt2->bindParam("arr_fonema", $paciente->arr_fonema);
+        $stmt2->bindParam("id", $id);
 
         $stmt2->execute();
 
@@ -857,7 +886,7 @@ function deletePaciente(Request $request, Response $response) {
         $stmt2->execute();
 
         $stmt3 = $db->prepare($sqlPessoa);
-        $stmt3->bindParam("id", $paciente->frg_pessoa);
+        $stmt3->bindParam("id", $paciente->id_pessoa);
         $stmt3->execute();
 
         $db->commit();
@@ -871,6 +900,7 @@ function deletePaciente(Request $request, Response $response) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
+
 
 /*______________________________________________________
 |                                                       |
@@ -1312,7 +1342,40 @@ $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($r
 });
 
 
+/*
 
+        PUSHER
+
+*/
+
+
+
+  
+
+function changeStatus(Request $request, Response $response){
+
+    $options = array(
+        'cluster' => 'us2',
+        'useTLS' => true
+      );
+      $pusher = new Pusher\Pusher(
+        '527a8eb84680c6505dbe',
+        '6ec5dc6e5d200ce23fa7',
+        '700073',
+        $options
+      );
+      
+    $status = json_decode($request->getBody());
+
+    
+    $data['status'] = $status->status;
+    $pusher->trigger('status-channel', $status->userId, $data);
+
+    changeStatusUsuario($status->userId,$status->status);
+
+    return $response->withJson($status, 200)
+        ->withHeader('Content-type', 'application/json');
+}
 /*______________________________________________________
 |                                                       |
 |                  Conecção com BD                      |

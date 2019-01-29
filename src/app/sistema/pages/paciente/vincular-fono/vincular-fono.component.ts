@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Fonoaudiologo } from '../../../../models/fonoaudiologo';
 import { ResourceServiceInterface } from '../../../../services/resource.service.interface';
 import { FonoaudiologoService } from '../../../../services/fonoaudiologo.service';
@@ -16,7 +16,7 @@ declare var $:any;
   providers:[FonoaudiologoPacienteService,
     {provide: 'ResourceServiceInterface', useClass: FonoaudiologoService}]
 })
-export class VincularFonoComponent implements OnInit {
+export class VincularFonoComponent implements OnInit,OnChanges {
 
   constructor(@Inject('ResourceServiceInterface') 
   private fonoService:ResourceServiceInterface<Fonoaudiologo>,
@@ -58,9 +58,14 @@ dataInfo = {
 }
 };
 
+ngOnChanges(){
+  this.pacienteId = localStorage.getItem("pacienteId")
+}
+
+
 ngOnInit() {
 this.loading = true;
-this.pacienteId = localStorage.getItem("pacienteId")
+
 this.refreshData();
 }
 
@@ -95,7 +100,7 @@ vincular(idFono: number){
 
   let fonoPaciente = new FonoaudiologoPaciente()
   fonoPaciente.frg_fonoaudiologo = idFono
-  fonoPaciente.frg_paciente = this.pacienteId
+  fonoPaciente.frg_paciente = localStorage.getItem("pacienteId")
   fonoPaciente.flag_situacao = 1
 
   this.fonoPacienteService.create(fonoPaciente).subscribe(

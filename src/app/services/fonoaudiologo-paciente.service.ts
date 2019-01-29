@@ -12,7 +12,7 @@ import { FonoaudiologoPacienteSerializer } from '../serializers/fonoaudiologo-pa
 
 
 @Injectable()
-export class FonoaudiologoPacienteService extends ResourceService<FonoaudiologoPaciente> implements ResourceServiceInterface<Paciente>{
+export class FonoaudiologoPacienteService extends ResourceService<FonoaudiologoPaciente> implements ResourceServiceInterface<FonoaudiologoPaciente>{
   constructor(httpClient: HttpClient) {
     super(
       httpClient,

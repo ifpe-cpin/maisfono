@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { PacienteService } from '../../../../services/paciente.service';
 import { Paciente } from "../../../../models/paciente";
-import { QueryOptions } from '../../../../models/query-options';
 import { ResourceServiceInterface } from '../../../../services/resource.service.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 
