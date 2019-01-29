@@ -6,6 +6,7 @@ import { ResourceService } from './resource.service';
 import { FonoaudiologoSerializer } from '../serializers/fonoaudiologo.serializer';
 import { REQUEST_BASE_URL } from '../models/request';
 import { ResourceServiceInterface } from './resource.service.interface';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable()
 export class FonoaudiologoService extends ResourceService<Fonoaudiologo>
@@ -15,7 +16,7 @@ export class FonoaudiologoService extends ResourceService<Fonoaudiologo>
   constructor(httpClient: HttpClient) {
     super(
       httpClient,
-      REQUEST_BASE_URL,
+      environment.request_base_url,
       'fonoaudiologos',
       new FonoaudiologoSerializer);
   }

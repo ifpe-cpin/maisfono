@@ -3,11 +3,10 @@ import { Paciente } from '../models/paciente';
 import 'rxjs/add/operator/map';
 import { ResourceService } from './resource.service';
 import { HttpClient } from '@angular/common/http';
-import { PacienteSerializer } from '../serializers/paciente.serializer';
-import { REQUEST_BASE_URL } from '../models/request';
 import { ResourceServiceInterface } from './resource.service.interface';
 import { FonoaudiologoPaciente } from '../models/fonoaudiologo-paciente';
 import { FonoaudiologoPacienteSerializer } from '../serializers/fonoaudiologo-paciente.serializer';
+import { environment } from '../../environments/environment.prod';
 
 
 
@@ -16,7 +15,7 @@ export class FonoaudiologoPacienteService extends ResourceService<FonoaudiologoP
   constructor(httpClient: HttpClient) {
     super(
       httpClient,
-      REQUEST_BASE_URL,
+      environment.request_base_url,
       'pacientesFonoaudiologos',
       new FonoaudiologoPacienteSerializer);
   }

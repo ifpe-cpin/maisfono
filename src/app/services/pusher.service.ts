@@ -23,7 +23,7 @@ export class PusherService {
   }
 
   changeUserStatus(status,userId) {
-    this.http.post(HOST_URL+'/pusher/', 
+    this.http.post(environment.host_url_server+'/pusher/', 
     {'status': status,'userId':userId})
     .subscribe(data => {});
   }
