@@ -19,12 +19,13 @@ import { AppModule } from '../../app.module';
    
   ],
   declarations: [
-        LeftSideComponent,
-        DashComponent,
-        VideoComponent,
+        //LeftSideComponent,
+        //DashComponent,
+       // VideoComponent,
         // LoadComponent,
-        PacienteSelecionarComponent,
-        RoleMenuComponent],
+       // PacienteSelecionarComponent,
+        //RoleMenuComponent
+      ],
         //exports:[LoadComponent]
 })
 export class LeftSideModule { }

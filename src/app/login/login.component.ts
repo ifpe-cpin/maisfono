@@ -15,7 +15,16 @@ import { PusherService } from '../services/pusher.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.css',
+              '../../assets/css/normalize.css',
+              '../../assets/css/reset.css',
+              '../../assets/css/grid.css',
+              '../../assets/css/style.css',
+              '../../assets/css/contato.css',
+              '../../assets/css/responsivo.css',
+              '../..',
+            
+            ],
   providers: [AuthService, FonoaudiologoService,PacienteService,
   {provide: 'ResourceServiceInterface', useClass: UserService},
   PusherService]
