@@ -59,12 +59,17 @@ let fono = {
             icon: "fa fa-user",
             itens:[
                 {
+                    nome:"Admin",
+                    url:"/sistema/paciente/admin",
+                    icone:"fa fa-circle-o"
+                },
+                {
                     nome:"Consultar Pacientes",
                     url:"/sistema/fonoaudiologo/consultarPacientes",
                     icone:"fa fa-circle-o"
                 },
                 {
-                    nome:"Meus Pacientes",
+                    nome:"Consultar Meus",
                     url:"/sistema/fonoaudiologo/consultarMeus",
                     icone:"fa fa-circle-o"
                 },
@@ -109,6 +114,18 @@ let custom = {
                 {
                     nome:"Play",
                     url:"/sistema/video/play",
+                    icone:"fa fa-circle-o"
+                },
+               
+            ]
+        },
+        {
+            nome:"Jogos",
+            icon: "fa fa-user",
+            itens:[
+                {
+                    nome:"Play",
+                    url:"/sistema/jogos",
                     icone:"fa fa-circle-o"
                 },
                

@@ -634,14 +634,18 @@ function deleteFonoaudiologo(Request $request, Response $response) {
 |______________________________________________________*/
 
 function getPacientes(Request $request, Response $response) {
-    $sql = "SELECT pe.*, (
-                SELECT flag_situacao FROM tb_fonoaudiologo_paciente WHERE flag_situacao = 1 and pe.id = frg_paciente
+         
+    $sql = "SELECT pac.*, p.dsc_nome,p.dsc_cpf, p.dsc_email,p.dat_nascimento,
+    p.dsc_telefone1,p.dsc_telefone2,p.frg_cor,p.frg_endestado,
+    p.frg_endcidade,p.dsc_endbairro,p.dsc_endcep,p.dsc_endnum,
+    p.dsc_endrua,p.dsc_nomemae,p.dsc_nomepai,p.frg_estado_civil,
+    p.frg_sexo,p.frg_nasestado,p.frg_nascidade, (
+                SELECT flag_situacao FROM tb_fonoaudiologo_paciente WHERE flag_situacao = 1 and p.id = frg_paciente
                 GROUP BY frg_paciente
-            ) AS situacao
-            FROM tb_pessoa pe 
-            INNER JOIN tb_paciente pa 
-            ON pe.id = pa.id_pessoa";
-        
+            ) AS situacao 
+            FROM tb_pessoa p 
+            INNER JOIN tb_paciente pac 
+            ON p.id = pac.id_pessoa";
     try {
         $stmt = getConnection()->query($sql);
         $pacientes = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -683,9 +687,9 @@ function getPacienteByUser(Request $request, Response $response) {
 function getPaciente(Request $request, Response $response) {
     $id = $request->getAttribute('id');
     
-    $sql = "SELECT * FROM tb_pessoa pe 
-    INNER JOIN tb_paciente pa
-    ON pe.id = pa.frg_pessoa WHERE pa.id=:id";
+    $sql = "SELECT * FROM tb_pessoa p
+    INNER JOIN tb_paciente pac
+    ON p.id = pac.id_pessoa WHERE pac.id=:id";
 
     try {
         $db = getConnection();
@@ -702,6 +706,161 @@ function getPaciente(Request $request, Response $response) {
         ->withHeader('Content-type', 'application/json');
 
     } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function addPacientes(Request $request, Response $response){
+    $paciente = json_decode($request->getBody());
+	
+    $sqlPessoa = "INSERT INTO tb_pessoa(dsc_cpf,dsc_nome,dsc_email,dat_nascimento,
+                                    dsc_telefone1,dsc_telefone2,frg_cor,frg_endestado,
+                                    frg_endcidade,dsc_endbairro,dsc_endcep,dsc_endnum,
+                                    dsc_endrua,dsc_nomemae,dsc_nomepai,frg_estado_civil,
+                                    frg_sexo,frg_nasestado,frg_nascidade
+                                    )
+     VALUES (:dsc_cpf,:dsc_nome,:dsc_email,:dat_nascimento,
+            :dsc_telefone1,:dsc_telefone2,:frg_cor,:frg_endestado,
+            :frg_endcidade,:dsc_endbairro,:dsc_endcep,:dsc_endnum,
+            :dsc_endrua,:dsc_nomemae,:dsc_nomepai,:frg_estado_civil,
+            :frg_sexo,:frg_nasestado,:frg_nascidade)";
+
+    $sqlPaciente = "INSERT INTO tb_paciente(id_pessoa,arr_deficiencia,arr_fonema) 
+                VALUES (:id_pessoa,:arr_deficiencia,:arr_fonema)";
+    
+    $db = getConnection();
+    try {
+        
+        $db->beginTransaction();
+        $stmt = $db->prepare($sqlPessoa);        
+        $stmt->bindParam("dsc_nome", $paciente->dsc_nome);
+        $stmt->bindParam("dsc_cpf", $paciente->dsc_cpf);
+        $stmt->bindParam("dat_nascimento", $paciente->dat_nascimento);
+        $stmt->bindParam("dsc_email", $paciente->dsc_email);
+        $stmt->bindParam("dsc_telefone1", $paciente->dsc_telefone1);
+        $stmt->bindParam("dsc_telefone2", $paciente->dsc_telefone2);
+        $stmt->bindParam("frg_cor", $paciente->frg_cor);
+        $stmt->bindParam("frg_endestado", $paciente->frg_endestado);
+        $stmt->bindParam("frg_endcidade", $paciente->frg_endcidade);
+        $stmt->bindParam("dsc_endbairro", $paciente->dsc_endbairro);
+        $stmt->bindParam("dsc_endcep", $paciente->dsc_endcep);
+        $stmt->bindParam("dsc_endnum", $paciente->dsc_endnum);
+        $stmt->bindParam("dsc_endrua", $paciente->dsc_endrua);
+        $stmt->bindParam("dsc_nomemae", $paciente->dsc_nomemae);
+        $stmt->bindParam("dsc_nomepai", $paciente->dsc_nomepai);
+        $stmt->bindParam("frg_estado_civil", $paciente->frg_estado_civil);
+        $stmt->bindParam("frg_sexo", $paciente->frg_sexo);
+        $stmt->bindParam("frg_nasestado", $paciente->frg_nasestado);
+        $stmt->bindParam("frg_nascidade", $paciente->frg_nascidade);
+
+        
+       
+        $stmt->execute();
+
+        $idPessoa = $db->lastInsertId();
+
+        $paciente->id_pessoa = $idPessoa;
+
+        $stmt2 = $db->prepare($sqlPaciente);
+
+        $stmt2->bindParam("id_pessoa", $paciente->id_pessoa);
+        $stmt2->bindParam("arr_deficiencia", $paciente->arr_deficiencia);
+        $stmt2->bindParam("arr_fonema", $paciente->arr_fonema);
+
+        $stmt2->execute();
+
+        $paciente->id = $db->lastInsertId();
+
+        $db->commit();
+        $db = null;
+
+        return $response->withJson($paciente, 201)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        $db->rollBack();
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function updatePaciente(Request $request, Response $response) {
+    $paciente = json_decode($request->getBody());
+
+    $id = $request->getAttribute('id');
+    
+    $sqlPessoa = "UPDATE tb_pessoa 
+            SET 
+            dsc_cpf = :dsc_cpf,
+            dsc_nome = :dsc_nome,
+            dsc_email = :dsc_email,
+            dat_nascimento = :dat_nascimento,
+            dsc_telefone1 = :dsc_telefone1,
+            dsc_telefone2 = :dsc_telefone2,
+            frg_cor= :frg_cor,
+            frg_endestado = :frg_endestado,
+            frg_endcidade = :frg_endcidade,
+            dsc_endbairro = :dsc_endbairro,
+            dsc_endcep = :dsc_endcep,
+            dsc_endnum = :dsc_endnum,
+            dsc_endrua = :dsc_endrua,
+            dsc_nomemae = :dsc_nomemae,
+            dsc_nomepai = :dsc_nomepai,
+            frg_estado_civil = :frg_estado_civil,
+            frg_sexo = :frg_sexo,
+            frg_nasestado = :frg_nasestado,
+            frg_nascidade = :frg_nascidade
+            WHERE id=:id";
+
+    $sqlPaciente = "UPDATE tb_paciente 
+            SET 
+            arr_deficiencia = :arr_deficiencia,
+            arr_fonema = :arr_fonema
+            WHERE id=:id";    
+
+
+        $db = getConnection();
+    try {
+        $db->beginTransaction();
+        
+        $stmt = $db->prepare($sqlPessoa);
+        $stmt->bindParam("dsc_nome", $paciente->dsc_nome);
+        $stmt->bindParam("dsc_cpf", $paciente->dsc_cpf);
+        $stmt->bindParam("dat_nascimento", $paciente->dat_nascimento);
+        $stmt->bindParam("dsc_email", $paciente->dsc_email);
+        $stmt->bindParam("dsc_telefone1", $paciente->dsc_telefone1);
+        $stmt->bindParam("dsc_telefone2", $paciente->dsc_telefone2);
+        $stmt->bindParam("frg_cor", $paciente->frg_cor);
+        $stmt->bindParam("frg_endestado", $paciente->frg_endestado);
+        $stmt->bindParam("frg_endcidade", $paciente->frg_endcidade);
+        $stmt->bindParam("dsc_endbairro", $paciente->dsc_endbairro);
+        $stmt->bindParam("dsc_endcep", $paciente->dsc_endcep);
+        $stmt->bindParam("dsc_endnum", $paciente->dsc_endnum);
+        $stmt->bindParam("dsc_endrua", $paciente->dsc_endrua);
+        $stmt->bindParam("dsc_nomemae", $paciente->dsc_nomemae);
+        $stmt->bindParam("dsc_nomepai", $paciente->dsc_nomepai);
+        $stmt->bindParam("frg_estado_civil", $paciente->frg_estado_civil);
+        $stmt->bindParam("frg_sexo", $paciente->frg_sexo);
+        $stmt->bindParam("frg_nasestado", $paciente->frg_nasestado);
+        $stmt->bindParam("frg_nascidade", $paciente->frg_nascidade);
+
+        $stmt->bindParam("id", $paciente->id_pessoa);
+
+        $stmt->execute();
+
+        $stmt2 = $db->prepare($sqlPaciente);
+
+        $stmt2->bindParam("arr_deficiencia", $paciente->arr_deficiencia);
+        $stmt2->bindParam("arr_fonema", $paciente->arr_fonema);
+        $stmt2->bindParam("id", $id);
+
+        $stmt2->execute();
+
+        $db->commit();
+        $db = null;
+        return $response->withJson($paciente, 200)
+        ->withHeader('Content-type', 'application/json');
+    } catch(PDOException $e) {
+        $db->rollBack();
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }

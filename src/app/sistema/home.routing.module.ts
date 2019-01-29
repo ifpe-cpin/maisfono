@@ -11,6 +11,7 @@ import { FonoFormComponent  } from './pages/fono/fono-form/fono-form.component';
 import { FonoDetalheComponent } from './pages/fono/fono-detalhe/fono-detalhe.component';
 
 import { ConsultaComponent  } from './pages/paciente/consulta/consulta.component';
+import { PacienteAdminComponent  } from './pages/paciente/paciente-admin/paciente-admin.component';
 import { ConsultarMeusComponent  } from './pages/paciente/consultar-meus/consultar-meus.component';
 import { PacienteEvolucaoComponent  } from './pages/paciente/paciente-evolucao/paciente-evolucao.component';
 import { PacienteFormComponent  } from './pages/paciente/paciente-form/paciente-form.component';
@@ -60,8 +61,11 @@ const homeRoutes = [
 
 			]},
 			{path: 'paciente', component: PacienteComponent, children: [
-				{path: 'paciente-fono', component: PacienteFonoComponent, canActivate: [PacienteGuard]},]
-			},
+				{path: 'paciente-fono', component: PacienteFonoComponent, canActivate: [PacienteGuard]},
+				{path: 'admin',component:PacienteAdminComponent, canActivate:[AdminGuard]},
+				{path: 'ver',component:PacienteDetalheComponent, canActivate:[AdminGuard]},
+				{path: 'novo',component:PacienteFormComponent},
+			]},
 			{path: 'fonoaudiologo', component: FonoComponent, children: [
 
 				{path: 'novo', component: FonoFormComponent, canActivate: [FonoGuard]},

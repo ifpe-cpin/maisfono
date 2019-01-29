@@ -1,15 +1,14 @@
 <section class="content-header">
   <h1>
-    Cadastrar meus Pacientes
-    
+    Paciente
+    <small>Formulário de Cadastro</small>
   </h1>
   <ol class="breadcrumb">
     <li><a routerLink="/home/dash"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li>Paciente</li>
-    <li class="active">Cadastrar Meus Pacientes</li>
+    <li><a href="#">Paciente</a></li>
+    <li class="active">Cadastro</li>
   </ol>
 </section>
-
 <!-- Main content -->
 <section class="content">
 <div class="row">
@@ -17,47 +16,327 @@
 
               <div class="box box-danger">
                 <div class="box-header">
-                  <h3 class="box-title">Cadastrar Pacientes</h3>
+                  <h3 class="box-title">Informações Pessoais</h3>
                 </div>
                 <div class="box-body">
+              <form id="form1" #f="ngForm"
+                    (ngSubmit)="onSubmit()" class="form1" method="post">                      
                 <div class="form-group">
                     <label>Nome:</label>
                     <div class="input-group">
                       <div class="input-group-addon">
                         <i class="fa fa-user-plus"></i>
                       </div>
-                      <input type="text" class="form-control" [(ngModel)]="paciente.nome">
+                      <input type="text" [(ngModel)]="paciente.dsc_nome" name="Nome" id="nome" class="form-control" placeholder="Nome" required>
+                      <input type="hidden" [(ngModel)]="paciente.id" name="id">
+                      <input type="hidden" [(ngModel)]="paciente.id_pessoa" name="pessoa_id">
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->
-                  
-
-                  <!-- phone mask -->
-                  <div class="form-group">
-                    <label>Telefone:</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-phone"></i>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="col-lg-12 input-group">
+                        <div>
+                          <label>Data de Nascimento
+                            <em>*</em>
+                          </label>
+                        </div>
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </span>
+                          <input type="date" [(ngModel)]="paciente.dat_nascimento" maxlength="8" name="dn" id="dn" class="form-control" placeholder="Data de nascimento" required>
+                        </div>
                       </div>
-                      <input type="text" class="form-control" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask [(ngModel)]="paciente.telefone">
-                    </div><!-- /.input group -->
-                  </div><!-- /.form group -->
-
-                    <div class="form-group">
-                    <label>Email:</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-folder"></i>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <div class="col-lg-4">
+                      <div class="col-lg-12 input-group">
+                        <div>
+                          <label>CPF
+                            <em>*</em>
+                          </label>
+                        </div>
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="fa fa-credit-card"></i>
+                          </span>
+                          <input type="text" [(ngModel)]="paciente.dsc_cpf" name="cpf" class="form-control" placeholder="CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Este campo deve conter apenas números"
+                            maxlength="14" minlength="14" OnKeyPress="formatar('###.###.###-##', this)" id="cpf" required>
+                        </div>
+    
                       </div>
-                      <input type="text" class="form-control" [(ngModel)]="paciente.email">
-                    </div><!-- /.input group -->
-                  </div><!-- /.form group -->
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                  </div>
+                  <!-- /.row -->
+                  <br>
+    
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Sexo
+                        </label>
+                        <select [(ngModel)]="paciente.frg_sexo" name="num_sexo" id="num_sexo" 
+                                class="form-control select2"
+                                title="Por favor, selecione uma opção.">
+                          <option value="">--Selecione--</option>
+                          <option value='1'>Feminino</option>
+                          <option value='2'>Masculino</option>
+                        </select>
+    
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Cor
+                        </label>
+                        <select [(ngModel)]="paciente.frg_cor" name="cor" id="cor" 
+                                class="form-control select2"
+                                title="Por favor, selecione uma opção.">
+                          <option value="">--Selecione--</option>
+                          <option value='1'>Branco</option>
+                          <option value='2'>Pardo</option>
+                          <option value='3'>Preto</option>
+                          <option value='4'>Amarelo(a)</option>
+                          <option value='5'>Indígena</option>
+                          <option value='6'>Não declarada</option>
+                        </select>
+    
+                      </div>
+                    </div>
+                    <!-- /.col (right) -->
+    
+                  </div>
+                  <!-- /.row -->  
+
+                
+                  <h3>Contato</h3>
+                  <hr>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="col-lg-12 input-group">
+                        <div>
+                          <label>Telefone 1</label>
+                        </div>
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="fa fa-phone"></i>
+                          </span>
+                          <input type="text" [(ngModel)]="paciente.dsc_telefone1" name="telefone1" class="form-control" placeholder="xx xxxx-xxxx" title="Telefone" maxlength="12" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" >
+                        </div>
+                      </div>
+    
+                      <div class="col-lg-12 input-group">
+                        <div>
+                          <label>Telefone 2</label>
+                        </div>
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="fa fa-phone"></i>
+                          </span>
+                          <input type="text" [(ngModel)]="paciente.dsc_telefone2" name="telefone2" class="form-control" placeholder="xx xxxx-xxxx" title="Telefone" maxlength="12" OnKeyPress="formatar('## ####-####', this);">
+                        </div>
+                      </div>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <div class="col-lg-6">
+                      <div class="col-lg-12 input-group">
+                        <div>
+                          <label>Email</label>
+                        </div>
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="fa fa-envelope"></i>
+                          </span>
+                          <input type="email" [(ngModel)]="paciente.dsc_email" name="email" class="form-control" placeholder="Email">
+                        </div>
+                      </div>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                  </div>
+                  <!-- /.row -->
+                  <br>
+                  <br>
+                  <h3>Endereço</h3>
+                  <hr>
+                  <div class="row">
+                    <!-- /.form-group -->
+                    <div class="col-lg-6">
+                      <div class="col-lg-12 input-group">
+                        <div>
+                          <label>CEP</label>
+                        </div>
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="fa fa-home"></i>
+                          </span>
+                          <input type="int" [(ngModel)]="paciente.dsc_endcep" maxlength="10" class="form-control" name="cep" id="cep" OnKeyPress="formatar('##.###-###', this);">
+    
+                        </div>
+                      </div>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                  </div>
+                  <!-- /.row -->
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="input-group col-xs-12">
+                        <label>Estado
+                        </label>
+    
+                        <select class="form-control select2" [(ngModel)]="paciente.frg_endestado" name="estado" id="estado" id="estado" onchange="showUser(this.value)" onChange="ativa(this);"
+                          >
+    
+                          <option value="">--Selecione--</option>
+                          <option value='1'>Acre</option>
+                          <option value='2'>Alagoas</option>
+                          <option value='3'>Amazonas</option>
+                          <option value='4'>Amapá</option>
+                          <option value='5'>Bahia</option>
+                          <option value='6'>Ceará</option>
+                          <option value='7'>Distrito Federal</option>
+                          <option value='8'>Espírito Santo</option>
+                          <option value='9'>Goiás</option>
+                          <option value='10'>Maranhão</option>
+                          <option value='11'>Minas Gerais</option>
+                          <option value='12'>Mato Grosso do Sul</option>
+                          <option value='13'>Mato Grosso</option>
+                          <option value='14'>Pará</option>
+                          <option value='15'>Paraíba</option>
+                          <option value='16'>Pernambuco</option>
+                          <option value='17'>Piauí</option>
+                          <option value='18'>Paraná</option>
+                          <option value='19'>Rio de Janeiro</option>
+                          <option value='20'>Rio Grande do Norte</option>
+                          <option value='21'>Rondônia</option>
+                          <option value='22'>Roraima</option>
+                          <option value='23'>Rio Grande do Sul</option>
+                          <option value='24'>Santa Catarina</option>
+                          <option value='25'>Sergipe</option>
+                          <option value='26'>São Paulo</option>
+                          <option value='27'>Tocantins</option>
+                        </select>
+                      </div>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <div class="col-lg-4">
+                      <div class="input-group col-xs-12">
+                        <label>Município
+                        </label>
+                        <select class="form-control select2" [(ngModel)]="paciente.frg_endmunicipio" name="municipio" id="municipio">
+                          <option value="">Selecione o Estado</option>
+                          <option value='26'>Garanhuns</option>
+                          <option value='27'>Maceió</option>
+                        </select>
+                      </div>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <div class="col-lg-4">
+                      <div class="col-lg-12 input-group">
+                        <div>
+                          <label>Bairro</label>
+                        </div>
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="fa fa-home"></i>
+                          </span>
+                          <input type="text" [(ngModel)]="paciente.dsc_endbairro" name="bairro" id="bairro" class="form-control" placeholder="Bairro" title="Bairro">
+                        </div>
+                      </div>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                  </div>
+                  <!-- /.row -->
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-9">
+                      <div class="col-lg-12 input-group">
+                        <div>
+                          <label>Rua
+                            <em>*</em>
+                          </label>
+                        </div>
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="fa fa-home"></i>
+                          </span>
+                          <input type="text" [(ngModel)]="paciente.dsc_endrua" name="rua" id="rua" class="form-control" placeholder="Endereço" min="5" title="Este campo deve conter apenas letras e um mínimo de 5 caracteres."
+                            required>
+                        </div>
+                      </div>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <div class="col-lg-3">
+                      <div class="col-lg-12 input-group">
+                        <div>
+                          <label>Número</label>
+                        </div>
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="fa fa-home"></i>
+                          </span>
+                          <input type="text" [(ngModel)]="paciente.dsc_endnum" name="num_end" class="form-control" placeholder="Número" title="Número">
+                        </div>
+                      </div>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                  </div>
+                  <!-- /.row -->
+                  <br>
+                  <br>
+
+                  <h3>Deficiencia</h3>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Grau de Deficiencia
+                          <em>*</em>
+                        </label>
+                        <select [(ngModel)]="paciente.arr_deficiencia" name="Deficiencia" id="Deficiencia" class="form-control select2" title="Por favor, selecione uma opção." required>
+                          <option value="">--Selecione--</option>
+                          <option value='1'>Alto</option>
+                          <option value='2'>Moderado</option>
+                          <option value='3'>Leve</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Fonemas:</label>
+                        <input type="text" class="form-control pull-right" [(ngModel)]="paciente.arr_fonema" name="fonema" id="reservationtime">
+    
+                      </div>
+                    </div>
+                    
+                    </div>
+    
+    
 
 
                  <div class="col-md-3">
-                 <button  class="btn btn-primary" label="GRAVAR" (click)="gravar(paciente.nome, paciente.telefone, paciente.email)"  > GRAVAR</button>
+                    <p align="right">
+                        <button type="submit"  class="btn btn-lg btn-primary fa fa-save" align="right">
+                          <b style="margin-left: 10px"> Salvar</b>
+                        </button>
+                      </p>
+            
 
-                  <!-- (click)="gravar(nome.value, telefone.value, email.value, laudo.value)" #clienteForm="ngForm" -->
             </div>
+          </form>
 
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

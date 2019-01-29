@@ -6,6 +6,8 @@ import { REQUEST_BASE_URL } from '../models/request';
 import { PacienteSerializer } from '../serializers/paciente.serializer';
 import { Paciente } from "../models/paciente";
 
+import 'rxjs/add/operator/map';
+
 
 
 @Injectable()
@@ -18,3 +20,5 @@ export class PacienteService extends ResourceService<Paciente> implements Resour
       new PacienteSerializer);
   }
 }
+
+

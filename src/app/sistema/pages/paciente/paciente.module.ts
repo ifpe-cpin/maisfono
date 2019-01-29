@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { PacienteRoutingModule } from './paciente.routing.module';
+import { PacienteAdminComponent } from './paciente-admin/paciente-admin.component';
 import { PacienteDetalheComponent } from './paciente-detalhe/paciente-detalhe.component';
 import { PacienteFormComponent } from './paciente-form/paciente-form.component';
 import { PacienteComponent } from './paciente.component';
@@ -23,6 +24,7 @@ import { VincularFonoComponent } from './vincular-fono/vincular-fono.component';
 	
   ],
   declarations: [
+	PacienteAdminComponent,
   	PacienteDetalheComponent, 
   	PacienteFormComponent,
   	PacienteComponent, 
