@@ -68,6 +68,11 @@ let fono = {
                     url:"/sistema/fonoaudiologo/consultarPacientes",
                     icone:"fa fa-circle-o"
                 },
+                {
+                    nome:"Consultar Meus",
+                    url:"/sistema/fonoaudiologo/consultarMeus",
+                    icone:"fa fa-circle-o"
+                },
             ],
         },
         {
