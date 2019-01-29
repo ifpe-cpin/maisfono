@@ -6,6 +6,7 @@ import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 import { ResourceServiceInterface } from '../services/resource.service.interface';
 import { PusherService } from '../services/pusher.service';
+import { environment } from '../../environments/environment.prod';
 
 declare const gapi: any;
 

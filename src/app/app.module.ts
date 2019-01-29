@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ControlSidebarComponent } from './sistema/control-sidebar/control-sidebar.component';
 import { HeaderComponent } from './sistema/header/header.component';
-import { LeftSideComponent } from './sistema/left-side/left-side.component';
 
 
 import { SistemaModule } from './sistema/sistema.module';
@@ -75,7 +74,6 @@ const agoraConfig: AgoraConfig = {
     ConfirmDialogComponent,
     ControlSidebarComponent,
     HeaderComponent,
-    LeftSideComponent,
     AppComponent,
     ControlSidebarComponent,
     HeaderComponent,

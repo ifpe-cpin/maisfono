@@ -13,6 +13,7 @@ import { LoadComponent } from '../load/load.component';
 import { AppModule } from '../app.module';
 import { VideochamadaComponent } from '../videochamada/videochamada.component';
 import { UserStatusComponent } from './user-status/user-status.component';
+import { LeftSideComponent } from './left-side/left-side.component';
 
 
 
@@ -21,7 +22,8 @@ import { UserStatusComponent } from './user-status/user-status.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    FullCalendarModule
+    FullCalendarModule,
+    
    
   ],
   declarations: [SistemaComponent,
@@ -30,8 +32,9 @@ import { UserStatusComponent } from './user-status/user-status.component';
      LoadComponent,
      PacienteSelecionarComponent,
     RoleMenuComponent,
+    LeftSideComponent,
     VideochamadaComponent,
     UserStatusComponent],
-    exports:[LoadComponent,UserStatusComponent]
+    exports:[LoadComponent,UserStatusComponent,LeftSideComponent]
 })
 export class SistemaModule { }

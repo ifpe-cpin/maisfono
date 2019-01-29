@@ -53,13 +53,13 @@
     </header>
     
       <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar">
+      <!-- <aside class="main-sidebar"> -->
             <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
+            <!-- <section class="sidebar"> -->
               <!-- Sidebar user panel -->
-              <div class="user-panel">
-                <div class="pull-left image">
-                  <img [src]="img" class="img-circle" alt="User Image">
+              <!-- <div class="user-panel"> -->
+                <!-- <div class="pull-left image"> -->
+                  <!-- <img [src]="img" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                   <p>{{name}}</p>
@@ -67,22 +67,22 @@
                   
                   <button type="button" (click)="openRoom()" class="btn btn-primary {{visible}}">Sala</button>
                 </div>
-              </div>
+              </div> -->
               <!-- search form -->
-              <form action="#" method="get" class="sidebar-form">
+              <!-- <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
                   <input type="text" name="q" class="form-control" placeholder="Search...">
                   <span class="input-group-btn">
                     <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
                   </span>
                 </div>
-              </form>
+              </form> -->
               <!-- /.search form -->
-              <app-role-menu  [menus]="menus"></app-role-menu>
-            </section>
+              <!-- <app-role-menu  [menus]="menus"></app-role-menu>
+            </section> -->
             <!-- /.sidebar -->
-        </aside>
-        
+        <!-- </aside> -->
+        <app-left-side></app-left-side>
         <div class="content-wrapper">
             <router-outlet></router-outlet>
             <div class="clearfix"></div>
