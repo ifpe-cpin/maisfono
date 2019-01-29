@@ -19,7 +19,7 @@ export class ConsultaAgendaComponent implements OnInit {
               private route: ActivatedRoute,
               private chRef: ChangeDetectorRef) { }
  
-  agenda;//: Agenda[];
+  agenda: Agenda[];
   dataTable: any;
   loading:boolean;
 
@@ -64,9 +64,10 @@ export class ConsultaAgendaComponent implements OnInit {
       let id = localStorage.getItem('pessoaId');
             
 			if(id!= undefined){
-                this.agendaService.listWithID2(id).
+                this.agendaService.listWithID(id).
                 subscribe(agenda => {
-                        this.agenda.push(agenda)
+                        console.log(agenda)
+                        this.agenda = agenda;
 
                         this.chRef.detectChanges();
                         

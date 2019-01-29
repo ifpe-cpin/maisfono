@@ -865,38 +865,31 @@ function updatePaciente(Request $request, Response $response) {
     }
 }
 
-function deletePaciente(Request $request, Response $response) {
-	$id = $request->getAttribute('id');
-    $sqlPaciente = "DELETE FROM tb_paciente WHERE id=:id";
-    $sqlPessoa = "DELETE FROM tb_pessoa WHERE id=:id";
-    $sqlSelectPaciente = "SELECT * FROM tb_paciente WHERE id=:id";
 
-    $db = getConnection();
+function getPacienteByFonoaudiologo(Request $request, Response $response) {
+    $id = $request->getAttribute('id');
+    
+    $sql = "SELECT pa.* 
+    FROM tb_pessoa pa 
+    INNER JOIN tb_fonoaudiologo_paciente fp
+    ON (pa.id = fp.frg_paciente )
+    where fp.frg_fonoaudiologo =:id";
+
     try {
-        $db->beginTransaction();
-
-        $stmt = $db->prepare($sqlSelectPaciente);
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
         $stmt->bindParam(":id", $id);
+
         $stmt->execute();
 
-        $paciente = $stmt->fetch(PDO::FETCH_OBJ);
-        
-        $stmt2 = $db->prepare($sqlPaciente);
-        $stmt2->bindParam("id", $paciente->id);
-        $stmt2->execute();
-
-        $stmt3 = $db->prepare($sqlPessoa);
-        $stmt3->bindParam("id", $paciente->id_pessoa);
-        $stmt3->execute();
-
-        $db->commit();
+        $pacientes = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
         
-		return $response->withJson(['msg' => "Deletando o paciente {$id}"], 204)
+        return  $response->withJson($pacientes, 200)
         ->withHeader('Content-type', 'application/json');
 
     } catch(PDOException $e) {
-        $db->rollBack();
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }

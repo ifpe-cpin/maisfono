@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { EvolucaoService } from '../../../../services/evolucao.service';
 import { Evolucao } from '../../../../models/evolucao';
 import { ActivatedRoute } from '@angular/router';
@@ -10,8 +10,7 @@ import { QueryOptions } from '../../../../models/query-options';
   selector: 'app-paciente-evolucao',
   templateUrl: './paciente-evolucao.component.html',
   styleUrls: ['./paciente-evolucao.component.css'],
- 	providers: [EvolucaoService],
-   encapsulation: ViewEncapsulation.None
+ 	providers: [EvolucaoService]
 }) 
 export class PacienteEvolucaoComponent implements OnInit {
   evolucoes: Evolucao[];
@@ -34,7 +33,7 @@ export class PacienteEvolucaoComponent implements OnInit {
    };
 
   //Inicializa um evolução que servirá para inclusão 
-  evolucao: Evolucao
+  evolucao: Evolucao[];
   //  = {
   //   dsc_evolucao: '',
   //   dsc_titulo: '',
@@ -42,18 +41,28 @@ export class PacienteEvolucaoComponent implements OnInit {
   //  };
 
   teste: Object;
-   
-  constructor(private http: HttpClient, private evolucaoService: EvolucaoService, private route: ActivatedRoute) {  }
+  
+  loading:boolean;
+  constructor(private http: HttpClient, 
+              private evolucaoService: EvolucaoService, 
+              private route: ActivatedRoute,
+              private chRef: ChangeDetectorRef) {  }
   
   ngOnInit() {
+    
+    this.loading = true;
+    this.refreshData();
+    /*
     this.evolucao = new Evolucao();
     this.evolucao.fk_flag_evolucao = 1
     this.evolucaoService.list(new QueryOptions).subscribe(data => {
       this.evolucoes = <any>data
     })
+    */
   }
 
   onSubmit() {
+    /*
     console.log(this.evolucao)
     if(this.evolucao.dsc_evolucao != '' && this.evolucao.dsc_titulo != '' 
     && this.evolucao.fk_flag_evolucao > 0 && this.evolucao.fk_flag_evolucao < 4 ) {
@@ -66,6 +75,7 @@ export class PacienteEvolucaoComponent implements OnInit {
         }
         );;
     }
+    */
   }
 
   editEvolucao(event, evolucao) {
@@ -73,11 +83,29 @@ export class PacienteEvolucaoComponent implements OnInit {
     this.evolucaoToEdit = evolucao;
   }
 
-  getEvolucoesRest(){    
-    //passando como parametro o id do paciente e o id do fono
-    return this.http.get('http://localhost/slim/public/evolucao/evolucoes/'+this.idPaciente+'/2')
-  }
+  refreshData(){
+    this.route
+    .queryParams
+    .subscribe(params => {
+        // Defaults to 0 if no query param provided.
+        let id = localStorage.getItem('pessoaId');
+            
+        if(id!= undefined){
+            this.evolucaoService.listWithTwoID(this.idPaciente, id).subscribe(
+                evolucao => {
+                    this.evolucoes = evolucao
 
+                    this.chRef.detectChanges();
+                    
+                    this.loading = false;
+                }
+            );
+        } 
+    });
+
+    }
+    
+   /* 
   setEvolucaoRest(evolucao){
     //passando como parametro o id do paciente e o id do fono  
     evolucao.fk_paciente = this.idPaciente;
@@ -86,7 +114,7 @@ export class PacienteEvolucaoComponent implements OnInit {
      return this.http.post('http://localhost/slim/public/evolucao/create', evolucao)
      .subscribe(res => console.log("done"));
 
-   }
+  }
 
   delEvolucaoRest(id){
      const response = confirm('Tem certeza que quer deletar este registro?');
@@ -105,4 +133,5 @@ export class PacienteEvolucaoComponent implements OnInit {
      .subscribe(res => console.log("done"));
 
    }
+   */
 }

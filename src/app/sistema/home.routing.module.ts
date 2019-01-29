@@ -44,6 +44,7 @@ import { UserCreateComponent } from './pages/user/user-create/user-create.compon
 import { ConsultaDisponibilidadeComponent } from './pages/agenda/consulta-disponibilidade/consulta-disponibilidade.component';
 import { PacienteComponent } from './pages/paciente/paciente.component';
 import { PacienteFonoComponent } from './pages/paciente/paciente-fono/paciente-fono.component';
+import { DisponibilidadeFormComponent }  from './pages/agenda/disponibilidade-form/disponibilidade-form.component';
 import { PacienteGuard } from '../core/paciente.guard';
 
 const homeRoutes = [
@@ -82,6 +83,7 @@ const homeRoutes = [
 					{path: 'consultaAgenda', component: ConsultaAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
 					{path: 'calendarioAgenda', component: CalendarioAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
 					{path: 'calendarioDisponibilidade', component: ConsultaDisponibilidadeComponent, canActivate: [AuthGuard,AdminGuard]},
+					{path: 'incluiDisponibilidade', component: DisponibilidadeFormComponent, canActivate: [AuthGuard,AdminGuard]},
 				]},
 			]},
 			{path: 'jogos', component: JogosComponent, children: [

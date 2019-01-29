@@ -63,6 +63,15 @@ $app->group('/fonoaudiologosPacientes', function () use ($app) {
 
 /*______________________________________________________
 |                                                       |
+|               Route's - PacienteFonoaudiologo         |
+|______________________________________________________*/
+$app->group('/pacientesFonoaudiologos', function () use ($app) {
+    $app->get('/{id}', 'getPacienteByFonoaudiologo');
+});
+
+
+/*______________________________________________________
+|                                                       |
 |                 Route's - Paciente                    |
 |______________________________________________________*/
 $app->group('/pacientes', function () use ($app) {

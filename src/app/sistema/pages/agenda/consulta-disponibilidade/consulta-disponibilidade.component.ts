@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FonoaudiologoDisponibilidade } from '../../../../models/fonoaudiologoDisponibilidade';
 import { FonoaudiologoDisponibilidadeService } from '../../../../services/fonoaudiologoDisponibilidade.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +15,8 @@ export class ConsultaDisponibilidadeComponent implements OnInit {
 
   constructor(private fonoaudiologoDisponibilidadeService:FonoaudiologoDisponibilidadeService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private chRef: ChangeDetectorRef) { }
 
   fonoaudiologoDisponibilidade: FonoaudiologoDisponibilidade[];
   dataTable: any;
@@ -63,8 +64,21 @@ export class ConsultaDisponibilidadeComponent implements OnInit {
           if(id!= undefined){
                     this.fonoaudiologoDisponibilidadeService.listWithID(id).subscribe(
                         fonoaudiologoDisponibilidade => {
-                            this.fonoaudiologoDisponibilidade = this.fonoaudiologoDisponibilidade
-                        }
+                            this.fonoaudiologoDisponibilidade = fonoaudiologoDisponibilidade
+
+                            this.chRef.detectChanges();
+                        
+                            if ( $.fn.dataTable.isDataTable( '#consultaDisponibilidade' ) ) {
+                            this.dataTable = $('#consultaDisponibilidade').DataTable();
+                            }
+                            else {
+                                this.dataTable = $('#consultaDisponibilidade').DataTable(
+                                    this.dataInfo 
+                                );
+                            }
+                            
+                            this.loading = false;
+                            }
                     );
           } 
       });
