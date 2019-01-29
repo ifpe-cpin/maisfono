@@ -5,7 +5,7 @@
   "projects": {
     "mais-fono": {
       "root": "",
-      "sourceRoot": "src",
+      "sourceRoot": "src",        
       "projectType": "application",
       "prefix": "app",
       "schematics": {},
@@ -77,15 +77,6 @@
           },
           "configurations": {
             "production": {
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -97,10 +88,10 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
+              "aot": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer":false
             }
           }
         },

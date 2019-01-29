@@ -21,9 +21,7 @@ import { PusherService } from '../services/pusher.service';
               '../../assets/css/grid.css',
               '../../assets/css/style.css',
               '../../assets/css/contato.css',
-              '../../assets/css/responsivo.css',
-              '../..',
-            
+              '../../assets/css/responsivo.css',            
             ],
   providers: [AuthService, FonoaudiologoService,PacienteService,
   {provide: 'ResourceServiceInterface', useClass: UserService},

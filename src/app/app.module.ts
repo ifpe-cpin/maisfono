@@ -79,7 +79,6 @@ const agoraConfig: AgoraConfig = {
     AppComponent,
     ControlSidebarComponent,
     HeaderComponent,
-    LeftSideComponent,
     LoginComponent,
     PerfilComponent,
     DashboardComponent,
