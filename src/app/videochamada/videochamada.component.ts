@@ -43,7 +43,7 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
 			}
     });
 
-    this.pusherService.disponivel(this.userId);
+    this.start()
   }
 
   // Add
@@ -52,7 +52,7 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
     this.agoraService.client.join(null, this.id, null, (uid) => {
       this.localStream = this.agoraService.createStream(uid, true, null, null, true, false);
       this.localStream.setVideoProfile('720p_3');
-      this.pusherService.ocupado(this.userId);
+       this.pusherService.disponivel(this.userId);
       this.subscribe();
     });
   }
@@ -100,7 +100,14 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
 
     this.agoraService.client.on('stream-subscribed', (evt) => {
       const stream = evt.stream;
-      if (!this.remoteCalls.includes(`agora_remote${stream.getId()}`)) this.remoteCalls.push(`agora_remote${stream.getId()}`);
+      
+      if(this.remoteCalls==0){
+         if (!this.remoteCalls.includes(`agora_remote${stream.getId()}`)){ 
+             this.remoteCalls.push(`agora_remote${stream.getId()}`);
+             this.pusherService.ocupado(this.userId);
+         }
+      }
+
       setTimeout(() => stream.play(`agora_remote${stream.getId()}`), 2000);
     });
 
@@ -120,6 +127,7 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
         stream.stop();
         this.remoteCalls = this.remoteCalls.filter(call => call === `#agora_remote${stream.getId()}`);
         console.log(`${evt.uid} left from this channel`);
+        this.pusherService.disponivel(this.userId);
       }
     });
   }
@@ -132,7 +140,7 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
       document.getElementById('agora_local').innerHTML = "";
       this.remoteCalls = []
       console.log("Leavel channel successfully");
-      this.pusherService.disponivel(this.userId);
+      this.pusherService.ausente(this.userId);
     }, (err) => {
       console.log("Leave channel failed");
     });
@@ -152,6 +160,7 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
 
 
   ngOnDestroy(){
+    this.leave()
     this.pusherService.ausente(this.userId);
   }
 }
