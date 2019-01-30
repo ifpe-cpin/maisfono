@@ -71,7 +71,7 @@ this.refreshData();
 
 refreshData(){
 let queryMap = new Map<string,string>()
-queryMap.set("notIdPaciente",this.pacienteId)
+queryMap.set("notIdPaciente",localStorage.getItem("pacienteId"))
 
 this.fonoService.list(new QueryOptions(queryMap)).
     subscribe( fonos => {
