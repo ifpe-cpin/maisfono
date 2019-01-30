@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VideoCall } from '../models/videocall.interface';
 import { PusherService } from '../services/pusher.service';
 
@@ -23,6 +23,7 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
   constructor(
     private agoraService: AngularAgoraRtcService,
     private route: ActivatedRoute,
+    private router: Router,
     private pusherService: PusherService) {
     
     this.agoraService.createClient();
@@ -101,12 +102,11 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
     this.agoraService.client.on('stream-subscribed', (evt) => {
       const stream = evt.stream;
       
-      if(this.remoteCalls==0){
          if (!this.remoteCalls.includes(`agora_remote${stream.getId()}`)){ 
              this.remoteCalls.push(`agora_remote${stream.getId()}`);
              this.pusherService.ocupado(this.userId);
          }
-      }
+
 
       setTimeout(() => stream.play(`agora_remote${stream.getId()}`), 2000);
     });
@@ -141,6 +141,8 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
       this.remoteCalls = []
       console.log("Leavel channel successfully");
       this.pusherService.ausente(this.userId);
+      
+      this.router.navigate(['/sistema/dash'])
     }, (err) => {
       console.log("Leave channel failed");
     });

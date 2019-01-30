@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { UserStatus } from '../../models/user-status';
 import { STATUS } from '../../models/status';
 import { PusherService } from '../../services/pusher.service';
@@ -11,6 +11,7 @@ import { UserService } from '../../services/user.service';
   providers: [PusherService,UserService]
 })
 export class UserStatusComponent implements OnInit,OnChanges {
+
 
   @Input()
   nameVisible:boolean = false

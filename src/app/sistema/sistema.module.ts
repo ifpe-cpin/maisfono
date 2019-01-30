@@ -14,6 +14,7 @@ import { AppModule } from '../app.module';
 import { VideochamadaComponent } from '../videochamada/videochamada.component';
 import { UserStatusComponent } from './user-status/user-status.component';
 import { LeftSideComponent } from './left-side/left-side.component';
+import { VideocallIconComponent } from './videocall-icon/videocall-icon.component';
 
 
 
@@ -34,7 +35,8 @@ import { LeftSideComponent } from './left-side/left-side.component';
     RoleMenuComponent,
     LeftSideComponent,
     VideochamadaComponent,
-    UserStatusComponent],
-    exports:[LoadComponent,UserStatusComponent,LeftSideComponent]
+    UserStatusComponent,
+    VideocallIconComponent],
+    exports:[LoadComponent,UserStatusComponent,LeftSideComponent,VideocallIconComponent]
 })
 export class SistemaModule { }

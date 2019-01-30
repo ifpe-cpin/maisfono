@@ -40,10 +40,11 @@
                     [queryParams]="{ id: f.id }" class="space-10">
                     <i class="fa fa-search-plus" ></i>
                   </a>
-                   
-                  <a (click)="videoCall(f._user_id)">
+                   <app-videocall-icon [userId]="f._user_id"></app-videocall-icon>
+
+                  <!-- <a (click)="videoCall(f._user_id)" *ngIf="videoCallVisible">
                      <i class="fa fa-video-camera" ></i>
-                  </a>
+                  </a> -->
                 </td>
               
               </tr>

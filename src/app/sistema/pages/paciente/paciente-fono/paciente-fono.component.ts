@@ -62,8 +62,8 @@ export class PacienteFonoComponent implements OnInit, OnChanges {
   }
   
   ngOnInit() {
-    this.loading = true;
-    this.vincularVisible = false;
+    this.loading = true
+    this.vincularVisible = false
     
     console.log(localStorage.getItem("pacienteId"))
     this.refreshData();
