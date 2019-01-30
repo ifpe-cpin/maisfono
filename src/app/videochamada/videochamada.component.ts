@@ -102,10 +102,12 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
     this.agoraService.client.on('stream-subscribed', (evt) => {
       const stream = evt.stream;
       
+      if(this.remoteCalls.length==0){
          if (!this.remoteCalls.includes(`agora_remote${stream.getId()}`)){ 
              this.remoteCalls.push(`agora_remote${stream.getId()}`);
              this.pusherService.ocupado(this.userId);
          }
+      }
 
 
       setTimeout(() => stream.play(`agora_remote${stream.getId()}`), 2000);
