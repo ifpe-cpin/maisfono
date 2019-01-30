@@ -4,7 +4,7 @@ import { ResourceServiceInterface } from './resource.service.interface';
 import { HttpClient } from '@angular/common/http';
 import { AgendaSerializer } from '../serializers/agenda.serializer';
 import { Agenda } from '../models/agenda';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment';
 
 
 @Injectable()

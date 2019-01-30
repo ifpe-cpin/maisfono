@@ -4,7 +4,7 @@ import { ResourceServiceInterface } from './resource.service.interface';
 import { HttpClient } from '@angular/common/http';
 import { CalendarioSerializer } from '../serializers/calendario.serializer';
 import { Calendario } from '../models/calendario';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment';
 
 
 @Injectable()

@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ResourceServiceInterface } from './resource.service.interface';
 import { FonoaudiologoPaciente } from '../models/fonoaudiologo-paciente';
 import { FonoaudiologoPacienteSerializer } from '../serializers/fonoaudiologo-paciente.serializer';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment';
 
 
 

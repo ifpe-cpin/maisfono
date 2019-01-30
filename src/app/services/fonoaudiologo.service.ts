@@ -6,7 +6,7 @@ import { ResourceService } from './resource.service';
 import { FonoaudiologoSerializer } from '../serializers/fonoaudiologo.serializer';
 import { REQUEST_BASE_URL } from '../models/request';
 import { ResourceServiceInterface } from './resource.service.interface';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class FonoaudiologoService extends ResourceService<Fonoaudiologo>
