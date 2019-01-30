@@ -16,7 +16,7 @@ export class FonoaudiologoPacienteService extends ResourceService<FonoaudiologoP
     super(
       httpClient,
       environment.request_base_url,
-      'pacientesFonoaudiologos',
+      'fonoaudiologosPacientes',
       new FonoaudiologoPacienteSerializer);
   }
 }
