@@ -4,7 +4,6 @@ import 'rxjs/add/operator/map';
 import { HttpClient } from '@angular/common/http';
 import { ResourceService } from './resource.service';
 import { FonoaudiologoSerializer } from '../serializers/fonoaudiologo.serializer';
-import { REQUEST_BASE_URL } from '../models/request';
 import { ResourceServiceInterface } from './resource.service.interface';
 import { environment } from '../../environments/environment';
 
