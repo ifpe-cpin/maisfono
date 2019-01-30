@@ -65,7 +65,7 @@ export class PacienteFonoComponent implements OnInit, OnChanges {
     this.loading = true;
     this.vincularVisible = false;
     
-    console.log(this.pacienteId)
+    console.log(localStorage.getItem("pacienteId"))
     this.refreshData();
    }
 
@@ -74,7 +74,7 @@ export class PacienteFonoComponent implements OnInit, OnChanges {
    }
    refreshData(){
      let queryMap = new Map<string,string>()
-     queryMap.set("idPaciente",this.pacienteId)
+     queryMap.set("idPaciente",localStorage.getItem("pacienteId"))
 
      this.fonoPacienteService.list(new QueryOptions(queryMap)).
                 subscribe( fonos => {
