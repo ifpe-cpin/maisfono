@@ -12,31 +12,53 @@ p {
   justify-content: center;
 }
 
-.agora_local{
+.agora_local_small{
   background-color: #404040;
-  height: 400px;
-  width: 400px;
+  height: 200px;
+  width: 200px;
   border: black 1px solid;
   margin: 8px;
 }
-#agora_local{
-  height: 400px; 
-  width: 400px;
+.agora_local_video_small{
+  height: 200px; 
+  width: 200px;
   position: relative;
-  top: -8%;
+  top: -15%;
+}
+
+.agora_local_large{
+  background-color: #404040;
+  height: 500px;
+  width: 800px;
+  border: black 1px solid;
+  margin: 8px;
+}
+.agora_local_video_large{
+  height: 500px; 
+  width: 800px;
+  position: relative;
+  top: -6%;
 }
 
 .agora_remote{
   background-color: #404040;
-  height: 400px;
-  width: 400px;
+  height: 500px;
+  width: 800px;
   border: black 1px solid;
   margin: 8px;
 }
 
-.video-buttons{
-  width: 400px;
-  top: 360px;
+.video-buttons_small{
+  width: 205px;
+  top: 160px;
+  position: relative;
+  text-align: center;
+  z-index: 999;
+}
+
+.video-buttons_large{
+  width: 800px;
+  top: 460px;
   position: relative;
   text-align: center;
   z-index: 999;

@@ -20,6 +20,10 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
   id:String;
   userId:string;
 
+  classLocal:string
+  classLocalVideo:string
+  classButtons:string
+
   constructor(
     private agoraService: AngularAgoraRtcService,
     private route: ActivatedRoute,
@@ -31,6 +35,9 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
 
 
   ngOnInit() {
+
+    this.largeStyle()
+
     this.userId = localStorage.getItem("id")
     this.id = "1000";
     this.route
@@ -47,13 +54,25 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
     this.start()
   }
 
+  private smallStyle() {
+    this.classLocal = "agora_local_small";
+    this.classLocalVideo = "agora_local_video_small";
+    this.classButtons = "video-buttons_small";
+  }
+
+  private largeStyle() {
+    this.classLocal = "agora_local_large";
+    this.classLocalVideo = "agora_local_video_large";
+    this.classButtons = "video-buttons_large";
+  }
+
   // Add
   start() {
     this.activeCall = true;
     this.agoraService.client.join(null, this.id, null, (uid) => {
       this.localStream = this.agoraService.createStream(uid, true, null, null, true, false);
       this.localStream.setVideoProfile('720p_3');
-       this.pusherService.disponivel(this.userId);
+      this.pusherService.disponivel(this.userId);
       this.subscribe();
     });
   }
@@ -106,6 +125,7 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
          if (!this.remoteCalls.includes(`agora_remote${stream.getId()}`)){ 
              this.remoteCalls.push(`agora_remote${stream.getId()}`);
              this.pusherService.ocupado(this.userId);
+             this.smallStyle()
          }
       }
 
@@ -120,6 +140,7 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
       this.pusherService.disponivel(this.userId);
       this.remoteCalls = this.remoteCalls.filter(call => call !== `#agora_remote${stream.getId()}`);
       console.log(`Remote stream is removed ${stream.getId()}`);
+      this.largeStyle()
     });
 
     this.agoraService.client.on('peer-leave', (evt) => {
@@ -130,6 +151,7 @@ export class VideochamadaComponent implements OnInit, OnDestroy, VideoCall {
         this.remoteCalls = this.remoteCalls.filter(call => call === `#agora_remote${stream.getId()}`);
         console.log(`${evt.uid} left from this channel`);
         this.pusherService.disponivel(this.userId);
+        this.largeStyle()
       }
     });
   }

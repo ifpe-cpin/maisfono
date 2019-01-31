@@ -1,8 +1,9 @@
 <div class="video-container">
 	<div class="call-container">
 	</div>
-	<div class="agora_local">
-		<div class="video-buttons">
+	<div  class="agora_remote" *ngFor="let remote of remoteCalls" [id]="remote"></div>
+	<div [ngClass]="classLocal">
+		<div [ngClass]="classButtons">
 			<i class="startCall material-icons" (click)="start()" *ngIf="!activeCall">videocam</i>
 			<ng-container *ngIf="activeCall">
 				<i class="endCall material-icons" (click)="leave()" *ngIf="activeCall">phone</i>
@@ -14,9 +15,7 @@
 				<i class="mic material-icons" (click)="toggleVideo()" *ngIf="!videoEnabled">videocam_off</i>
 			</ng-container>
 		</div>
-		<div id="agora_local"></div>
+		<div id="agora_local" [ngClass]="classLocalVideo"></div>
 	</div>
-	<div  class="agora_remote" *ngFor="let remote of remoteCalls" [id]="remote">
-
-	</div>
+	
 </div>
