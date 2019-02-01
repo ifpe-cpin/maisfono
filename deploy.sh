@@ -20,6 +20,8 @@ cd dist
 # cria o arquivo CNAME com o domínio
 echo "maisfono.com" > CNAME
 
+cp ../404.html .
+
 # inicie um novo repositório git
 git init
 
