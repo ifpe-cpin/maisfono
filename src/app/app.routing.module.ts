@@ -7,13 +7,14 @@ import { LoginComponent } from './login/login.component';
 import { SistemaComponent } from './sistema/sistema.component';
 import { AuthGuard } from './core/auth.guard';
 import { UserCreateComponent } from './sistema/pages/user/user-create/user-create.component';
+import { DashComponent } from './sistema/pages/dash/dash.component';
 
 
 
 
 const appRoutes: Routes = [
 	{ path: '', component: LoginComponent},
-	{ path: '**', component: LoginComponent},
+	{ path: '**', component: SistemaComponent},
 	{ path: 'user-create', component: UserCreateComponent},
 	{ path: 'sistema', component: SistemaComponent, canActivate: [AuthGuard]},
 	
