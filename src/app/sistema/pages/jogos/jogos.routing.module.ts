@@ -9,7 +9,7 @@ import { ListaJogosComponent  } from './lista-jogos/lista-jogos.component';
 
 const jogosRoutes = [
 		{path: 'jogos', component: JogosComponent, children: [
-				{path: 'listaJogos', component: ListaJogosComponent}
+				{path: 'jogoMemoria', component: ListaJogosComponent}
 		]}
 
 ];

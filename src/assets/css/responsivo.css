@@ -94,7 +94,7 @@
 .introducao {
 	margin-top: 0px;
 	padding-top: 40px;
-	background: url("../img/bg-mobile.jpg") no-repeat center;
+	background: url("../img/bg-intro.jpg") no-repeat center;
 	background-size: cover;
 }
 
@@ -168,4 +168,4 @@
 	margin-bottom: 40px;
 }
 
-} /* Final do estilo para smartphone 
+} /* Final do estilo para smartphone */
