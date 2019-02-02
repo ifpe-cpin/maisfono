@@ -13,6 +13,7 @@ import { UserCreateComponent } from './sistema/pages/user/user-create/user-creat
 
 const appRoutes: Routes = [
 	{ path: '', component: LoginComponent},
+	{ path: '**', component: LoginComponent},
 	{ path: 'user-create', component: UserCreateComponent},
 	{ path: 'sistema', component: SistemaComponent, canActivate: [AuthGuard]},
 	
