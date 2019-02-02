@@ -89,7 +89,7 @@ const homeRoutes = [
 				]},
 			]},
 			{path: 'jogos', component: JogosComponent, children: [
-				{path: 'listaJogos', component: ListaJogosComponent, canActivate: [AuthGuard,AdminGuard]},
+				{path: 'jogoMemoria', component: ListaJogosComponent, canActivate: [AuthGuard,AdminGuard]},
 			]},
 			{path: 'perfil', component: PerfilComponent, children: [
 				{path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard,AdminGuard]},
