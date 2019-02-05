@@ -1110,11 +1110,15 @@ function getSumDashMarcacoes($request) {
     */
     
     try {
-        $stmt = getConnection()->query($sql);
-        $atendidos = $stmt->fetch();
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->execute();
+
+        $fonoaudiologoDisponibilidade = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
         
-        return $atendidos['total'];
+        return json_encode($fonoaudiologoDisponibilidade, JSON_UNESCAPED_UNICODE);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }

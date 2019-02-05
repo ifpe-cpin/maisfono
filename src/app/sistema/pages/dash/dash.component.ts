@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { DashMarcacoes } from '../../../models/dash-marcacoes';
 import { DashMarcacoesService } from '../../../services/dash-marcacoes.service';
@@ -17,6 +16,7 @@ export class DashComponent implements OnInit {
               private chRef: ChangeDetectorRef){}
 
   marcacoes: DashMarcacoes[];
+  agendamentos: any[];
   loading:boolean;
 
   ngOnInit(){
@@ -33,8 +33,9 @@ export class DashComponent implements OnInit {
             
         if(id!= undefined){
             this.dashMarcacoesService.listWithID(id).subscribe(
-                marcacoes => {
-                    this.marcacoes = marcacoes
+              dashMarcacoes => {
+                    this.marcacoes = dashMarcacoes
+                    //console.log(this.marcacoes)
                     this.chRef.detectChanges();
                     this.loading = false;
                 }

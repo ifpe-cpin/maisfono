@@ -15,7 +15,7 @@
 				<!-- small box -->
 				<div class="small-box bg-green">
 					<div class="inner">
-						<h3>{{marcacoes.total_atendido}}</h3>
+						<h3>{{1}}</h3>
 		
 						<p>Atendidos Hoje</p>
 					</div>
@@ -30,7 +30,7 @@
 				<!-- small box -->
 				<div class="small-box bg-red">
 					<div class="inner">
-						<h3>{{marcacoes.total_faltou}}</h3>
+						<h3>{{1}}</h3>
 		
 						<p>Faltaram Hoje</p>
 					</div>
@@ -45,7 +45,7 @@
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
-						<h3>{{marcacoes.total_aguardando}}</h3>
+						<h3>{{1}}</h3>
 		
 						<p>Falta Atender</p>
 					</div>
@@ -60,7 +60,7 @@
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 				<div class="inner">
-					<h3>{{marcacoes.total_marcado}}</h3>
+					<h3>{{1}}</h3>
 	
 					<p>Marcados para Hoje</p>
 				</div>
@@ -101,7 +101,7 @@
 									  </tr>
 									  </thead>
 									  <tbody>
-											<tr *ngFor="let lista of marcacoes">
+											<tr *ngFor="let lista of agendamentos">
 													<td><a href="pages/examples/invoice.html">{{lista.dsc_nome}}</a></td>
 													<td>{{lista.hor_inicio}}</td>
 													<td>
