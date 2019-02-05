@@ -1042,10 +1042,49 @@ function getAgenda($request) {
     }
 }
 
-function getSumAtendidos($request) {
+function getSumDashMarcacoes($request) {
     $idFonoaudiologo = $request->getAttribute('id');
     $dataAtual = date("Y-m-d"); 
-    $sql = "SELECT count(*) as total
+    
+    $sql = "SELECT count(*) as total_atendido,
+                (
+                    SELECT count(*) as total
+                    FROM  tb_agenda a
+                    INNER JOIN tb_pessoa p
+                    ON a.fk_paciente = p.id
+                    INNER JOIN tb_agenda_disponibilidade d
+                    ON a.fk_agenda_disponibilidade =  d.id 
+                    INNER JOIN aux_status s
+                    ON a.fk_status = s.id 
+                    WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
+                    and d.dat_atendimento = '". $dataAtual ."'
+                    and a.fk_status = 4
+                ) as total_faltou,
+                (
+                    SELECT count(*) 
+                    FROM  tb_agenda a
+                    INNER JOIN tb_pessoa p
+                    ON a.fk_paciente = p.id
+                    INNER JOIN tb_agenda_disponibilidade d
+                    ON a.fk_agenda_disponibilidade =  d.id 
+                    INNER JOIN aux_status s
+                    ON a.fk_status = s.id 
+                    WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
+                    and d.dat_atendimento = '". $dataAtual ."'
+                    and a.fk_status = 1 or a.fk_status = 2
+                ) as total_aguardando,
+                (
+                    SELECT count(*) as total 
+                    FROM  tb_agenda a
+                    INNER JOIN tb_pessoa p
+                    ON a.fk_paciente = p.id
+                    INNER JOIN tb_agenda_disponibilidade d
+                    ON a.fk_agenda_disponibilidade =  d.id 
+                    INNER JOIN aux_status s
+                    ON a.fk_status = s.id 
+                    WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
+                    and d.dat_atendimento = '". $dataAtual ."'
+                ) as total_marcado
             FROM  tb_agenda a
             INNER JOIN tb_pessoa p
             ON a.fk_paciente = p.id
@@ -1056,91 +1095,26 @@ function getSumAtendidos($request) {
             WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
             and d.dat_atendimento = '". $dataAtual ."'
             and a.fk_status = 5";
-
+    /*
+        SELECT  a.fk_status, count(*) as total
+        FROM  tb_agenda a
+        INNER JOIN tb_pessoa p
+        ON a.fk_paciente = p.id
+        INNER JOIN tb_agenda_disponibilidade d
+        ON a.fk_agenda_disponibilidade =  d.id 
+        INNER JOIN aux_status s
+        ON a.fk_status = s.id 
+        WHERE d.fk_fonoaudiologo = 2
+        and d.dat_atendimento = '". $dataAtual ."'
+        group by a.fk_status;
+    */
+    
     try {
         $stmt = getConnection()->query($sql);
         $atendidos = $stmt->fetch();
         $db = null;
         
         return $atendidos['total'];
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
-
-function getSumFaltou($request) {
-    $idFonoaudiologo = $request->getAttribute('id');
-    $dataAtual = date("Y-m-d"); 
-    $sql = "SELECT count(*) as total
-            FROM  tb_agenda a
-            INNER JOIN tb_pessoa p
-            ON a.fk_paciente = p.id
-            INNER JOIN tb_agenda_disponibilidade d
-            ON a.fk_agenda_disponibilidade =  d.id 
-            INNER JOIN aux_status s
-            ON a.fk_status = s.id 
-            WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
-            and d.dat_atendimento = '". $dataAtual ."'
-            and a.fk_status = 4";
-
-    try {
-        $stmt = getConnection()->query($sql);
-        $faltaram = $stmt->fetch();
-        $db = null;
-        
-        return $faltaram['total'];
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
-
-function getSumAguardando($request) {
-    $idFonoaudiologo = $request->getAttribute('id');
-    $dataAtual = date("Y-m-d"); 
-    $sql = "SELECT count(*) as total 
-            FROM  tb_agenda a
-            INNER JOIN tb_pessoa p
-            ON a.fk_paciente = p.id
-            INNER JOIN tb_agenda_disponibilidade d
-            ON a.fk_agenda_disponibilidade =  d.id 
-            INNER JOIN aux_status s
-            ON a.fk_status = s.id 
-            WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
-            and d.dat_atendimento = '". $dataAtual ."'
-            and a.fk_status = 1 or a.fk_status = 2";
-
-    try {
-        $stmt = getConnection()->query($sql);
-        $atendidos = $stmt->fetch();
-        $db = null;
-        
-        return $atendidos['total'];
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
-
-
-function getSumMarcados($request) {
-    $idFonoaudiologo = $request->getAttribute('id');
-    $dataAtual = date("Y-m-d"); 
-    $sql = "SELECT count(*) as total 
-            FROM  tb_agenda a
-            INNER JOIN tb_pessoa p
-            ON a.fk_paciente = p.id
-            INNER JOIN tb_agenda_disponibilidade d
-            ON a.fk_agenda_disponibilidade =  d.id 
-            INNER JOIN aux_status s
-            ON a.fk_status = s.id 
-            WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
-            and d.dat_atendimento = '". $dataAtual ."'";
-
-    try {
-        $stmt = getConnection()->query($sql);
-        $marcados = $stmt->fetch();
-        $db = null;
-        
-        return $marcados['total'];
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }

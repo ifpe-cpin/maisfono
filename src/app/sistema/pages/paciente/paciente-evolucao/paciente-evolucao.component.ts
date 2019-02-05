@@ -51,14 +51,7 @@ export class PacienteEvolucaoComponent implements OnInit {
   ngOnInit() {
     
     this.loading = true;
-    this.refreshData();
-    /*
-    this.evolucao = new Evolucao();
-    this.evolucao.fk_flag_evolucao = 1
-    this.evolucaoService.list(new QueryOptions).subscribe(data => {
-      this.evolucoes = <any>data
-    })
-    */
+    this.refreshData();    
   }
 
   onSubmit() {

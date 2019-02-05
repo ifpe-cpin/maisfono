@@ -8,12 +8,14 @@ import { ConsultaAgendaComponent } from './consulta-agenda/consulta-agenda.compo
 import { AgendaComponent } from './agenda.component';
 import { ConsultaDisponibilidadeComponent } from './consulta-disponibilidade/consulta-disponibilidade.component';
 import { DisponibilidadeFormComponent } from './disponibilidade-form/disponibilidade-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({ 
   imports: [
     CommonModule,
     AgendaRoutingModule,
-    FullCalendarModule
+    FullCalendarModule,
+    FormsModule
   ],
   declarations: [
     CalendarioAgendaComponent, 

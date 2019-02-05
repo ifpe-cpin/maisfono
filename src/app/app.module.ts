@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from 'ng-fullcalendar';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ControlSidebarComponent } from './sistema/control-sidebar/control-sidebar.component';
@@ -80,7 +79,7 @@ const agoraConfig: AgoraConfig = {
     LoginComponent,
     PerfilComponent,
     DashboardComponent,
-    MeusDadosComponent,
+    MeusDadosComponent,    
   ],
   entryComponents:[ConfirmDialogComponent],
   imports: [
@@ -98,8 +97,8 @@ const agoraConfig: AgoraConfig = {
     MatDialogModule, 
     UserModule,
     AngularAgoraRtcModule.forRoot(agoraConfig),
-    FullCalendarModule
-    
+    FullCalendarModule,    
+    FormsModule  
   ],
   exports:[LoadComponent],
 

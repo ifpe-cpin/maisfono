@@ -86,17 +86,10 @@ $app->group('/pacientes', function () use ($app) {
 
 /*______________________________________________________
 |                                                       |
-|                 Route's - Dashboard                   |
+|           Route's - Dashboard - Marcações             |
 |______________________________________________________*/
-$app->group('/dashboard', function () use ($app) {
-    $app->get('/agenda/{id}', 'getAgenda');
-
-    $app->get('/atendidos/{id}', 'getSumAtendidos');
-    $app->get('/faltaram/{id}', 'getSumFaltou');
-    $app->get('/aguardando/{id}', 'getSumAguardando');
-    $app->get('/marcados/{id}', 'getSumMarcados');
-       
-    $app->put('/update/{id}', 'updateAgenda');
+$app->group('/fonoaudiologoDashMarcacoes', function () use ($app) {
+    $app->get('/{id}', 'getSumDashMarcacoes');
 });
 
 
