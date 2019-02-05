@@ -15,7 +15,7 @@ export class DashComponent implements OnInit {
               private route: ActivatedRoute,
               private chRef: ChangeDetectorRef){}
 
-  marcacoes: DashMarcacoes[];
+  dashMarcacoes: DashMarcacoes[];
   agendamentos: any[];
   loading:boolean;
 
@@ -34,8 +34,8 @@ export class DashComponent implements OnInit {
         if(id!= undefined){
             this.dashMarcacoesService.listWithID(id).subscribe(
               dashMarcacoes => {
-                    this.marcacoes = dashMarcacoes
-                    //console.log(this.marcacoes)
+                    this.dashMarcacoes = dashMarcacoes
+                    console.log(this.dashMarcacoes)
                     this.chRef.detectChanges();
                     this.loading = false;
                 }
