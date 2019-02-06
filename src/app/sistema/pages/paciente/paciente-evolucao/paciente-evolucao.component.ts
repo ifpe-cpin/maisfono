@@ -17,8 +17,6 @@ import { PacienteService } from '../../../../services/paciente.service';
 }) 
 export class PacienteEvolucaoComponent implements OnInit {
 
-  //pacienteId: String
-
   evolucoes: Evolucao[]
   paciente: Paciente
   editState: boolean = false
@@ -31,12 +29,7 @@ export class PacienteEvolucaoComponent implements OnInit {
   fonoId: string;
   //Podendo usar somente uma para os dois casos.
   //Inicializa um evolução que servirá para edição
-  evolucaoToEdit: Evolucao= {
-    id: 0,
-    dsc_evolucao: '',
-    dsc_titulo: '',
-    fk_flag_evolucao: 0
-   };
+  evolucaoToEdit: Evolucao
 
   //Inicializa um evolução que servirá para inclusão 
   evolucao: Evolucao
@@ -53,19 +46,13 @@ export class PacienteEvolucaoComponent implements OnInit {
   
   ngOnInit() {
     this.evolucao = new Evolucao
+    this.evolucaoToEdit = new Evolucao
     this.evolucao.fk_fonoaudiologo = +localStorage.getItem("fonoId")
     this.pacienteService.read(this.idPaciente).subscribe(
       paciente => this.paciente = paciente
     )
 
     this.refreshData()
-    /*
-    this.evolucao = new Evolucao();
-    this.evolucao.fk_flag_evolucao = 1
-    this.evolucaoService.list(new QueryOptions).subscribe(data => {
-      this.evolucoes = <any>data
-    })
-    */
   }
 
   onSubmit() {
@@ -98,11 +85,6 @@ export class PacienteEvolucaoComponent implements OnInit {
 
   refreshData(){
     this.loading = true
-    //this.route
-    //.queryParams
-    //.subscribe(params => {
-        // Defaults to 0 if no query param provided.
-        //let id = localStorage.getItem('pessoaId');
 
         this.evolucao.fk_paciente = +this.idPaciente
         
@@ -126,39 +108,28 @@ export class PacienteEvolucaoComponent implements OnInit {
           this.evolucoes = []
          
         }
-    //});
-
     }
 
-    
-    
-   /* 
-  setEvolucaoRest(evolucao){
-    //passando como parametro o id do paciente e o id do fono  
-    evolucao.fk_paciente = this.idPaciente;
-    evolucao = JSON.stringify(evolucao);
-
-     return this.http.post('http://localhost/slim/public/evolucao/create', evolucao)
-     .subscribe(res => console.log("done"));
-
-  }
-
-  delEvolucaoRest(id){
+  delete(id){
      const response = confirm('Tem certeza que quer deletar este registro?');
      if (response ) {
-       return this.http.delete('http://localhost/slim/public/evolucao/delete/'+id)
-       .subscribe(res => console.log('Done'));
+       this.evolucaoService.delete(id).subscribe(
+         result => {
+          console.log(result)
+          this.refreshData()
+         }
+       )
      }
-     return;
    }
 
-  updEvolucaoRest(evolucaoToEdit, id){
-    //passando como parametro o evolução e o id da evolução    
-    evolucaoToEdit = JSON.stringify(evolucaoToEdit);
+  update(evolucaoToEdit){  
+     this.evolucaoService.update(evolucaoToEdit).subscribe(
+       result => {
+         console.log(result)
+         this.refreshData()
+        }
 
-     return this.http.put('http://localhost/slim/public/evolucao/update/'+id, evolucaoToEdit)
-     .subscribe(res => console.log("done"));
-
+     )
    }
-   */
+   
 }

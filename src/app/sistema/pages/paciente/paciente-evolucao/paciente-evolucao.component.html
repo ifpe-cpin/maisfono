@@ -71,7 +71,7 @@
               <div class="timeline-footer">
                 <a class="btn btn-primary btn-xs" (click)="editEvolucao($event, evolucao)" data-toggle="modal"
                   data-target="#modal-edicao">Editar</a>
-                <a class="btn btn-danger btn-xs" (click)="delEvolucaoRest(evolucao.id)">Excluir</a>
+                <a class="btn btn-danger btn-xs" (click)="delete(evolucao.id)">Excluir</a>
               </div>
             </div>
           </li>
@@ -134,7 +134,7 @@
 
 <!--Modal Editar -->
 <div class="modal fade" id="modal-edicao" style="display: none;">
-  <form (ngSubmit)="updEvolucaoRest(evolucaoToEdit, evolucaoToEdit.id)" name="formEdit">
+  <form (ngSubmit)="update(evolucaoToEdit)" name="formEdit">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
