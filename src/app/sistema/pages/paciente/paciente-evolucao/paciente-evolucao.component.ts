@@ -16,11 +16,12 @@ import { Paciente } from '../../../../models/paciente';
 }) 
 export class PacienteEvolucaoComponent implements OnInit {
 
-  pacienteId: String
+  //pacienteId: String
 
   evolucoes: Evolucao[]
   pacientes: Paciente[]
   editState: boolean = false
+  incluirVisible: boolean
 
   
   time: Date
@@ -50,10 +51,8 @@ export class PacienteEvolucaoComponent implements OnInit {
   
   ngOnInit() {
     this.evolucao = new Evolucao
-    this.fonoId = localStorage.getItem("fonoId")
+    this.evolucao.fk_fonoaudiologo = +localStorage.getItem("fonoId")
 
- 
-    console.log("FONO "+this.fonoId)
 
     let queryMap = new Map<string,string>()
     queryMap.set("idFono",localStorage.getItem("fonoId"))
@@ -63,8 +62,9 @@ export class PacienteEvolucaoComponent implements OnInit {
         this.pacientes = pacientes
       }
     )
-    //this.loading = true
-    //this.refreshData()
+
+
+    this.refreshData()
     /*
     this.evolucao = new Evolucao();
     this.evolucao.fk_flag_evolucao = 1
@@ -75,9 +75,15 @@ export class PacienteEvolucaoComponent implements OnInit {
   }
 
   onSubmit() {
-    /*
-    console.log(this.evolucao)
-    if(this.evolucao.dsc_evolucao != '' && this.evolucao.dsc_titulo != '' 
+    
+    this.evolucaoService.create(this.evolucao).subscribe(
+      result => {
+        console.log(result)
+        this.refreshData()
+      }
+      )
+
+    /*if(this.evolucao.dsc_evolucao != '' && this.evolucao.dsc_titulo != '' 
     && this.evolucao.fk_flag_evolucao > 0 && this.evolucao.fk_flag_evolucao < 4 ) {
       this.evolucao.fk_fonoaudiologo = 2;
       this.evolucao.fk_paciente = 1;
@@ -97,14 +103,22 @@ export class PacienteEvolucaoComponent implements OnInit {
   }
 
   refreshData(){
-    this.route
-    .queryParams
-    .subscribe(params => {
+    this.loading = true
+    //this.route
+    //.queryParams
+    //.subscribe(params => {
         // Defaults to 0 if no query param provided.
-        let id = localStorage.getItem('pessoaId');
-            
-        if(id!= undefined){
-            this.evolucaoService.listWithTwoID(this.idPaciente, id).subscribe(
+        //let id = localStorage.getItem('pessoaId');
+
+        
+        
+        if(this.evolucao.fk_paciente!= undefined && this.evolucao.fk_paciente+""!=""){
+            this.incluirVisible = true
+            let queryMap = new Map<string,string>()
+            queryMap.set("idPaciente",this.evolucao.fk_paciente+"")
+            queryMap.set("idFono",localStorage.getItem("fonoId"))
+
+            this.evolucaoService.list(new QueryOptions(queryMap)).subscribe(
                 evolucao => {
                     this.evolucoes = evolucao
 
@@ -113,8 +127,12 @@ export class PacienteEvolucaoComponent implements OnInit {
                     this.loading = false;
                 }
             );
-        } 
-    });
+        }else{
+          this.incluirVisible = false
+          this.evolucoes = []
+         
+        }
+    //});
 
     }
 

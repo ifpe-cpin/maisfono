@@ -16,20 +16,23 @@
 <section class="content"> 
   <!-- row -->  
   <div class="row">
-    <br>
-    <div class="col-md-3">
+    <div class="col-md-12">
       <label>Paciente
       </label>
-      <select [(ngModel)]="pacienteId" name="paciente" id="paciente" 
+      <select [(ngModel)]="evolucao.fk_paciente" (change)="refreshData()" name="paciente" id="paciente" 
               class="form-control select2"
               title="Por favor, selecione uma opção.">
         <option value="">--Selecione--</option>
-        <option *ngFor="let p of pacientes" value='p.id'>{{p.dsc_nome}}</option>
+        <option *ngFor="let p of pacientes" value='{{p.id}}'>{{p.dsc_nome}}</option>
       </select>
-      <br>
+   
     </div>
-    <div class="col-md-3">
-      <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-inclusao">Incluir
+  </div>
+  <div class="row">
+    <br>
+    
+    <div class="col-md-12">
+      <button type="button" *ngIf="incluirVisible" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-inclusao">Incluir
         Evolução</button>
     </div>
     <br>

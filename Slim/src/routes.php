@@ -27,6 +27,7 @@ $app->group('/usuarios', function () use ($app) {
 |                Route's - Evolução                     |
 |______________________________________________________*/
 $app->group('/evolucoes', function () use ($app) {
+    $app->get('/idPaciente/{idPaciente}/idFono/{idFonoaudiologo}', 'getEvolucoes');
     $app->get('/{idPaciente}/{idFonoaudiologo}', 'getEvolucoes');
     $app->get('/{id}', 'getEvolucao');
     $app->post('', 'addEvolucao');
