@@ -75,7 +75,7 @@ const homeRoutes = [
 				{path: 'consultarMeusFonos', component: ConsultarMeusFonosComponent, canActivate: [FonoGuard]},
 				{path: 'consultarPacientes', component: ConsultaComponent, canActivate: [FonoGuard]},
 				{path: 'consultarMeus', component: ConsultarMeusComponent, canActivate: [FonoGuard]},
-				{path: 'evolucao/:id', component: PacienteEvolucaoComponent, canActivate: [FonoGuard]},
+				{path: 'evolucao', component: PacienteEvolucaoComponent, canActivate: [FonoGuard]},
 				{path: 'laudo/:id', component: PacienteLaudoComponent, canActivate: [FonoGuard]},
 				{path: 'novo', component: PacienteFormComponent, canActivate: [FonoGuard]},
 				{path: 'ver', component: PacienteDetalheComponent, canActivate: [FonoGuard]},

@@ -1258,6 +1258,59 @@ function getFonoaudiologosByPaciente(Request $request, Response $response) {
 }
 
 
+function getPacientesByFonoaudiologo(Request $request, Response $response) {
+    $idFono = $request->getAttribute('idFono');
+    
+    $sql = "SELECT pac.id as id,pac.id_pessoa,
+    pac.frg_user,
+    pes.dsc_nome,
+    pes.dat_nascimento,
+    pes.dsc_cpf,
+    pes.dsc_email,
+    pes.dsc_endbairro,
+    pes.dsc_endcep,
+    pes.dsc_endnum,
+    pes.dsc_endrua,
+    pes.dsc_nomemae,
+    pes.dsc_nomepai,
+    pes.dsc_telefone1,
+    pes.dsc_telefone2,
+    pes.frg_cor,
+    pes.frg_endestado,
+    pes.frg_endcidade,
+    pes.frg_estado_civil,
+    pes.frg_nasestado,
+    pes.frg_nascidade,
+    pes.frg_sexo,
+    pes.frg_tipo_sanguineo
+    FROM tb_fonoaudiologo_paciente as fon_pac
+    INNER JOIN tb_paciente as pac
+    ON  fon_pac.frg_paciente=pac.id
+    INNER JOIN tb_pessoa as pes ON pac.id_pessoa=pes.id
+    INNER JOIN tb_user usr ON pac.frg_user=usr.id
+    WHERE fon_pac.frg_fonoaudiologo=:idFono and fon_pac.flag_situacao=1";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam(":idFono", $idFono);
+
+        $stmt->execute();
+
+        $pacientes = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return  $response->withJson($pacientes, 200)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+
+
 
 function addFonoaudiologoPaciente(Request $request, Response $response){
     $fonoaudiologoPaciente = json_decode($request->getBody());
@@ -1376,15 +1429,15 @@ function changeStatus(Request $request, Response $response){
 
 function getConnection() {
     
-    // $dbhost="127.0.0.1";
-    // $dbuser="root";
-    // $dbpass="";
-    // $dbname="db_maisfono";
+    $dbhost="127.0.0.1";
+    $dbuser="root";
+    $dbpass="";
+    $dbname="db_maisfono";
 
-    $dbhost="jrpires.com";
-    $dbuser="jrpiresc_ifpe";
-    $dbpass="maisfono_0001";
-    $dbname="jrpiresc_maisfono_rest";
+    // $dbhost="jrpires.com";
+    // $dbuser="jrpiresc_ifpe";
+    // $dbpass="maisfono_0001";
+    // $dbname="jrpiresc_maisfono_rest";
     
     $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

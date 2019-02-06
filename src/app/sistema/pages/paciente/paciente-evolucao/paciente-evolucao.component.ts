@@ -1,28 +1,32 @@
-import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input  } from '@angular/core';
 import { EvolucaoService } from '../../../../services/evolucao.service';
 import { Evolucao } from '../../../../models/evolucao';
 import { ActivatedRoute } from '@angular/router';
 import {  HttpClient } from '@angular/common/http'; 
 import { QueryOptions } from '../../../../models/query-options';
+import { FonoaudiologoPacienteService } from '../../../../services/fonoaudiologo-paciente.service';
+import { Paciente } from '../../../../models/paciente';
 
 
 @Component({
   selector: 'app-paciente-evolucao',
   templateUrl: './paciente-evolucao.component.html',
   styleUrls: ['./paciente-evolucao.component.css'],
- 	providers: [EvolucaoService]
+ 	providers: [EvolucaoService,FonoaudiologoPacienteService]
 }) 
 export class PacienteEvolucaoComponent implements OnInit {
-  evolucoes: Evolucao[];
-  editState: boolean = false;
-  pacienteId: String;
-  time: Date;
-  idPaciente = this.route.snapshot.paramMap.get('id'); 
-  /*
-    Alterar
-    Pegar id do fono no login e setar como global
-  */
-  fonoadiologoId: "8u1i3tA5R0Gvp4FB91S";
+
+  pacienteId: String
+
+  evolucoes: Evolucao[]
+  pacientes: Paciente[]
+  editState: boolean = false
+
+  
+  time: Date
+  idPaciente = this.route.snapshot.paramMap.get('id')
+  
+  fonoId: string;
   //Podendo usar somente uma para os dois casos.
   //Inicializa um evolução que servirá para edição
   evolucaoToEdit: Evolucao= {
@@ -33,25 +37,34 @@ export class PacienteEvolucaoComponent implements OnInit {
    };
 
   //Inicializa um evolução que servirá para inclusão 
-  evolucao: Evolucao[];
-  //  = {
-  //   dsc_evolucao: '',
-  //   dsc_titulo: '',
-  //   fk_flag_evolucao: 0
-  //  };
+  evolucao: Evolucao
 
-  teste: Object;
+  teste: Object
   
-  loading:boolean;
+  loading:boolean
   constructor(private http: HttpClient, 
-              private evolucaoService: EvolucaoService, 
+              private evolucaoService: EvolucaoService,
+              private fonoPacienteService:FonoaudiologoPacienteService, 
               private route: ActivatedRoute,
               private chRef: ChangeDetectorRef) {  }
   
   ngOnInit() {
-    
-    this.loading = true;
-    this.refreshData();
+    this.evolucao = new Evolucao
+    this.fonoId = localStorage.getItem("fonoId")
+
+ 
+    console.log("FONO "+this.fonoId)
+
+    let queryMap = new Map<string,string>()
+    queryMap.set("idFono",localStorage.getItem("fonoId"))
+
+    this.fonoPacienteService.list(new QueryOptions(queryMap)).subscribe(
+      pacientes => {
+        this.pacientes = pacientes
+      }
+    )
+    //this.loading = true
+    //this.refreshData()
     /*
     this.evolucao = new Evolucao();
     this.evolucao.fk_flag_evolucao = 1
@@ -104,6 +117,8 @@ export class PacienteEvolucaoComponent implements OnInit {
     });
 
     }
+
+    
     
    /* 
   setEvolucaoRest(evolucao){
