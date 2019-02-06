@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Input  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef  } from '@angular/core';
 import { EvolucaoService } from '../../../../services/evolucao.service';
 import { Evolucao } from '../../../../models/evolucao';
 import { ActivatedRoute } from '@angular/router';
@@ -21,6 +21,13 @@ export class PacienteEvolucaoComponent implements OnInit {
   paciente: Paciente
   editState: boolean = false
   incluirVisible: boolean
+
+  @ViewChild('modal_inclusao')
+  modalInclusao: ElementRef
+
+
+  @ViewChild('modal_edicao')
+  modalEdicao: ElementRef
 
   
   time: Date
@@ -57,25 +64,17 @@ export class PacienteEvolucaoComponent implements OnInit {
 
   onSubmit() {
     
-    this.evolucaoService.create(this.evolucao).subscribe(
-      result => {
-        console.log(result)
-        this.refreshData()
-      }
-      )
-
-    /*if(this.evolucao.dsc_evolucao != '' && this.evolucao.dsc_titulo != '' 
+    if(this.evolucao.dsc_evolucao != '' && this.evolucao.dsc_titulo != '' 
     && this.evolucao.fk_flag_evolucao > 0 && this.evolucao.fk_flag_evolucao < 4 ) {
-      this.evolucao.fk_fonoaudiologo = 2;
-      this.evolucao.fk_paciente = 1;
 
       this.evolucaoService.create(this.evolucao).subscribe(
         result => {
           console.log(result)
+          this.refreshData()
         }
-        );;
+        );
     }
-    */
+    
   }
 
   editEvolucao(event, evolucao) {
