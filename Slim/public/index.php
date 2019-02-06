@@ -1114,8 +1114,7 @@ function getSumDashMarcacoes($request) {
         $stmt = getConnection()->query($sql);
         $dashMarcacoes = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-        
-        
+                
         return  $response->withJson($dashMarcacoes, 200)
         ->withHeader('Content-type', 'application/json');
     } catch(PDOException $e) {
