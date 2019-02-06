@@ -1017,7 +1017,7 @@ function getCalendarDisponibilidade(Request $request, Response $response) {
         4 | Faltou
         5 | Atendido 
 */
-function getAgenda($request) {
+function getDashAgenda($request) {
     $idFonoaudiologo = $request->getAttribute('id');
     $dataAtual = date("Y-m-d"); 
     $sql = "SELECT a.fk_status as id_status, p.dsc_nome, d.dat_atendimento, d.hor_inicio, d.hor_fim, s.dsc_nome as status 
@@ -1114,7 +1114,7 @@ function getSumDashMarcacoes($request) {
         $stmt = getConnection()->query($sql);
         $dashMarcacoes = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-                
+
         return  $response->withJson($dashMarcacoes, 200)
         ->withHeader('Content-type', 'application/json');
     } catch(PDOException $e) {

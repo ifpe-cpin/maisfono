@@ -91,6 +91,13 @@ $app->group('/pacientes', function () use ($app) {
 $app->group('/fonoaudiologoDashMarcacoes', function () use ($app) {
     $app->get('/{id}', 'getSumDashMarcacoes');
 });
+/*______________________________________________________
+|                                                       |
+|           Route's - Dashboard - Marcações             |
+|______________________________________________________*/
+$app->group('/fonoaudiologoDashAgenda', function () use ($app) {
+    $app->get('/{id}', 'getDashAgenda');
+});
 
 
 /*______________________________________________________
