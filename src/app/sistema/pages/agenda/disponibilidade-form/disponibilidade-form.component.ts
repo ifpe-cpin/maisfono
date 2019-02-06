@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FonoaudiologoDisponibilidade } from '../../../../models/fonoaudiologoDisponibilidade';
 import { FonoaudiologoDisponibilidadeService } from '../../../../services/fonoaudiologoDisponibilidade.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-disponibilidade-form',
@@ -22,8 +23,13 @@ export class DisponibilidadeFormComponent implements OnInit {
      
     }
 
+    onSubmit(f: NgForm) {
+      console.log(f.value);  // { first: '', last: '' }
+      console.log(f.valid);  // false
+    }
 
-    incluiDisponibilidade() {
+
+    submit() {
       console.log(this.fonoaudiologoDisponibilidade);
 
       /*
@@ -36,5 +42,5 @@ export class DisponibilidadeFormComponent implements OnInit {
         );
       */
     }
-
+    
 }

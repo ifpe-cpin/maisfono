@@ -1,75 +1,85 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DashMarcacoes } from '../../../models/dash-marcacoes';
+import { DashMarcacoesService } from '../../../services/dash-marcacoes.service';
+import { Agenda } from '../../../models/agenda';
+import { AgendaDashService } from '../../../services/agenda-dash.service';
 
 @Component({
-  selector: 'app-dash',
-  templateUrl: './dash.component.html',
-  styleUrls: ['./dash.component.css']
+    selector: 'app-dash',
+    templateUrl: './dash.component.html',
+    styleUrls: ['./dash.component.css'],
+    providers: [
+        DashMarcacoesService,
+        AgendaDashService
+    ]
 })
 export class DashComponent implements OnInit {
-  marcacoes: any[];
-  totalAtendidos: 0;
-  totalFaltaram: 0;
-  totalAguardando: 0;
-  totalMarcados: 0;
-
-  constructor(private http: HttpClient, private route: ActivatedRoute){}
-
-  ngOnInit(){
-    /*
-    this.getAgendaRest().subscribe(data => {
-      this.marcacoes = <any>data
-    })
     
 
-    this.getSumAtendidosRest().subscribe(data => {
-      this.totalAtendidos = <any>data
-    })
-    this.getSumFaltaramRest().subscribe(data => {
-      this.totalFaltaram = <any>data
-    })
-    this.getSumAguardandoRest().subscribe(data => {
-      this.totalAguardando = <any>data
-    })
-    this.getSumMarcadosRest().subscribe(data => {
-      this.totalMarcados = <any>data
-    })
+  constructor(private dashMarcacoesService: DashMarcacoesService,
+              private agendaService: AgendaDashService,
+              private route: ActivatedRoute,
+              private chRef: ChangeDetectorRef){}
 
-*/
+    dashMarcacoes: DashMarcacoes[];
+    agenda: Agenda[];
+    agendamentos: any[];
+    loading:boolean;
+    total_marcado: number;
+    total_aguardando: number;
+    total_atendido: number;
+    total_faltou: number;
 
-  }
+    ngOnInit(){
+        this.loading = true;
+        this.refreshData();
+        this.refreshDataAgenda();
+    }
+  
+    refreshData(){
+        this.route
+        .queryParams
+        .subscribe(params => {
+            // Defaults to 0 if no query param provided.
+                let id = localStorage.getItem('pessoaId');
+                
+            if(id!= undefined){
+                this.dashMarcacoesService.listWithID(id).subscribe(
+                    dashMarcacoes => {
+                        this.dashMarcacoes = dashMarcacoes
+                        this.total_marcado = this.dashMarcacoes[0].total_marcado;
+                        this.total_aguardando = this.dashMarcacoes[0].total_aguardando;
+                        this.total_atendido = this.dashMarcacoes[0].total_atendido;
+                        this.total_faltou = this.dashMarcacoes[0].total_faltou;
 
-/*
-  getAgendaRest(){    
-    let idFonoaudiologo = 2;//this.route.snapshot.paramMap.get('id');
-    //passando como parametro o id do paciente e o id do fono
-    return this.http.get('http://localhost/slim/public/dashboard/agenda/'+idFonoaudiologo)
-  }
+                        this.chRef.detectChanges();
+                        this.loading = false;
+                    }
+                );
+            } 
+        });
+    }
+  
+    refreshDataAgenda(){
+        this.route
+            .queryParams
+            .subscribe(params => {
+                // Defaults to 0 if no query param provided.
+          let id = localStorage.getItem('pessoaId');
+                
+                if(id!= undefined){
+                    this.agendaService.listWithID(id).
+                    subscribe(agenda => {
+                            this.agenda = agenda;
+                            console.log(this.agenda)
+                            this.chRef.detectChanges();
+                            
+                            this.loading = false;
+                        }
+                    );
+                } 
+            });
+    }
 
-  getSumAtendidosRest(){    
-    let idFonoaudiologo = 2;//this.route.snapshot.paramMap.get('id');
-    //passando como parametro o id do paciente e o id do fono
-    return this.http.get('http://localhost/slim/public/dashboard/atendidos/'+idFonoaudiologo)
-  }
-
-  getSumFaltaramRest(){    
-    let idFonoaudiologo = 2;//this.route.snapshot.paramMap.get('id');
-    //passando como parametro o id do paciente e o id do fono
-    return this.http.get('http://localhost/slim/public/dashboard/faltaram/'+idFonoaudiologo)
-  }
-
-  getSumAguardandoRest(){    
-    let idFonoaudiologo = 2;//this.route.snapshot.paramMap.get('id');
-    //passando como parametro o id do paciente e o id do fono
-    return this.http.get('http://localhost/slim/public/dashboard/aguardando/'+idFonoaudiologo)
-  }
-
-  getSumMarcadosRest(){    
-    let idFonoaudiologo = 2;//this.route.snapshot.paramMap.get('id');
-    //passando como parametro o id do paciente e o id do fono
-    return this.http.get('http://localhost/slim/public/dashboard/marcados/'+idFonoaudiologo)
-  }
-
-*/
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from 'ng-fullcalendar';
-
+import { FormsModule }   from '@angular/forms';
 import { HomeRoutingModule } from './home.routing.module';
 import { SistemaComponent } from './sistema.component';
 import { DashComponent } from './pages/dash/dash.component';
@@ -24,7 +24,7 @@ import { VideocallIconComponent } from './videocall-icon/videocall-icon.componen
     CommonModule,
     HomeRoutingModule,
     FullCalendarModule,
-    
+    FormsModule
    
   ],
   declarations: [SistemaComponent,
