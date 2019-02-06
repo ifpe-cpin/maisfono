@@ -102,7 +102,10 @@
 									  </thead>
 									  <tbody>
 											<tr *ngFor="let lista of agenda">
-													<td><a href="pages/examples/invoice.html">{{lista.paciente}}</a></td>
+													<td><!--<a href="pages/examples/invoice.html">-->
+														{{lista.paciente}}
+													<!--</a>-->
+													</td>
 													<td>{{lista.hora_inicio}}</td>
 													<td>
 															<ng-container [ngSwitch]="lista.fk_status">
