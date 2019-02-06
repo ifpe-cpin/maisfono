@@ -15,19 +15,7 @@
 <!-- Main content -->
 <section class="content"> 
   <!-- row -->  
-  <div class="row">
-    <div class="col-md-12">
-      <label>Paciente
-      </label>
-      <select [(ngModel)]="evolucao.fk_paciente" (change)="refreshData()" name="paciente" id="paciente" 
-              class="form-control select2"
-              title="Por favor, selecione uma opção.">
-        <option value="">--Selecione--</option>
-        <option *ngFor="let p of pacientes" value='{{p.id}}'>{{p.dsc_nome}}</option>
-      </select>
-   
-    </div>
-  </div>
+ 
   <div class="row">
     <br>
     
@@ -38,6 +26,18 @@
     <br>
     <br>
     <br>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>{{paciente.dsc_nome}}
+      </h2>
+    </div>
+  </div>
+
+
+  <div class="row">
     <div class="col-md-12">
       <!-- The time line -->
       <ul class="timeline">

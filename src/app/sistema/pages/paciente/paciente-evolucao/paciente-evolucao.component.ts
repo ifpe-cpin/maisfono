@@ -6,20 +6,21 @@ import {  HttpClient } from '@angular/common/http';
 import { QueryOptions } from '../../../../models/query-options';
 import { FonoaudiologoPacienteService } from '../../../../services/fonoaudiologo-paciente.service';
 import { Paciente } from '../../../../models/paciente';
+import { PacienteService } from '../../../../services/paciente.service';
 
 
 @Component({
   selector: 'app-paciente-evolucao',
   templateUrl: './paciente-evolucao.component.html',
   styleUrls: ['./paciente-evolucao.component.css'],
- 	providers: [EvolucaoService,FonoaudiologoPacienteService]
+ 	providers: [EvolucaoService,FonoaudiologoPacienteService,PacienteService]
 }) 
 export class PacienteEvolucaoComponent implements OnInit {
 
   //pacienteId: String
 
   evolucoes: Evolucao[]
-  pacientes: Paciente[]
+  paciente: Paciente
   editState: boolean = false
   incluirVisible: boolean
 
@@ -46,23 +47,16 @@ export class PacienteEvolucaoComponent implements OnInit {
   constructor(private http: HttpClient, 
               private evolucaoService: EvolucaoService,
               private fonoPacienteService:FonoaudiologoPacienteService, 
+              private pacienteService:PacienteService, 
               private route: ActivatedRoute,
               private chRef: ChangeDetectorRef) {  }
   
   ngOnInit() {
     this.evolucao = new Evolucao
     this.evolucao.fk_fonoaudiologo = +localStorage.getItem("fonoId")
-
-
-    let queryMap = new Map<string,string>()
-    queryMap.set("idFono",localStorage.getItem("fonoId"))
-
-    this.fonoPacienteService.list(new QueryOptions(queryMap)).subscribe(
-      pacientes => {
-        this.pacientes = pacientes
-      }
+    this.pacienteService.read(this.idPaciente).subscribe(
+      paciente => this.paciente = paciente
     )
-
 
     this.refreshData()
     /*
@@ -110,7 +104,7 @@ export class PacienteEvolucaoComponent implements OnInit {
         // Defaults to 0 if no query param provided.
         //let id = localStorage.getItem('pessoaId');
 
-        
+        this.evolucao.fk_paciente = +this.idPaciente
         
         if(this.evolucao.fk_paciente!= undefined && this.evolucao.fk_paciente+""!=""){
             this.incluirVisible = true
