@@ -62,10 +62,15 @@ export class ConsultarMeusComponent implements OnInit {
     .queryParams
     .subscribe(params => {
         // Defaults to 0 if no query param provided.
-            let id = localStorage.getItem('pessoaId');
+           // let id = localStorage.getItem('pessoaId');
             
-        if(id!= undefined){
-            this.fonoaudiologoPacienteService.listWithID(id).subscribe(
+       //if(id!= undefined){
+
+            let queryMap = new Map<string,string>()
+
+            queryMap.set("idFono",localStorage.getItem("fonoId"))
+
+            this.fonoaudiologoPacienteService.list(new QueryOptions(queryMap)).subscribe(
                 pacientes => {
                     this.pacientes = pacientes
 
@@ -83,7 +88,7 @@ export class ConsultarMeusComponent implements OnInit {
                     this.loading = false;
                 }
             );
-        } 
+        //} 
     });
 }
 
