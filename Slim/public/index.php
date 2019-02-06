@@ -1020,7 +1020,12 @@ function getCalendarDisponibilidade(Request $request, Response $response) {
 function getDashAgenda($request) {
     $idFonoaudiologo = $request->getAttribute('id');
     $dataAtual = date("Y-m-d"); 
-    $sql = "SELECT a.fk_status as id_status, p.dsc_nome, d.dat_atendimento, d.hor_inicio, d.hor_fim, s.dsc_nome as status 
+    $sql = "SELECT p.dsc_nome as paciente, 
+                d.dat_atendimento as data,
+                d.hor_inicio as hora_inicio, 
+                d.hor_fim as hora_fim, 
+                s.id as fk_status,
+                s.dsc_nome as nome_status
             FROM  tb_agenda a
             INNER JOIN tb_pessoa p
             ON a.fk_paciente = p.id
@@ -1112,11 +1117,10 @@ function getSumDashMarcacoes($request) {
     try {
         
         $stmt = getConnection()->query($sql);
-        $dashMarcacoes = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $dashMarcacoes= $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-
-        return  $response->withJson($dashMarcacoes, 200)
-        ->withHeader('Content-type', 'application/json');
+        
+        return json_encode($dashMarcacoes, JSON_UNESCAPED_UNICODE);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }

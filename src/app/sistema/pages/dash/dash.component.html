@@ -101,11 +101,11 @@
 									  </tr>
 									  </thead>
 									  <tbody>
-											<tr *ngFor="let lista of agendamentos">
-													<td><a href="pages/examples/invoice.html">{{lista.dsc_nome}}</a></td>
-													<td>{{lista.hor_inicio}}</td>
+											<tr *ngFor="let lista of agenda">
+													<td><a href="pages/examples/invoice.html">{{lista.paciente}}</a></td>
+													<td>{{lista.hora_inicio}}</td>
 													<td>
-															<ng-container [ngSwitch]="lista.id_status">
+															<ng-container [ngSwitch]="lista.fk_status">
 																	<span *ngSwitchCase='1' class="label label-warning">Pendente</span>
 																	<span *ngSwitchCase='2' class="label label-info">Confirmado</span>
 																	<span *ngSwitchCase='3' class="label label-default">Em Atendimento</span>
