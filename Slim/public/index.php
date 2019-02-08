@@ -1002,6 +1002,44 @@ function getCalendarDisponibilidade(Request $request, Response $response) {
     }
 }
 
+function addDisponibilidade(Request $request, Response $response){
+    $disponibilidade = json_decode($request->getBody());
+	
+
+
+    $sql = "INSERT INTO tb_agenda_disponibilidade(fk_fonoaudiologo,dat_atendimento,hor_inicio,hor_fim) 
+                VALUES (:fk_fonoaudiologo,:dat_atendimento,:hor_inicio,:hor_fim)";
+    
+    
+    $db = getConnection();
+    try {
+        
+        $db->beginTransaction();
+
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindParam("fk_fonoaudiologo", $disponibilidade->fk_fonoaudiologo);
+        $stmt->bindParam("dat_atendimento", $disponibilidade->dat_atendimento);
+        $stmt->bindParam("hor_inicio", $disponibilidade->hor_inicio);
+        $stmt->bindParam("hor_fim", $disponibilidade->hor_fim);
+    
+       
+        $stmt->execute();
+
+       
+
+        $db->commit();
+        $db = null;
+
+        return $response->withJson($disponibilidade, 201)
+        ->withHeader('Content-type', 'application/json');
+
+    } catch(PDOException $e) {
+        $db->rollBack();
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
 
 
 
