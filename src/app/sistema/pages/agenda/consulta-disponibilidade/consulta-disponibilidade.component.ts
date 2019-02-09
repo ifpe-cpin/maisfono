@@ -101,6 +101,7 @@ export class ConsultaDisponibilidadeComponent implements OnInit {
       this.fonoAgendaService.create(agenda).subscribe(
           result=>{
               console.log(result)
+              this.refreshData()
           }
       )
   }

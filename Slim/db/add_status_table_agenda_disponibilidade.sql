@@ -1,0 +1,1 @@
+ALTER TABLE `tb_agenda_disponibilidade` ADD `status` TINYINT(1) NOT NULL DEFAULT '1' AFTER `hor_fim`;

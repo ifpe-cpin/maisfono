@@ -895,11 +895,37 @@ function getPacienteByFonoaudiologo(Request $request, Response $response) {
 }
 
 
+
 /*______________________________________________________
 |                                                       |
 |        RESTS's - Fonoaudiologo - Calendário           |
 |______________________________________________________*/
 
+function updateDisponibilidadeStatus($id,$status) {
+    
+    $sql = "UPDATE tb_agenda_disponibilidade as agen_d 
+            SET 
+            status = :status
+            WHERE id=:id";
+
+        
+    try {
+        $db = getConnection();
+        
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam("status", $status);
+
+        $stmt->bindParam("id", $id);
+
+        $stmt->execute();
+
+        $db = null;
+        return $response->withJson($status, 200)
+        ->withHeader('Content-type', 'application/json');
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
 
 function addAgenda(Request $request, Response $response) {
     $agenda = json_decode($request->getBody());
@@ -908,14 +934,32 @@ function addAgenda(Request $request, Response $response) {
     fk_fonoaudiologo,fk_status) VALUES (:fk_agenda_disponibilidade,:fk_paciente,
     :fk_fonoaudiologo,:fk_status)";
 
+    $sqlDisponibilidade = "UPDATE tb_agenda_disponibilidade as agen_d 
+    SET agen_d.status=:status WHERE agen_d.id=:id";
+
+    $db = getConnection();
     try {
-        $db = getConnection();
+       
+        $db->beginTransaction();
+
         $stmt = $db->prepare($sql);
         $stmt->bindParam("fk_agenda_disponibilidade", $agenda->fk_agenda_disponibilidade);
         $stmt->bindParam("fk_paciente", $agenda->fk_paciente);
         $stmt->bindParam("fk_fonoaudiologo", $agenda->fk_fonoaudiologo);
         $stmt->bindParam("fk_status", $agenda->fk_status);
         $stmt->execute();
+
+        $status = 0;
+        $stmt2 = $db->prepare($sqlDisponibilidade);
+        $stmt2->bindParam("status", $status);
+
+        $stmt2->bindParam("id",$agenda->fk_agenda_disponibilidade);
+
+        $stmt2->execute();
+
+        //updateDisponibilidadeStatus($agenda->fk_agenda_disponibilidade,0);
+
+        $db->commit();
         $db = null;
         echo json_encode($agenda);
     } catch(PDOException $e) {
@@ -1010,7 +1054,7 @@ function getCalendarDisponibilidade(Request $request, Response $response) {
                    d.hor_inicio as hora_inicio,
                    d.hor_fim as hora_fim
             FROM  tb_agenda_disponibilidade d
-            WHERE d.fk_fonoaudiologo=:id";
+            WHERE d.fk_fonoaudiologo=:id and d.status=1";
 
     try {
         $db = getConnection();
@@ -1066,6 +1110,8 @@ function addDisponibilidade(Request $request, Response $response){
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
+
+
 
 
 
@@ -1339,7 +1385,7 @@ function getPacientesByFonoaudiologo(Request $request, Response $response) {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         
-        $stmt->bindParam(":idFono", $idFono);
+        $stmt->bindParam("idFono", $idFono);
 
         $stmt->execute();
 
@@ -1474,15 +1520,15 @@ function changeStatus(Request $request, Response $response){
 
 function getConnection() {
     
-    // $dbhost="127.0.0.1";
-    // $dbuser="root";
-    // $dbpass="";
-    // $dbname="db_maisfono";
+    $dbhost="127.0.0.1";
+    $dbuser="root";
+    $dbpass="";
+    $dbname="db_maisfono";
 
-    $dbhost="jrpires.com";
-    $dbuser="jrpiresc_ifpe";
-    $dbpass="maisfono_0001";
-    $dbname="jrpiresc_maisfono_rest";
+    // $dbhost="jrpires.com";
+    // $dbuser="jrpiresc_ifpe";
+    // $dbpass="maisfono_0001";
+    // $dbname="jrpiresc_maisfono_rest";
     
     $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
