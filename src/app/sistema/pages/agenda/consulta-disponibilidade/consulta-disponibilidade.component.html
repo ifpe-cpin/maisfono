@@ -25,17 +25,22 @@
                 <th width="30%">Data</th>
                 <th width="30%">Hora Início</th>
                 <th width="30%">Hora Término</th>
-                <th width="10%">Cancelar</th>
+                <th width="10%">Ações</th>
               </tr>
             </thead>
             <tbody>
-               <tr *ngFor="let lista of fonoaudiologoDisponibilidade">
+               <tr *ngFor="let lista of agendaDisponibilidade">
                 <td>{{lista.data}}</td>
                 <td>{{lista.hora_inicio}}</td>
                 <td>{{lista.hora_fim}}</td>
                 <td align='center'>
-                    <i (click)="confirmExclusao($event, lista)" data-toggle="modal"
+                    <i (click)="selectedDisponibilidade($event, lista)" data-toggle="modal"
+                    data-target="#modal-marcacao" class="fa fa-user-o"></i>
+
+                    <i (click)="selectedDisponibilidade($event, lista)" data-toggle="modal"
                     data-target="#modal-confirm-exclusao" class="fa fa-fw fa-trash-o"></i>
+
+                    
                 </td>
                 
               </tr>
@@ -90,3 +95,41 @@
 
   </form>
 </div>
+
+
+<div class="modal fade" id="modal-marcacao" #modal_marcacao style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span></button>
+          <h4 class="modal-title">Incluir Evolução</h4>
+        </div>
+        <form (ngSubmit)="onSubmit()" name="myForm" ng-controller="FormController" novalidate>
+          <div class="modal-body">
+            
+              <div class="row">
+                  <div class="col-md-12">
+                    <label>Paciente
+                    </label>
+                    <select [(ngModel)]="pacienteSelectedId" name="paciente" id="paciente" 
+                            class="form-control select2"
+                            title="Por favor, selecione uma opção.">
+                      <option value="">--Selecione--</option>
+                      <option *ngFor="let p of pacientes" value='{{p.id}}'>{{p.dsc_nome}}</option>
+                    </select>
+              
+                  </div>
+                </div>           
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid">Salvar</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>

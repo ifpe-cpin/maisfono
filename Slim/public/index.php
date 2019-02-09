@@ -900,6 +900,31 @@ function getPacienteByFonoaudiologo(Request $request, Response $response) {
 |        RESTS's - Fonoaudiologo - Calendário           |
 |______________________________________________________*/
 
+
+function addAgenda(Request $request, Response $response) {
+    $agenda = json_decode($request->getBody());
+	
+    $sql = "INSERT INTO tb_agenda(fk_agenda_disponibilidade,fk_paciente,
+    fk_fonoaudiologo,fk_status) VALUES (:fk_agenda_disponibilidade,:fk_paciente,
+    :fk_fonoaudiologo,:fk_status)";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam("fk_agenda_disponibilidade", $agenda->fk_agenda_disponibilidade);
+        $stmt->bindParam("fk_paciente", $agenda->fk_paciente);
+        $stmt->bindParam("fk_fonoaudiologo", $agenda->fk_fonoaudiologo);
+        $stmt->bindParam("fk_status", $agenda->fk_status);
+        $stmt->execute();
+        $db = null;
+        echo json_encode($agenda);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+
+
 function getCalendario(Request $request, Response $response) {
     $id= $request->getAttribute('id');
 
@@ -978,7 +1003,7 @@ function getCalendarAgenda(Request $request, Response $response) {
 }
 
 function getCalendarDisponibilidade(Request $request, Response $response) {
-    $id= $request->getAttribute('id');
+    $id= $request->getAttribute('idFono');
 
     $sql = "SELECT d.id as id, 
                    d.dat_atendimento as data, 
@@ -991,7 +1016,7 @@ function getCalendarDisponibilidade(Request $request, Response $response) {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         
-        $stmt->bindParam(":id", $id);
+        $stmt->bindParam("id", $id);
 
         $stmt->execute();
 

@@ -117,6 +117,7 @@ $app->group('/fonoaudiologoCalendario', function () use ($app) {
 |______________________________________________________*/
 $app->group('/fonoaudiologoAgenda', function () use ($app) {
     $app->get('/idFono/{idFono}', 'getCalendarAgenda');
+    $app->post('', 'addAgenda');
     
 });
 
@@ -125,7 +126,7 @@ $app->group('/fonoaudiologoAgenda', function () use ($app) {
 |  Route's - Fonoaudiologo - Agenda - Disponibilidade   |
 |______________________________________________________*/
 $app->group('/fonoaudiologoDisponibilidade', function () use ($app) {
-    $app->get('/{id}', 'getCalendarDisponibilidade');
+    $app->get('/idFono/{idFono}', 'getCalendarDisponibilidade');
     $app->post('', 'addDisponibilidade');
 });
 

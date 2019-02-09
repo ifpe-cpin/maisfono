@@ -2,6 +2,15 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FonoaudiologoDisponibilidade } from '../../../../models/fonoaudiologoDisponibilidade';
 import { FonoaudiologoDisponibilidadeService } from '../../../../services/fonoaudiologoDisponibilidade.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AgendaDisponibilidade } from '../../../../models/agenda-disponibilidade';
+import { Paciente } from '../../../../models/paciente';
+import { PacienteService } from '../../../../services/paciente.service';
+import { FonoaudiologoPacienteService } from '../../../../services/fonoaudiologo-paciente.service';
+import { Agenda } from '../../../../models/agenda';
+import { FonoAgenda } from '../../../../models/fono-agenda';
+import { FonoAgendaService } from '../../../../services/fono-agenda.service';
+import { AgendaDisponibilidadeService } from '../../../../services/agenda-disponibilidade.service';
+import { QueryOptions } from '../../../../models/query-options';
 
 declare var $:any;
 
@@ -9,18 +18,28 @@ declare var $:any;
   selector: 'app-consulta-disponibilidade',
   templateUrl: './consulta-disponibilidade.component.html',
   styleUrls: ['./consulta-disponibilidade.component.css'],
-  providers: [FonoaudiologoDisponibilidadeService]
+  providers: [AgendaDisponibilidadeService,
+    PacienteService,
+    FonoaudiologoPacienteService,
+    FonoAgendaService]
 })
 export class ConsultaDisponibilidadeComponent implements OnInit {
 
-  constructor(private fonoaudiologoDisponibilidadeService:FonoaudiologoDisponibilidadeService,
+  constructor(private agendaDisponibilidadeService:AgendaDisponibilidadeService,
               private route: ActivatedRoute,
               private router: Router,
+              private fonoAgendaService:FonoAgendaService,
+              private fonoPacienteService:FonoaudiologoPacienteService,
               private chRef: ChangeDetectorRef) { }
 
-  fonoaudiologoDisponibilidade: FonoaudiologoDisponibilidade[];
+  agendaDisponibilidade: AgendaDisponibilidade[];
   dataTable: any;
   loading:boolean;
+
+  disponibilidadeSelectedId: number
+  pacienteSelectedId: number
+  pacientes: Paciente[]
+  
 
 
   dataInfo = {
@@ -50,10 +69,41 @@ export class ConsultaDisponibilidadeComponent implements OnInit {
   };
             
   ngOnInit() {
+
+    let queryMap = new Map<string,string>()
+    queryMap.set("idFono",localStorage.getItem("fonoId"))
+
+    this.fonoPacienteService.list(new QueryOptions(queryMap)).subscribe(
+      pacientes => {
+        this.pacientes = pacientes
+      }
+    )
+
     this.loading = true;
     this.refreshData();
   }
 
+  selectedDisponibilidade(event, disponibilidade){
+        this.disponibilidadeSelectedId = disponibilidade.id
+        console.log("SELECTED "+this.disponibilidadeSelectedId)
+  }
+
+  confirmExclusao(event, lista){
+
+  }
+  onSubmit(){
+      let agenda = new FonoAgenda
+      agenda.fk_agenda_disponibilidade = this.disponibilidadeSelectedId
+      agenda.fk_fonoaudiologo = +localStorage.getItem('fonoId')
+      agenda.fk_paciente = this.pacienteSelectedId
+      agenda.fk_status = 5
+
+      this.fonoAgendaService.create(agenda).subscribe(
+          result=>{
+              console.log(result)
+          }
+      )
+  }
   refreshData(){
       this.route
       .queryParams
@@ -62,9 +112,13 @@ export class ConsultaDisponibilidadeComponent implements OnInit {
               let id = localStorage.getItem('fonoId');
               
           if(id!= undefined){
-                    this.fonoaudiologoDisponibilidadeService.listWithID(id).subscribe(
-                        fonoaudiologoDisponibilidade => {
-                            this.fonoaudiologoDisponibilidade = fonoaudiologoDisponibilidade
+
+                    let queryMap = new Map<string,string>()
+                    queryMap.set("idFono",id)
+                    this.agendaDisponibilidadeService.list(new QueryOptions(queryMap)).subscribe(
+                        agendaDisponibilidade => {
+                            this.agendaDisponibilidade = agendaDisponibilidade
+                            console.log("Disponibilidade "+agendaDisponibilidade)
 
                             this.chRef.detectChanges();
                         
