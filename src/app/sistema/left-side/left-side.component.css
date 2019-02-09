@@ -1,0 +1,11 @@
+.user-panel{
+    padding-bottom: 40px;
+}
+
+.hidden{
+    display: none;
+}
+
+.visible{
+    display: inline;
+}
