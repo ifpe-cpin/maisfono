@@ -49,7 +49,7 @@ export class CalendarioAgendaComponent implements OnInit {
 		.queryParams
 		.subscribe(params => {
 			// Defaults to 0 if no query param provided.
-            let id = localStorage.getItem('pessoaId');
+            let id = localStorage.getItem('fonoId');
             
 			if(id!= undefined){
                 this.calendarioService.listWithID(id).subscribe(

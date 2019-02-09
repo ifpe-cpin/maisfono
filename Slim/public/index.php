@@ -903,9 +903,9 @@ function getPacienteByFonoaudiologo(Request $request, Response $response) {
 function getCalendario(Request $request, Response $response) {
     $id= $request->getAttribute('id');
 
-    $sql = "SELECT p.dsc_nome as title, 
-           CONCAT(d.dat_atendimento, ' ', d.hor_inicio) as start, 
-           CONCAT(d.dat_atendimento, ' ', d.hor_fim) as end, 
+    $sql = "SELECT pes.dsc_nome as title, 
+           CONCAT(agen_d.dat_atendimento, ' ', agen_d.hor_inicio) as start, 
+           CONCAT(agen_d.dat_atendimento, ' ', agen_d.hor_fim) as end, 
            CASE
                 WHEN s.id = 1 THEN 'yellow'
                 WHEN s.id = 2 THEN 'liteblue'
@@ -913,22 +913,21 @@ function getCalendario(Request $request, Response $response) {
                 WHEN s.id = 4 THEN 'red'
                 WHEN s.id = 5 THEN 'green'
            END as color
-                FROM  tb_agenda a
-                INNER JOIN tb_paciente as pac
-                ON a.fk_paciente = pac.id
-                INNER JOIN tb_pessoa p
-                ON pac.id_pessoa = p.id
-                INNER JOIN tb_agenda_disponibilidade d
-                ON a.fk_agenda_disponibilidade =  d.id 
+                FROM  `tb_agenda` agen INNER JOIN tb_paciente pac 
+                ON agen.fk_paciente=pac.id 
+                INNER JOIN tb_pessoa pes 
+                ON pac.id_pessoa=pes.id 
+                INNER JOIN tb_agenda_disponibilidade agen_d 
+                ON agen.`fk_agenda_disponibilidade`=agen_d.id 
                 INNER JOIN aux_status s
-                ON a.fk_status = s.id 
-                WHERE d.fk_fonoaudiologo=:id";
+                ON agen.fk_status = s.id
+                WHERE agen_d.fk_fonoaudiologo=:id";
 
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         
-        $stmt->bindParam(":id", $id);
+        $stmt->bindParam("id", $id);
 
         $stmt->execute();
 
@@ -944,7 +943,7 @@ function getCalendario(Request $request, Response $response) {
 
 function getCalendarAgenda(Request $request, Response $response) {
     $id= $request->getAttribute('idFono');
-    
+
     $sql = "SELECT pes.dsc_nome as paciente, 
                    agen_d.dat_atendimento as data,
                    agen_d.hor_inicio as hora_inicio, 
