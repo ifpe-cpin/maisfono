@@ -61,10 +61,14 @@ export class ConsultaAgendaComponent implements OnInit {
 		.queryParams
 		.subscribe(params => {
 			// Defaults to 0 if no query param provided.
-      let id = localStorage.getItem('pessoaId');
+      let id = localStorage.getItem('fonoId');
+      console.log("idFono: "+id)
             
 			if(id!= undefined){
-                this.agendaService.listWithID(id).
+
+        let queryMap = new Map<string,string>()
+        queryMap.set("idFono",id)
+                this.agendaService.list(new QueryOptions(queryMap)).
                 subscribe(agenda => {
                         console.log(agenda)
                         this.agenda = agenda;

@@ -116,7 +116,7 @@ $app->group('/fonoaudiologoCalendario', function () use ($app) {
 |         Route's - Fonoaudiologo - Agenda              |
 |______________________________________________________*/
 $app->group('/fonoaudiologoAgenda', function () use ($app) {
-    $app->get('/{id}', 'getCalendarAgenda');
+    $app->get('/idFono/{idFono}', 'getCalendarAgenda');
     
 });
 
