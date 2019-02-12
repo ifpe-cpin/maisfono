@@ -109,6 +109,8 @@ $app->group('/fonoaudiologoDashAgenda', function () use ($app) {
 |______________________________________________________*/
 $app->group('/fonoaudiologoCalendario', function () use ($app) {
     $app->get('/{id}', 'getCalendario');
+    $app->get('/idFono/{idFono}', 'getCalendario');
+    $app->get('/idPaciente/{idPaciente}', 'getCalendarioByPaciente');
 });
 
 /*______________________________________________________

@@ -61,6 +61,8 @@ export class DisponibilidadeFormComponent implements OnInit {
           }
         )  
       })
+
+      this.router.navigate(["/sistema/fonoaudiologo/agenda/calendarioDisponibilidade"])
         
     }
 
@@ -93,7 +95,7 @@ export class DisponibilidadeFormComponent implements OnInit {
   
       // The days array will contain a Date object for each day between dates (inclusive)
       const days: Date[] = Array.from(new Array(daysBetweenDates + 1), 
-      (v, i) => new Date((start+86400000) + (i * MS_PER_DAY)))
+      (v, i) => new Date((start) + (i * MS_PER_DAY)))
       console.log(dias)
       days.forEach(date =>{
         if(dias.includes(date.getDay()+"")){

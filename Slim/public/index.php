@@ -901,31 +901,6 @@ function getPacienteByFonoaudiologo(Request $request, Response $response) {
 |        RESTS's - Fonoaudiologo - Calendário           |
 |______________________________________________________*/
 
-function updateDisponibilidadeStatus($id,$status) {
-    
-    $sql = "UPDATE tb_agenda_disponibilidade as agen_d 
-            SET 
-            status = :status
-            WHERE id=:id";
-
-        
-    try {
-        $db = getConnection();
-        
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam("status", $status);
-
-        $stmt->bindParam("id", $id);
-
-        $stmt->execute();
-
-        $db = null;
-        return $response->withJson($status, 200)
-        ->withHeader('Content-type', 'application/json');
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
 
 function addAgenda(Request $request, Response $response) {
     $agenda = json_decode($request->getBody());
@@ -970,7 +945,7 @@ function addAgenda(Request $request, Response $response) {
 
 
 function getCalendario(Request $request, Response $response) {
-    $id= $request->getAttribute('id');
+    $id= $request->getAttribute('idFono');
 
     $sql = "SELECT pes.dsc_nome as title, 
            CONCAT(agen_d.dat_atendimento, ' ', agen_d.hor_inicio) as start, 
@@ -991,6 +966,47 @@ function getCalendario(Request $request, Response $response) {
                 INNER JOIN aux_status s
                 ON agen.fk_status = s.id
                 WHERE agen_d.fk_fonoaudiologo=:id";
+
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam("id", $id);
+
+        $stmt->execute();
+
+        $events = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return  $response->withJson($events, 200)
+        ->withHeader('Content-type', 'application/json');
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function getCalendarioByPaciente(Request $request, Response $response) {
+    $id= $request->getAttribute('idPaciente');
+
+    $sql = "SELECT pes.dsc_nome as title, 
+           CONCAT(agen_d.dat_atendimento, ' ', agen_d.hor_inicio) as start, 
+           CONCAT(agen_d.dat_atendimento, ' ', agen_d.hor_fim) as end, 
+           CASE
+                WHEN s.id = 1 THEN 'yellow'
+                WHEN s.id = 2 THEN 'liteblue'
+                WHEN s.id = 3 THEN 'grey'
+                WHEN s.id = 4 THEN 'red'
+                WHEN s.id = 5 THEN 'green'
+           END as color
+                FROM  `tb_agenda` agen INNER JOIN tb_paciente pac 
+                ON agen.fk_paciente=pac.id 
+                INNER JOIN tb_pessoa pes 
+                ON pac.id_pessoa=pes.id 
+                INNER JOIN tb_agenda_disponibilidade agen_d 
+                ON agen.`fk_agenda_disponibilidade`=agen_d.id 
+                INNER JOIN aux_status s
+                ON agen.fk_status = s.id
+                WHERE agen.fk_paciente=:id";
 
     try {
         $db = getConnection();

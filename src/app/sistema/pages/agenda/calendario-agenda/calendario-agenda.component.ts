@@ -4,6 +4,7 @@ import { CalendarioService } from '../../../../services/calendario.service';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { QueryOptions } from '../../../../models/query-options';
 
 
 @Component({
@@ -45,20 +46,27 @@ export class CalendarioAgendaComponent implements OnInit {
     }
 
     refreshData(){
-        this.route
-		.queryParams
-		.subscribe(params => {
-			// Defaults to 0 if no query param provided.
-            let id = localStorage.getItem('fonoId');
+
+            let queryMap = new Map<string,string>()
+
+            console.log(localStorage.getItem('fonoId'))
+            if(localStorage.getItem('fonoId')!=undefined && localStorage.getItem('fonoId')!=""){
+
+                queryMap.set("idFono",localStorage.getItem('fonoId'))
+
+            }else if(localStorage.getItem('pacienteId')!=undefined && 
+                     localStorage.getItem('pacienteId')!=""){
+
+                queryMap.set("idPaciente",localStorage.getItem('pacienteId')) 
+            }
+
+            this.calendarioService.list(new QueryOptions(queryMap)).subscribe(
+                events => {
+                    this.events = events
+                }
+            );
             
-			if(id!= undefined){
-                this.calendarioService.listWithID(id).subscribe(
-                    events => {
-                        this.events = events
-                    }
-                );
-            } 
-        });
+			
        
     }
 

@@ -40,12 +40,12 @@ import { UserAdminComponent } from './pages/user/user-admin/user-admin.component
 import { UserViewComponent } from './pages/user/user-view/user-view.component';
 import { PacienteLaudoComponent } from './pages/paciente/paciente-laudo/paciente-laudo.component';
 import { VideochamadaComponent } from '../videochamada/videochamada.component';
-import { UserCreateComponent } from './pages/user/user-create/user-create.component';
 import { ConsultaDisponibilidadeComponent } from './pages/agenda/consulta-disponibilidade/consulta-disponibilidade.component';
 import { PacienteComponent } from './pages/paciente/paciente.component';
 import { PacienteFonoComponent } from './pages/paciente/paciente-fono/paciente-fono.component';
 import { DisponibilidadeFormComponent }  from './pages/agenda/disponibilidade-form/disponibilidade-form.component';
 import { PacienteGuard } from '../core/paciente.guard';
+import { UserCreateComponent } from './pages/user/user-create/user-create.component';
 
 const homeRoutes = [
 		{path: 'sistema', component: SistemaComponent, children:[

@@ -32,6 +32,18 @@ let paciente = {
                 },
             ]
         },
+
+        {
+            nome:"Agenda",
+            icon: "fa fa-calendar",
+            itens:[
+                {
+                    nome:"Calendário",
+                    url:"/sistema/fonoaudiologo/agenda/calendarioAgenda",
+                    icone:"fa fa-circle-o"
+                }
+            ],
+        },
     ]
 };
 
@@ -89,7 +101,7 @@ let fono = {
                     icone:"fa fa-circle-o"
                 },
                 {
-                    nome:"Consulta Disponibilidade",
+                    nome:"Disponibilidade Admin",
                     url:"/sistema/fonoaudiologo/agenda/calendarioDisponibilidade",
                     icone:"fa fa-circle-o"
                 },
