@@ -96,8 +96,8 @@ function getUsuario(Request $request, Response $response) {
 function addUsuario(Request $request, Response $response){
     $usuario = json_decode($request->getBody());
     
-    $sqlUsuario = "INSERT INTO tb_user(id,email,photoUrl,displayName,roles,tipo) 
-                VALUES (:id,:email,:photoUrl,:displayName,:roles,:tipo)";
+    $sqlUsuario = "INSERT INTO tb_user(id,email,photoUrl,displayName,roles,tipo,ultimo_acesso) 
+                VALUES (:id,:email,:photoUrl,:displayName,:roles,:tipo,:ultimo_acesso)";
 
     $sqlPessoa = "INSERT INTO tb_pessoa(dsc_nome,img_perfil,dsc_email)
             VALUES (:dsc_nome,:img_perfil,:dsc_email)";
@@ -123,6 +123,7 @@ function addUsuario(Request $request, Response $response){
         $stmt->bindParam("displayName", $usuario->displayName);
         $stmt->bindParam("roles",$roles);   
         $stmt->bindParam("tipo", $usuario->tipo);
+        $stmt->bindParam("ultimo_acesso", $usuario->ultimo_acesso);
        
         $stmt->execute();
 
@@ -186,7 +187,8 @@ function updateUsuario(Request $request, Response $response) {
             photoUrl = :photoUrl,
             displayName = :displayName,
             roles = :roles,
-            tipo = :tipo
+            tipo = :tipo,
+            ultimo_acesso = :ultimo_acesso
             WHERE id=:id";
 
     
@@ -202,6 +204,7 @@ function updateUsuario(Request $request, Response $response) {
         $stmt->bindParam("displayName", $usuario->displayName);
         $stmt->bindParam("roles", $usuario->roles);
         $stmt->bindParam("tipo", $usuario->tipo);
+        $stmt->bindParam("ultimo_acesso", $usuario->ultimo_acesso);
         $stmt->bindParam("id", $usuario->id);
         
 
@@ -1536,15 +1539,15 @@ function changeStatus(Request $request, Response $response){
 
 function getConnection() {
     
-    // $dbhost="127.0.0.1";
-    // $dbuser="root";
-    // $dbpass="";
-    // $dbname="db_maisfono";
+    $dbhost="127.0.0.1";
+    $dbuser="root";
+    $dbpass="";
+    $dbname="db_maisfono";
 
-    $dbhost="jrpires.com";
-    $dbuser="jrpiresc_ifpe";
-    $dbpass="maisfono_0001";
-    $dbname="jrpiresc_maisfono_rest";
+    // $dbhost="jrpires.com";
+    // $dbuser="jrpiresc_ifpe";
+    // $dbpass="maisfono_0001";
+    // $dbname="jrpiresc_maisfono_rest";
     
     $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

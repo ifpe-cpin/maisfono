@@ -14,6 +14,7 @@ export class User extends Resource{
     roles?: string[];
     tipo:number;
     status:number;
+    ultimo_acesso: Date
 
     _fonoaudiologo: Fonoaudiologo;
     _paciente: Paciente;

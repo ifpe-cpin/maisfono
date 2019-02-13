@@ -12,6 +12,7 @@ export class UsuarioSerializer {
       user.email = json.email
       user.tipo = json.tipo
       user.status = json.status
+      user.ultimo_acesso = json.ultimo_acesso
       if(json.roles!=undefined){
          user.roles = json.roles.split(",")
       }
@@ -29,7 +30,8 @@ export class UsuarioSerializer {
         "displayName":user.displayName,
         "tipo":user.tipo,
         "status":user.status,
-        "roles": user.roles.join()
+        "roles": user.roles.join(),
+        "ultimo_acesso":user.ultimo_acesso
       }
 
       console.log(json)

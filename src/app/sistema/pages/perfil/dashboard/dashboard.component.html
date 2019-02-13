@@ -19,13 +19,12 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src='img/user2-160x160.jpg' alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src='{{perfil.photoUrl}}' alt="User profile picture">
 
-              <h3 class="profile-username text-center">Teste</h3>
+              <h3 class="profile-username text-center">{{perfil.nome}}</h3>
 
-              <p class="text-muted text-center">Fonoaudiólogo</p>
+              <p class="text-muted text-center">{{perfil.tipo}}</p>
 
-              <a href="alterarFoto.php" class="btn btn-primary btn-block"><b>Alterar Foto</b></a>
             </div>
             <!-- /.box-body -->
           </div>
@@ -40,14 +39,9 @@
 
               <ul class="list-group list-group-unbordered" style="margin-bottom: 27px">
                 <li class="list-group-item">
-                  <b>Último acesso</b> <span class="pull-right">05-05-2018 08:02</span>
-                </li>
-                <li class="list-group-item">
-                  <b>Alteração de senha</b> <span class="pull-right">30-11--0001 00:00</span>
+                  <b>Último acesso</b> <span class="pull-right">{{perfil.ultimoAcesso | date:'dd/MM/yyyy'}}</span>
                 </li>
               </ul>
-
-              <a class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-password" ><b>Alterar de senha</b></a>
             </div>
             <!-- /.box-body -->
           </div>
@@ -62,25 +56,25 @@
               <div class="col-md-6">
                 <ul class="list-group list-group-unbordered" style="margin-bottom: 27px">
                   <li class="list-group-item">
-                    <b>E-mail</b> <span class="pull-right">teste@gmail.com</span>
+                    <b>E-mail</b> <span class="pull-right">{{perfil.email}}</span>
                   </li>
                   <li class="list-group-item">
-                    <b>Endereço</b> <span class="pull-right">Rua Alto das Alamedas, 256 - Farol - Maceió/AL</span>
+                    <b>Endereço</b> <span class="pull-right">{{perfil.endereco}}</span>
                   </li>
                 </ul>
               </div>
               <div class="col-md-6">
                 <ul class="list-group list-group-unbordered" style="margin-bottom: 27px">
                   <li class="list-group-item">
-                    <b>Telefone</b> <span class="pull-right">(82) 98888-8888</span>
+                    <b>Telefone</b> <span class="pull-right">{{perfil.telefone1}}</span>
                   </li>
                   <li class="list-group-item">
-                    <b>Telefone</b> <span class="pull-right">(82) 98888-8888</span>
+                    <b>Telefone</b> <span class="pull-right">{{perfil.telefone2}}</span>
                   </li>
                 </ul>
               </div>
               <div class="col-md-12">
-                <a class="btn btn-primary btn-block" routerLink="/sistema/perfil/meusDados"><b>Alterar Dados Pessoais</b></a>
+                <a class="btn btn-primary btn-block" (click)="update()"><b>Alterar Dados Pessoais</b></a>
               </div>
             </div>
             <!-- /.box-body -->

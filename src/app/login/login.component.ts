@@ -73,6 +73,16 @@ export class LoginComponent implements OnInit, OnDestroy{
               if(user.id!=undefined){
 
                 this.user.tipo = user.tipo;
+
+                user.ultimo_acesso = new Date()
+
+
+                this.userService.update(user).subscribe(
+                  user => {
+                    console.log("UPDATE: "+user.id)
+                  }
+                )
+               
                 
                 if(this.user.isFonoaudiologo()){
                   
@@ -107,6 +117,7 @@ export class LoginComponent implements OnInit, OnDestroy{
 
                 localStorage.setItem('roles', user.roles.toString());
                 this.pusherService.ausente(this.user.id)
+                
                 
 
                 

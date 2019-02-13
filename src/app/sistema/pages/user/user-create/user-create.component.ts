@@ -44,6 +44,7 @@ export class UserCreateComponent implements OnInit {
             this.user.email = params['email'];
             this.user.photoUrl =params['photoUrl'];
             this.user.displayName = params['displayName']; 
+            this.user.ultimo_acesso = new Date()
 
             
             
