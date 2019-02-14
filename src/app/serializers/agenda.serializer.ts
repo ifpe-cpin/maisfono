@@ -4,6 +4,7 @@ export class AgendaSerializer {
     fromJson(json: any): Agenda {
       let agenda = new Agenda();
 
+      agenda.id = json.id
       agenda.paciente = json.paciente;
       agenda.data = json.data;
       agenda.hora_inicio = json.hora_inicio;

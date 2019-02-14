@@ -7,7 +7,7 @@ import { Paciente } from '../../../../models/paciente';
 import { PacienteService } from '../../../../services/paciente.service';
 import { FonoaudiologoPacienteService } from '../../../../services/fonoaudiologo-paciente.service';
 import { Agenda } from '../../../../models/agenda';
-import { FonoAgenda } from '../../../../models/fono-agenda';
+import { FonoAgenda, CONFIRMADO } from '../../../../models/fono-agenda';
 import { FonoAgendaService } from '../../../../services/fono-agenda.service';
 import { AgendaDisponibilidadeService } from '../../../../services/agenda-disponibilidade.service';
 import { QueryOptions } from '../../../../models/query-options';
@@ -96,7 +96,7 @@ export class ConsultaDisponibilidadeComponent implements OnInit {
       agenda.fk_agenda_disponibilidade = this.disponibilidadeSelectedId
       agenda.fk_fonoaudiologo = +localStorage.getItem('fonoId')
       agenda.fk_paciente = this.pacienteSelectedId
-      agenda.fk_status = 5
+      agenda.fk_status = CONFIRMADO
 
       this.fonoAgendaService.create(agenda).subscribe(
           result=>{

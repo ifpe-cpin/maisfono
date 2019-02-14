@@ -5,10 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { Agenda } from '../models/agenda';
 import { environment } from '../../environments/environment';
 import { FonoAgendaSerializer } from '../serializers/fono-agenda.serializer';
+import { FonoAgenda } from '../models/fono-agenda';
 
 
 @Injectable()
-export class FonoAgendaService extends ResourceService<Agenda> implements ResourceServiceInterface<Agenda>{
+export class FonoAgendaService extends ResourceService<FonoAgenda> implements ResourceServiceInterface<FonoAgenda>{
   
   constructor(httpClient: HttpClient) {
     super(

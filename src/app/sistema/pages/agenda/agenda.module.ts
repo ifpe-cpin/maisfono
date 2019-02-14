@@ -9,13 +9,16 @@ import { AgendaComponent } from './agenda.component';
 import { ConsultaDisponibilidadeComponent } from './consulta-disponibilidade/consulta-disponibilidade.component';
 import { DisponibilidadeFormComponent } from './disponibilidade-form/disponibilidade-form.component';
 import { FormsModule } from '@angular/forms';
+import { SistemaComponent } from '../../sistema.component';
+import { SistemaModule } from '../../sistema.module';
 
 @NgModule({ 
   imports: [
     CommonModule,
     AgendaRoutingModule,
     FullCalendarModule,
-    FormsModule
+    FormsModule,
+    SistemaModule
   ],
   declarations: [
     CalendarioAgendaComponent, 
