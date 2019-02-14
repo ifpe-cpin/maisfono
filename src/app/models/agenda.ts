@@ -7,4 +7,5 @@ export class Agenda extends Resource{
         hora_fim?: string;
         fk_status: number;
         nome_status?: string;
+        frg_paciente: number;
 }
