@@ -72,7 +72,7 @@ export class DashComponent implements OnInit {
                     this.agendaService.listWithID(id).
                     subscribe(agenda => {
                             this.agenda = agenda;
-                            console.log(this.agenda)
+                            console.log(this.agenda);
                             this.chRef.detectChanges();
                             
                             this.loading = false;

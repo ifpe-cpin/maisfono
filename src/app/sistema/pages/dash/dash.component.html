@@ -102,9 +102,10 @@
 									  </thead>
 									  <tbody>
 											<tr *ngFor="let lista of agenda">
-													<td><!--<a href="pages/examples/invoice.html">-->
-														{{lista.paciente}}
-													<!--</a>-->
+													<td>
+														<a routerLink="/sistema/fonoaudiologo/dashPaciente/{{lista.frg_paciente}}">
+															{{lista.paciente}}
+														</a>
 													</td>
 													<td>{{lista.hora_inicio}}</td>
 													<td>

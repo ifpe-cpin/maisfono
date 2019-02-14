@@ -46,6 +46,7 @@ import { PacienteFonoComponent } from './pages/paciente/paciente-fono/paciente-f
 import { DisponibilidadeFormComponent }  from './pages/agenda/disponibilidade-form/disponibilidade-form.component';
 import { PacienteGuard } from '../core/paciente.guard';
 import { UserCreateComponent } from './pages/user/user-create/user-create.component';
+import { PacienteDashComponent } from './pages/paciente/paciente-dash/paciente-dash.component';
 
 const homeRoutes = [
 		{path: 'sistema', component: SistemaComponent, children:[
@@ -79,6 +80,7 @@ const homeRoutes = [
 				{path: 'laudo/:id', component: PacienteLaudoComponent, canActivate: [FonoGuard]},
 				{path: 'novo', component: PacienteFormComponent, canActivate: [FonoGuard]},
 				{path: 'ver', component: PacienteDetalheComponent, canActivate: [FonoGuard]},
+				{path: 'dashPaciente', component: PacienteDashComponent, canActivate: [FonoGuard]},
 				{path: 'agenda', component: AgendaComponent, children: [
 					{path: 'consultaAgenda', component: ConsultaAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
 					{path: 'calendarioAgenda', component: CalendarioAgendaComponent, canActivate: [AuthGuard,AdminGuard]},

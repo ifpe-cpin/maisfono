@@ -14,6 +14,7 @@ import { PacienteLaudoComponent } from './paciente-laudo/paciente-laudo.componen
 import { PacienteFonoComponent } from './paciente-fono/paciente-fono.component';
 import { SistemaModule } from '../../sistema.module';
 import { VincularFonoComponent } from './vincular-fono/vincular-fono.component';
+import { PacienteDashComponent } from './paciente-dash/paciente-dash.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { VincularFonoComponent } from './vincular-fono/vincular-fono.component';
 	PacienteEvolucaoComponent,
 	PacienteLaudoComponent,
 	PacienteFonoComponent,
-	VincularFonoComponent
+	VincularFonoComponent,
+	PacienteDashComponent
   	]
 })
 export class PacienteModule { }

@@ -1155,7 +1155,8 @@ function getDashAgenda($request) {
                 d.hor_inicio as hora_inicio, 
                 d.hor_fim as hora_fim, 
                 s.id as fk_status,
-                s.dsc_nome as nome_status
+                s.dsc_nome as nome_status,
+                a.fk_paciente as frg_paciente
             FROM  tb_agenda a
             INNER JOIN tb_pessoa p
             ON a.fk_paciente = p.id
