@@ -1285,8 +1285,6 @@ function getSumDashMarcacoes($request) {
     }
 }
 
-<<<<<<< HEAD
-
 /*______________________________________________________
 |                                                       |
 |            RESTS's - Dashboard - Paciente             |
@@ -1383,8 +1381,6 @@ function updateAgenda($request) {
     }  
 }
 
-=======
->>>>>>> b1cbaad355ee0315244a87b4a26b3fb027964c67
 /*______________________________________________________
 |                                                       |
 |                RESTS's - FonoaudiologoPaciente        |
