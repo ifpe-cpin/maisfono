@@ -10,6 +10,7 @@ import { MatDialog } from "@angular/material";
 import { Fonoaudiologo } from '../../../../models/fonoaudiologo';
 import { QueryOptions } from '../../../../models/query-options';
 import { ResourceServiceInterface } from '../../../../services/resource.service.interface';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-fono-admin',
@@ -74,7 +75,7 @@ export class FonoAdminComponent implements OnInit {
                 }
                 else {
                   this.dataTable = $('#fonoaudiologos').DataTable(
-                        this.dataInfo
+                        environment.data_pt_info
                      );
                 }
 

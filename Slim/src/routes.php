@@ -129,6 +129,7 @@ $app->group('/fonoaudiologoCalendario', function () use ($app) {
 $app->group('/fonoaudiologoAgenda', function () use ($app) {
     $app->get('/idFono/{idFono}', 'getCalendarAgenda');
     $app->post('', 'addAgenda');
+    $app->put('/{id}', 'updateAgenda');
     
 });
 

@@ -945,6 +945,46 @@ function addAgenda(Request $request, Response $response) {
     }
 }
 
+function updateAgenda(Request $request, Response $response) {
+    $agenda = json_decode($request->getBody());
+
+    $id = $request->getAttribute('id');
+    
+    $sql = "UPDATE tb_agenda
+            SET 
+            fk_agenda_disponibilidade = :fk_agenda_disponibilidade,
+            fk_paciente = :fk_paciente,
+            fk_fonoaudiologo = :fk_fonoaudiologo,
+            fk_status = :fk_status
+            WHERE id=:id";
+
+
+        $db = getConnection();
+    try {
+        $db->beginTransaction();
+        
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindParam("fk_agenda_disponibilidade", $agenda->fk_agenda_disponibilidade);
+        $stmt->bindParam("fk_paciente", $agenda->fk_paciente);
+        $stmt->bindParam("fk_fonoaudiologo", $agenda->fk_fonoaudiologo);
+        $stmt->bindParam("fk_status", $agenda->fk_status);
+
+        $stmt->bindParam("id", $id);
+
+        $stmt->execute();
+
+        $db->commit();
+        $db = null;
+        return $response->withJson($agenda, 200)
+        ->withHeader('Content-type', 'application/json');
+    } catch(PDOException $e) {
+        $db->rollBack();
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+
 
 
 function getCalendario(Request $request, Response $response) {
@@ -1032,7 +1072,7 @@ function getCalendarioByPaciente(Request $request, Response $response) {
 function getCalendarAgenda(Request $request, Response $response) {
     $id= $request->getAttribute('idFono');
 
-    $sql = "SELECT pes.dsc_nome as paciente, 
+    $sql = "SELECT agen.id as id, pes.dsc_nome as paciente, 
                    agen_d.dat_atendimento as data,
                    agen_d.hor_inicio as hora_inicio, 
                    agen_d.hor_fim as hora_fim, 
@@ -1046,7 +1086,7 @@ function getCalendarAgenda(Request $request, Response $response) {
                 ON agen.`fk_agenda_disponibilidade`=agen_d.id 
                 INNER JOIN aux_status s
                 ON agen.fk_status = s.id
-                WHERE agen_d.fk_fonoaudiologo=:id";
+                WHERE agen_d.fk_fonoaudiologo=:id and agen.fk_status=2";
 
     try {
         $db = getConnection();
@@ -1245,6 +1285,7 @@ function getSumDashMarcacoes($request) {
     }
 }
 
+<<<<<<< HEAD
 
 /*______________________________________________________
 |                                                       |
@@ -1342,6 +1383,8 @@ function updateAgenda($request) {
     }  
 }
 
+=======
+>>>>>>> b1cbaad355ee0315244a87b4a26b3fb027964c67
 /*______________________________________________________
 |                                                       |
 |                RESTS's - FonoaudiologoPaciente        |

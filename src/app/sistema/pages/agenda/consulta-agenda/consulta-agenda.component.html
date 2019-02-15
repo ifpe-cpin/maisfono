@@ -10,6 +10,7 @@
   </ol>
 </section>
 
+<app-load [loading]="loading"></app-load>
 <!-- Main content -->
 <section class="content"> 
   <div class="row">
@@ -26,22 +27,21 @@
                 <th width="11%">Data</th>
                 <th width="11%">Hora Início</th>
                 <th width="11%">Hora Término</th>
-                <th width="11%">Desmarcar</th>
-                <th width="7%">Atender</th>
+                <th width="7%">Ações</th>
               </tr>
             </thead>
             <tbody>
-               <tr *ngFor="let lista of agenda">
-                <td>{{lista.paciente}}</td>
-                <td>{{lista.data}}</td>
-                <td>{{lista.hora_inicio}}</td>
-                <td>{{lista.hora_fim}}</td>
-                <td></td>
-                <td>
-                    <ng-container [ngSwitch]="lista.situacao">
-                        <i *ngSwitchCase='1' class="fa fa-check-square"></i>
-                        <i *ngSwitchCase='' class="fa fa-square"></i>
-                    </ng-container>  
+               <tr *ngFor="let agenda of agendas">
+                <td>{{agenda.paciente}}</td>
+                <td>{{agenda.data}}</td>
+                <td>{{agenda.hora_inicio}}</td>
+                <td>{{agenda.hora_fim}}</td>
+                <td align="center">
+                  <a (click)="changeStatus(agenda,5)">
+                   <i class="fa fa-check"> </i></a>
+                  &nbsp;
+                  <a (click)="changeStatus(agenda,4)">
+                       <i class="fa fa-close"></i></a>
                 </td>
                 
               </tr>
@@ -53,8 +53,7 @@
                 <th>Data</th>
                 <th>Hora Início</th>
                 <th>Hora Término</th>
-                <th>Desmarcar</th>
-                <th>Atender</th>
+                <th>Ações</th>
               </tr>
             </tfoot>
           </table>

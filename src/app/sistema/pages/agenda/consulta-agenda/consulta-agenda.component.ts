@@ -1,10 +1,12 @@
+declare var $:any;
+
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Agenda } from '../../../../models/agenda';
 import { AgendaService } from '../../../../services/agenda.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { QueryOptions } from '../../../../models/query-options';
+import { environment } from '../../../../../environments/environment.prod';
 
-declare var $:any;
+
 
 @Component({
   selector: 'app-consulta-agenda',
@@ -15,39 +17,11 @@ declare var $:any;
 export class ConsultaAgendaComponent implements OnInit {
   
   constructor(private agendaService:AgendaService,
-              private router: Router,
-              private route: ActivatedRoute,
               private chRef: ChangeDetectorRef) { }
  
-  agenda: Agenda[];
+  agendas: Agenda[];
   dataTable: any;
   loading:boolean;
-
-  dataInfo = {
-    "language":{
-      "sEmptyTable": "Nenhum registro encontrado",
-      "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-      "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-      "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-      "sInfoPostFix": "",
-      "sInfoThousands": ".",
-      "sLengthMenu": "_MENU_ resultados por página",
-      "sLoadingRecords": "Carregando...",
-      "sProcessing": "Processando...",
-      "sZeroRecords": "Nenhum registro encontrado",
-      "sSearch": "Pesquisar",
-      "oPaginate": {
-          "sNext": "Próximo",
-          "sPrevious": "Anterior",
-          "sFirst": "Primeiro",
-          "sLast": "Último"
-      },
-      "oAria": {
-          "sSortAscending": ": Ordenar colunas de forma ascendente",
-          "sSortDescending": ": Ordenar colunas de forma descendente"
-      }
-  }
-  };
 
 
   ngOnInit() {
@@ -57,38 +31,47 @@ export class ConsultaAgendaComponent implements OnInit {
 
   refreshData(){
 
-    this.route
-		.queryParams
-		.subscribe(params => {
 			// Defaults to 0 if no query param provided.
       let id = localStorage.getItem('fonoId');
-      console.log("idFono: "+id)
             
 			if(id!= undefined){
 
         let queryMap = new Map<string,string>()
         queryMap.set("idFono",id)
                 this.agendaService.list(new QueryOptions(queryMap)).
-                subscribe(agenda => {
-                        console.log(agenda)
-                        this.agenda = agenda;
+                subscribe(agendas => {
+
+                        this.agendas = agendas;
 
                         this.chRef.detectChanges();
+
+                        this.loading = false;
                         
                         if ( $.fn.dataTable.isDataTable( '#agenda' ) ) {
                           this.dataTable = $('#agenda').DataTable();
                         }
                         else {
                             this.dataTable = $('#agenda').DataTable(
-                                this.dataInfo 
+                                environment.data_pt_info 
                             );
                         }
                         
-                        this.loading = false;
+                        
                     }
                 );
             } 
-        });
+        
+  }
+
+
+  changeStatus(agenda:Agenda,status:number){
+      agenda.fk_status = status
+      this.agendaService.update(agenda).subscribe(
+        result => {
+              console.log(result)
+              this.refreshData()
+        }
+      )
   }
 
 }

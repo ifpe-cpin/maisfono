@@ -37,6 +37,7 @@ import { VideocallIconComponent } from './videocall-icon/videocall-icon.componen
     VideochamadaComponent,
     UserStatusComponent,
     VideocallIconComponent],
+    
     exports:[LoadComponent,UserStatusComponent,LeftSideComponent,VideocallIconComponent]
 })
 export class SistemaModule { }

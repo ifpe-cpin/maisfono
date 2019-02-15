@@ -50,8 +50,6 @@ export class SistemaComponent implements OnInit {
 
 
     this.showVideoChatButton();
-
-    console.log(JSON.stringify(environment))
    
 
   }
