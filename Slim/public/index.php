@@ -1362,7 +1362,7 @@ function getSumDashMarcacoesPaciente($request) {
 |                                                       |
 |                 RESTS's - Atendimento                 |
 |______________________________________________________*/
-function updateAgenda($request) {
+function updateStatusAgenda($request) {
     $novo_status = json_decode($request->getBody());
     $id = $request->getAttribute('id');
     $sql = "UPDATE tb_agenda 
