@@ -10,6 +10,7 @@ export class AgendaSerializer {
       agenda.hora_fim = json.hora_fim;
       agenda.fk_status = json.fk_status;
       agenda.nome_status = json.nome_status;
+      agenda.frg_paciente = json.frg_paciente;
       
       return agenda;
     }
@@ -21,7 +22,8 @@ export class AgendaSerializer {
         "hora_inicio": agenda.hora_inicio,
         "hora_fim": agenda.hora_fim,
         "fk_status": agenda.fk_status,
-        "nome_status": agenda.nome_status
+        "nome_status": agenda.nome_status,
+        "frg+paciente": agenda.frg_paciente
       }
 
       return json

@@ -80,7 +80,7 @@ const homeRoutes = [
 				{path: 'laudo/:id', component: PacienteLaudoComponent, canActivate: [FonoGuard]},
 				{path: 'novo', component: PacienteFormComponent, canActivate: [FonoGuard]},
 				{path: 'ver', component: PacienteDetalheComponent, canActivate: [FonoGuard]},
-				{path: 'dashPaciente', component: PacienteDashComponent, canActivate: [FonoGuard]},
+				{path: 'dashPaciente/:id', component: PacienteDashComponent, canActivate: [FonoGuard]},
 				{path: 'agenda', component: AgendaComponent, children: [
 					{path: 'consultaAgenda', component: ConsultaAgendaComponent, canActivate: [AuthGuard,AdminGuard]},
 					{path: 'calendarioAgenda', component: CalendarioAgendaComponent, canActivate: [AuthGuard,AdminGuard]},

@@ -1248,6 +1248,79 @@ function getSumDashMarcacoes($request) {
 
 /*______________________________________________________
 |                                                       |
+|            RESTS's - Dashboard - Paciente             |
+|______________________________________________________*/
+
+function getSumDashMarcacoesPaciente($request) {
+    $idFonoaudiologo = $request->getAttribute('id');
+    $idPaciente = $request->getAttribute('idPaciente');
+    
+    $sql = "SELECT count(*) as total_atendido,
+                (
+                    SELECT count(*) as total
+                    FROM  tb_agenda a
+                    INNER JOIN tb_pessoa p
+                    ON a.fk_paciente = p.id
+                    INNER JOIN tb_agenda_disponibilidade d
+                    ON a.fk_agenda_disponibilidade =  d.id 
+                    INNER JOIN aux_status s
+                    ON a.fk_status = s.id 
+                    WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
+                    and a.fk_paciente = ". $idPaciente ."
+                    and a.fk_status = 4
+                ) as total_faltou,
+                (
+                    SELECT count(*) 
+                    FROM  tb_agenda a
+                    INNER JOIN tb_pessoa p
+                    ON a.fk_paciente = p.id
+                    INNER JOIN tb_agenda_disponibilidade d
+                    ON a.fk_agenda_disponibilidade =  d.id 
+                    INNER JOIN aux_status s
+                    ON a.fk_status = s.id 
+                    WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
+                    and a.fk_paciente = ". $idPaciente ."
+                    and a.fk_status = 1 or a.fk_status = 2
+                ) as total_aguardando,
+                (
+                    SELECT count(*) as total 
+                    FROM  tb_agenda a
+                    INNER JOIN tb_pessoa p
+                    ON a.fk_paciente = p.id
+                    INNER JOIN tb_agenda_disponibilidade d
+                    ON a.fk_agenda_disponibilidade =  d.id 
+                    INNER JOIN aux_status s
+                    ON a.fk_status = s.id 
+                    WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
+                    and a.fk_paciente = ". $idPaciente ."
+                ) as total_marcado
+            FROM  tb_agenda a
+            INNER JOIN tb_pessoa p
+            ON a.fk_paciente = p.id
+            INNER JOIN tb_agenda_disponibilidade d
+            ON a.fk_agenda_disponibilidade =  d.id 
+            INNER JOIN aux_status s
+            ON a.fk_status = s.id 
+            WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
+            and a.fk_paciente = ". $idPaciente ."
+            and a.fk_status = 5";
+   
+    
+    try {
+        
+        $stmt = getConnection()->query($sql);
+        $dashMarcacoes= $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        
+        return json_encode($dashMarcacoes, JSON_UNESCAPED_UNICODE);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+
+/*______________________________________________________
+|                                                       |
 |                 RESTS's - Atendimento                 |
 |______________________________________________________*/
 function updateAgenda($request) {

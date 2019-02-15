@@ -66,7 +66,7 @@ export class DashComponent implements OnInit {
             .queryParams
             .subscribe(params => {
                 // Defaults to 0 if no query param provided.
-          let id = localStorage.getItem('pessoaId');
+                let id = localStorage.getItem('pessoaId');
                 
                 if(id!= undefined){
                     this.agendaService.listWithID(id).
