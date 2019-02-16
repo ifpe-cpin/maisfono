@@ -49,9 +49,9 @@ export class PacienteDashComponent implements OnInit {
         .queryParams
         .subscribe(params => {
             // Defaults to 0 if no query param provided.
-            let id = localStorage.getItem('fonoId');
+            let id = sessionStorage.getItem('fonoId');
                 
-            if(id!= undefined){
+            if(id!= undefined && id!="" && id!=null){
                 this.dashMarcacoesPacienteService.listWithTwoID(id, this.idPaciente).subscribe(
                     dashMarcacoes => {
                         this.dashMarcacoes = dashMarcacoes
@@ -73,8 +73,9 @@ export class PacienteDashComponent implements OnInit {
         this.loading = true
         let queryMap = new Map<string,string>()
         queryMap.set("idPaciente",this.idPaciente+"")
-        queryMap.set("idFono",localStorage.getItem("fonoId"))
+        queryMap.set("idFono",sessionStorage.getItem("fonoId"))
 
+        
         this.evolucaoService.list(new QueryOptions(queryMap)).subscribe(
             evolucao => {
                 this.evolucoes = evolucao

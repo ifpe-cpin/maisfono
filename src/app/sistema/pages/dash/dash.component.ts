@@ -38,12 +38,15 @@ export class DashComponent implements OnInit {
     }
   
     refreshData(){
+        this.route
+            .queryParams
+            .subscribe(params => {
             // Defaults to 0 if no query param provided.
-                let id = localStorage.getItem('fonoId');
+                let id = sessionStorage.getItem('fonoId');
                 console.log("ID Fono: "+id)
                 
-            if(id!= undefined){
-                this.dashMarcacoesService.listWithID(localStorage.getItem('fonoId')).subscribe(
+            if(id!= undefined && id!="" && id!=null){
+                this.dashMarcacoesService.listWithID(id).subscribe(
                     dashMarcacoes => {
                         this.dashMarcacoes = dashMarcacoes
                         this.total_marcado = this.dashMarcacoes[0].total_marcado;
@@ -56,6 +59,7 @@ export class DashComponent implements OnInit {
                     }
                 );
             } 
+        });
 
     }
   
@@ -64,9 +68,9 @@ export class DashComponent implements OnInit {
             .queryParams
             .subscribe(params => {
                 // Defaults to 0 if no query param provided.
-                let id = localStorage.getItem('fonoId');
+                let id = sessionStorage.getItem('fonoId');
                 
-                if(id!= undefined){
+                if(id!= undefined && id!="" && id!=null){
                     this.agendaService.listWithID(id).
                     subscribe(agenda => {
                             this.agenda = agenda;

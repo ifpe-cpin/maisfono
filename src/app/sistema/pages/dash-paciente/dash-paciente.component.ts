@@ -45,9 +45,12 @@ export class DashPacienteComponent implements OnInit {
 
 
     refreshData(){
-
-                let id = localStorage.getItem("pacienteId")
-                this.dashMarcacoesPacienteService.listWithID(localStorage.getItem("pacienteId")).subscribe(
+        this.route
+        .queryParams
+        .subscribe(params => {
+                let id = sessionStorage.getItem("pacienteId")
+                if(id!= undefined && id!="" && id!=null){
+                this.dashMarcacoesPacienteService.listWithID(id).subscribe(
                     dashMarcacoes => {
                         this.dashMarcacoes = dashMarcacoes
                         this.total_marcado = this.dashMarcacoes[0].total_marcado;
@@ -59,7 +62,8 @@ export class DashPacienteComponent implements OnInit {
                         this.loading = false;
                     }
                 );
-            
+                }
+            }); 
 
     }
 

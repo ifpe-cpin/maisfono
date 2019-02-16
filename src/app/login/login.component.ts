@@ -95,6 +95,9 @@ export class LoginComponent implements OnInit, OnDestroy{
                                fono=>{
                                 localStorage.setItem('fonoId', fono.id); 
                                 localStorage.setItem('pessoaId', <any>fono.frg_pessoa); 
+
+                                sessionStorage.setItem('fonoId', fono.id); 
+                                sessionStorage.setItem('pessoaId', <any>fono.frg_pessoa); 
                                }
                              )
                         }
@@ -109,6 +112,7 @@ export class LoginComponent implements OnInit, OnDestroy{
                           pacientes.forEach(
                             paciente=>{
                              localStorage.setItem('pacienteId', paciente.id); 
+                             sessionStorage.setItem('pacienteId', paciente.id); 
                             }
                           )
                         }
