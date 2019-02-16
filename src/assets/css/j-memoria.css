@@ -8,20 +8,27 @@ body{
 	background-color: #555;
 }
 
+.box{
+	width: 80%;
+	margin: 0px auto;
+	
+}
 #game{
 	position: relative;
 	width: 100%;
 	height: auto;
-	border: 1px solid #111;
+	border: 1px solid #333;
 	border-radius: 10px;
 	margin: 0;
-	background-color: #333333;
+	padding-left: 30px;
+	padding-top: 30px;
+	
 }
 
 .card{
     width: 100%;
     max-width: 160px;
-	height: 160px;
+	height: 240px;
 	perspective: 600px;
 	/* position: absolute; */
 	border-radius: 10px;
@@ -40,6 +47,7 @@ body{
 
 .front{
 	transform: rotateY(-180deg);
+	background-size: 100% 100%;
 }
 
 .flipped.front{
@@ -47,8 +55,10 @@ body{
 }
 
 .back{
-	/* background: red; */
-	background-image: url(../assets/img-jm/verso.jpg);
+	 background: #3d688a; 
+	background-image: url(../assets/img-jm/verso.png);
+	background-repeat: no-repeat;
+	background-position: center;
 	 /*background-image: url("paper.gif");*/
 }
 
