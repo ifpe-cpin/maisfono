@@ -15,6 +15,7 @@ import { VideochamadaComponent } from '../videochamada/videochamada.component';
 import { UserStatusComponent } from './user-status/user-status.component';
 import { LeftSideComponent } from './left-side/left-side.component';
 import { VideocallIconComponent } from './videocall-icon/videocall-icon.component';
+import { DashPacienteComponent } from './pages/dash-paciente/dash-paciente.component';
 
 
 
@@ -36,7 +37,8 @@ import { VideocallIconComponent } from './videocall-icon/videocall-icon.componen
     LeftSideComponent,
     VideochamadaComponent,
     UserStatusComponent,
-    VideocallIconComponent],
+    VideocallIconComponent,
+    DashPacienteComponent],
     
     exports:[LoadComponent,UserStatusComponent,LeftSideComponent,VideocallIconComponent]
 })

@@ -47,6 +47,7 @@ import { DisponibilidadeFormComponent }  from './pages/agenda/disponibilidade-fo
 import { PacienteGuard } from '../core/paciente.guard';
 import { UserCreateComponent } from './pages/user/user-create/user-create.component';
 import { PacienteDashComponent } from './pages/paciente/paciente-dash/paciente-dash.component';
+import { DashPacienteComponent } from './pages/dash-paciente/dash-paciente.component';
 
 const homeRoutes = [
 		{path: 'sistema', component: SistemaComponent, children:[
@@ -96,6 +97,7 @@ const homeRoutes = [
 				{path: 'meusDados', component: MeusDadosComponent, canActivate: [AuthGuard,AdminGuard]},
 			]},
 			{path: 'dash', component: DashComponent,canActivate: [AuthGuard]},
+			{path: 'dashPaciente', component: DashPacienteComponent,canActivate: [AuthGuard]},
 			{path: 'video', component: PacienteSelecionarComponent, canActivate: [AuthGuard,AdminGuard]}
 		]}
 

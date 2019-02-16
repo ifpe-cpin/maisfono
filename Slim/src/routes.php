@@ -101,6 +101,7 @@ $app->group('/fonoaudiologoDashMarcacoes', function () use ($app) {
 |______________________________________________________*/
 $app->group('/fonoaudiologoDashMarcacoesPaciente', function () use ($app) {
     $app->get('/{id}/{idPaciente}', 'getSumDashMarcacoesPaciente');
+    $app->get('/{idPaciente}', 'getSumDashPaciente');
 });
 
 /*______________________________________________________
