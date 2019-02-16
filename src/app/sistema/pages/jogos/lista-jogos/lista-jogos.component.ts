@@ -15,10 +15,10 @@ export class ListaJogosComponent implements OnInit {
       var images = [];
       
       //imagem a ser exibida em caso de acerto
-      var matchSign = document.querySelector("#match");
+      var matchSign = document.querySelector("#match") as HTMLElement;
       
       //imagem de fim do jogo
-      var modal = document.querySelector("#gameOver");
+      var modal = document.querySelector("#gameOver") as HTMLElement;
       
       //array que armazena as cartas viradas
       var flippedCards = [];
@@ -63,7 +63,7 @@ export class ListaJogosComponent implements OnInit {
           frontFaces[i].classList.remove("match","flipped");
           
           //posiciona as cartas no tabuleiro
-          var card = document.querySelector("#card" + i);
+          var card = document.querySelector("#card" + i) as HTMLElement;
           card.style.left = (i % 8) === 0 ? 5 + "px" : 5 + ((i % 8) * 165) + "px";
           card.style.top = i/8 >= 1 ? 170 + "px" : 5 + "px";
           
