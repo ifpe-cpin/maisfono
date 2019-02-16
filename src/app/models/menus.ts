@@ -120,24 +120,12 @@ let custom = {
     titulo:"Geral",
     categorias:[
         {
-            nome:"Video",
-            icon: "fa fa-user",
-            itens:[
-                {
-                    nome:"Play",
-                    url:"/sistema/video/play",
-                    icone:"fa fa-circle-o"
-                },
-               
-            ]
-        },
-        {
             nome:"Jogos",
             icon: "fa fa-user",
             itens:[
                 {
                     nome:"Play",
-                    url:"/sistema/jogos",
+                    url:"/sistema/jogos/jogoMemoria",
                     icone:"fa fa-circle-o"
                 },
                
