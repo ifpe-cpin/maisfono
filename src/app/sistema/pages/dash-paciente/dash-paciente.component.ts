@@ -47,7 +47,7 @@ export class DashPacienteComponent implements OnInit {
     refreshData(){
 
                 let id = localStorage.getItem("pacienteId")
-                this.dashMarcacoesPacienteService.listWithID(id).subscribe(
+                this.dashMarcacoesPacienteService.listWithID(localStorage.getItem("pacienteId")).subscribe(
                     dashMarcacoes => {
                         this.dashMarcacoes = dashMarcacoes
                         this.total_marcado = this.dashMarcacoes[0].total_marcado;

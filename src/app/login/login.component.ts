@@ -123,9 +123,7 @@ export class LoginComponent implements OnInit, OnDestroy{
                 if(this.user.isFonoaudiologo()){
                   this.router.navigate(['/sistema/dash'],);
                 }else if(this.user.isPaciente()){
-                  console.log(localStorage.getItem("pacienteId"))
-                  this.router.navigate(['/sistema/dashPaciente/'
-                  +localStorage.getItem("pacienteId")],);
+                  this.router.navigate(['/sistema/dashPaciente/'],);
                 }
               }else{
                 console.log({queryParams:this.user})

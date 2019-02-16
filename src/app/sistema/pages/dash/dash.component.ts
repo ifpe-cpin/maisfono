@@ -38,15 +38,12 @@ export class DashComponent implements OnInit {
     }
   
     refreshData(){
-        this.route
-        .queryParams
-        .subscribe(params => {
             // Defaults to 0 if no query param provided.
                 let id = localStorage.getItem('fonoId');
                 console.log("ID Fono: "+id)
                 
             if(id!= undefined){
-                this.dashMarcacoesService.listWithID(id).subscribe(
+                this.dashMarcacoesService.listWithID(localStorage.getItem('fonoId')).subscribe(
                     dashMarcacoes => {
                         this.dashMarcacoes = dashMarcacoes
                         this.total_marcado = this.dashMarcacoes[0].total_marcado;
@@ -59,7 +56,7 @@ export class DashComponent implements OnInit {
                     }
                 );
             } 
-        });
+
     }
   
     refreshDataAgenda(){
