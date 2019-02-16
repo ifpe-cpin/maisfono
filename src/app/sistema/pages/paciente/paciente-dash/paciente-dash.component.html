@@ -89,46 +89,66 @@
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                 </div>
               </div>
-              <!-- /.box-header 
               <div class="box-body">
-                <div class="table-responsive">
-                <table class="table no-margin">
-                  <thead>
-                  <tr>
-                  <th>Nome do Paciente</th>
-                  <th>Hora</th>
-                  <th>Status</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let lista of agenda">
-                        <td>
-                          <a routerLink="/sistema/fonoaudiologo/dashPaciente/{{lista.id}}">
-                            {{lista.paciente}}
-                          </a>
-                        </td>
-                        <td>{{lista.hora_inicio}}</td>
-                        <td>
-                            <ng-container [ngSwitch]="lista.fk_status">
-                                <span *ngSwitchCase='1' class="label label-warning">Pendente</span>
-                                <span *ngSwitchCase='2' class="label label-info">Confirmado</span>
-                                <span *ngSwitchCase='3' class="label label-default">Em Atendimento</span>
-                                <span *ngSwitchCase='4' class="label label-danger">Faltou</span>
-                                <span *ngSwitchCase='5' class="label label-success">Atendido</span>
-                            </ng-container>  
-                        </td>
-                    </tr>
-                  </tbody>
-                </table>
-                </div>
-                 /.table-responsive
+                  <div class="row">
+                    <div class="col-md-12">
+                      <!-- The time line -->
+                      <ul class="timeline">
+                
+                        <ng-container *ngFor="let evolucao of evolucoes ">
+                
+                          <li class="time-label">
+                            <span class="bg-blue">
+                              {{evolucao.dat_evolucao | date:'dd-MM-yyyy'}}
+                            </span>
+                          </li>
+                          <!-- /.timeline-label -->
+                          <!-- timeline item -->
+                          <li>
+                            <ng-container [ngSwitch]="evolucao.fk_flag_evolucao">
+                              <i *ngSwitchCase=3 class="fa fa-arrow-up bg-green"></i>
+                              <i *ngSwitchCase=2 class="fa fa-minus bg-yellow"></i>
+                              <i *ngSwitchCase=1 class="fa fa-arrow-down bg-red"></i>
+                            </ng-container>
+                
+                
+                            <div class="timeline-item">
+                              <span class="time"><i class="fa fa-clock-o"></i> {{evolucao.dat_evolucao | date:'HH:mm:ss'}}</span>
+                
+                              <h3 class="timeline-header">{{evolucao.dsc_titulo}}</h3>
+                
+                              <div class="timeline-body">
+                                {{evolucao.dsc_evolucao}}
+                              </div>
+                              <!--
+                              <div class="timeline-footer">
+                                <a class="btn btn-primary btn-xs" (click)="editEvolucao($event, evolucao)" data-toggle="modal"
+                                  data-target="#modal-edicao">Editar</a>
+                                <a class="btn btn-danger btn-xs" (click)="delete(evolucao.id)">Excluir</a>
+                              </div>
+
+                              -->
+                              
+                            </div>
+                          </li>
+                          <!-- END timeline item -->
+                
+                        </ng-container>
+                        <li>
+                          <i class="fa fa-clock-o bg-gray"></i>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- /.col -->
+                  </div>
+
               </div>
-               /.box-body 
               <div class="box-footer clearfix">
-                <a routerLink="/sistema/fonoaudiologo/agenda/consultaAgenda" class="btn btn-sm btn-info btn-flat pull-right">Visualizar Agenda</a>
+                <a routerLink="/sistema/fonoaudiologo/evolucao/{{this.idPaciente}}" class="btn btn-sm btn-info btn-flat pull-right">
+                  Evoluções
+                </a>
               </div>
-               /.box-footer -->
-              </div>
+          </div>
       </section>
       <!-- /.Left col -->
       <!-- right col (We are only adding the ID to make the widgets sortable)-->
