@@ -1198,8 +1198,10 @@ function getDashAgenda($request) {
                 s.dsc_nome as nome_status,
                 a.fk_paciente as frg_paciente
             FROM  tb_agenda a
-            INNER JOIN tb_pessoa p
-            ON a.fk_paciente = p.id
+            INNER JOIN tb_paciente pac
+            ON a.fk_paciente = pac.id
+            INNER JOIN tb_pessoa p 
+            ON pac.id_pessoa=p.id 
             INNER JOIN tb_agenda_disponibilidade d
             ON a.fk_agenda_disponibilidade =  d.id 
             INNER JOIN aux_status s
@@ -1226,8 +1228,10 @@ function getSumDashMarcacoes($request) {
                 (
                     SELECT count(*) as total
                     FROM  tb_agenda a
-                    INNER JOIN tb_pessoa p
-                    ON a.fk_paciente = p.id
+                    INNER JOIN tb_paciente pac
+                    ON a.fk_paciente = pac.id
+                    INNER JOIN tb_pessoa p 
+                    ON pac.id_pessoa=p.id 
                     INNER JOIN tb_agenda_disponibilidade d
                     ON a.fk_agenda_disponibilidade =  d.id 
                     INNER JOIN aux_status s
@@ -1239,21 +1243,25 @@ function getSumDashMarcacoes($request) {
                 (
                     SELECT count(*) 
                     FROM  tb_agenda a
-                    INNER JOIN tb_pessoa p
-                    ON a.fk_paciente = p.id
-                    INNER JOIN tb_agenda_disponibilidade d
+                    LEFT JOIN tb_paciente pac
+                    ON a.fk_paciente = pac.id
+                    LEFT JOIN tb_pessoa p 
+                    ON pac.id_pessoa=p.id 
+                    LEFT JOIN tb_agenda_disponibilidade d
                     ON a.fk_agenda_disponibilidade =  d.id 
-                    INNER JOIN aux_status s
+                    LEFT JOIN aux_status s
                     ON a.fk_status = s.id 
                     WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
                     and d.dat_atendimento = '". $dataAtual ."'
-                    and a.fk_status = 1 or a.fk_status = 2
+                    and a.fk_status = 1 or a.fk_status = 2 and d.id=null
                 ) as total_aguardando,
                 (
                     SELECT count(*) as total 
                     FROM  tb_agenda a
-                    INNER JOIN tb_pessoa p
-                    ON a.fk_paciente = p.id
+                    INNER JOIN tb_paciente pac
+                    ON a.fk_paciente = pac.id
+                    INNER JOIN tb_pessoa p 
+                    ON pac.id_pessoa=p.id 
                     INNER JOIN tb_agenda_disponibilidade d
                     ON a.fk_agenda_disponibilidade =  d.id 
                     INNER JOIN aux_status s
@@ -1262,8 +1270,10 @@ function getSumDashMarcacoes($request) {
                     and d.dat_atendimento = '". $dataAtual ."'
                 ) as total_marcado
             FROM  tb_agenda a
-            INNER JOIN tb_pessoa p
-            ON a.fk_paciente = p.id
+            INNER JOIN tb_paciente pac
+            ON a.fk_paciente = pac.id
+            INNER JOIN tb_pessoa p 
+            ON pac.id_pessoa=p.id 
             INNER JOIN tb_agenda_disponibilidade d
             ON a.fk_agenda_disponibilidade =  d.id 
             INNER JOIN aux_status s
@@ -1311,15 +1321,17 @@ function getSumDashMarcacoesPaciente($request) {
                 (
                     SELECT count(*) 
                     FROM  tb_agenda a
-                    INNER JOIN tb_pessoa p
-                    ON a.fk_paciente = p.id
-                    INNER JOIN tb_agenda_disponibilidade d
+                    LEFT JOIN tb_paciente pac
+                    ON a.fk_paciente = pac.id
+                    LEFT JOIN tb_pessoa p 
+                    ON pac.id_pessoa=p.id 
+                    LEFT JOIN tb_agenda_disponibilidade d
                     ON a.fk_agenda_disponibilidade =  d.id 
-                    INNER JOIN aux_status s
+                    LEFT JOIN aux_status s
                     ON a.fk_status = s.id 
                     WHERE d.fk_fonoaudiologo = ". $idFonoaudiologo ."
                     and a.fk_paciente = ". $idPaciente ."
-                    and a.fk_status = 1 or a.fk_status = 2
+                    and a.fk_status = 1 or a.fk_status = 2 and d.id=null
                 ) as total_aguardando,
                 (
                     SELECT count(*) as total 
