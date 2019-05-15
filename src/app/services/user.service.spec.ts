@@ -4,7 +4,6 @@ import { UserService } from './user.service';
 import { QueryOptions } from '../models/query-options';
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
-import { userInfo } from 'os';
 
 fdescribe('UserService', () => {
   let injector: TestBed;
@@ -88,5 +87,55 @@ fdescribe('UserService', () => {
       req.flush(user);
     });
   });
+
+  fdescribe('#updateUser', () => {
+    it('should return the user object updated', () => {
+        
+
+
+        let user:User  = new User()
+        user.id=3
+        user.frg_pessoa = 7
+        user.email = "williane@gmail.com"
+        user.status = 1
+        user.ultimo_acesso = new Date()
+        user._fonoaudiologo = null
+        user._paciente
+        user.roles = ["paciente","admin"]
+
+
+      service.update(user).subscribe(_user => {
+        expect(_user).toBe(user);
+      });
+  
+      const req = httpMock.expectOne(`${environment.request_base_url}/usuarios/3`);
+      expect(req.request.method).toBe("PUT");
+      req.flush(user);
+    });
+  });
+
+  fdescribe('#deleteUser', () => {
+    it('should remove user by id', () => {
+      let id = 3
+      service.delete(id).subscribe();
+  
+      const req = httpMock.expectOne(`${environment.request_base_url}/usuarios/`+id);
+      expect(req.request.method).toBe("DELETE");
+    });
+  });
+
+  fdescribe('#readUser', () => {
+    it('should return user object by id pass', () => {
+      let id = 1
+      service.read(id).subscribe(use=>
+        expect(use.id).toEqual(id) 
+      );
+  
+      const req = httpMock.expectOne(`${environment.request_base_url}/usuarios/`+id);
+      expect(req.request.method).toBe("GET");
+      req.flush(dummyUsers[0]);
+    });
+  });
+
 
 });
