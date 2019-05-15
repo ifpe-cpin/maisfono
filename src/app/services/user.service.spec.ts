@@ -4,6 +4,7 @@ import { UserService } from './user.service';
 import { QueryOptions } from '../models/query-options';
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
+import { Paciente } from '../models/paciente';
 
 fdescribe('UserService', () => {
   let injector: TestBed;
@@ -22,7 +23,7 @@ fdescribe('UserService', () => {
         isFonoaudiologo(){return true},
         isPaciente(){return false}},
 
-    {   id:2,
+    {   id:3,
         frg_pessoa:3,
         email: "victor@gmail.com",
         tipo:1,
@@ -100,7 +101,7 @@ fdescribe('UserService', () => {
         user.status = 1
         user.ultimo_acesso = new Date()
         user._fonoaudiologo = null
-        user._paciente
+        user._paciente = new Paciente()
         user.roles = ["paciente","admin"]
 
 
@@ -121,14 +122,15 @@ fdescribe('UserService', () => {
   
       const req = httpMock.expectOne(`${environment.request_base_url}/usuarios/`+id);
       expect(req.request.method).toBe("DELETE");
+      req.flush(dummyUsers[1]);
     });
   });
 
   fdescribe('#readUser', () => {
     it('should return user object by id pass', () => {
       let id = 1
-      service.read(id).subscribe(use=>
-        expect(use.id).toEqual(id) 
+      service.read(id).subscribe(user=>
+        expect(user.id).toEqual(id) 
       );
   
       const req = httpMock.expectOne(`${environment.request_base_url}/usuarios/`+id);
