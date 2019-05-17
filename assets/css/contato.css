@@ -1,0 +1,135 @@
+.interna_contato {
+	/* background: url("../img/bg-contato.jpg") no-repeat center; */
+	background-size: cover;
+}
+
+/*Orçamento*/
+
+.contato {
+	padding: 40px 0;
+}
+
+.contato_form {
+	padding-right: 60px;
+}
+
+.contato_form label{
+	display: block;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 18px;
+	line-height: 25px;
+	margin-bottom: 4px;
+}
+.contato_form select {
+	display: block;
+	width: 100%;
+	border: 1px solid #3d6889;;
+	background: #88adb9;
+	padding: 7px 10px;
+	margin-bottom: 10px;
+	outline: none;
+	font-size: 14px;
+	font-family: Georgia, "Times New Roman", serif;
+	box-shadow: 2px 2px 2px #3d6889;
+	color: #f1f5f8;
+	font-weight: bold;
+	text-transform: uppercase;
+	/*font-size: 1.2em;*/
+}
+
+.contato_form input {
+	display: block;
+	width: 100%;
+	border: 1px solid #3d6889;;
+	background: #88adb9;
+	padding: 7px 10px;
+	margin-bottom: 10px;
+	outline: none;
+	font-size: 14px;
+	font-family: Georgia, "Times New Roman", serif;
+	color: #f1f5f8;
+	box-shadow: 2px 2px 2px #3d6889;
+}
+
+.contato_form input::placeholder, .contato_form textarea::placeholder, .contato_form select::placeholder { 
+	color: #f1f5f8;
+	font-weight: bold;
+	text-transform: uppercase;
+	/*font-size: 1.2em;*/
+}
+
+.contato_form input:hover, .contato_form textarea:hover, .contato_form select:hover { 
+	box-shadow: 1px 1px 1px #3d6889;
+
+}
+.contato_form input:focus, .contato_form textarea:focus, .contato_form select:focus { 
+	box-shadow: 1px 1px 1px #f1f5f8;
+
+
+}
+
+.contato_form textarea {
+	display: block;
+	width: 100%;
+	height: 120px;
+	border: 2px solid #3d6889;;
+	background: #88adb9;
+	padding: 7px 10px;
+	margin-bottom: 20px;
+	outline: none;
+	font-size: 14px;
+	font-family: Georgia, "Times New Roman", serif;
+	color: #f1f5f8;
+	box-shadow: 2px 2px 2px #3d6889;
+}
+
+.contato_form button {
+	padding: 7px 40px;
+	background: none;
+}
+
+.orcamento_dados {
+	color: #f1f5f8;
+}
+
+.contato_dados h3{
+	font-size: 18px;
+	line-height: 25px;
+	text-transform: uppercase;
+	color: #3d6889;
+	font-weight: bold;
+}
+
+.contato_dados span {
+	display: block;
+	font-size: 18px;
+	line-height: 30px;
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+.contato_dados span:nth-of-type(even) {
+	margin-bottom: 30px;
+}
+
+.contato_dados ul {
+	margin-top: 10px;
+}
+
+.contato_dados ul li {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.contato_dados ul li a {
+	border: 3px solid #3d6889;
+	display: block;
+	padding: 10px;
+}
+
+.contato_dados ul li a:hover {
+	border-color: #000;
+}
+
+.contato_mapa {
+	margin-bottom: 60px;
+}
