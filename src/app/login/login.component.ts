@@ -23,8 +23,8 @@ import { PusherService } from '../services/pusher.service';
               '../../assets/css/contato.css',
               '../../assets/css/responsivo.css',            
             ],
-  providers: [AuthService, FonoaudiologoService,PacienteService,
-  {provide: 'ResourceServiceInterface', useClass: UserService},
+  providers: [AuthService, FonoaudiologoService,PacienteService,UserService,
+  //{provide: 'ResourceServiceInterface', useClass: UserService},
   PusherService]
 })
 export class LoginComponent implements OnInit, OnDestroy{
@@ -35,8 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   constructor(private fonoService:FonoaudiologoService,
               private pacienteService:PacienteService,
-              @Inject('ResourceServiceInterface') 
-              private userService:ResourceServiceInterface<User>,
+              private userService:UserService,
               private socialAuthService: AuthService,
               private router: Router,
               private pusherService: PusherService){ 
